@@ -21,10 +21,12 @@ class MovieRecommendationTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+//        func testGradientStep() {
+//            let parseController = ParseController.sharedInstance
+//            let xArray = array(1.048686, -0.400232, 1.194119, 0.780851, -0.385626, 0.521198, 0.641509, -0.547854, -0.083796, 0.453618, -0.800218, 0.680481, 0.937538, 0.106090, 0.361953)
+//            parseController.X = xArray.reshape((5,3))
+//
+//        }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

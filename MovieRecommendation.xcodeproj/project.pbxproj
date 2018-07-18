@@ -13,7 +13,7 @@
 		ACF36C1820FEB77D0088BFE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF36C1620FEB77D0088BFE8 /* Main.storyboard */; };
 		ACF36C2420FEB77D0088BFE8 /* MovieRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C2320FEB77D0088BFE8 /* MovieRecommendationTests.swift */; };
 		ACF36C2F20FEB77D0088BFE8 /* MovieRecommendationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C2E20FEB77D0088BFE8 /* MovieRecommendationUITests.swift */; };
-		ACF36C4120FEB7B80088BFE8 /* GradientDescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3D20FEB7B80088BFE8 /* GradientDescent.swift */; };
+		ACF36C4120FEB7B80088BFE8 /* RecommenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3D20FEB7B80088BFE8 /* RecommenderModel.swift */; };
 		ACF36C4220FEB7B80088BFE8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3E20FEB7B80088BFE8 /* Movie.swift */; };
 		ACF36C4320FEB7B80088BFE8 /* ParseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */; };
 		ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4020FEB7B80088BFE8 /* User.swift */; };
@@ -34,7 +34,6 @@
 		ACF36C7920FEB7EF0088BFE8 /* opencv.mm in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5420FEB7EE0088BFE8 /* opencv.mm */; };
 		ACF36C7A20FEB7EF0088BFE8 /* opencv.mm in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5420FEB7EE0088BFE8 /* opencv.mm */; };
 		ACF36C7B20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */; };
-		ACF36C7C20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */; };
 		ACF36C7D20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5620FEB7EE0088BFE8 /* operations-and-indexing.m */; };
 		ACF36C7E20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5620FEB7EE0088BFE8 /* operations-and-indexing.m */; };
 		ACF36C7F20FEB7EF0088BFE8 /* initing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5820FEB7EE0088BFE8 /* initing.swift */; };
@@ -66,6 +65,9 @@
 		ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6620FEB7EE0088BFE8 /* numbers.swift */; };
 		ACF36C9A20FEB7EF0088BFE8 /* numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6620FEB7EE0088BFE8 /* numbers.swift */; };
 		ACF36CBE20FEC0320088BFE8 /* Movie_Data in Resources */ = {isa = PBXBuildFile; fileRef = ACF36CBD20FEC0320088BFE8 /* Movie_Data */; };
+		ACF36CC020FEC17A0088BFE8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */; };
+		ACF36CC220FEC6CE0088BFE8 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36CC120FEC6CE0088BFE8 /* Test.swift */; };
+		ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36CC720FED5BF0088BFE8 /* GradientDescentController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +101,7 @@
 		ACF36C2A20FEB77D0088BFE8 /* MovieRecommendationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieRecommendationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C2E20FEB77D0088BFE8 /* MovieRecommendationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationUITests.swift; sourceTree = "<group>"; };
 		ACF36C3020FEB77D0088BFE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ACF36C3D20FEB7B80088BFE8 /* GradientDescent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientDescent.swift; sourceTree = "<group>"; };
+		ACF36C3D20FEB7B80088BFE8 /* RecommenderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommenderModel.swift; sourceTree = "<group>"; };
 		ACF36C3E20FEB7B80088BFE8 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseController.swift; sourceTree = "<group>"; };
 		ACF36C4020FEB7B80088BFE8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -130,6 +132,8 @@
 		ACF36C6520FEB7EE0088BFE8 /* m-image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-image.swift"; sourceTree = "<group>"; };
 		ACF36C6620FEB7EE0088BFE8 /* numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = numbers.swift; sourceTree = "<group>"; };
 		ACF36CBD20FEC0320088BFE8 /* Movie_Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Movie_Data; sourceTree = "<group>"; };
+		ACF36CC120FEC6CE0088BFE8 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		ACF36CC720FED5BF0088BFE8 /* GradientDescentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientDescentController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACF36C7C20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */,
+				ACF36CC020FEC17A0088BFE8 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +171,7 @@
 				ACF36C2220FEB77D0088BFE8 /* MovieRecommendationTests */,
 				ACF36C2D20FEB77D0088BFE8 /* MovieRecommendationUITests */,
 				ACF36C0E20FEB77C0088BFE8 /* Products */,
+				ACF36CBF20FEC17A0088BFE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +192,7 @@
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
+				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
 				ACF36C1420FEB77D0088BFE8 /* Assets.xcassets */,
 				ACF36C1620FEB77D0088BFE8 /* Main.storyboard */,
 				ACF36C1920FEB77D0088BFE8 /* Info.plist */,
@@ -216,7 +222,8 @@
 		ACF36C3C20FEB7B80088BFE8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ACF36C3D20FEB7B80088BFE8 /* GradientDescent.swift */,
+				ACF36C3D20FEB7B80088BFE8 /* RecommenderModel.swift */,
+				ACF36CC720FED5BF0088BFE8 /* GradientDescentController.swift */,
 				ACF36C3E20FEB7B80088BFE8 /* Movie.swift */,
 				ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */,
 				ACF36C4020FEB7B80088BFE8 /* User.swift */,
@@ -287,6 +294,13 @@
 				ACF36C6520FEB7EE0088BFE8 /* m-image.swift */,
 			);
 			path = matrix;
+			sourceTree = "<group>";
+		};
+		ACF36CBF20FEC17A0088BFE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -423,6 +437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */,
+				ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */,
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
 				ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */,
 				ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
@@ -440,7 +455,8 @@
 				ACF36C6F20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */,
 				ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */,
 				ACF36C8B20FEB7EF0088BFE8 /* m-operators.swift in Sources */,
-				ACF36C4120FEB7B80088BFE8 /* GradientDescent.swift in Sources */,
+				ACF36C4120FEB7B80088BFE8 /* RecommenderModel.swift in Sources */,
+				ACF36CC220FEC6CE0088BFE8 /* Test.swift in Sources */,
 				ACF36C9520FEB7EF0088BFE8 /* m-helper-functions.swift in Sources */,
 				ACF36C8920FEB7EF0088BFE8 /* simple-math.swift in Sources */,
 				ACF36C7D20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */,

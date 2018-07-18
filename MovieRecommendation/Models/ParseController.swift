@@ -11,28 +11,10 @@ import Foundation
 class ParseController {
     
     static let sharedInstance = ParseController()
+    var delegate: RMDelegate?
+    
     var movies: [Movie?] = Array.init(repeating: nil, count: 164979)
     var users: [User] = []
-    
-    // Ratings: Y(movie, user) = 0.5 - 5
-    var Y: matrix = zeros((164979, 671))
-    
-    // Binary value: R(movie, user) = 1 if rated, 0 if not
-    var R: matrix = zeros((164979, 671))
-    
-    // Binary value: X(movie, user) = 1 if has that genre, 0 if not
-    var X: matrix = zeros((164979, 19))
-    
-    // Binary value: X(movie, user) = 1 if has that genre, 0 if not
-    var theta: matrix = rand((671, 19))
-    
- /* ----------------------------------------------------------------------------------------------------
-     Other Stuff:
-         nm: # of movies = 164979
-         nu: # of users = 671
-         n : # of features = 18 - 0 based
-     
-    ---------------------------------------------------------------------------------------------------- */
     
     func importAndParseData() {
         importAndParseMovies()
@@ -42,7 +24,6 @@ class ParseController {
     private func importAndParseMovies() {
         guard let text = importCSV("movies") else { return }
         parseMovie(text)
-        print("Swoosh")
     }
     
     private func importAndParseRatings() {
@@ -73,15 +54,17 @@ class ParseController {
                 let title = movieArray[1]
                 let genres = movieArray[2].components(separatedBy: "|")
                 let movie = Movie(id: id, title: title, genres: genres)
+                
                 self.movies[id - 1] = movie
-                self.X[i, 0..<19] = movie.features
+                self.delegate?.updateX(at: i, 0..<19, with: movie.features)
                 i+=1
             }
         }
     }
     
     private func parseRating(_ text: String) {
-        var user = User(id: 1, theta: self.theta[0, "all"])
+        
+        var user = User(id: 1, theta: delegate!.getParametersForUser(0))
         
         text.enumerateLines { (line, _) in
             let ratingArray = line.components(separatedBy: ",")
@@ -101,10 +84,7 @@ class ParseController {
     }
     
     private func addRatingsForCreatedUser(_ user: inout User, with uID: Int, _ movieID: Int, _ rating: Double) {
-        Y[movieID - 1, uID - 1] = rating
-        R[movieID - 1, uID - 1] = 1
-        let movie = self.movies[movieID - 1]
-        movie!.addRating(rating, for: uID)
+        addRating(rating, for: uID, movieID)
         
         if user.id == 671 {
             self.users[670].addRating(rating, for: movieID)
@@ -114,16 +94,22 @@ class ParseController {
     }
     
     private func addRatingsForNewUser(_ user: inout User, with uID: Int, _ movieID: Int, _ rating: Double) {
-        Y[movieID - 1, uID - 1] = rating
-        R[movieID - 1, uID - 1] = 1
-        let movie = self.movies[movieID - 1]
-        movie!.addRating(rating, for: uID)
+        addRating(rating, for: uID, movieID)
         
-        self.users.append(user)
-        user = User(id: uID, theta: self.theta[uID - 1, "all"])
+        users.append(user)
+        user = User(id: uID, theta: delegate!.getParametersForUser(0))
         user.addRating(rating, for: movieID)
         if user.id == 671 {
             self.users.append(user)
         }
+    }
+    
+    private func addRating(_ rating: Double, for uID: Int, _ movieID: Int) {
+        delegate?.updateRatings(at: movieID, uID, with: rating)
+        guard let movie = movies[movieID - 1] else {
+            print("Rating a nil Movie")
+            return
+        }
+        movie.addRating(rating, for: uID)
     }
 }

@@ -13,8 +13,15 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let parseController = ParseController.sharedInstance
-        parseController.importAndParseData()
+//        let parseController = ParseController.sharedInstance
+//        parseController.importAndParseData()
+        runTests()
+    }
+    
+    private func runTests() {
+        let test = Test.sharedInstance
+        test.delegate = GradientDescentController.sharedInstance
+        test.runGradientTests()
     }
 
     override var representedObject: Any? {
