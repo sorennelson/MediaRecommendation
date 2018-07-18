@@ -13,6 +13,59 @@
 		ACF36C1820FEB77D0088BFE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACF36C1620FEB77D0088BFE8 /* Main.storyboard */; };
 		ACF36C2420FEB77D0088BFE8 /* MovieRecommendationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C2320FEB77D0088BFE8 /* MovieRecommendationTests.swift */; };
 		ACF36C2F20FEB77D0088BFE8 /* MovieRecommendationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C2E20FEB77D0088BFE8 /* MovieRecommendationUITests.swift */; };
+		ACF36C4120FEB7B80088BFE8 /* GradientDescent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3D20FEB7B80088BFE8 /* GradientDescent.swift */; };
+		ACF36C4220FEB7B80088BFE8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3E20FEB7B80088BFE8 /* Movie.swift */; };
+		ACF36C4320FEB7B80088BFE8 /* ParseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */; };
+		ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4020FEB7B80088BFE8 /* User.swift */; };
+		ACF36C6720FEB7EE0088BFE8 /* imshow.py in Resources */ = {isa = PBXBuildFile; fileRef = ACF36C4620FEB7EE0088BFE8 /* imshow.py */; };
+		ACF36C6820FEB7EE0088BFE8 /* imshow.py in Resources */ = {isa = PBXBuildFile; fileRef = ACF36C4620FEB7EE0088BFE8 /* imshow.py */; };
+		ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4820FEB7EE0088BFE8 /* machine_learning.swift */; };
+		ACF36C6A20FEB7EE0088BFE8 /* machine_learning.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4820FEB7EE0088BFE8 /* machine_learning.swift */; };
+		ACF36C6F20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4C20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift */; };
+		ACF36C7020FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4C20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift */; };
+		ACF36C7120FEB7EE0088BFE8 /* io.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4D20FEB7EE0088BFE8 /* io.swift */; };
+		ACF36C7220FEB7EE0088BFE8 /* io.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4D20FEB7EE0088BFE8 /* io.swift */; };
+		ACF36C7320FEB7EE0088BFE8 /* machine_learning.mm in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4F20FEB7EE0088BFE8 /* machine_learning.mm */; };
+		ACF36C7420FEB7EE0088BFE8 /* machine_learning.mm in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4F20FEB7EE0088BFE8 /* machine_learning.mm */; };
+		ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5020FEB7EE0088BFE8 /* math.m */; };
+		ACF36C7620FEB7EE0088BFE8 /* math.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5020FEB7EE0088BFE8 /* math.m */; };
+		ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5120FEB7EE0088BFE8 /* conversion.swift */; };
+		ACF36C7820FEB7EE0088BFE8 /* conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5120FEB7EE0088BFE8 /* conversion.swift */; };
+		ACF36C7920FEB7EF0088BFE8 /* opencv.mm in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5420FEB7EE0088BFE8 /* opencv.mm */; };
+		ACF36C7A20FEB7EF0088BFE8 /* opencv.mm in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5420FEB7EE0088BFE8 /* opencv.mm */; };
+		ACF36C7B20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */; };
+		ACF36C7C20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */; };
+		ACF36C7D20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5620FEB7EE0088BFE8 /* operations-and-indexing.m */; };
+		ACF36C7E20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5620FEB7EE0088BFE8 /* operations-and-indexing.m */; };
+		ACF36C7F20FEB7EF0088BFE8 /* initing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5820FEB7EE0088BFE8 /* initing.swift */; };
+		ACF36C8020FEB7EF0088BFE8 /* initing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5820FEB7EE0088BFE8 /* initing.swift */; };
+		ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5920FEB7EE0088BFE8 /* complex-math.swift */; };
+		ACF36C8220FEB7EF0088BFE8 /* complex-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5920FEB7EE0088BFE8 /* complex-math.swift */; };
+		ACF36C8320FEB7EF0088BFE8 /* operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5A20FEB7EE0088BFE8 /* operators.swift */; };
+		ACF36C8420FEB7EF0088BFE8 /* operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5A20FEB7EE0088BFE8 /* operators.swift */; };
+		ACF36C8520FEB7EF0088BFE8 /* vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5B20FEB7EE0088BFE8 /* vector.swift */; };
+		ACF36C8620FEB7EF0088BFE8 /* vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5B20FEB7EE0088BFE8 /* vector.swift */; };
+		ACF36C8720FEB7EF0088BFE8 /* helper-functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5C20FEB7EE0088BFE8 /* helper-functions.swift */; };
+		ACF36C8820FEB7EF0088BFE8 /* helper-functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5C20FEB7EE0088BFE8 /* helper-functions.swift */; };
+		ACF36C8920FEB7EF0088BFE8 /* simple-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5D20FEB7EE0088BFE8 /* simple-math.swift */; };
+		ACF36C8A20FEB7EF0088BFE8 /* simple-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5D20FEB7EE0088BFE8 /* simple-math.swift */; };
+		ACF36C8B20FEB7EF0088BFE8 /* m-operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5F20FEB7EE0088BFE8 /* m-operators.swift */; };
+		ACF36C8C20FEB7EF0088BFE8 /* m-operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C5F20FEB7EE0088BFE8 /* m-operators.swift */; };
+		ACF36C8D20FEB7EF0088BFE8 /* m-simple-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6020FEB7EE0088BFE8 /* m-simple-math.swift */; };
+		ACF36C8E20FEB7EF0088BFE8 /* m-simple-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6020FEB7EE0088BFE8 /* m-simple-math.swift */; };
+		ACF36C8F20FEB7EF0088BFE8 /* m-matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6120FEB7EE0088BFE8 /* m-matrix.swift */; };
+		ACF36C9020FEB7EF0088BFE8 /* m-matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6120FEB7EE0088BFE8 /* m-matrix.swift */; };
+		ACF36C9120FEB7EF0088BFE8 /* m-initing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6220FEB7EE0088BFE8 /* m-initing.swift */; };
+		ACF36C9220FEB7EF0088BFE8 /* m-initing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6220FEB7EE0088BFE8 /* m-initing.swift */; };
+		ACF36C9320FEB7EF0088BFE8 /* m-complex-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6320FEB7EE0088BFE8 /* m-complex-math.swift */; };
+		ACF36C9420FEB7EF0088BFE8 /* m-complex-math.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6320FEB7EE0088BFE8 /* m-complex-math.swift */; };
+		ACF36C9520FEB7EF0088BFE8 /* m-helper-functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6420FEB7EE0088BFE8 /* m-helper-functions.swift */; };
+		ACF36C9620FEB7EF0088BFE8 /* m-helper-functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6420FEB7EE0088BFE8 /* m-helper-functions.swift */; };
+		ACF36C9720FEB7EF0088BFE8 /* m-image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6520FEB7EE0088BFE8 /* m-image.swift */; };
+		ACF36C9820FEB7EF0088BFE8 /* m-image.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6520FEB7EE0088BFE8 /* m-image.swift */; };
+		ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6620FEB7EE0088BFE8 /* numbers.swift */; };
+		ACF36C9A20FEB7EF0088BFE8 /* numbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C6620FEB7EE0088BFE8 /* numbers.swift */; };
+		ACF36CBE20FEC0320088BFE8 /* Movie_Data in Resources */ = {isa = PBXBuildFile; fileRef = ACF36CBD20FEC0320088BFE8 /* Movie_Data */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +99,37 @@
 		ACF36C2A20FEB77D0088BFE8 /* MovieRecommendationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieRecommendationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C2E20FEB77D0088BFE8 /* MovieRecommendationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRecommendationUITests.swift; sourceTree = "<group>"; };
 		ACF36C3020FEB77D0088BFE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACF36C3D20FEB7B80088BFE8 /* GradientDescent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientDescent.swift; sourceTree = "<group>"; };
+		ACF36C3E20FEB7B80088BFE8 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseController.swift; sourceTree = "<group>"; };
+		ACF36C4020FEB7B80088BFE8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ACF36C4620FEB7EE0088BFE8 /* imshow.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = imshow.py; sourceTree = "<group>"; };
+		ACF36C4820FEB7EE0088BFE8 /* machine_learning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = machine_learning.swift; sourceTree = "<group>"; };
+		ACF36C4C20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ScalarArithmetic-bleed.swift"; sourceTree = "<group>"; };
+		ACF36C4D20FEB7EE0088BFE8 /* io.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = io.swift; sourceTree = "<group>"; };
+		ACF36C4F20FEB7EE0088BFE8 /* machine_learning.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = machine_learning.mm; sourceTree = "<group>"; };
+		ACF36C5020FEB7EE0088BFE8 /* math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = math.m; sourceTree = "<group>"; };
+		ACF36C5120FEB7EE0088BFE8 /* conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = conversion.swift; sourceTree = "<group>"; };
+		ACF36C5220FEB7EE0088BFE8 /* OpenCV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCV.h; sourceTree = "<group>"; };
+		ACF36C5320FEB7EE0088BFE8 /* swix-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "swix-Bridging-Header.h"; sourceTree = "<group>"; };
+		ACF36C5420FEB7EE0088BFE8 /* opencv.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = opencv.mm; sourceTree = "<group>"; };
+		ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		ACF36C5620FEB7EE0088BFE8 /* operations-and-indexing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "operations-and-indexing.m"; sourceTree = "<group>"; };
+		ACF36C5820FEB7EE0088BFE8 /* initing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = initing.swift; sourceTree = "<group>"; };
+		ACF36C5920FEB7EE0088BFE8 /* complex-math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "complex-math.swift"; sourceTree = "<group>"; };
+		ACF36C5A20FEB7EE0088BFE8 /* operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = operators.swift; sourceTree = "<group>"; };
+		ACF36C5B20FEB7EE0088BFE8 /* vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = vector.swift; sourceTree = "<group>"; };
+		ACF36C5C20FEB7EE0088BFE8 /* helper-functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "helper-functions.swift"; sourceTree = "<group>"; };
+		ACF36C5D20FEB7EE0088BFE8 /* simple-math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simple-math.swift"; sourceTree = "<group>"; };
+		ACF36C5F20FEB7EE0088BFE8 /* m-operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-operators.swift"; sourceTree = "<group>"; };
+		ACF36C6020FEB7EE0088BFE8 /* m-simple-math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-simple-math.swift"; sourceTree = "<group>"; };
+		ACF36C6120FEB7EE0088BFE8 /* m-matrix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-matrix.swift"; sourceTree = "<group>"; };
+		ACF36C6220FEB7EE0088BFE8 /* m-initing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-initing.swift"; sourceTree = "<group>"; };
+		ACF36C6320FEB7EE0088BFE8 /* m-complex-math.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-complex-math.swift"; sourceTree = "<group>"; };
+		ACF36C6420FEB7EE0088BFE8 /* m-helper-functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-helper-functions.swift"; sourceTree = "<group>"; };
+		ACF36C6520FEB7EE0088BFE8 /* m-image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "m-image.swift"; sourceTree = "<group>"; };
+		ACF36C6620FEB7EE0088BFE8 /* numbers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = numbers.swift; sourceTree = "<group>"; };
+		ACF36CBD20FEC0320088BFE8 /* Movie_Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Movie_Data; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF36C7B20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF36C7C20FEB7EF0088BFE8 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +162,7 @@
 		ACF36C0420FEB77C0088BFE8 = {
 			isa = PBXGroup;
 			children = (
+				ACF36C4520FEB7EE0088BFE8 /* swix */,
 				ACF36C0F20FEB77C0088BFE8 /* MovieRecommendation */,
 				ACF36C2220FEB77D0088BFE8 /* MovieRecommendationTests */,
 				ACF36C2D20FEB77D0088BFE8 /* MovieRecommendationUITests */,
@@ -96,8 +183,10 @@
 		ACF36C0F20FEB77C0088BFE8 /* MovieRecommendation */ = {
 			isa = PBXGroup;
 			children = (
+				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
+				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36C1420FEB77D0088BFE8 /* Assets.xcassets */,
 				ACF36C1620FEB77D0088BFE8 /* Main.storyboard */,
 				ACF36C1920FEB77D0088BFE8 /* Info.plist */,
@@ -122,6 +211,82 @@
 				ACF36C3020FEB77D0088BFE8 /* Info.plist */,
 			);
 			path = MovieRecommendationUITests;
+			sourceTree = "<group>";
+		};
+		ACF36C3C20FEB7B80088BFE8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ACF36C3D20FEB7B80088BFE8 /* GradientDescent.swift */,
+				ACF36C3E20FEB7B80088BFE8 /* Movie.swift */,
+				ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */,
+				ACF36C4020FEB7B80088BFE8 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ACF36C4520FEB7EE0088BFE8 /* swix */ = {
+			isa = PBXGroup;
+			children = (
+				ACF36C4620FEB7EE0088BFE8 /* imshow.py */,
+				ACF36C4720FEB7EE0088BFE8 /* machine_learning */,
+				ACF36C4C20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift */,
+				ACF36C4D20FEB7EE0088BFE8 /* io.swift */,
+				ACF36C4E20FEB7EE0088BFE8 /* objc */,
+				ACF36C5720FEB7EE0088BFE8 /* vector */,
+				ACF36C5E20FEB7EE0088BFE8 /* matrix */,
+				ACF36C6620FEB7EE0088BFE8 /* numbers.swift */,
+			);
+			path = swix;
+			sourceTree = SOURCE_ROOT;
+		};
+		ACF36C4720FEB7EE0088BFE8 /* machine_learning */ = {
+			isa = PBXGroup;
+			children = (
+				ACF36C4820FEB7EE0088BFE8 /* machine_learning.swift */,
+			);
+			path = machine_learning;
+			sourceTree = "<group>";
+		};
+		ACF36C4E20FEB7EE0088BFE8 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				ACF36C4F20FEB7EE0088BFE8 /* machine_learning.mm */,
+				ACF36C5020FEB7EE0088BFE8 /* math.m */,
+				ACF36C5120FEB7EE0088BFE8 /* conversion.swift */,
+				ACF36C5220FEB7EE0088BFE8 /* OpenCV.h */,
+				ACF36C5320FEB7EE0088BFE8 /* swix-Bridging-Header.h */,
+				ACF36C5420FEB7EE0088BFE8 /* opencv.mm */,
+				ACF36C5520FEB7EE0088BFE8 /* opencv2.framework */,
+				ACF36C5620FEB7EE0088BFE8 /* operations-and-indexing.m */,
+			);
+			path = objc;
+			sourceTree = "<group>";
+		};
+		ACF36C5720FEB7EE0088BFE8 /* vector */ = {
+			isa = PBXGroup;
+			children = (
+				ACF36C5820FEB7EE0088BFE8 /* initing.swift */,
+				ACF36C5920FEB7EE0088BFE8 /* complex-math.swift */,
+				ACF36C5A20FEB7EE0088BFE8 /* operators.swift */,
+				ACF36C5B20FEB7EE0088BFE8 /* vector.swift */,
+				ACF36C5C20FEB7EE0088BFE8 /* helper-functions.swift */,
+				ACF36C5D20FEB7EE0088BFE8 /* simple-math.swift */,
+			);
+			path = vector;
+			sourceTree = "<group>";
+		};
+		ACF36C5E20FEB7EE0088BFE8 /* matrix */ = {
+			isa = PBXGroup;
+			children = (
+				ACF36C5F20FEB7EE0088BFE8 /* m-operators.swift */,
+				ACF36C6020FEB7EE0088BFE8 /* m-simple-math.swift */,
+				ACF36C6120FEB7EE0088BFE8 /* m-matrix.swift */,
+				ACF36C6220FEB7EE0088BFE8 /* m-initing.swift */,
+				ACF36C6320FEB7EE0088BFE8 /* m-complex-math.swift */,
+				ACF36C6420FEB7EE0088BFE8 /* m-helper-functions.swift */,
+				ACF36C6520FEB7EE0088BFE8 /* m-image.swift */,
+			);
+			path = matrix;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -230,6 +395,8 @@
 			files = (
 				ACF36C1520FEB77D0088BFE8 /* Assets.xcassets in Resources */,
 				ACF36C1820FEB77D0088BFE8 /* Main.storyboard in Resources */,
+				ACF36C6720FEB7EE0088BFE8 /* imshow.py in Resources */,
+				ACF36CBE20FEC0320088BFE8 /* Movie_Data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +404,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF36C6820FEB7EE0088BFE8 /* imshow.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,8 +422,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */,
+				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
+				ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */,
+				ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
+				ACF36C8320FEB7EF0088BFE8 /* operators.swift in Sources */,
+				ACF36C9720FEB7EF0088BFE8 /* m-image.swift in Sources */,
+				ACF36C8F20FEB7EF0088BFE8 /* m-matrix.swift in Sources */,
+				ACF36C4320FEB7B80088BFE8 /* ParseController.swift in Sources */,
 				ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */,
+				ACF36C8D20FEB7EF0088BFE8 /* m-simple-math.swift in Sources */,
+				ACF36C7920FEB7EF0088BFE8 /* opencv.mm in Sources */,
+				ACF36C9320FEB7EF0088BFE8 /* m-complex-math.swift in Sources */,
+				ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */,
+				ACF36C7F20FEB7EF0088BFE8 /* initing.swift in Sources */,
+				ACF36C8720FEB7EF0088BFE8 /* helper-functions.swift in Sources */,
+				ACF36C6F20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */,
+				ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */,
+				ACF36C8B20FEB7EF0088BFE8 /* m-operators.swift in Sources */,
+				ACF36C4120FEB7B80088BFE8 /* GradientDescent.swift in Sources */,
+				ACF36C9520FEB7EF0088BFE8 /* m-helper-functions.swift in Sources */,
+				ACF36C8920FEB7EF0088BFE8 /* simple-math.swift in Sources */,
+				ACF36C7D20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */,
+				ACF36C7120FEB7EE0088BFE8 /* io.swift in Sources */,
+				ACF36C4220FEB7B80088BFE8 /* Movie.swift in Sources */,
+				ACF36C9120FEB7EF0088BFE8 /* m-initing.swift in Sources */,
 				ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */,
+				ACF36C8520FEB7EF0088BFE8 /* vector.swift in Sources */,
+				ACF36C7320FEB7EE0088BFE8 /* machine_learning.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +457,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF36C8A20FEB7EF0088BFE8 /* simple-math.swift in Sources */,
 				ACF36C2420FEB77D0088BFE8 /* MovieRecommendationTests.swift in Sources */,
+				ACF36C8420FEB7EF0088BFE8 /* operators.swift in Sources */,
+				ACF36C7E20FEB7EF0088BFE8 /* operations-and-indexing.m in Sources */,
+				ACF36C9220FEB7EF0088BFE8 /* m-initing.swift in Sources */,
+				ACF36C8020FEB7EF0088BFE8 /* initing.swift in Sources */,
+				ACF36C9420FEB7EF0088BFE8 /* m-complex-math.swift in Sources */,
+				ACF36C7220FEB7EE0088BFE8 /* io.swift in Sources */,
+				ACF36C7A20FEB7EF0088BFE8 /* opencv.mm in Sources */,
+				ACF36C7020FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */,
+				ACF36C8820FEB7EF0088BFE8 /* helper-functions.swift in Sources */,
+				ACF36C8C20FEB7EF0088BFE8 /* m-operators.swift in Sources */,
+				ACF36C7620FEB7EE0088BFE8 /* math.m in Sources */,
+				ACF36C9820FEB7EF0088BFE8 /* m-image.swift in Sources */,
+				ACF36C8620FEB7EF0088BFE8 /* vector.swift in Sources */,
+				ACF36C9020FEB7EF0088BFE8 /* m-matrix.swift in Sources */,
+				ACF36C6A20FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
+				ACF36C9A20FEB7EF0088BFE8 /* numbers.swift in Sources */,
+				ACF36C8220FEB7EF0088BFE8 /* complex-math.swift in Sources */,
+				ACF36C8E20FEB7EF0088BFE8 /* m-simple-math.swift in Sources */,
+				ACF36C9620FEB7EF0088BFE8 /* m-helper-functions.swift in Sources */,
+				ACF36C7820FEB7EE0088BFE8 /* conversion.swift in Sources */,
+				ACF36C7420FEB7EE0088BFE8 /* machine_learning.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +575,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "swix/objc/swix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -413,6 +630,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "swix/objc/swix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -425,6 +643,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 84KNPHRLXA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/swix/objc",
+				);
 				INFOPLIST_FILE = MovieRecommendation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -444,6 +666,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 84KNPHRLXA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/swix/objc",
+				);
 				INFOPLIST_FILE = MovieRecommendation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -463,6 +689,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 84KNPHRLXA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/swix/objc",
+				);
 				INFOPLIST_FILE = MovieRecommendationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -484,6 +714,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 84KNPHRLXA;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/swix/objc",
+				);
 				INFOPLIST_FILE = MovieRecommendationTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

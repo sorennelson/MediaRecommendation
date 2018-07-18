@@ -13,7 +13,8 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let parseController = ParseController.sharedInstance
+        parseController.importAndParseData()
     }
 
     override var representedObject: Any? {

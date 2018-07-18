@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MovieRecommendation.xcodeproj">
+      location = "group:../MovieRecommendation/Movie_Data">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
