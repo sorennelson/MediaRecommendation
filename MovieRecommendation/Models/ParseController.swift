@@ -17,6 +17,7 @@ class ParseController {
     var users: [User] = []
     
     func importAndParseData() {
+        delegate?.createEmptyMatrices(movieCount: 164979, userCount: 671, featureCount: 18)
         importAndParseMovies()
         importAndParseRatings()
     }
