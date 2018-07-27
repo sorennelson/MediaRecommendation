@@ -24,11 +24,24 @@ class Test {
         delegate?.setMatrices(X: X.reshape((5, 3)), Y: Y.reshape((5, 4)), R: R.reshape((5, 4)), Theta: theta.reshape((4, 3)))
     }
     
+    private func setCourseraValues() {
+        delegate?.createEmptyMatrices(movieCount: 5, userCount: 4, featureCount: 3)
+        let X = array(1, 0.99, 0, 1, 1, 0.01, 1, 0.99, 0, 1, 0.1, 1, 1, 0, 0.9)
+        let Y = array(5, 5, 0, 0, 5, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5, 4, 0, 0, 5, 0)
+        let R = array(1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+        let theta = rand((4, 3))
+        //let theta = array(0.28544, -1.68427, 0.26294, 0.50501, -0.45465, 0.31746, -0.43192, -0.47880, 0.84671, 0.72860, -0.27189, 0.32684)
+        delegate?.setMatrices(X: X.reshape((5, 3)), Y: Y.reshape((5, 4)), R: R.reshape((5, 4)), Theta: theta)
+    }
+    
     func runGradientTests() {
-        setSmallValues()
-//        testGradientStep()
-//        testRegularization()
+//        setSmallValues()
+//         testGradientStep()
+//         testRegularization()
+        
+        setCourseraValues()
         testGradientDescent()
+        testPredict()
     }
     
     private func testGradientStep() {
@@ -44,11 +57,20 @@ class Test {
     }
     
     func testGradientDescent() {
-        delegate?.runGradientDescent(iterations: 400, alpha: 0.001)
+        delegate?.runGradientDescent(iterations: 2000, alpha: 0.001)
     }
     
+    func testPredict() {
+        var mat = matrix.init(columns: 4, rows: 5)
+        for movie in 0..<5 {
+            for user in 0..<4 {
+                // if delegate!.getR()[movie, user] == 0 {
+                    mat[movie, user] = delegate!.predict(movie: movie, user: user)
+                // }
+            }
+        }
+        print("Done")
+    }
 
-    
-    
-    
+
 }

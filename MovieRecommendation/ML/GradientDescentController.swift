@@ -19,6 +19,7 @@ class GradientDescentController: RMDelegate {
     func getCost() -> Double { return RM.J }
     func getGrad() -> matrix { return RM.grad }
     func getParametersForUser(_ id: Int) -> vector { return RM.theta[id - 1, "all"] }
+    func getR() -> matrix { return RM.R }
     
     func updateX(at row: Int, _ columns: Range<Int>, with features: vector) {
         self.RM.X[row, columns] = features
@@ -46,21 +47,32 @@ class GradientDescentController: RMDelegate {
     func runGradientDescent(iterations:Int, alpha: Double) {
         //TODO: Normalize ratings
         var Jhist = [Double]()
-        let time = Date.init()
+        let costFunction = CostFunction(X: RM.X, Y: RM.Y, R: RM.R, theta: RM.theta, lambda: 0)
+        // let time = Date.init()
         
         for _ in 1..<iterations {
-            let (J, grad) = takeStep(lambda: 10)
+            let (J, grad) = takeStep(costFunction)
             RM.theta = RM.theta - (alpha * grad)
+            costFunction.update(RM.theta)
             Jhist.append(J)
         }
         
-        print(Date().timeIntervalSince(time))
+        // print(Date().timeIntervalSince(time))
         print(Jhist)
+        print(RM.theta)
     }
     
-    func takeStep(lambda: Double) -> (Double, matrix) {
+    private func takeStep(_ costFunction: CostFunction) -> (Double, matrix) {
+        return costFunction.takeStep()
+    }
+    
+    public func takeStep(lambda: Double) -> (Double, matrix) {
         let costFunction = CostFunction(X: RM.X, Y: RM.Y, R: RM.R, theta: RM.theta, lambda: lambda)
         return costFunction.takeStep()
+    }
+
+    func predict(movie: Int, user: Int) -> Double {
+        return RM.predict(movie: movie, user: user)
     }
     
     

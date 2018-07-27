@@ -25,6 +25,10 @@ class CostFunction {
         self.lambda = lambda
     }
     
+    func update(_ theta: matrix) {
+        self.theta = theta
+    }
+    
     func takeStep() -> (Double, matrix) {
         let error = computeError()
         let grad = computeGrad(error)

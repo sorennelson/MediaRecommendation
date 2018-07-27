@@ -14,6 +14,7 @@ protocol RMDelegate {
     func getCost() -> Double
     func getGrad() -> matrix
     func getParametersForUser(_ id: Int) -> vector
+    func getR() -> matrix
     
     func setMatrices(X: matrix, Y: matrix, R: matrix, Theta: matrix)
     
@@ -23,6 +24,7 @@ protocol RMDelegate {
     func createEmptyMatrices(movieCount: Int, userCount: Int, featureCount: Int)
     func runGradientDescent(iterations:Int, alpha: Double)
     func takeStep(lambda: Double) -> (Double, matrix)
+    func predict(movie: Int, user: Int) -> Double
 }
 
 class RecommenderModel {
@@ -122,6 +124,13 @@ class RecommenderModel {
             print("Matrix has shape: \(matrix.shape) but Theta should have shape: \(theta.shape)")
             //TODO: Error
         }
+    }
+    
+    func predict(movie: Int, user: Int) -> Double {
+        //normally feature count would be +1
+        let t = theta[user, "all"]
+        let x = X[movie, "all"]
+        return sum(x * t)
     }
 }
     
