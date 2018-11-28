@@ -12,12 +12,12 @@ class ParseController {
     
     static let sharedInstance = ParseController()
     var delegate: RMDelegate?
-    
-    var movies: [Movie?] = Array.init(repeating: nil, count: 164979)
+    // Array.init(repeating: nil, count: 9125)
+    var movies: [Int: Movie] = Dictionary.init()
     var users: [User] = []
     
     func importAndParseData() {
-        delegate?.createEmptyMatrices(movieCount: 164979, userCount: 671, featureCount: 18)
+        delegate?.createEmptyMatrices(movieCount: 9125, userCount: 671, featureCount: 18)
         importAndParseMovies()
         importAndParseRatings()
     }
@@ -47,25 +47,24 @@ class ParseController {
     }
     
     private func parseMovie(_ text: String) {
-        var i = 0
+        var i = 1
         text.enumerateLines { (line, _) in
             let movieArray = line.components(separatedBy: ",")
             
             if let id = Int(movieArray[0]) {
                 let title = movieArray[1]
                 let genres = movieArray[2].components(separatedBy: "|")
-                let movie = Movie(id: id, title: title, genres: genres)
+                let movie = Movie(id: i, title: title, genres: genres)
                 
-                self.movies[id - 1] = movie
-                self.delegate?.updateX(at: i, 0..<19, with: movie.features)
+                self.movies[id] = movie
+                self.delegate?.updateX(at: i - 1, 0..<19, with: movie.features)
                 i+=1
             }
         }
     }
     
     private func parseRating(_ text: String) {
-        
-        var user = User(id: 1, theta: delegate!.getParametersForUser(0))
+        var user = User(id: 1, theta: delegate!.getParametersForUser(1))
         
         text.enumerateLines { (line, _) in
             let ratingArray = line.components(separatedBy: ",")
@@ -87,10 +86,13 @@ class ParseController {
     private func addRatingsForCreatedUser(_ user: inout User, with uID: Int, _ movieID: Int, _ rating: Double) {
         addRating(rating, for: uID, movieID)
         
+        var mID = movieID
+        getMID(&mID)
+        
         if user.id == 671 {
-            self.users[670].addRating(rating, for: movieID)
+            self.users[670].addRating(rating, for: mID)
         } else {
-            user.addRating(rating, for: movieID)
+            user.addRating(rating, for: mID)
         }
     }
     
@@ -98,19 +100,39 @@ class ParseController {
         addRating(rating, for: uID, movieID)
         
         users.append(user)
-        user = User(id: uID, theta: delegate!.getParametersForUser(0))
-        user.addRating(rating, for: movieID)
+        user = User(id: uID, theta: delegate!.getParametersForUser(uID))
+        
+        var mID = movieID
+        getMID(&mID)
+        
+        user.addRating(rating, for: mID)
         if user.id == 671 {
             self.users.append(user)
         }
     }
     
     private func addRating(_ rating: Double, for uID: Int, _ movieID: Int) {
-        delegate?.updateRatings(at: movieID, uID, with: rating)
-        guard let movie = movies[movieID - 1] else {
+        guard let movie = movies[movieID] else {
             print("Rating a nil Movie")
             return
         }
+        var mID = movieID
+        getMID(&mID)
+        
+        delegate?.updateRatings(at: mID, uID, with: rating)
         movie.addRating(rating, for: uID)
     }
+    
+    /**
+     Used to swap from moviesID to yID
+     **/
+    private func getMID(_ movieID: inout Int) {
+        guard let movie = movies[movieID] else {
+            print("Rating a nil Movie")
+            return
+        }
+        movieID = movie.yID
+    }
+    
+    
 }

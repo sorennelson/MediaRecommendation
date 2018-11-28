@@ -47,9 +47,15 @@ class CostFunction {
     private func computeGrad(_ error: matrix) -> matrix {
         var grad = transpose(error).dot(X)
         if lambda != 0 {
-            grad = grad + lambda * theta
+            grad = grad + (lambda * theta)
         }
         return grad
+    }
+    
+    func computeTestCost() -> Double {
+        let error = computeError()
+        let sq_error = error * error
+        return computeCost(sq_error)/(2 * X.rows)
     }
     
     private func computeCost(_ sq_error: matrix) -> Double {

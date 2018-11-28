@@ -57,7 +57,7 @@ class Test {
     }
     
     func testGradientDescent() {
-        delegate?.runGradientDescent(iterations: 2000, alpha: 0.001)
+//        delegate?.runGradientDescent(iterations: 2000, alpha: 0.001)
     }
     
     func testPredict() {

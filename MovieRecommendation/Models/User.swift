@@ -19,7 +19,7 @@ class User: Hashable {
     init(id: Int, theta: vector) {
         self.id = id
         mj = 0
-        ratings = Array(repeating: 0, count: 164979)
+        ratings = Array(repeating: 0, count: 9125)
         self.theta = theta
     }
     

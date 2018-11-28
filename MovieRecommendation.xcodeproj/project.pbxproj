@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47CCA421AE4093003572E3 /* RatingsTableView.swift */; };
 		AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F29892107A52100746B6A /* CostFunction.swift */; };
+		AC967A75210BAF5900E93111 /* HypothesisEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */; };
 		ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */; };
 		ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1220FEB77C0088BFE8 /* ViewController.swift */; };
 		ACF36C1520FEB77D0088BFE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF36C1420FEB77D0088BFE8 /* Assets.xcassets */; };
@@ -89,7 +91,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC47CCA421AE4093003572E3 /* RatingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableView.swift; sourceTree = "<group>"; };
 		AC4F29892107A52100746B6A /* CostFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostFunction.swift; sourceTree = "<group>"; };
+		AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HypothesisEvaluation.swift; path = MovieRecommendation/ML/HypothesisEvaluation.swift; sourceTree = SOURCE_ROOT; };
 		ACF36C0D20FEB77C0088BFE8 /* MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF36C1220FEB77C0088BFE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				ACF36C3D20FEB7B80088BFE8 /* RecommenderModel.swift */,
 				ACF36CC720FED5BF0088BFE8 /* GradientDescentController.swift */,
 				AC4F29892107A52100746B6A /* CostFunction.swift */,
+				AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */,
 			);
 			path = ML;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
+				AC47CCA421AE4093003572E3 /* RatingsTableView.swift */,
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
@@ -236,8 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				ACF36C3E20FEB7B80088BFE8 /* Movie.swift */,
-				ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */,
 				ACF36C4020FEB7B80088BFE8 /* User.swift */,
+				ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -461,6 +467,7 @@
 				ACF36C7920FEB7EF0088BFE8 /* opencv.mm in Sources */,
 				ACF36C9320FEB7EF0088BFE8 /* m-complex-math.swift in Sources */,
 				AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */,
+				AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */,
 				ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */,
 				ACF36C7F20FEB7EF0088BFE8 /* initing.swift in Sources */,
 				ACF36C8720FEB7EF0088BFE8 /* helper-functions.swift in Sources */,
@@ -476,6 +483,7 @@
 				ACF36C4220FEB7B80088BFE8 /* Movie.swift in Sources */,
 				ACF36C9120FEB7EF0088BFE8 /* m-initing.swift in Sources */,
 				ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */,
+				AC967A75210BAF5900E93111 /* HypothesisEvaluation.swift in Sources */,
 				ACF36C8520FEB7EF0088BFE8 /* vector.swift in Sources */,
 				ACF36C7320FEB7EE0088BFE8 /* machine_learning.mm in Sources */,
 			);

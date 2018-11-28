@@ -10,14 +10,14 @@ import Foundation
 
 class Movie: Hashable {
 
-    var id: Int;
+    var yID: Int;
     var title: String;
     var genres: [String]
     var features: vector
     var ratings: [Double]
     
     init(id: Int, title: String, genres: [String]) {
-        self.id = id;
+        self.yID = id;
         self.title = title;
         self.genres = genres;
         self.ratings = Array(repeating: 0, count: 671)
@@ -26,7 +26,7 @@ class Movie: Hashable {
     }
     
     public var description: String {
-        return String("ID: \(id) \nTitle: \(title) \ngenre: \(genres) \nratings: \(ratings)")
+        return String("ID: \(yID) \nTitle: \(title) \ngenre: \(genres) \nratings: \(ratings)")
     }
     
     func addRating(_ rating: Double, for user: Int) {
@@ -82,11 +82,11 @@ class Movie: Hashable {
     
     // MARK: Hashable Protocol
     static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id
+        return lhs.yID == rhs.yID
     }
 
     var hashValue: Int {
-        return id.hashValue
+        return yID.hashValue
     }
 
 }
