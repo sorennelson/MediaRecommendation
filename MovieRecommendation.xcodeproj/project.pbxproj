@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47CCA421AE4093003572E3 /* RatingsTableView.swift */; };
 		AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F29892107A52100746B6A /* CostFunction.swift */; };
+		AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F6B5D21C8D58700DC268A /* RatingCell.swift */; };
 		AC967A75210BAF5900E93111 /* HypothesisEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */; };
 		ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */; };
 		ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1220FEB77C0088BFE8 /* ViewController.swift */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		AC47CCA421AE4093003572E3 /* RatingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableView.swift; sourceTree = "<group>"; };
 		AC4F29892107A52100746B6A /* CostFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostFunction.swift; sourceTree = "<group>"; };
+		AC5F6B5D21C8D58700DC268A /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
 		AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HypothesisEvaluation.swift; path = MovieRecommendation/ML/HypothesisEvaluation.swift; sourceTree = SOURCE_ROOT; };
 		ACF36C0D20FEB77C0088BFE8 /* MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
 				AC47CCA421AE4093003572E3 /* RatingsTableView.swift */,
+				AC5F6B5D21C8D58700DC268A /* RatingCell.swift */,
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
@@ -473,6 +476,7 @@
 				ACF36C8720FEB7EF0088BFE8 /* helper-functions.swift in Sources */,
 				ACF36C6F20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */,
 				ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */,
+				AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */,
 				ACF36C8B20FEB7EF0088BFE8 /* m-operators.swift in Sources */,
 				ACF36C4120FEB7B80088BFE8 /* RecommenderModel.swift in Sources */,
 				ACF36CC220FEC6CE0088BFE8 /* Test.swift in Sources */,

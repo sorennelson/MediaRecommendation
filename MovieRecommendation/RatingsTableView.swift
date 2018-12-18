@@ -16,12 +16,15 @@ class RatingsTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "RatingCell"), owner: nil) as? NSTableCellView {
-            // cell.imageView?.image = image ?? nil
-             cell.textField?.stringValue = "CELL"
+        if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MovieRatingCell"), owner: nil) as? RatingCell {
+            cell.setValues(image: nil, title: "Ozark", genres: "Insane", year: "2017", medium: "TV", myRating: 2.5, overallRating: 2.5)
             return cell
         }
         return nil
+    }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        return 153
     }
     
 }
