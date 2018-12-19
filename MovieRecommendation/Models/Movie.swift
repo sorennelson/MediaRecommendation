@@ -16,6 +16,10 @@ class Movie: Hashable {
     var features: vector
     var ratings: [Double]
     
+    // TODO: Add avg rating calculation
+//    var averageRating: Double?
+
+    
     init(id: Int, title: String, genres: [String]) {
         self.yID = id;
         self.title = title;

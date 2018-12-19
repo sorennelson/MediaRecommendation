@@ -10,6 +10,9 @@
 		AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47CCA421AE4093003572E3 /* RatingsTableView.swift */; };
 		AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F29892107A52100746B6A /* CostFunction.swift */; };
 		AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F6B5D21C8D58700DC268A /* RatingCell.swift */; };
+		AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */; };
+		AC72FBDE21CA1AF800DCF44E /* RecommendationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */; };
+		AC72FBE021CA1B0E00DCF44E /* RecommendationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */; };
 		AC967A75210BAF5900E93111 /* HypothesisEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */; };
 		ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */; };
 		ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1220FEB77C0088BFE8 /* ViewController.swift */; };
@@ -95,6 +98,9 @@
 		AC47CCA421AE4093003572E3 /* RatingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableView.swift; sourceTree = "<group>"; };
 		AC4F29892107A52100746B6A /* CostFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostFunction.swift; sourceTree = "<group>"; };
 		AC5F6B5D21C8D58700DC268A /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
+		AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
+		AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableView.swift; sourceTree = "<group>"; };
+		AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionView.swift; sourceTree = "<group>"; };
 		AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HypothesisEvaluation.swift; path = MovieRecommendation/ML/HypothesisEvaluation.swift; sourceTree = SOURCE_ROOT; };
 		ACF36C0D20FEB77C0088BFE8 /* MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +188,16 @@
 			path = ML;
 			sourceTree = "<group>";
 		};
+		AC72FBDC21CA0AC600DCF44E /* RatingView */ = {
+			isa = PBXGroup;
+			children = (
+				AC47CCA421AE4093003572E3 /* RatingsTableView.swift */,
+				AC5F6B5D21C8D58700DC268A /* RatingCell.swift */,
+				AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */,
+			);
+			path = RatingView;
+			sourceTree = "<group>";
+		};
 		ACF36C0420FEB77C0088BFE8 = {
 			isa = PBXGroup;
 			children = (
@@ -210,8 +226,9 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
-				AC47CCA421AE4093003572E3 /* RatingsTableView.swift */,
-				AC5F6B5D21C8D58700DC268A /* RatingCell.swift */,
+				AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */,
+				AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */,
+				AC72FBDC21CA0AC600DCF44E /* RatingView */,
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
@@ -459,6 +476,7 @@
 				ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */,
 				ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */,
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
+				AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */,
 				ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */,
 				ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
 				ACF36C8320FEB7EF0088BFE8 /* operators.swift in Sources */,
@@ -476,9 +494,11 @@
 				ACF36C8720FEB7EF0088BFE8 /* helper-functions.swift in Sources */,
 				ACF36C6F20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */,
 				ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */,
+				AC72FBE021CA1B0E00DCF44E /* RecommendationCollectionView.swift in Sources */,
 				AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */,
 				ACF36C8B20FEB7EF0088BFE8 /* m-operators.swift in Sources */,
 				ACF36C4120FEB7B80088BFE8 /* RecommenderModel.swift in Sources */,
+				AC72FBDE21CA1AF800DCF44E /* RecommendationTableView.swift in Sources */,
 				ACF36CC220FEC6CE0088BFE8 /* Test.swift in Sources */,
 				ACF36C9520FEB7EF0088BFE8 /* m-helper-functions.swift in Sources */,
 				ACF36C8920FEB7EF0088BFE8 /* simple-math.swift in Sources */,

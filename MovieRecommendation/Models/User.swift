@@ -13,6 +13,7 @@ class User: Hashable {
     var id: Int
     var ratings: [Double]
     var theta: vector
+    
     // Number of movies rated by user
     var mj: Int
     
@@ -30,6 +31,11 @@ class User: Hashable {
     func addRating(_ rating: Double, for movie: Int) {
         mj += 1
         ratings[movie - 1] = rating;
+    }
+    
+    func getRating() -> Double {
+        // TODO
+        return 0.0
     }
     
     // MARK: Hashable Protocol
