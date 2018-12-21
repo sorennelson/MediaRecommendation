@@ -13,12 +13,19 @@ class ViewController: NSViewController {
     @IBOutlet var ratingsTableView: NSTableView!
     var ratingsDataSource = RatingsTableView()
     
+    @IBOutlet var recommendationTableView: NSTableView!
+    var recommendationDataSource = RecommendationTableView()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ratingsTableView.dataSource = ratingsDataSource
         ratingsTableView.delegate = ratingsDataSource
+        ratingsTableView.reloadData()
+        
+        recommendationTableView.dataSource = recommendationDataSource
+        recommendationTableView.delegate = recommendationDataSource
         ratingsTableView.reloadData()
 
         DispatchQueue.global(qos: .background).async {

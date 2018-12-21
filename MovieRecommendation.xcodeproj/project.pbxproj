@@ -10,6 +10,9 @@
 		AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47CCA421AE4093003572E3 /* RatingsTableView.swift */; };
 		AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F29892107A52100746B6A /* CostFunction.swift */; };
 		AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F6B5D21C8D58700DC268A /* RatingCell.swift */; };
+		AC60DA5021CAEFFB00A46711 /* RecommendationTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60DA4F21CAEFFB00A46711 /* RecommendationTVCell.swift */; };
+		AC60DA5521CAF75300A46711 /* RecommendationCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC60DA5321CAF75300A46711 /* RecommendationCVCell.swift */; };
+		AC60DA5621CAF75300A46711 /* RecommendationCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC60DA5421CAF75300A46711 /* RecommendationCVCell.xib */; };
 		AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */; };
 		AC72FBDE21CA1AF800DCF44E /* RecommendationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */; };
 		AC72FBE021CA1B0E00DCF44E /* RecommendationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */; };
@@ -98,6 +101,9 @@
 		AC47CCA421AE4093003572E3 /* RatingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableView.swift; sourceTree = "<group>"; };
 		AC4F29892107A52100746B6A /* CostFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostFunction.swift; sourceTree = "<group>"; };
 		AC5F6B5D21C8D58700DC268A /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
+		AC60DA4F21CAEFFB00A46711 /* RecommendationTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTVCell.swift; sourceTree = "<group>"; };
+		AC60DA5321CAF75300A46711 /* RecommendationCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCVCell.swift; sourceTree = "<group>"; };
+		AC60DA5421CAF75300A46711 /* RecommendationCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecommendationCVCell.xib; sourceTree = "<group>"; };
 		AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableView.swift; sourceTree = "<group>"; };
 		AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionView.swift; sourceTree = "<group>"; };
@@ -188,6 +194,17 @@
 			path = ML;
 			sourceTree = "<group>";
 		};
+		AC60DA5721CD577100A46711 /* Recommendation View */ = {
+			isa = PBXGroup;
+			children = (
+				AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */,
+				AC60DA4F21CAEFFB00A46711 /* RecommendationTVCell.swift */,
+				AC60DA5321CAF75300A46711 /* RecommendationCVCell.swift */,
+				AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */,
+			);
+			path = "Recommendation View";
+			sourceTree = "<group>";
+		};
 		AC72FBDC21CA0AC600DCF44E /* RatingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,14 +243,14 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
-				AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */,
-				AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */,
+				AC60DA5721CD577100A46711 /* Recommendation View */,
 				AC72FBDC21CA0AC600DCF44E /* RatingView */,
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
 				ACF36C1420FEB77D0088BFE8 /* Assets.xcassets */,
 				ACF36C1620FEB77D0088BFE8 /* Main.storyboard */,
+				AC60DA5421CAF75300A46711 /* RecommendationCVCell.xib */,
 				ACF36C1920FEB77D0088BFE8 /* Info.plist */,
 				ACF36C1A20FEB77D0088BFE8 /* MovieRecommendation.entitlements */,
 			);
@@ -444,6 +461,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC60DA5621CAF75300A46711 /* RecommendationCVCell.xib in Resources */,
 				ACF36C1520FEB77D0088BFE8 /* Assets.xcassets in Resources */,
 				ACF36C1820FEB77D0088BFE8 /* Main.storyboard in Resources */,
 				ACF36C6720FEB7EE0088BFE8 /* imshow.py in Resources */,
@@ -477,12 +495,14 @@
 				ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */,
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
 				AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */,
+				AC60DA5521CAF75300A46711 /* RecommendationCVCell.swift in Sources */,
 				ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */,
 				ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
 				ACF36C8320FEB7EF0088BFE8 /* operators.swift in Sources */,
 				ACF36C9720FEB7EF0088BFE8 /* m-image.swift in Sources */,
 				ACF36C8F20FEB7EF0088BFE8 /* m-matrix.swift in Sources */,
 				ACF36C4320FEB7B80088BFE8 /* ParseController.swift in Sources */,
+				AC60DA5021CAEFFB00A46711 /* RecommendationTVCell.swift in Sources */,
 				ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */,
 				ACF36C8D20FEB7EF0088BFE8 /* m-simple-math.swift in Sources */,
 				ACF36C7920FEB7EF0088BFE8 /* opencv.mm in Sources */,

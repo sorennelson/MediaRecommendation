@@ -762,47 +762,47 @@
                                                                 <outlet property="titleHeaderLabel" destination="XA1-E0-Grs" id="sqJ-mr-NeI"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="MovieRatingCell" id="T6L-os-SQP" customClass="RatingCell" customModule="MovieRecommendation" customModuleProvider="target">
+                                                        <tableCellView identifier="MovieRatingCell" misplaced="YES" id="jSo-od-m4Y" customClass="RatingCell" customModule="MovieRecommendation" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="65" width="476" height="153"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <customView appearanceType="darkAqua" translatesAutoresizingMaskIntoConstraints="NO" id="4vL-qX-akS">
+                                                                <customView appearanceType="darkAqua" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mie-1b-XV0">
                                                                     <rect key="frame" x="24" y="26" width="428" height="131"/>
                                                                     <subviews>
-                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="x5P-gw-CSw">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="230" height="128"/>
+                                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibl-H5-aGQ">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="229" height="127"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" secondItem="x5P-gw-CSw" secondAttribute="height" multiplier="9:5" id="m53-qE-GiH"/>
+                                                                                <constraint firstAttribute="width" secondItem="ibl-H5-aGQ" secondAttribute="height" multiplier="9:5" id="mh6-Da-tZR"/>
                                                                             </constraints>
-                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="6Zb-1i-qpm"/>
+                                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Ozark" id="eep-cr-756"/>
                                                                         </imageView>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xvm-H2-vsR">
-                                                                            <rect key="frame" x="243" y="99" width="52" height="22"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Ozark" id="qtG-1X-mjM">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kph-nm-5Op">
+                                                                            <rect key="frame" x="242" y="99" width="52" height="22"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Ozark" id="DGI-zx-nnm">
                                                                                 <font key="font" metaFont="system" size="18"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zJH-Rn-IKL">
-                                                                            <rect key="frame" x="243" y="74" width="65" height="16"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="2017  |  TV" id="RxY-nF-RBc">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HRQ-Wy-DyI">
+                                                                            <rect key="frame" x="242" y="74" width="65" height="16"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="2017  |  TV" id="dhF-fD-v1W">
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hfi-Dh-Ecg">
-                                                                            <rect key="frame" x="243" y="52" width="129" height="16"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Crime, Drama, Thriller" id="Y9R-hy-OGE">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8uf-CX-EUB">
+                                                                            <rect key="frame" x="242" y="52" width="129" height="16"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Crime, Drama, Thriller" id="CMy-3h-YqO">
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="v6O-4H-hx4">
-                                                                            <rect key="frame" x="243" y="10" width="48" height="16"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="9  |  8.4" id="CHd-kq-imS">
+                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YOc-7h-FYC">
+                                                                            <rect key="frame" x="242" y="10" width="48" height="16"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="9  |  8.4" id="Ezx-QQ-xr3">
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -810,33 +810,33 @@
                                                                         </textField>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="xvm-H2-vsR" firstAttribute="top" secondItem="4vL-qX-akS" secondAttribute="top" constant="10" id="2CR-se-teI"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="v6O-4H-hx4" secondAttribute="bottom" constant="10" id="BiH-qo-fBR"/>
-                                                                        <constraint firstAttribute="width" constant="428" id="PRH-EX-5ba"/>
-                                                                        <constraint firstItem="Hfi-Dh-Ecg" firstAttribute="top" secondItem="zJH-Rn-IKL" secondAttribute="bottom" constant="6" id="Yh7-VX-KPk"/>
-                                                                        <constraint firstItem="Hfi-Dh-Ecg" firstAttribute="leading" secondItem="x5P-gw-CSw" secondAttribute="trailing" constant="15" id="ZXE-d4-Hzq"/>
-                                                                        <constraint firstItem="zJH-Rn-IKL" firstAttribute="leading" secondItem="x5P-gw-CSw" secondAttribute="trailing" constant="15" id="hks-MK-iBH"/>
-                                                                        <constraint firstItem="xvm-H2-vsR" firstAttribute="leading" secondItem="x5P-gw-CSw" secondAttribute="trailing" constant="15" id="kG9-95-y7B"/>
-                                                                        <constraint firstItem="x5P-gw-CSw" firstAttribute="leading" secondItem="4vL-qX-akS" secondAttribute="leading" id="mNn-kS-8Xg"/>
-                                                                        <constraint firstItem="zJH-Rn-IKL" firstAttribute="top" secondItem="xvm-H2-vsR" secondAttribute="bottom" constant="9" id="nPL-GT-Xzo"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="x5P-gw-CSw" secondAttribute="bottom" id="tVc-qF-MKF"/>
-                                                                        <constraint firstItem="x5P-gw-CSw" firstAttribute="top" secondItem="4vL-qX-akS" secondAttribute="top" constant="3" id="vTv-D9-ewd"/>
-                                                                        <constraint firstItem="v6O-4H-hx4" firstAttribute="leading" secondItem="x5P-gw-CSw" secondAttribute="trailing" constant="15" id="yxq-iU-vvg"/>
+                                                                        <constraint firstItem="ibl-H5-aGQ" firstAttribute="top" secondItem="Mie-1b-XV0" secondAttribute="top" constant="4" id="4LQ-pf-qfN"/>
+                                                                        <constraint firstItem="HRQ-Wy-DyI" firstAttribute="top" secondItem="kph-nm-5Op" secondAttribute="bottom" constant="9" id="9O2-UW-zgI"/>
+                                                                        <constraint firstAttribute="width" constant="428" id="AdY-iR-Pm5"/>
+                                                                        <constraint firstItem="HRQ-Wy-DyI" firstAttribute="leading" secondItem="ibl-H5-aGQ" secondAttribute="trailing" constant="15" id="C4L-bo-qYX"/>
+                                                                        <constraint firstItem="8uf-CX-EUB" firstAttribute="leading" secondItem="ibl-H5-aGQ" secondAttribute="trailing" constant="15" id="GNY-4I-h4l"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="YOc-7h-FYC" secondAttribute="bottom" constant="10" id="LO0-Rl-SFd"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="ibl-H5-aGQ" secondAttribute="bottom" id="buE-hQ-LL3"/>
+                                                                        <constraint firstItem="8uf-CX-EUB" firstAttribute="top" secondItem="HRQ-Wy-DyI" secondAttribute="bottom" constant="6" id="eZ1-jm-jXU"/>
+                                                                        <constraint firstItem="kph-nm-5Op" firstAttribute="leading" secondItem="HRQ-Wy-DyI" secondAttribute="leading" id="ieJ-uX-Rwi"/>
+                                                                        <constraint firstItem="kph-nm-5Op" firstAttribute="top" secondItem="Mie-1b-XV0" secondAttribute="top" constant="10" id="kWG-Ij-WIA"/>
+                                                                        <constraint firstItem="ibl-H5-aGQ" firstAttribute="leading" secondItem="Mie-1b-XV0" secondAttribute="leading" id="lHs-kI-7XG"/>
+                                                                        <constraint firstItem="YOc-7h-FYC" firstAttribute="leading" secondItem="8uf-CX-EUB" secondAttribute="leading" id="lsZ-kw-B2D"/>
                                                                     </constraints>
                                                                 </customView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="4vL-qX-akS" firstAttribute="top" secondItem="T6L-os-SQP" secondAttribute="top" constant="-4" id="42A-2J-5vD"/>
-                                                                <constraint firstItem="4vL-qX-akS" firstAttribute="centerX" secondItem="T6L-os-SQP" secondAttribute="centerX" id="4VZ-oV-ESm"/>
-                                                                <constraint firstAttribute="bottom" secondItem="4vL-qX-akS" secondAttribute="bottom" constant="26" id="lfz-G5-E9F"/>
+                                                                <constraint firstItem="Mie-1b-XV0" firstAttribute="centerX" secondItem="jSo-od-m4Y" secondAttribute="centerX" id="MHL-Vw-mBD"/>
+                                                                <constraint firstItem="Mie-1b-XV0" firstAttribute="top" secondItem="jSo-od-m4Y" secondAttribute="top" constant="-4" id="YZr-CF-Nst"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Mie-1b-XV0" secondAttribute="bottom" constant="26" id="yZM-Ow-omP"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="customView" destination="4vL-qX-akS" id="qlt-f1-g4M"/>
-                                                                <outlet property="genreLabel" destination="Hfi-Dh-Ecg" id="zn7-2v-JCi"/>
-                                                                <outlet property="image" destination="x5P-gw-CSw" id="pBz-J5-t86"/>
-                                                                <outlet property="ratingLabel" destination="v6O-4H-hx4" id="5JW-CQ-qvm"/>
-                                                                <outlet property="titleLabel" destination="xvm-H2-vsR" id="aq6-zT-l5a"/>
-                                                                <outlet property="yearLabel" destination="zJH-Rn-IKL" id="D4t-KJ-OIj"/>
+                                                                <outlet property="customView" destination="Mie-1b-XV0" id="Pvv-lf-wDC"/>
+                                                                <outlet property="genreLabel" destination="8uf-CX-EUB" id="31O-mM-qON"/>
+                                                                <outlet property="image" destination="ibl-H5-aGQ" id="94v-tw-90Q"/>
+                                                                <outlet property="ratingLabel" destination="YOc-7h-FYC" id="KJ5-F0-nS2"/>
+                                                                <outlet property="titleLabel" destination="kph-nm-5Op" id="saY-14-l3n"/>
+                                                                <outlet property="yearLabel" destination="HRQ-Wy-DyI" id="391-Xc-kK4"/>
                                                             </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
@@ -916,7 +916,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Tm-ce-DvX">
-                                                                    <rect key="frame" x="23" y="20" width="204" height="31"/>
+                                                                    <rect key="frame" x="78" y="20" width="204" height="31"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="31" id="aaG-cJ-nqK"/>
                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="111" id="ygf-Gn-FaY"/>
@@ -930,24 +930,24 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="9Tm-ce-DvX" firstAttribute="top" secondItem="gjs-z4-clG" secondAttribute="top" constant="11" id="FMz-Ru-1u8"/>
-                                                                <constraint firstItem="9Tm-ce-DvX" firstAttribute="leading" secondItem="gjs-z4-clG" secondAttribute="leading" constant="25" id="u26-Ji-cnF"/>
+                                                                <constraint firstItem="9Tm-ce-DvX" firstAttribute="leading" secondItem="gjs-z4-clG" secondAttribute="leading" constant="80" id="u26-Ji-cnF"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="titleHeaderLabel" destination="9Tm-ce-DvX" id="PNV-GM-2S3"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView id="Gmp-Ar-ZdY">
+                                                        <tableCellView identifier="CVCell" id="Gmp-Ar-ZdY" customClass="RecommendationTableViewCell" customModule="MovieRecommendation" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="65" width="782" height="398"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-iL-DeX">
-                                                                    <rect key="frame" x="80" y="3" width="623" height="392"/>
+                                                                <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z7s-iL-DeX">
+                                                                    <rect key="frame" x="80" y="3" width="622" height="392"/>
                                                                     <clipView key="contentView" id="1bj-mx-fLU">
-                                                                        <rect key="frame" x="1" y="1" width="621" height="390"/>
+                                                                        <rect key="frame" x="1" y="1" width="620" height="390"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <collectionView id="fVf-kS-CUj">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="621" height="158"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="620" height="390"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="UXQ-b4-hA3">
                                                                                     <size key="itemSize" width="50" height="50"/>
@@ -957,7 +957,7 @@
                                                                         </subviews>
                                                                     </clipView>
                                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="bXl-c5-zmO">
-                                                                        <rect key="frame" x="1" y="375" width="617" height="16"/>
+                                                                        <rect key="frame" x="-100" y="-100" width="617" height="16"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
                                                                     <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="0Nf-MT-eZ4">
@@ -968,10 +968,13 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="Z7s-iL-DeX" firstAttribute="top" secondItem="Gmp-Ar-ZdY" secondAttribute="top" constant="3" id="CBH-Ou-RqZ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="Z7s-iL-DeX" secondAttribute="trailing" constant="79" id="TB1-ee-DNR"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Z7s-iL-DeX" secondAttribute="trailing" constant="80" id="TB1-ee-DNR"/>
                                                                 <constraint firstItem="Z7s-iL-DeX" firstAttribute="leading" secondItem="Gmp-Ar-ZdY" secondAttribute="leading" constant="80" id="ZFi-13-TTN"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Z7s-iL-DeX" secondAttribute="bottom" constant="3" id="sAt-KJ-K7C"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="collectionView" destination="fVf-kS-CUj" id="lJi-gj-tzd"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
@@ -1004,6 +1007,7 @@
                     </view>
                     <connections>
                         <outlet property="ratingsTableView" destination="r8R-el-7Vr" id="bfz-vv-rOG"/>
+                        <outlet property="recommendationTableView" destination="868-vF-qOE" id="zHb-cY-PhB"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1011,4 +1015,7 @@
             <point key="canvasLocation" x="226.5" y="1000"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Ozark" width="307.20001220703125" height="172.80000305175781"/>
+    </resources>
 </document>
