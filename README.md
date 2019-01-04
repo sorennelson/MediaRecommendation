@@ -9,5 +9,5 @@ A Collaborative Filtering application that uses rankings from MovieLens to recom
 
 
 ## Resources
-[MovieLens](https://grouplens.org/datasets/movielens/)
+[MovieLens](https://grouplens.org/datasets/movielens/) \
 [Goodbooks](http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
