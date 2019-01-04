@@ -17,6 +17,8 @@ class RecommendationTableViewCell : NSTableCellView {
     override func awakeFromNib() {
         collectionView.dataSource = collectionViewDataSource
         collectionView.delegate = collectionViewDataSource
+        collectionView.enclosingScrollView?.backgroundColor = NSColor.clear
+        collectionView.backgroundColors = [NSColor.clear]
         collectionView.reloadData()
     }
     

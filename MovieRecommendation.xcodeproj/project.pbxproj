@@ -16,6 +16,8 @@
 		AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */; };
 		AC72FBDE21CA1AF800DCF44E /* RecommendationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */; };
 		AC72FBE021CA1B0E00DCF44E /* RecommendationCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */; };
+		AC8A303321D58C0400CDE43F /* CategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A303221D58C0400CDE43F /* CategoriesTableView.swift */; };
+		AC8A303521D58DFE00CDE43F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A303421D58DFE00CDE43F /* CategoryCell.swift */; };
 		AC967A75210BAF5900E93111 /* HypothesisEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */; };
 		ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */; };
 		ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1220FEB77C0088BFE8 /* ViewController.swift */; };
@@ -107,6 +109,8 @@
 		AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCell.swift; sourceTree = "<group>"; };
 		AC72FBDD21CA1AF800DCF44E /* RecommendationTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationTableView.swift; sourceTree = "<group>"; };
 		AC72FBDF21CA1B0E00DCF44E /* RecommendationCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionView.swift; sourceTree = "<group>"; };
+		AC8A303221D58C0400CDE43F /* CategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableView.swift; sourceTree = "<group>"; };
+		AC8A303421D58DFE00CDE43F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HypothesisEvaluation.swift; path = MovieRecommendation/ML/HypothesisEvaluation.swift; sourceTree = SOURCE_ROOT; };
 		ACF36C0D20FEB77C0088BFE8 /* MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,14 +209,23 @@
 			path = "Recommendation View";
 			sourceTree = "<group>";
 		};
-		AC72FBDC21CA0AC600DCF44E /* RatingView */ = {
+		AC72FBDC21CA0AC600DCF44E /* Rating View */ = {
 			isa = PBXGroup;
 			children = (
 				AC47CCA421AE4093003572E3 /* RatingsTableView.swift */,
 				AC5F6B5D21C8D58700DC268A /* RatingCell.swift */,
 				AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */,
 			);
-			path = RatingView;
+			path = "Rating View";
+			sourceTree = "<group>";
+		};
+		AC8A303621D58E0700CDE43F /* Category View */ = {
+			isa = PBXGroup;
+			children = (
+				AC8A303221D58C0400CDE43F /* CategoriesTableView.swift */,
+				AC8A303421D58DFE00CDE43F /* CategoryCell.swift */,
+			);
+			path = "Category View";
 			sourceTree = "<group>";
 		};
 		ACF36C0420FEB77C0088BFE8 = {
@@ -243,8 +256,9 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
+				AC8A303621D58E0700CDE43F /* Category View */,
 				AC60DA5721CD577100A46711 /* Recommendation View */,
-				AC72FBDC21CA0AC600DCF44E /* RatingView */,
+				AC72FBDC21CA0AC600DCF44E /* Rating View */,
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
@@ -496,6 +510,7 @@
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
 				AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */,
 				AC60DA5521CAF75300A46711 /* RecommendationCVCell.swift in Sources */,
+				AC8A303321D58C0400CDE43F /* CategoriesTableView.swift in Sources */,
 				ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */,
 				ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
 				ACF36C8320FEB7EF0088BFE8 /* operators.swift in Sources */,
@@ -507,6 +522,7 @@
 				ACF36C8D20FEB7EF0088BFE8 /* m-simple-math.swift in Sources */,
 				ACF36C7920FEB7EF0088BFE8 /* opencv.mm in Sources */,
 				ACF36C9320FEB7EF0088BFE8 /* m-complex-math.swift in Sources */,
+				AC8A303521D58DFE00CDE43F /* CategoryCell.swift in Sources */,
 				AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */,
 				AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */,
 				ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */,

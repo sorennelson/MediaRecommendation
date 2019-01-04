@@ -17,16 +17,27 @@ class ViewController: NSViewController {
     var recommendationDataSource = RecommendationTableView()
     
 
+    @IBOutlet var categoriesTableView: NSTableView!
+    var categoriesDataSource = CategoriesTableView()
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ratingsTableView.dataSource = ratingsDataSource
         ratingsTableView.delegate = ratingsDataSource
+        ratingsTableView.backgroundColor = NSColor(red: 0.1205, green: 0.1232, blue: 0.1287, alpha: 1)
         ratingsTableView.reloadData()
         
         recommendationTableView.dataSource = recommendationDataSource
         recommendationTableView.delegate = recommendationDataSource
-        ratingsTableView.reloadData()
+        recommendationTableView.backgroundColor = NSColor(red: 0.08493, green: 0.08767, blue: 0.09041, alpha: 1)
+        recommendationTableView.reloadData()
+        
+        categoriesTableView.dataSource = categoriesDataSource
+        categoriesTableView.delegate = categoriesDataSource
+        categoriesTableView.backgroundColor = NSColor(red: 0.1506, green: 0.1945, blue: 0.2164, alpha: 1)
+        categoriesTableView.reloadData()
 
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")

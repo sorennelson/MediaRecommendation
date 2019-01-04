@@ -24,7 +24,7 @@ class RecommendationCollectionView : NSObject, NSCollectionViewDataSource, NSCol
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-        return NSSize(width: 200, height: 300)
+        return NSSize(width: 175, height: 260)
     }
     
     
