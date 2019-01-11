@@ -42,9 +42,9 @@ class ViewController: NSViewController {
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
             
-            let parseController = ParseController.sharedInstance
-            parseController.delegate = GradientDescentController.sharedInstance
-            parseController.importAndParseData()
+            ImportController.sharedInstance.delegate = GradientDescentController.sharedInstance
+            ParseController.sharedInstance.importAndParseData()
+            ParseController.sharedInstance.importToMLModel()
             
             let hypothesisEval = HypothesisEvaluation.sharedInstance
             hypothesisEval.delegate = GradientDescentController.sharedInstance
@@ -52,8 +52,6 @@ class ViewController: NSViewController {
         }
         
 
-        
-        
 // 0.0008 - too large
 // 0.00079 - works
 //        runTests()

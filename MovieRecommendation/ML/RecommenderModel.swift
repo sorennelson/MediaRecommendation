@@ -18,7 +18,7 @@ protocol RMDelegate {
     func createEmptyMatrices(movieCount: Int, userCount: Int, featureCount: Int)
     
     func updateX(at row: Int, _ columns: Range<Int>, with features: vector)
-    func updateRatings(at row: Int, _ column: Int, with rating: Double)
+    func updateRatings(at row: Int, _ columns: Int, with rating: Double)
     func updateTestSet(xTest: matrix, yTest: matrix, rTest: matrix)
     func updateTrainingSet(xTrain: matrix, yTrain: matrix, rTrain: matrix)
     

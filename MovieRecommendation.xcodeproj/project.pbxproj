@@ -19,6 +19,9 @@
 		AC8A303321D58C0400CDE43F /* CategoriesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A303221D58C0400CDE43F /* CategoriesTableView.swift */; };
 		AC8A303521D58DFE00CDE43F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8A303421D58DFE00CDE43F /* CategoryCell.swift */; };
 		AC967A75210BAF5900E93111 /* HypothesisEvaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */; };
+		AC9764D221E8077700FEF318 /* ImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9764D121E8077700FEF318 /* ImportController.swift */; };
+		AC9764D421E8169700FEF318 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9764D321E8169700FEF318 /* Media.swift */; };
+		AC9764D621E8194100FEF318 /* UserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9764D521E8194100FEF318 /* UserProtocol.swift */; };
 		ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */; };
 		ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1220FEB77C0088BFE8 /* ViewController.swift */; };
 		ACF36C1520FEB77D0088BFE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACF36C1420FEB77D0088BFE8 /* Assets.xcassets */; };
@@ -112,6 +115,9 @@
 		AC8A303221D58C0400CDE43F /* CategoriesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableView.swift; sourceTree = "<group>"; };
 		AC8A303421D58DFE00CDE43F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HypothesisEvaluation.swift; path = MovieRecommendation/ML/HypothesisEvaluation.swift; sourceTree = SOURCE_ROOT; };
+		AC9764D121E8077700FEF318 /* ImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportController.swift; sourceTree = "<group>"; };
+		AC9764D321E8169700FEF318 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		AC9764D521E8194100FEF318 /* UserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProtocol.swift; sourceTree = "<group>"; };
 		ACF36C0D20FEB77C0088BFE8 /* MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACF36C1220FEB77C0088BFE8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 				ACF36CC720FED5BF0088BFE8 /* GradientDescentController.swift */,
 				AC4F29892107A52100746B6A /* CostFunction.swift */,
 				AC967A74210BAF5900E93111 /* HypothesisEvaluation.swift */,
+				AC9764D121E8077700FEF318 /* ImportController.swift */,
 			);
 			path = ML;
 			sourceTree = "<group>";
@@ -293,7 +300,9 @@
 			isa = PBXGroup;
 			children = (
 				ACF36C3E20FEB7B80088BFE8 /* Movie.swift */,
+				AC9764D321E8169700FEF318 /* Media.swift */,
 				ACF36C4020FEB7B80088BFE8 /* User.swift */,
+				AC9764D521E8194100FEF318 /* UserProtocol.swift */,
 				ACF36C3F20FEB7B80088BFE8 /* ParseController.swift */,
 			);
 			path = Models;
@@ -507,9 +516,11 @@
 			files = (
 				ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */,
 				ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */,
+				AC9764D221E8077700FEF318 /* ImportController.swift in Sources */,
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
 				AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */,
 				AC60DA5521CAF75300A46711 /* RecommendationCVCell.swift in Sources */,
+				AC9764D421E8169700FEF318 /* Media.swift in Sources */,
 				AC8A303321D58C0400CDE43F /* CategoriesTableView.swift in Sources */,
 				ACF36C8120FEB7EF0088BFE8 /* complex-math.swift in Sources */,
 				ACF36C6920FEB7EE0088BFE8 /* machine_learning.swift in Sources */,
@@ -525,6 +536,7 @@
 				AC8A303521D58DFE00CDE43F /* CategoryCell.swift in Sources */,
 				AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */,
 				AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */,
+				AC9764D621E8194100FEF318 /* UserProtocol.swift in Sources */,
 				ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */,
 				ACF36C7F20FEB7EF0088BFE8 /* initing.swift in Sources */,
 				ACF36C8720FEB7EF0088BFE8 /* helper-functions.swift in Sources */,

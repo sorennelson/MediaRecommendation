@@ -8,17 +8,16 @@
 
 import Foundation
 
-class Movie: Hashable {
+class Movie: Media {
 
-    var yID: Int;
-    var title: String;
+    var yID: Int
+    var title: String
     var genres: [String]
     var features: vector
     var ratings: [Double]
     
     // TODO: Add avg rating calculation
 //    var averageRating: Double?
-
     
     init(id: Int, title: String, genres: [String]) {
         self.yID = id;
@@ -33,11 +32,7 @@ class Movie: Hashable {
         return String("ID: \(yID) \nTitle: \(title) \ngenre: \(genres) \nratings: \(ratings)")
     }
     
-    func addRating(_ rating: Double, for user: Int) {
-        self.ratings[user - 1] = rating;
-    }
-    
-    func setFeatures() {
+    private func setFeatures() {
         self.features[0] = 1
         for genre in genres {
             switch genre {
@@ -83,15 +78,5 @@ class Movie: Hashable {
             }
         }
     }
-    
-    // MARK: Hashable Protocol
-    static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.yID == rhs.yID
-    }
-
-    var hashValue: Int {
-        return yID.hashValue
-    }
-
 }
 
