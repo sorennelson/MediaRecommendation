@@ -258,14 +258,11 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
-<<<<<<< Updated upstream
 				AC8A303621D58E0700CDE43F /* Category View */,
 				AC60DA5721CD577100A46711 /* Recommendation View */,
 				AC72FBDC21CA0AC600DCF44E /* Rating View */,
-=======
 				AC29A770220B64D5009C055F /* Expansion.swift */,
 				AC324E6A21F1354400270BD1 /* View */,
->>>>>>> Stashed changes
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
