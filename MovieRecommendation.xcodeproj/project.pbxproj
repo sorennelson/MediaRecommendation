@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC29A771220B64D5009C055F /* Expansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29A770220B64D5009C055F /* Expansion.swift */; };
 		AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47CCA421AE4093003572E3 /* RatingsTableView.swift */; };
 		AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F29892107A52100746B6A /* CostFunction.swift */; };
 		AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F6B5D21C8D58700DC268A /* RatingCell.swift */; };
@@ -100,6 +101,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC29A770220B64D5009C055F /* Expansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expansion.swift; sourceTree = "<group>"; };
 		AC47CCA421AE4093003572E3 /* RatingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableView.swift; sourceTree = "<group>"; };
 		AC4F29892107A52100746B6A /* CostFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostFunction.swift; sourceTree = "<group>"; };
 		AC5F6B5D21C8D58700DC268A /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
@@ -256,9 +258,14 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
+<<<<<<< Updated upstream
 				AC8A303621D58E0700CDE43F /* Category View */,
 				AC60DA5721CD577100A46711 /* Recommendation View */,
 				AC72FBDC21CA0AC600DCF44E /* Rating View */,
+=======
+				AC29A770220B64D5009C055F /* Expansion.swift */,
+				AC324E6A21F1354400270BD1 /* View */,
+>>>>>>> Stashed changes
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
 				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
@@ -506,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */,
+				AC29A771220B64D5009C055F /* Expansion.swift in Sources */,
 				ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */,
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
 				AC72FBDB21CA0AB900DCF44E /* TitleCell.swift in Sources */,
