@@ -11,13 +11,11 @@ import Foundation
 class ParseController {
     
     static let sharedInstance = ParseController()
-    var delegate: RMDelegate?
-    // Array.init(repeating: nil, count: 9125)
+    
     var movies: [Int: Movie] = Dictionary.init()
     var users: [User] = []
     
     func importAndParseData() {
-        delegate?.createEmptyMatrices(movieCount: 9125, userCount: 671, featureCount: 18)
         importAndParseMovies()
         importAndParseRatings()
     }
@@ -57,14 +55,13 @@ class ParseController {
                 let movie = Movie(id: i, title: title, genres: genres)
                 
                 self.movies[id] = movie
-                self.delegate?.updateX(at: i - 1, 0..<19, with: movie.features)
                 i+=1
             }
         }
     }
     
     private func parseRating(_ text: String) {
-        var user = User(id: 1, theta: delegate!.getParametersForUser(1))
+        var user = User(id: 1)
         
         text.enumerateLines { (line, _) in
             let ratingArray = line.components(separatedBy: ",")
@@ -100,7 +97,7 @@ class ParseController {
         addRating(rating, for: uID, movieID)
         
         users.append(user)
-        user = User(id: uID, theta: delegate!.getParametersForUser(uID))
+        user = User(id: uID)
         
         var mID = movieID
         getMID(&mID)
@@ -112,15 +109,12 @@ class ParseController {
     }
     
     private func addRating(_ rating: Double, for uID: Int, _ movieID: Int) {
-        guard let movie = movies[movieID] else {
+        guard let _ = movies[movieID] else {
             print("Rating a nil Movie")
             return
         }
-        var mID = movieID
-        getMID(&mID)
-        
-        delegate?.updateRatings(at: mID, uID, with: rating)
-        movie.addRating(rating, for: uID)
+
+        movies[movieID]!.addRating(rating, for: uID)
     }
     
     /**
@@ -134,5 +128,22 @@ class ParseController {
         movieID = movie.yID
     }
     
+    func importToMLModel() -> RecommenderModel {
+        let temp = changeDictionaryToArray()
+        return ImportController.sharedInstance.addMedia(temp, for: users, featureCount: 19)
+    }
+    
+    private func changeDictionaryToArray() -> [Movie] {
+        var keys = Array(movies.keys)
+        keys = keys.sorted()
+        var temp = [Movie]()
+        
+        for key in keys {
+            if let movie = movies[key] {
+                temp.append(movie)
+            }
+        }
+        return temp
+    }
     
 }

@@ -57,31 +57,11 @@ class ViewController: NSViewController {
         categoriesTableView.backgroundColor = NSColor(red: 0.152, green: 0.215, blue: 0.246, alpha: 1)
         // 39 55 63
         categoriesTableView.reloadData()
-
-        DispatchQueue.global(qos: .background).async {
-            print("This is run on the background queue")
-
-            let parseController = ParseController.sharedInstance
-            parseController.delegate = GradientDescentController.sharedInstance
-            parseController.importAndParseData()
-
-            let hypothesisEval = HypothesisEvaluation.sharedInstance
-            hypothesisEval.delegate = GradientDescentController.sharedInstance
-            hypothesisEval.runGradientDescents(iterations: 500)
-        }
-
-
-
-
-// 0.0008 - too large
-// 0.00079 - works
-//        runTests()
     }
 
 
     private func runTests() {
         let test = Test.sharedInstance
-        test.delegate = GradientDescentController.sharedInstance
         test.runGradientTests()
     }
 

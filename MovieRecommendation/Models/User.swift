@@ -8,42 +8,27 @@
 
 import Foundation
 
-class User: Hashable {
+class User: UserProtocol {
     
     var id: Int
     var ratings: [Double]
-    var theta: vector
     
     // Number of movies rated by user
     var mj: Int
     
-    init(id: Int, theta: vector) {
+    init(id: Int) {
         self.id = id
         mj = 0
         ratings = Array(repeating: 0, count: 9125)
-        self.theta = theta
     }
     
     public var description: String {
         return String("ID: \(id) \nratings: \(ratings)")
     }
     
-    func addRating(_ rating: Double, for movie: Int) {
-        mj += 1
-        ratings[movie - 1] = rating;
-    }
-    
     func getRating() -> Double {
-        // TODO
+        // TODO :  UserProtocol
         return 0.0
     }
     
-    // MARK: Hashable Protocol
-    static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
-    var hashValue: Int {
-        return id.hashValue
-    }
 }

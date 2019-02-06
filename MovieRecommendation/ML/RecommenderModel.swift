@@ -9,27 +9,7 @@
 
 import Foundation
 
-protocol RMDelegate {
-    
-    func getParametersForUser(_ id: Int) -> vector
-    func getMatrices() -> (matrix, matrix, matrix, matrix)
-    
-    func setMatrices(X: matrix, Y: matrix, R: matrix, Theta: matrix)
-    func createEmptyMatrices(movieCount: Int, userCount: Int, featureCount: Int)
-    
-    func updateX(at row: Int, _ columns: Range<Int>, with features: vector)
-    func updateRatings(at row: Int, _ column: Int, with rating: Double)
-    func updateTestSet(xTest: matrix, yTest: matrix, rTest: matrix)
-    func updateTrainingSet(xTrain: matrix, yTrain: matrix, rTrain: matrix)
-    
-    func runGradientDescent(lambda: Double, iterations: Int, alpha: Double) -> matrix
-    func takeStep(lambda: Double) -> (Double, matrix)
-    func computeTrainSetError(theta: matrix) -> Double
-    func computeTestSetError(theta: matrix) -> Double
-    func predict(movie: Int, user: Int) -> Double
-}
-
-class RecommenderModel {
+struct RecommenderModel {
     
     // Ratings: Y(movie, user) = 0.5 - 5
     var Y: matrix
@@ -96,7 +76,8 @@ class RecommenderModel {
         xTrain = zeros((0,0))
     }
     
-    func setX(matrix: matrix) {
+    // MARK:  SETTERS
+    mutating func setX(matrix: matrix) {
         if (matrix.shape == (movieCount, featureCount)) {
             X = matrix
         } else {
@@ -105,7 +86,7 @@ class RecommenderModel {
         }
     }
     
-    func setY(matrix: matrix) {
+    mutating func setY(matrix: matrix) {
         if (matrix.shape == Y.shape) {
            Y = matrix
         } else {
@@ -114,7 +95,7 @@ class RecommenderModel {
         }
     }
     
-    func setR(matrix: matrix) {
+    mutating func setR(matrix: matrix) {
         if (matrix.shape == R.shape) {
              R = matrix
         } else {
@@ -124,7 +105,7 @@ class RecommenderModel {
             
     }
     
-    func setTheta(matrix: matrix) {
+    mutating func setTheta(matrix: matrix) {
         if (matrix.shape == (userCount, featureCount)) {
             theta = matrix
         } else {
@@ -133,6 +114,51 @@ class RecommenderModel {
         }
     }
     
+    mutating func setAllMatrices(X: matrix, Y: matrix, R: matrix, Theta: matrix) {
+        setX(matrix: X)
+        setY(matrix: Y)
+        setR(matrix: R)
+        setTheta(matrix: Theta)
+    }
+    
+    // MARK: UPDATERS
+    
+    mutating func updateX(at row: Int, _ columns: Range<Int>, with features: vector) {
+        X[row, columns] = features
+    }
+    
+    mutating func updateRatings(at row: Int, _ column: Int, with rating: Double) {
+        Y[row - 1, column - 1] = rating
+        R[row - 1, column - 1] = 1
+    }
+    
+    mutating func separateTrainingAndTestData() {
+        let trainCount = ceil(X.rows.double * 0.7).int
+        
+        updateTrainingSet(xTrain: X[0..<trainCount, 0..<X.columns], yTrain: Y[0..<trainCount, 0..<Y.columns], rTrain: R[0..<trainCount, 0..<R.columns])
+        updateTestSet(xTest: X[trainCount..<X.rows, 0..<X.columns], yTest: Y[trainCount..<Y.rows, 0..<Y.columns], rTest: R[trainCount..<R.rows, 0..<R.columns])
+    }
+    
+    mutating func updateTestSet(xTest: matrix, yTest: matrix, rTest: matrix) {
+        self.xTest = xTest
+        self.yTest = yTest
+        self.rTest = rTest
+    }
+    
+    mutating func updateTrainingSet(xTrain: matrix, yTrain: matrix, rTrain: matrix) {
+        self.xTrain = xTrain
+        self.yTrain = yTrain
+        self.rTrain = rTrain
+    }
+    
+    // MARK: GETTERS
+    func getParametersForUser(_ id: Int) -> vector { return theta[id - 1, "all"] }
+    
+    func getAllMatrices() -> (matrix, matrix, matrix, matrix) {
+        return (X, Y, R, theta)
+    }
+    
+    // MARK: PREDICTION
     func predict(movie: Int, user: Int) -> Double {
         //normally feature count would be +1
         let t = theta[user, "all"]
