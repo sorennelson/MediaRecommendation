@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AC29A771220B64D5009C055F /* Expansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29A770220B64D5009C055F /* Expansion.swift */; };
+		AC29A777220B7002009C055F /* Expansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29A776220B7002009C055F /* Expansion.swift */; };
 		AC47CCA521AE4093003572E3 /* RatingsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC47CCA421AE4093003572E3 /* RatingsTableView.swift */; };
 		AC4F298A2107A52100746B6A /* CostFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4F29892107A52100746B6A /* CostFunction.swift */; };
 		AC5F6B5E21C8D58700DC268A /* RatingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5F6B5D21C8D58700DC268A /* RatingCell.swift */; };
@@ -104,7 +104,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AC29A770220B64D5009C055F /* Expansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expansion.swift; sourceTree = "<group>"; };
+		AC29A776220B7002009C055F /* Expansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Expansion.swift; path = "/Users/solosoren/Library/Mobile Documents/com~apple~CloudDocs/Dev/MovieRecommendation/MovieRecommendation/Expansion.swift"; sourceTree = "<absolute>"; };
 		AC47CCA421AE4093003572E3 /* RatingsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingsTableView.swift; sourceTree = "<group>"; };
 		AC4F29892107A52100746B6A /* CostFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostFunction.swift; sourceTree = "<group>"; };
 		AC5F6B5D21C8D58700DC268A /* RatingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingCell.swift; sourceTree = "<group>"; };
@@ -195,6 +195,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC29A775220B6F4C009C055F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		AC324E6A21F1354400270BD1 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +263,7 @@
 				ACF36C2D20FEB77D0088BFE8 /* MovieRecommendationUITests */,
 				ACF36C0E20FEB77C0088BFE8 /* Products */,
 				ACF36CBF20FEC17A0088BFE8 /* Frameworks */,
+				AC29A775220B6F4C009C055F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -275,6 +283,7 @@
 				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACF36C1220FEB77C0088BFE8 /* ViewController.swift */,
+				AC29A776220B7002009C055F /* Expansion.swift */,
 				AC324E6A21F1354400270BD1 /* View */,
 				AC4F298B2107A52D00746B6A /* ML */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
@@ -525,7 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACF36C7520FEB7EE0088BFE8 /* math.m in Sources */,
-				AC29A771220B64D5009C055F /* Expansion.swift in Sources */,
+				AC29A777220B7002009C055F /* Expansion.swift in Sources */,
 				ACF36CC820FED5BF0088BFE8 /* GradientDescentController.swift in Sources */,
 				AC9764D221E8077700FEF318 /* ImportController.swift in Sources */,
 				ACF36C7720FEB7EE0088BFE8 /* conversion.swift in Sources */,
