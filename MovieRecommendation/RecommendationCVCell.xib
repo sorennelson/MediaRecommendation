@@ -5,7 +5,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="RecommendationCVCell" customModule="MovieRecommendation" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="LeftTVMediaCVCell" customModule="MovieRecommendation" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -29,7 +29,7 @@
             </constraints>
             <point key="canvasLocation" x="-227.5" y="-368.5"/>
         </customView>
-        <collectionViewItem nibName="RecommendationCVCell" id="dLn-aM-z1L" customClass="RecommendationCVCell" customModule="MovieRecommendation" customModuleProvider="target">
+        <collectionViewItem nibName="RecommendationCVCell" id="dLn-aM-z1L" customClass="LeftTVMediaCVCell" customModule="MovieRecommendation" customModuleProvider="target">
             <connections>
                 <outlet property="imageView" destination="zjn-d0-qY3" id="Vjg-BE-nR9"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="QRd-ih-6qd"/>

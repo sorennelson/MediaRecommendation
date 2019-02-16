@@ -1,5 +1,5 @@
 //
-//  RecommendationTVCell.swift
+//  LeftTVContainerCell.swift
 //  MovieRecommendation
 //
 //  Created by Soren Nelson on 12/19/18.
@@ -9,10 +9,10 @@
 import Foundation
 import Cocoa
 
-class RecommendationTableViewCell : NSTableCellView {
+class LeftTVContainerCell : NSTableCellView {
     
     @IBOutlet var collectionView: NSCollectionView!
-    var collectionViewDataSource = RecommendationCollectionView()
+    var collectionViewDataSource = LeftCollectionView()
     
     override func awakeFromNib() {
         collectionView.dataSource = collectionViewDataSource

@@ -1,5 +1,5 @@
 //
-//  RecommendationCollectionView.swift
+//  LeftCollectionView.swift
 //  MovieRecommendation
 //
 //  Created by Soren Nelson on 12/18/18.
@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class RecommendationCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
+class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
@@ -19,7 +19,7 @@ class RecommendationCollectionView : NSObject, NSCollectionViewDataSource, NSCol
 //        let imageFile = imageDirectoryLoader.imageFileForIndexPath(indexPath)
 //        collectionViewItem.imageFile = imageFile
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "RecommendationCVCell"), for: indexPath)
-        guard let collectionViewItem = item as? RecommendationCVCell else {return item}
+        guard let collectionViewItem = item as? LeftTVMediaCVCell else {return item}
         return collectionViewItem
     }
     

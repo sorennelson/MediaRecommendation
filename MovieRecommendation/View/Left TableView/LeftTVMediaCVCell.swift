@@ -1,5 +1,5 @@
 //
-//  RecommendationCVCell.swift
+//  LeftTVMediaCVCell.swift
 //  MovieRecommendation
 //
 //  Created by Soren Nelson on 12/19/18.
@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class RecommendationCVCell: NSCollectionViewItem {
+class LeftTVMediaCVCell: NSCollectionViewItem {
     
     var image: NSImage? {
         didSet {

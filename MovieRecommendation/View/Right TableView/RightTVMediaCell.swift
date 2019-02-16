@@ -1,5 +1,5 @@
 //
-//  RatingCell.swift
+//  RightTVMediaCell.swift
 //  MovieRecommendation
 //
 //  Created by Soren Nelson on 12/18/18.
@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class RatingCell : NSTableCellView {
+class RightTVMediaCell : NSTableCellView {
     
     @IBOutlet var customView: NSView!
     @IBOutlet var image: NSImageView!

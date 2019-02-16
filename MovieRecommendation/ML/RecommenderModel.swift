@@ -1,5 +1,5 @@
 //
-//  GradientDescent.swift
+//  RecommenderModel.swift
 //  MovieRecommendation
 //
 //  Created by Soren Nelson on 7/15/18.

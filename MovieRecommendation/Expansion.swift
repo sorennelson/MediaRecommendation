@@ -7,59 +7,64 @@
 //
 
 import Foundation
+import Cocoa
 
 extension ViewController {
     
-    enum Expansion {
-        case notExpanded
-        case recommendation
+    private func toggleExpansion() {
+        if !isExpanded {
+            expand()
+            
+        } else {
+            minimize()
+        }
+        isExpanded = !isExpanded
     }
     
-    private func expand(to expandTo: Expansion) {
-        
-        switch expandTo {
-        case .notExpanded:
-            switch expansion {
-            case .recommendation:
-                minimize()
-            default: break
-            }
-            
-        case .recommendation:
-            expand()
-        }
-        
-        expansion = expandTo
+    private func changeArrow(_ button: NSButton, to imageName: String) {
+        button.image = NSImage.init(named: imageName)
     }
     
     private func minimize() {
-        recToViewConstraint.isActive = false
-        recToCategoriesConstraint.isActive = true
+        leftTVToViewConstraint.isActive = false
+        leftTVToCategoriesConstraint.isActive = true
         
-        ratingsToViewConstraint.isActive = false
-        ratingsToCategoriesConstraint.isActive = true
+        rightTVToViewConstraint.isActive = false
+        rightTVToCategoriesConstraint.isActive = true
         
         categoriesTableView.isHidden = false
     }
     
     private func expand() {
-        recToCategoriesConstraint.isActive = false
+        leftTVToCategoriesConstraint.isActive = false
         
-        recToViewConstraint.constant = 66
-        recToViewConstraint.isActive = true
+        leftTVToViewConstraint.constant = 66
+        leftTVToViewConstraint.isActive = true
         
-        ratingsToViewConstraint.constant = 66
-        ratingsToViewConstraint.isActive = true
+        rightTVToViewConstraint.constant = 66
+        rightTVToViewConstraint.isActive = true
         
         categoriesTableView.isHidden = true
     }
     
     @IBAction func recExpandButtonPressed(_ sender: Any) {
-        if (expansion == .notExpanded) {
-            expand(to: .recommendation)
+        if !isExpanded {
+            rightDataSource.changeContent(to: Content.Categories)
+            leftDataSource.toggleArrowButtonDirection()
+            
         } else {
-            expand(to: .notExpanded)
+            leftDataSource.changeContent(to: Content.Recommendations)
+            rightDataSource.changeContent(to: Content.Ratings)
+            leftDataSource.toggleArrowButtonDirection()
         }
+        toggleExpansion()
+    }
+    
+    @IBAction func ratingsExpandButtonPressed(_ sender: Any) {
+        toggleExpansion()
+        leftDataSource.changeContent(to: Content.Ratings)
+        rightDataSource.changeContent(to: Content.Categories)
+        leftDataSource.toggleArrowButtonDirection()
     }
     
 }
