@@ -9,7 +9,14 @@
 
 import Foundation
 
-struct RecommenderModel {
+enum RMType {
+    case ContentBased
+    case CollaborativeFiltering
+}
+
+class RecommenderModel {
+    
+    var algorithmType:RMType
     
     // Ratings: Y(movie, user) = 0.5 - 5
     var Y: matrix
@@ -21,18 +28,23 @@ struct RecommenderModel {
     var rTest: matrix
     var rTrain: matrix
     
-    // Binary value: X(movie, genres) = 1 if has that genre, 0 if not
+    // Binary value for Content Based: X(movie, genres) = 1 if has that genre, 0 if not
     var X: matrix
+    var originalXTrain: matrix
+    var originalXTest: matrix
     var xTest: matrix
     var xTrain: matrix
     
     // Trained Parameters
-    var originalTheta: matrix
-    var theta: matrix
+    var originalWeights: matrix
+    var weights: matrix
     
-    var movieCount: Int
+    var mediaCount: Int
     var featureCount: Int
     var userCount: Int
+    
+    var trainCount: Int
+    var testCount: Int
     
     /* ----------------------------------------------------------------------------------------------------
      Movie_Data:
@@ -49,24 +61,47 @@ struct RecommenderModel {
         rTest = zeros((0,0))
         rTrain = zeros((0,0))
         X = zeros((0,0))
+        originalXTrain = zeros((0,0))
+        originalXTest = zeros((0,0))
         xTest = zeros((0,0))
         xTrain = zeros((0,0))
-        theta = zeros((0,0))
-        originalTheta = zeros((0,0))
+        weights = zeros((0,0))
+        originalWeights = zeros((0,0))
         userCount = 0
-        movieCount = 0
+        mediaCount = 0
         featureCount = 0
+        trainCount = 0
+        testCount = 0
+        algorithmType = .CollaborativeFiltering
     }
 
-    init(movieCount: Int, userCount: Int, featureCount: Int) {
-        self.movieCount = movieCount
+    init(mediaCount: Int, userCount: Int, featureCount: Int, type: RMType) {
+        self.algorithmType = type
+        
+        self.mediaCount = mediaCount
         self.userCount = userCount
         self.featureCount = featureCount
-        Y = zeros((movieCount, userCount))
-        R = zeros((movieCount, userCount))
-        X = zeros((movieCount, featureCount + 1))
-        theta = rand((userCount, featureCount + 1))
-        originalTheta = theta
+        Y = zeros((mediaCount, userCount))
+        R = zeros((mediaCount, userCount))
+        
+        if type == .ContentBased {
+            X = zeros((mediaCount, featureCount + 1))
+            X[0..<mediaCount, 0] = ones(mediaCount)
+            weights = rand((userCount, featureCount + 1))
+            weights[0..<userCount, 0] = zeros(userCount)
+        }
+        else {
+            // No bias parameter for collaborative filtering
+            // Randomly initialize X for collaborative filtering
+            X = rand((mediaCount, featureCount))
+            weights = rand((userCount, featureCount))
+        }
+        originalXTrain = X
+        originalXTest = X
+        originalWeights = weights
+        
+        trainCount = 0
+        testCount = 0
         
         yTest = zeros((0,0))
         yTrain = zeros((0,0))
@@ -77,8 +112,8 @@ struct RecommenderModel {
     }
     
     // MARK:  SETTERS
-    mutating func setX(matrix: matrix) {
-        if (matrix.shape == (movieCount, featureCount)) {
+    func setX(matrix: matrix) {
+        if (matrix.shape == (mediaCount, featureCount)) {
             X = matrix
         } else {
             print("Matrix has shape: \(matrix.shape) but X should have shape: \(X.shape)")
@@ -86,7 +121,7 @@ struct RecommenderModel {
         }
     }
     
-    mutating func setY(matrix: matrix) {
+    func setY(matrix: matrix) {
         if (matrix.shape == Y.shape) {
            Y = matrix
         } else {
@@ -95,7 +130,7 @@ struct RecommenderModel {
         }
     }
     
-    mutating func setR(matrix: matrix) {
+    func setR(matrix: matrix) {
         if (matrix.shape == R.shape) {
              R = matrix
         } else {
@@ -105,63 +140,71 @@ struct RecommenderModel {
             
     }
     
-    mutating func setTheta(matrix: matrix) {
+    func setWeights(matrix: matrix) {
         if (matrix.shape == (userCount, featureCount)) {
-            theta = matrix
+            weights = matrix
         } else {
-            print("Matrix has shape: \(matrix.shape) but Theta should have shape: \(theta.shape)")
+            print("Matrix has shape: \(matrix.shape) but Theta should have shape: \(weights.shape)")
             //TODO: Error
         }
     }
     
-    mutating func setAllMatrices(X: matrix, Y: matrix, R: matrix, Theta: matrix) {
+    func setAllMatrices(X: matrix, Y: matrix, R: matrix, Theta: matrix) {
         setX(matrix: X)
         setY(matrix: Y)
         setR(matrix: R)
-        setTheta(matrix: Theta)
+        setWeights(matrix: Theta)
+    }
+    
+    func resetMatrices() {
+        self.weights = originalWeights
+        self.xTrain = originalXTrain
+//        self.xTest = originalXTest
     }
     
     // MARK: UPDATERS
-    
-    mutating func updateX(at row: Int, _ columns: Range<Int>, with features: vector) {
+    func updateX(at row: Int, _ columns: Range<Int>, with features: vector) {
         X[row, columns] = features
     }
     
-    mutating func updateRatings(at row: Int, _ column: Int, with rating: Double) {
+    func updateRatings(at row: Int, _ column: Int, with rating: Double) {
         Y[row - 1, column - 1] = rating
         R[row - 1, column - 1] = 1
     }
     
-    mutating func separateTrainingAndTestData() {
-        let trainCount = ceil(X.rows.double * 0.7).int
+    func separateTrainingAndTestData() {
+        trainCount = ceil(X.rows.double * 0.7).int
+        testCount = X.rows.double - trainCount
         
         updateTrainingSet(xTrain: X[0..<trainCount, 0..<X.columns], yTrain: Y[0..<trainCount, 0..<Y.columns], rTrain: R[0..<trainCount, 0..<R.columns])
         updateTestSet(xTest: X[trainCount..<X.rows, 0..<X.columns], yTest: Y[trainCount..<Y.rows, 0..<Y.columns], rTest: R[trainCount..<R.rows, 0..<R.columns])
     }
     
-    mutating func updateTestSet(xTest: matrix, yTest: matrix, rTest: matrix) {
+    func updateTestSet(xTest: matrix, yTest: matrix, rTest: matrix) {
         self.xTest = xTest
+        self.originalXTest = xTest
         self.yTest = yTest
         self.rTest = rTest
     }
     
-    mutating func updateTrainingSet(xTrain: matrix, yTrain: matrix, rTrain: matrix) {
+    func updateTrainingSet(xTrain: matrix, yTrain: matrix, rTrain: matrix) {
         self.xTrain = xTrain
+        self.originalXTrain = xTrain
         self.yTrain = yTrain
         self.rTrain = rTrain
     }
     
     // MARK: GETTERS
-    func getParametersForUser(_ id: Int) -> vector { return theta[id - 1, "all"] }
+    func getParametersForUser(_ id: Int) -> vector { return weights[id - 1, "all"] }
     
     func getAllMatrices() -> (matrix, matrix, matrix, matrix) {
-        return (X, Y, R, theta)
+        return (X, Y, R, weights)
     }
     
     // MARK: PREDICTION
     func predict(movie: Int, user: Int) -> Double {
-        //normally feature count would be +1
-        let t = theta[user, "all"]
+        // normally feature count would be +1
+        let t = weights[user, "all"]
         let x = X[movie, "all"]
         return sum(x * t)
     }

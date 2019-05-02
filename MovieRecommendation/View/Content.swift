@@ -13,3 +13,8 @@ enum Content {
     case Ratings
     case Categories
 }
+
+enum MediaType {
+    case Movies
+    case Books
+}

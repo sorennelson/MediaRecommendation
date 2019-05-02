@@ -13,36 +13,59 @@ class GradientDescentController {
     static var sharedInstance = GradientDescentController()
     // var test: Test?
     
-    func runGradientDescent(RM: inout RecommenderModel, lambda: Double, iterations: Int, alpha: Double) -> matrix {
-        var trainJ = [Double]()
-        RM.theta = RM.originalTheta
-        let costFunction = CostFunction(RM: &RM, lambda: lambda)
+    func runBatchGradientDescent(RM: inout RecommenderModel, regParam: Double, iterations: Int, learningRate: Double) -> matrix {
+        var costs = [Double]()
+        RM.resetMatrices()
+//        RM.weights = RM.originalWeights
+
+        let costFunction = CostFunction(RM: RM, regParam: regParam)
         
         for _ in 1..<iterations {
-            let (J, grad) = costFunction.takeStep()
-            RM.theta = RM.theta - (alpha * grad)
-            trainJ.append(J)
+            var cost: Double
+            
+            if RM.algorithmType == .ContentBased {
+                cost = takeContentStep(RM: &RM, costFunction: costFunction, learningRate: learningRate)
+            }
+                
+            else {
+                cost = takeCollaborativeStep(RM: &RM, costFunction: costFunction, learningRate: learningRate)
+            }
+            costs.append(cost)
         }
         
-        print("Lambda: \(lambda) Alpha: \(alpha) trainJ: \(trainJ)")
-        return RM.theta
+        print("Lambda: \(regParam) Alpha: \(learningRate) trainJ: \(costs)")
+        return RM.weights
+    }
+    
+    func takeContentStep(RM: inout RecommenderModel, costFunction: CostFunction, learningRate: Double) -> Double {
+        let (cost, grad) = costFunction.computeContentStep()
+        RM.weights = RM.weights - (learningRate * grad)
+        return cost
+    }
+    
+    func takeCollaborativeStep(RM: inout RecommenderModel, costFunction: CostFunction, learningRate: Double) -> Double {
+        let (cost, weightGrad, itemFeatureGrad) = costFunction.computeCollaborativeStep()
+        
+        RM.weights = RM.weights - (learningRate * weightGrad)
+        RM.xTrain = RM.xTrain - (learningRate * itemFeatureGrad)
+        return cost
     }
     
     func computeTrainSetError(RM: inout RecommenderModel) -> Double {
-        let costFunction = CostFunction(RM: &RM, lambda: 0)
-        return costFunction.computeTestCost()
+        let costFunction = CostFunction(RM: RM, regParam: 0)
+        return costFunction.computeTrainError()
     }
     
     func computeTestSetError(RM: inout RecommenderModel) -> Double {
-        let costFunction = CostFunction(RM: &RM, lambda: 0)
-        return costFunction.computeTestCost()
+        let costFunction = CostFunction(RM: RM, regParam: 0)
+        return costFunction.computeTestError()
     }
     
     
-    // Mark: TESTING
-    func takeStep(RM: inout RecommenderModel, lambda: Double) -> (Double, matrix) {
-        let costFunction = CostFunction(RM: &RM, lambda: lambda)
-        return costFunction.takeStep()
-    }
+    // MARK: TESTING
+//    func takeStep(RM: inout RecommenderModel, lambda: Double) -> (Double, matrix) {
+//        let costFunction = CostFunction(RM: &RM, regParam: lambda)
+//        return costFunction.computeStep()
+//    }
     
 }

@@ -24,29 +24,45 @@ class ViewController: NSViewController {
     @IBOutlet var rightTVToCategoriesConstraint: NSLayoutConstraint!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableViews()
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
         //self.view.window?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1)
-    
+
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
+            
+//          TODO: Move to OC
+            
+            ParseController.sharedInstance.importAndParseMovies()
+            DispatchQueue.main.async {
+                self.leftTableView.reloadData()
+            }
+            print("movies imported")
 
-            ParseController.sharedInstance.importAndParseData()
-            var RM = ParseController.sharedInstance.importToMLModel()
-            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &RM)
+//            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
+//            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentMovieRM)
+//
+//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 7)
+//            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
+            
+            
+            ParseController.sharedInstance.importAndParseBooks()
+            print("Books imported")
+
+            
+//            var bookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
+//            HypothesisEvaluation.sharedInstance.trainData(iterations: 1, RM: &bookRM)
+            
+            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 7)
+            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
         }
-
-// 0.0008 - too large
-// 0.00079 - works
-//        runTests()
     }
     
-
     private func setupTableViews() {
         rightDataSource.setTableView(rightTableView)
+        
         leftDataSource.setTableView(leftTableView)
 
         categoriesTableView.dataSource = categoriesDataSource
@@ -55,8 +71,24 @@ class ViewController: NSViewController {
         // 39 55 63
         categoriesTableView.reloadData()
     }
-
-
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func bookButtonPressed(_ sender: Any) {
+        ObjectController.currentMediaType = .Books
+        rightTableView.reloadData()
+        leftTableView.reloadData()
+    }
+    
+    @IBAction func movieButtonPressed(_ sender: Any) {
+        ObjectController.currentMediaType = .Movies
+        rightTableView.reloadData()
+        leftTableView.reloadData()
+    }
+    
+    
     private func runTests() {
         let test = Test.sharedInstance
         test.runGradientTests()

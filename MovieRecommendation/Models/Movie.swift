@@ -9,69 +9,67 @@
 import Foundation
 
 class Movie: Media {
-
-    var yID: Int
-    var title: String
-    var genres: [String]
-    var features: vector
-    var ratings: [Double]
+    
+//    var tmdbLink: URL?
     
     // TODO: Add avg rating calculation
-//    var averageRating: Double?
+    //    var averageRating: Double?
     
-    init(id: Int, title: String, genres: [String]) {
-        self.yID = id;
-        self.title = title;
-        self.genres = genres;
-        self.ratings = Array(repeating: 0, count: 671)
-        self.features = zeros(19)
+    init(yid: Int, title: String, imageString: String?, genres: [String]) {
+        super.init(id: yid, title: title, genres: genres, features: zeros(19), ratings: Array(repeating: 0, count: 671) )
+        if let string = imageString { self.imageURL = "https://image.tmdb.org/t/p/w342" + string }
         setFeatures()
     }
     
-    public var description: String {
+    override public var description: String {
         return String("ID: \(yID) \nTitle: \(title) \ngenre: \(genres) \nratings: \(ratings)")
     }
     
+    //        https://api.themoviedb.org/3/movie/862?api_key=60d78c7cfee3c407c714903efd4c3359&language=en-US
+    //        tmdbLink = URL(string: "https://api.themoviedb.org/3/movie/" + String(tmdbID) + "?api_key=60d78c7cfee3c407c714903efd4c3359&language=en-US")
+    
+    //        imageURL =
+    //        "https://image.tmdb.org/t/p/w500/6ksm1sjKMFLbO7UY2i6G1ju9SML.jpg"
+    
     private func setFeatures() {
-        self.features[0] = 1
         for genre in genres {
             switch genre {
             case "Action":
-                features[1] = 1
+                features[0] = 1
             case "Adventure":
-                features[2] = 1
+                features[1] = 1
             case "Animation":
-                features[3] = 1
+                features[2] = 1
             case "Children's":
-                features[4] = 1
+                features[3] = 1
             case "Comedy":
-                features[5] = 1
+                features[4] = 1
             case "Crime":
-                features[6] = 1
+                features[5] = 1
             case "Documentary":
-                features[7] = 1
+                features[6] = 1
             case "Drama":
-                features[8] = 1
+                features[7] = 1
             case "Fantasy":
-                features[9] = 1
+                features[8] = 1
             case "Film-Noir":
-                features[10] = 1
+                features[9] = 1
             case "Horror":
-                features[11] = 1
+                features[10] = 1
             case "Musical":
-                features[12] = 1
+                features[11] = 1
             case "Mystery":
-                features[13] = 1
+                features[12] = 1
             case "Romance":
-                features[14] = 1
+                features[13] = 1
             case "Sci-Fi":
-                features[15] = 1
+                features[14] = 1
             case "Thriller":
-                features[16] = 1
+                features[15] = 1
             case "War":
-                features[17] = 1
+                features[16] = 1
             case "Western":
-                features[18] = 1
+                features[17] = 1
             default:
                 // no genres listed
                 return

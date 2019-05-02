@@ -12,7 +12,9 @@ import Cocoa
 class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        let count = ObjectController.sharedInstance.getAllMediaCount()
+        if count == 0 { return 3 }
+        else { return count }
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
@@ -20,6 +22,9 @@ class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionVie
 //        collectionViewItem.imageFile = imageFile
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "RecommendationCVCell"), for: indexPath)
         guard let collectionViewItem = item as? LeftTVMediaCVCell else {return item}
+        
+        collectionViewItem.media = ObjectController.sharedInstance.getAllMedia(for: indexPath.item)
+        
         return collectionViewItem
     }
     

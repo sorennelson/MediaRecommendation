@@ -10,11 +10,28 @@ import Cocoa
 
 class LeftTVMediaCVCell: NSCollectionViewItem {
     
-    var image: NSImage? {
+    var media: Media? {
         didSet {
-            guard isViewLoaded else { return }
-            imageView?.image = image ?? nil
+            setImage()
         }
+    }
+    
+    func setImage() {
+        guard isViewLoaded else { return }
+        
+        guard let media = media else {
+            // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
+            return
+        }
+        media.getImageData(completion: { (data) in
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.imageView?.image = NSImage(data: data)
+                }
+            } else {
+                // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
+            }
+        })
     }
     
     override func viewDidLoad() {

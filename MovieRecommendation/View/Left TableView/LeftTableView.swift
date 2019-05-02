@@ -38,7 +38,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
             
         default :
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionCellID), owner: nil) as! LeftTVContainerCell
-            //            cell.media =
+            cell.reloadCollectionView()
             return cell
             
         }

@@ -19,7 +19,7 @@ class TitleCell : NSTableCellView {
     
     var leadingMargin : Double? {
         didSet {
-            //            TODO: Connect leading margin and set constant
+            // TODO: Connect leading margin and set constant
         }
     }
     var header: String! {
@@ -53,5 +53,10 @@ class TitleCell : NSTableCellView {
         addButton.isHidden = !addButton.isHidden
     }
 
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        print("A")
+        
+    }
     
 }

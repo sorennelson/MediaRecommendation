@@ -15,13 +15,13 @@ protocol UserProtocol: Hashable {
     // Number of movies rated by user
     var mj: Int { get set }
     
-    mutating func addRating(_ rating: Double, for movie: Int)
+    mutating func addRating(_ rating: Double, for media: Int)
 }
 
 extension UserProtocol {
-    mutating func addRating(_ rating: Double, for movie: Int) {
+    mutating func addRating(_ rating: Double, for media: Int) {
         mj += 1
-        ratings[movie - 1] = rating;
+        ratings[media - 1] = rating;
     }
 }
 

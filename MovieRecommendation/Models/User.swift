@@ -8,21 +8,19 @@
 
 import Foundation
 
-class User: UserProtocol {
+class User: NSObject, UserProtocol {
     
     var id: Int
-    var ratings: [Double]
+    var ratings: [Double] // ratings by user, index is mID
+    var mj: Int // Number of medium rated by user
     
-    // Number of movies rated by user
-    var mj: Int
-    
-    init(id: Int) {
+    init(id: Int, numMedia: Int) {
         self.id = id
         mj = 0
-        ratings = Array(repeating: 0, count: 9125)
+        ratings = Array(repeating: 0, count: numMedia)
     }
     
-    public var description: String {
+    override public var description: String {
         return String("ID: \(id) \nratings: \(ratings)")
     }
     
