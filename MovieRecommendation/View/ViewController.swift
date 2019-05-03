@@ -43,9 +43,10 @@ class ViewController: NSViewController {
 
 //            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
 //            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentMovieRM)
-//
-//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 7)
-//            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
+
+            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 7)
+            HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabMovieRM)
+            ObjectController.sharedInstance.movieRM = collabMovieRM
             
             
             ParseController.sharedInstance.importAndParseBooks()
@@ -55,8 +56,8 @@ class ViewController: NSViewController {
 //            var bookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
 //            HypothesisEvaluation.sharedInstance.trainData(iterations: 1, RM: &bookRM)
             
-            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 7)
-            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
+//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 7)
+//            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
         }
     }
     
@@ -87,6 +88,7 @@ class ViewController: NSViewController {
         rightTableView.reloadData()
         leftTableView.reloadData()
     }
+    
     
     
     private func runTests() {

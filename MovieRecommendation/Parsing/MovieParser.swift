@@ -59,7 +59,7 @@ class MovieParser {
     
     // MARK: Ratings
     private func parseMovieRatings(_ text: String) {
-        var user = User(id: 1, numMedia: 9125)
+        var user = RatingUser(id: 1, numMedia: 9125)
         
         text.enumerateLines { (line, _) in
             let ratingArray = line.components(separatedBy: ",")
@@ -78,7 +78,7 @@ class MovieParser {
         }
     }
     
-    private func addMovieRatingsForCreatedUser(_ user: inout User, with uID: Int, _ movieID: Int, _ rating: Double) {
+    private func addMovieRatingsForCreatedUser(_ user: inout RatingUser, with uID: Int, _ movieID: Int, _ rating: Double) {
         addMovieRating(rating, for: uID, movieID)
         
         var mID = movieID
@@ -91,11 +91,11 @@ class MovieParser {
         }
     }
     
-    private func addMovieRatingsForNewUser(_ user: inout User, with uID: Int, _ movieID: Int, _ rating: Double) {
+    private func addMovieRatingsForNewUser(_ user: inout RatingUser, with uID: Int, _ movieID: Int, _ rating: Double) {
         addMovieRating(rating, for: uID, movieID)
         
         objectController.movieUsers.append(user)
-        user = User(id: uID, numMedia: 9125)
+        user = RatingUser(id: uID, numMedia: 9125)
         
         var mID = movieID
         getMID(&mID)

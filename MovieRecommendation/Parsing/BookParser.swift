@@ -88,7 +88,7 @@ class BookParser {
     
     private func parseBookRatings(_ text: String) {
         for i in 0..<53425 {
-            self.objectController.bookUsers.append(User(id: i, numMedia: 10000))
+            self.objectController.bookUsers.append(RatingUser(id: i, numMedia: 10000))
         }
         
         text.enumerateLines { (line, _) in

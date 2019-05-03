@@ -1,0 +1,37 @@
+PODS:
+  - FirebaseAuth (5.4.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GoogleUtilities/Environment (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (5.4.1):
+    - GoogleUtilities/Environment (~> 5.2)
+    - GoogleUtilities/Logger (~> 5.2)
+  - GoogleUtilities/Environment (5.8.0)
+  - GoogleUtilities/Logger (5.8.0):
+    - GoogleUtilities/Environment
+  - GTMSessionFetcher/Core (1.2.1)
+
+DEPENDENCIES:
+  - FirebaseAuth
+  - FirebaseCore
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - GoogleUtilities
+    - GTMSessionFetcher
+
+SPEC CHECKSUMS:
+  FirebaseAuth: dd7bbf03a5aee0eafb3a1aee4d2812bd74bac890
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: f1a9a8be1aee4bf71a2fc0f4096df6788bdfda61
+  GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
+
+PODFILE CHECKSUM: 1817dd877695b91c14acb79496646e3bd75fe5c1
+
+COCOAPODS: 1.5.3

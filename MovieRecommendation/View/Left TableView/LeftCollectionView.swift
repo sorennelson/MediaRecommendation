@@ -32,6 +32,16 @@ class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionVie
         return NSSize(width: 175, height: 260)
     }
     
+    func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        guard let indexPath = indexPaths.first else { return }
+        let item = collectionView.item(at: indexPath) as! LeftTVMediaCVCell
+        
+        let user = ObjectController.sharedInstance.movieUsers[0]
+        let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: item.media!)
+        print(prediction)
+        
+    }
+    
     
     
 }

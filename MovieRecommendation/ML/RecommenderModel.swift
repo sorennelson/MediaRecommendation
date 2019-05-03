@@ -202,11 +202,13 @@ class RecommenderModel {
     }
     
     // MARK: PREDICTION
-    func predict(movie: Int, user: Int) -> Double {
+    func predict(media: Int, user: Int) -> Double {
         // normally feature count would be +1
         let t = weights[user, "all"]
-        let x = X[movie, "all"]
-        return sum(x * t)
+        let x = X[media, "all"]
+        let prediction = sum (x * t)
+        let rounded = round(prediction * 2) / 2
+        return rounded
     }
 }
     

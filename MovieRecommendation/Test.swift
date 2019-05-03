@@ -67,7 +67,7 @@ class Test {
         for movie in 0..<5 {
             for user in 0..<4 {
                 // if delegate!.getR()[movie, user] == 0 {
-                    mat[movie, user] = RM.predict(movie: movie, user: user)
+                    mat[movie, user] = RM.predict(media: movie, user: user)
                 // }
             }
         }
