@@ -14,6 +14,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
 // MARK: TableView
     var tableView: NSTableView?
     let CollectionCellID = "CVCell"
+    let MediaCellID = "MediaCellID"
     let TitleCellID = "TitleCell"
     var titleCell: TitleCell?
     
@@ -26,7 +27,9 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 2
+        let count = ObjectController.sharedInstance.getAllMediaCount()
+        if count == 0 { return 1 }
+        else { return 1 + ceil(Double(count) / 3.0) }
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -37,16 +40,24 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
             return titleCell
             
         default :
-            let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionCellID), owner: nil) as! LeftTVContainerCell
-            cell.reloadCollectionView()
+            let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
+            let media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)
+            cell.setMedia(media: media)
             return cell
-            
+//            let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionCellID), owner: nil) as! LeftTVContainerCell
+//            cell.reloadCollectionView()
         }
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         if row == 0 { return 90 }
-        return 515
+        return 320
+//        else if ViewController.isExpanded {
+//            return 288 + 32
+//        }
+//        else {
+//            return 485
+//        }
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
