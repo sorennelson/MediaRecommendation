@@ -38,6 +38,7 @@
 		AC9764D221E8077700FEF318 /* ImportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9764D121E8077700FEF318 /* ImportController.swift */; };
 		AC9764D421E8169700FEF318 /* MediaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9764D321E8169700FEF318 /* MediaProtocol.swift */; };
 		AC9764D621E8194100FEF318 /* UserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9764D521E8194100FEF318 /* UserProtocol.swift */; };
+		ACCB9674227D58FB0027E834 /* LeftTVMediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCB9673227D58FB0027E834 /* LeftTVMediaCell.swift */; };
 		ACD511A6226BB1B8006D9FFA /* ObjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD511A5226BB1B8006D9FFA /* ObjectController.swift */; };
 		ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */; };
 		ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C1220FEB77C0088BFE8 /* ViewController.swift */; };
@@ -154,6 +155,7 @@
 		AC9764D121E8077700FEF318 /* ImportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportController.swift; sourceTree = "<group>"; };
 		AC9764D321E8169700FEF318 /* MediaProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaProtocol.swift; sourceTree = "<group>"; };
 		AC9764D521E8194100FEF318 /* UserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProtocol.swift; sourceTree = "<group>"; };
+		ACCB9673227D58FB0027E834 /* LeftTVMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftTVMediaCell.swift; sourceTree = "<group>"; };
 		ACD511A5226BB1B8006D9FFA /* ObjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectController.swift; sourceTree = "<group>"; };
 		ACF36C0D20FEB77C0088BFE8 /* MovieRecommendation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieRecommendation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				AC72FBDD21CA1AF800DCF44E /* LeftTableView.swift */,
+				ACCB9673227D58FB0027E834 /* LeftTVMediaCell.swift */,
 				AC60DA4F21CAEFFB00A46711 /* LeftTVContainerCell.swift */,
 				AC60DA5321CAF75300A46711 /* LeftTVMediaCVCell.swift */,
 				AC72FBDF21CA1B0E00DCF44E /* LeftCollectionView.swift */,
@@ -762,6 +765,7 @@
 				ACF36C6F20FEB7EE0088BFE8 /* ScalarArithmetic-bleed.swift in Sources */,
 				ACF36C9920FEB7EF0088BFE8 /* numbers.swift in Sources */,
 				AC72FBE021CA1B0E00DCF44E /* LeftCollectionView.swift in Sources */,
+				ACCB9674227D58FB0027E834 /* LeftTVMediaCell.swift in Sources */,
 				AC5F6B5E21C8D58700DC268A /* RightTVMediaCell.swift in Sources */,
 				AC22D2FD2263E17800F1A045 /* BookParser.swift in Sources */,
 				ACF36C8B20FEB7EF0088BFE8 /* m-operators.swift in Sources */,

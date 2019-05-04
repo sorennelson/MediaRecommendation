@@ -20,22 +20,20 @@ class CostFunction {
         self.regParam = regParam
     }
     
+//    Root Mean Squared Error
     func computeTrainError() -> Double {
-        let abserror = round(abs(computeError(data: RM.xTrain, ratings: RM.yTrain, rated: RM.rTrain)))
-        var missclassified = 0.0
-        for i in 0..<abserror.count {
-            if abserror.flat[i] != 0 { missclassified += 1 }
-        }
-        return missclassified / abserror.count
+        let error = computeError(data: RM.xTrain, ratings: RM.yTrain, rated: RM.rTrain)
+        let sqError = error * error
+        let rmse = sqrt(sum(sqError.flat) / Double(error.count))
+        return rmse
     }
     
+//    Root Mean Squared Error
     func computeTestError() -> Double {
-        let abserror = round(abs(computeError(data: RM.xTest, ratings: RM.yTest, rated: RM.rTest)))
-        var missclassified = 0.0
-        for i in 0..<abserror.count {
-            if abserror.flat[i] != 0 { missclassified += 1 }
-        }
-        return missclassified / abserror.count
+        let error = computeError(data: RM.xTest, ratings: RM.yTest, rated: RM.rTest)
+        let sqError = error * error
+        let rmse = sqrt(sum(sqError.flat) / Double(error.count))
+        return rmse
     }
     
     private func computeError(data: matrix, ratings: matrix, rated: matrix) -> matrix {
