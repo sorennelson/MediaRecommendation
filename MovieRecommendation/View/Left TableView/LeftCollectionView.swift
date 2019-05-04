@@ -13,7 +13,7 @@ class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionVie
     
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         let count = ObjectController.sharedInstance.getAllMediaCount()
-        if count == 0 { return 3 }
+        if count == 0 { return 20 }
         else { return count }
     }
     
@@ -28,8 +28,16 @@ class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionVie
         return collectionViewItem
     }
     
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
-        return NSSize(width: 175, height: 260)
+        return NSSize(width: 205, height: 260)
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
@@ -41,7 +49,5 @@ class LeftCollectionView : NSObject, NSCollectionViewDataSource, NSCollectionVie
         print(prediction)
         
     }
-    
-    
     
 }

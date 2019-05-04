@@ -15,6 +15,13 @@ class LeftTVContainerCell : NSTableCellView {
     var collectionViewDataSource = LeftCollectionView()
     
     override func awakeFromNib() {
+        
+//        if #available(OSX 10.13, *) {
+//            if let contentSize = self.collectionView.collectionViewLayout?.collectionViewContentSize {
+//                self.collectionView.setFrameSize(contentSize)
+//            }
+//        }
+        
         collectionView.dataSource = collectionViewDataSource
         collectionView.delegate = collectionViewDataSource
         collectionView.enclosingScrollView?.backgroundColor = NSColor.clear
@@ -25,4 +32,5 @@ class LeftTVContainerCell : NSTableCellView {
     func reloadCollectionView() {
         collectionView.reloadData()
     }
+    
 }

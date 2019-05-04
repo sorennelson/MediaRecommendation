@@ -17,11 +17,18 @@ class ViewController: NSViewController {
     @IBOutlet var categoriesTableView: NSTableView!
     var categoriesDataSource = CategoriesTableView()
 
-    var isExpanded = false
+    static var isExpanded = false
     @IBOutlet var leftTVToViewConstraint: NSLayoutConstraint!
     @IBOutlet var leftTVToCategoriesConstraint: NSLayoutConstraint!
     @IBOutlet var rightTVToViewConstraint: NSLayoutConstraint!
     @IBOutlet var rightTVToCategoriesConstraint: NSLayoutConstraint!
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        if let window = self.view.window {
+//            window.styleMask = [.closable, .titled, .miniaturizable]
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -34,7 +41,6 @@ class ViewController: NSViewController {
             print("This is run on the background queue")
             
 //          TODO: Move to OC
-            
             ParseController.sharedInstance.importAndParseMovies()
             DispatchQueue.main.async {
                 self.leftTableView.reloadData()
@@ -44,13 +50,13 @@ class ViewController: NSViewController {
 //            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
 //            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentMovieRM)
 
-            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 7)
-            HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabMovieRM)
-            ObjectController.sharedInstance.movieRM = collabMovieRM
+//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 6)
+//            HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
+//            ObjectController.sharedInstance.movieRM = collabMovieRM
             
             
-            ParseController.sharedInstance.importAndParseBooks()
-            print("Books imported")
+//            ParseController.sharedInstance.importAndParseBooks()
+//            print("Books imported")
 
             
 //            var bookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)

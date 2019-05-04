@@ -12,13 +12,15 @@ import Cocoa
 extension ViewController {
     
     private func toggleExpansion() {
-        if !isExpanded {
+        if !ViewController.isExpanded {
             expand()
             
         } else {
             minimize()
         }
-        isExpanded = !isExpanded
+        ViewController.isExpanded = !ViewController.isExpanded
+        leftTableView.reloadData()
+        rightTableView.reloadData()
     }
     
     private func changeArrow(_ button: NSButton, to imageName: String) {
@@ -48,7 +50,7 @@ extension ViewController {
     }
     
     @IBAction func recExpandButtonPressed(_ sender: Any) {
-        if !isExpanded {
+        if !ViewController.isExpanded {
             rightDataSource.changeContent(to: Content.Categories)
             leftDataSource.toggleArrowButtonDirection()
             
