@@ -9,11 +9,12 @@
 import Foundation
 import FirebaseAuth
 
+
 class ObjectController {
     
     static var sharedInstance = ObjectController()
     static var currentMediaType = MediaType.Movies
-    static var currentUser: RatingUser?
+    var currentUser: User?
     
     var movies: [Int: Movie] = Dictionary.init() // YID: Movie
     var movieLinks = [Int: String]() // YID: Link
@@ -55,6 +56,27 @@ class ObjectController {
         }
     }
     
+    func getAllMedia(for indices: Range<Int>) -> [Media] {
+        var media = [Media]()
+        switch ObjectController.currentMediaType {
+        case .Books:
+            for i in indices {
+                if let book = books[i] {
+                    media.append(book)
+                }
+            }
+            return media
+            
+        case .Movies:
+            for i in indices {
+                if let movie = movies[i] {
+                    media.append(movie)
+                }
+            }
+            return media
+        }
+    }
+    
     func getPrediction(for user: RatingUser, media: Media) -> Double {
         var prediction: Double
         switch ObjectController.currentMediaType {
@@ -74,10 +96,21 @@ class ObjectController {
                 print(error.localizedDescription)
                 completion(false)
             }
-            if let authResult = authResult {
-                
-                print(authResult)
+            guard let authResult = authResult else {
+                completion(false)
+                return
             }
+                
+            self.currentUser = User(firID: authResult.user.uid,
+                                    ubid: self.bookUsers.count, numBooks: self.books.count,
+                                    umid: self.movieUsers.count, numMovies: self.movies.count)
+            self.bookUsers.append(self.currentUser!.bookRatingUser!)
+            self.movieUsers.append(self.currentUser!.movieRatingUser!)
+            
+//                TODO: Save User to database
+            
+            
+            print(authResult)
             completion(true)
         }
     }
@@ -90,6 +123,8 @@ class ObjectController {
             }
             
             if let authResult = authResult {
+                
+//                TODO: Get User from firebase
                 print(authResult.user)
                 
             } else {
