@@ -66,14 +66,14 @@ class ViewController: NSViewController {
             }
             print("movies imported")
 
-//            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
-//            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentMovieRM)
-//            print("ROOT MEAN SQUARED ERROR FOR MOVIE CONTENT BASED: " + String(err))
+            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
+            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentMovieRM)
+            print("ROOT MEAN SQUARED ERROR FOR MOVIE CONTENT BASED: " + String(err))
 
-//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 8)
-//            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
-//            print("ROOT MEAN SQUARED ERROR FOR MOVIE COLLABORATIVE FILTERING: " + String(err))
-//            ObjectController.sharedInstance.movieRM = collabMovieRM
+            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 8)
+            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
+            print("ROOT MEAN SQUARED ERROR FOR MOVIE COLLABORATIVE FILTERING: " + String(err))
+            ObjectController.sharedInstance.movieRM = collabMovieRM
             
             
         }
