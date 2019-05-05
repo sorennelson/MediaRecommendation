@@ -87,12 +87,12 @@ class ViewController: NSViewController {
 
             var contentBookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
             ObjectController.sharedInstance.bookRM = contentBookRM
-            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &contentBookRM)
+            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentBookRM)
             print("ROOT MEAN SQUARED ERROR FOR BOOK CONTENT BASED: " + String(err))
             
             var collabBookRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 10)
             ObjectController.sharedInstance.bookRM = contentBookRM
-            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabBookRM)
+            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabBookRM)
             print("ROOT MEAN SQUARED ERROR FOR BOOK COLLAB BASED: " + String(err))
 
         }
