@@ -22,15 +22,7 @@ class CostFunction {
     
 //    Root Mean Squared Error
     func computeTrainError() -> Double {
-        let error = computeError(data: RM.xTrain, ratings: RM.yTrain, rated: RM.rTrain)
-        let sqError = error * error
-        let rmse = sqrt(sum(sqError.flat) / Double(error.count))
-        return rmse
-    }
-    
-//    Root Mean Squared Error
-    func computeTestError() -> Double {
-        let error = computeError(data: RM.xTest, ratings: RM.yTest, rated: RM.rTest)
+        let error = computeError(data: RM.X, ratings: RM.Y, rated: RM.R)
         let sqError = error * error
         let rmse = sqrt(sum(sqError.flat) / Double(error.count))
         return rmse
@@ -41,10 +33,9 @@ class CostFunction {
         return rated * allError // to only get the values that are rated
     }
     
-    
 //    MARK: Content
     func computeContentStep() -> (Double, matrix) {
-        let error = computeError(data: RM.xTrain, ratings: RM.yTrain, rated: RM.rTrain)
+        let error = computeError(data: RM.X, ratings: RM.Y, rated: RM.R)
         let grad = computeContentWeightGrad(error)
         
         let sq_error = error * error
@@ -54,7 +45,7 @@ class CostFunction {
     }
     
     private func computeContentWeightGrad(_ error: matrix) -> matrix {
-        var grad = transpose(error).dot(RM.xTrain)
+        var grad = transpose(error).dot(RM.X)
         let regularization = regParam * RM.weights
         var weightGrad = grad + regularization
         
@@ -72,7 +63,7 @@ class CostFunction {
     
 //    MARK: Collaborative
     func computeCollaborativeStep() -> (Double, matrix, matrix) {
-        let error = computeError(data: RM.xTrain, ratings: RM.yTrain, rated: RM.rTrain)
+        let error = computeError(data: RM.X, ratings: RM.Y, rated: RM.R)
         let itemFeatureGrad = computeCollaborativeItemFeatureGrad(error)
         let weightGrad = computeCollaborativeWeightGrad(error)
         
@@ -84,13 +75,13 @@ class CostFunction {
     
     private func computeCollaborativeItemFeatureGrad(_ error: matrix) -> matrix {
         let grad = error.dot(RM.weights)
-        let regularization = regParam * RM.xTrain
+        let regularization = regParam * RM.X
         
         return grad + regularization
     }
     
     private func computeCollaborativeWeightGrad(_ error: matrix) -> matrix {
-        let grad = transpose(error).dot(RM.xTrain)
+        let grad = transpose(error).dot(RM.X)
         let regularization = regParam * RM.weights
         
         return grad + regularization
@@ -98,7 +89,7 @@ class CostFunction {
     
     private func computeCollaborativeCost(_ sq_error: matrix) -> Double {
         let cost = sum(sq_error.flat) / 2
-        let itemFeatureReg = (regParam / 2) * sum( pow(RM.xTrain, power: 2).flat)
+        let itemFeatureReg = (regParam / 2) * sum( pow(RM.X, power: 2).flat)
         let weightReg = (regParam / 2) * sum(pow(RM.weights, power: 2).flat)
         
         return cost + itemFeatureReg + weightReg

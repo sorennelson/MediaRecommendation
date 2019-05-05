@@ -710,30 +710,30 @@
             <objects>
                 <viewController storyboardIdentifier="MediaDetailPopover" id="Y1m-k3-eVn" customClass="MediaDetailPopover" customModule="MovieRecommendation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="0Ul-Ob-MB7">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="264"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="288"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fpf-Ev-qkD">
-                                <rect key="frame" x="20" y="44" width="133" height="200"/>
+                                <rect key="frame" x="20" y="68" width="133" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="133" id="2Bf-Fb-cLC"/>
                                     <constraint firstAttribute="height" constant="200" id="iiU-zP-epZ"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="no-image" id="2YO-Oq-9I9"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="top" imageScaling="proportionallyDown" image="no-image" id="2YO-Oq-9I9"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2WJ-Wb-MHv">
-                                <rect key="frame" x="171" y="215" width="261" height="29"/>
+                                <rect key="frame" x="171" y="239" width="261" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="S3B-x5-aLX"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Movie Title" id="Jsc-2A-B6p">
-                                    <font key="font" size="17" name="Avenir-Medium"/>
+                                    <font key="font" size="20" name="Avenir-Medium"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sug-SJ-Fyu">
-                                <rect key="frame" x="171" y="81" width="124" height="29"/>
+                                <rect key="frame" x="171" y="115" width="124" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="0hq-gz-R7V"/>
                                 </constraints>
@@ -744,7 +744,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gkU-EQ-2gg">
-                                <rect key="frame" x="171" y="165" width="86" height="29"/>
+                                <rect key="frame" x="171" y="189" width="86" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="6sw-p5-DwZ"/>
                                 </constraints>
@@ -755,18 +755,18 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JqR-jS-wzR">
-                                <rect key="frame" x="402" y="165" width="25" height="29"/>
+                                <rect key="frame" x="418" y="189" width="9" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="qHS-oc-1MR"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="3.5" id="rCB-kn-ovA">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="rCB-kn-ovA">
                                     <font key="font" size="15" name="Avenir-Roman"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vc8-Fd-VXj">
-                                <rect key="frame" x="171" y="123" width="113" height="29"/>
+                                <rect key="frame" x="171" y="152" width="113" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="bKY-Zp-Bq1"/>
                                 </constraints>
@@ -777,22 +777,22 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tGK-nL-WMU">
-                                <rect key="frame" x="402" y="123" width="25" height="29"/>
+                                <rect key="frame" x="418" y="152" width="9" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="wgo-ur-P9k"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="3.5" id="yhV-bn-pOT">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="yhV-bn-pOT">
                                     <font key="font" size="15" name="Avenir-Roman"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Efx-J2-oDq">
-                                <rect key="frame" x="402" y="81" width="25" height="29"/>
+                                <rect key="frame" x="418" y="115" width="9" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="2Su-Vl-6fx"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="3.5" id="xni-GB-bMZ">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="-" id="xni-GB-bMZ">
                                     <font key="font" size="15" name="Avenir-Roman"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -803,9 +803,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="Yl3-gr-zOl"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" id="aRG-8F-FMp">
-                                    <font key="font" size="15" name="Avenir-Roman"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="aRG-8F-FMp">
+                                    <font key="font" size="15" name="Avenir-Heavy"/>
+                                    <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -814,21 +814,21 @@
                             <constraint firstItem="tGK-nL-WMU" firstAttribute="trailing" secondItem="JqR-jS-wzR" secondAttribute="trailing" id="7ey-4c-jhT"/>
                             <constraint firstItem="fpf-Ev-qkD" firstAttribute="leading" secondItem="0Ul-Ob-MB7" secondAttribute="leading" constant="20" id="8Aj-vO-we9"/>
                             <constraint firstItem="tac-Bm-Rt8" firstAttribute="leading" secondItem="0Ul-Ob-MB7" secondAttribute="leading" constant="26" id="8Xq-TP-WUi"/>
-                            <constraint firstItem="Vc8-Fd-VXj" firstAttribute="top" secondItem="gkU-EQ-2gg" secondAttribute="bottom" constant="13" id="CAP-mG-lx4"/>
+                            <constraint firstItem="Vc8-Fd-VXj" firstAttribute="top" secondItem="gkU-EQ-2gg" secondAttribute="bottom" constant="8" id="CAP-mG-lx4"/>
                             <constraint firstItem="Vc8-Fd-VXj" firstAttribute="leading" secondItem="gkU-EQ-2gg" secondAttribute="leading" id="K0F-hh-h1O"/>
                             <constraint firstAttribute="trailing" secondItem="JqR-jS-wzR" secondAttribute="trailing" constant="25" id="Khq-gR-CiV"/>
                             <constraint firstItem="gkU-EQ-2gg" firstAttribute="leading" secondItem="2WJ-Wb-MHv" secondAttribute="leading" id="Lhg-1K-Ye2"/>
                             <constraint firstAttribute="trailing" secondItem="tac-Bm-Rt8" secondAttribute="trailing" constant="25" id="OUK-Yz-UV7"/>
-                            <constraint firstItem="sug-SJ-Fyu" firstAttribute="top" secondItem="Vc8-Fd-VXj" secondAttribute="bottom" constant="13" id="TIU-Yi-kD3"/>
+                            <constraint firstItem="sug-SJ-Fyu" firstAttribute="top" secondItem="Vc8-Fd-VXj" secondAttribute="bottom" constant="8" id="TIU-Yi-kD3"/>
                             <constraint firstItem="tGK-nL-WMU" firstAttribute="centerY" secondItem="Vc8-Fd-VXj" secondAttribute="centerY" id="U9b-da-99N"/>
                             <constraint firstItem="JqR-jS-wzR" firstAttribute="centerY" secondItem="gkU-EQ-2gg" secondAttribute="centerY" id="Vag-wu-QgQ"/>
                             <constraint firstItem="fpf-Ev-qkD" firstAttribute="top" secondItem="0Ul-Ob-MB7" secondAttribute="top" constant="20" id="W8Q-ES-LTa"/>
                             <constraint firstAttribute="trailing" secondItem="2WJ-Wb-MHv" secondAttribute="trailing" constant="20" id="coG-xh-a1l"/>
+                            <constraint firstItem="tac-Bm-Rt8" firstAttribute="top" secondItem="fpf-Ev-qkD" secondAttribute="bottom" constant="19" id="iMq-Tp-Spx"/>
                             <constraint firstItem="gkU-EQ-2gg" firstAttribute="top" secondItem="2WJ-Wb-MHv" secondAttribute="bottom" constant="21" id="kln-hz-GeY"/>
                             <constraint firstItem="sug-SJ-Fyu" firstAttribute="leading" secondItem="gkU-EQ-2gg" secondAttribute="leading" id="lBr-Ky-WzP"/>
                             <constraint firstItem="2WJ-Wb-MHv" firstAttribute="leading" secondItem="fpf-Ev-qkD" secondAttribute="trailing" constant="20" id="mQY-ve-glx"/>
                             <constraint firstItem="Efx-J2-oDq" firstAttribute="trailing" secondItem="tGK-nL-WMU" secondAttribute="trailing" id="r5r-Gc-Gk3"/>
-                            <constraint firstAttribute="bottom" secondItem="tac-Bm-Rt8" secondAttribute="bottom" constant="20" id="uJh-hl-yrt"/>
                             <constraint firstItem="2WJ-Wb-MHv" firstAttribute="top" secondItem="0Ul-Ob-MB7" secondAttribute="top" constant="20" id="uN8-wH-KEd"/>
                             <constraint firstItem="Efx-J2-oDq" firstAttribute="centerY" secondItem="sug-SJ-Fyu" secondAttribute="centerY" id="vd1-4c-8DL"/>
                         </constraints>
@@ -844,7 +844,7 @@
                 </viewController>
                 <customObject id="kRU-Wc-CjB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-752" y="860"/>
+            <point key="canvasLocation" x="-752" y="872"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -1124,7 +1124,6 @@
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="leftButtonClicked:" target="Gmp-Ar-ZdY" id="ouZ-5C-0Rc"/>
-                                                                        <segue destination="Y1m-k3-eVn" kind="popover" popoverAnchorView="m2S-Jp-Qdl" popoverBehavior="t" preferredEdge="minY" id="wqy-m2-TeS"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Emi-e5-KWF">
@@ -1139,7 +1138,6 @@
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="middleButtonClicked:" target="Gmp-Ar-ZdY" id="GL4-Bh-C6P"/>
-                                                                        <segue destination="Y1m-k3-eVn" kind="popover" popoverAnchorView="m2S-Jp-Qdl" popoverBehavior="t" preferredEdge="minY" id="AGR-iV-wZE"/>
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="dAu-1G-Cni">
@@ -1154,7 +1152,6 @@
                                                                     </buttonCell>
                                                                     <connections>
                                                                         <action selector="rightButtonClicked:" target="Gmp-Ar-ZdY" id="TIE-nB-Lym"/>
-                                                                        <segue destination="Y1m-k3-eVn" kind="popover" popoverAnchorView="m2S-Jp-Qdl" popoverBehavior="t" preferredEdge="minY" id="EXC-Yf-VcU"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -1413,6 +1410,7 @@
                         <outlet property="rightTVToViewConstraint" destination="vCE-bQ-dHP" id="jjz-Q8-OtQ"/>
                         <outlet property="rightTableView" destination="r8R-el-7Vr" id="bfz-vv-rOG"/>
                         <outlet property="userButton" destination="EpX-pa-IMd" id="QOf-Z1-ElM"/>
+                        <segue destination="Y1m-k3-eVn" kind="popover" identifier="MediaPopover" popoverAnchorView="m2S-Jp-Qdl" popoverBehavior="t" preferredEdge="maxY" id="aCF-YA-Zxp"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1507,7 +1505,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXO-0a-qG2">
-                                                                    <rect key="frame" x="370" y="61" width="13" height="17"/>
+                                                                    <rect key="frame" x="365" y="61" width="13" height="17"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" placeholderString="-" id="44d-Rp-ujG">
                                                                         <font key="font" metaFont="systemSemibold" size="16"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1515,7 +1513,7 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IBl-50-DgG">
-                                                                    <rect key="frame" x="366" y="89" width="20" height="20"/>
+                                                                    <rect key="frame" x="361" y="89" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="20" id="Ej6-zE-iB6"/>
                                                                         <constraint firstAttribute="height" constant="20" id="hNO-f5-jGj"/>
@@ -1529,7 +1527,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="hIa-Yq-Ban">
-                                                                    <rect key="frame" x="366" y="30" width="20" height="20"/>
+                                                                    <rect key="frame" x="361" y="30" width="20" height="20"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="20" id="3vz-3Q-gsD"/>
                                                                         <constraint firstAttribute="width" constant="20" id="Jxi-yv-K9e"/>
@@ -1543,10 +1541,10 @@
                                                                     </connections>
                                                                 </button>
                                                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-8m-WG4">
-                                                                    <rect key="frame" x="403" y="55" width="30" height="30"/>
+                                                                    <rect key="frame" x="389" y="47" width="44" height="44"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="30" id="41f-6e-ulG"/>
-                                                                        <constraint firstAttribute="width" constant="30" id="nhT-Fq-FZh"/>
+                                                                        <constraint firstAttribute="height" constant="44" id="41f-6e-ulG"/>
+                                                                        <constraint firstAttribute="width" constant="44" id="nhT-Fq-FZh"/>
                                                                     </constraints>
                                                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="icons8-plus-24" imagePosition="only" inset="2" id="CLv-Vu-wbr">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -1558,17 +1556,17 @@
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="IBl-50-DgG" firstAttribute="leading" secondItem="Pfw-dw-7QK" secondAttribute="trailing" constant="39" id="D1o-x4-7Ok"/>
-                                                                <constraint firstItem="IBl-50-DgG" firstAttribute="leading" secondItem="fxQ-qv-FWD" secondAttribute="trailing" constant="39" id="EZU-3y-mEW"/>
-                                                                <constraint firstItem="GcN-8m-WG4" firstAttribute="centerY" secondItem="okL-Yt-kuM" secondAttribute="centerY" id="H57-lu-Kqw"/>
-                                                                <constraint firstAttribute="trailing" secondItem="AXO-0a-qG2" secondAttribute="trailing" constant="64" id="Ibx-RR-JYU"/>
+                                                                <constraint firstItem="IBl-50-DgG" firstAttribute="leading" secondItem="Pfw-dw-7QK" secondAttribute="trailing" constant="34" id="D1o-x4-7Ok"/>
+                                                                <constraint firstItem="IBl-50-DgG" firstAttribute="leading" secondItem="fxQ-qv-FWD" secondAttribute="trailing" constant="34" id="EZU-3y-mEW"/>
+                                                                <constraint firstItem="GcN-8m-WG4" firstAttribute="centerY" secondItem="okL-Yt-kuM" secondAttribute="centerY" constant="1" id="H57-lu-Kqw"/>
+                                                                <constraint firstAttribute="trailing" secondItem="AXO-0a-qG2" secondAttribute="trailing" constant="69" id="Ibx-RR-JYU"/>
                                                                 <constraint firstItem="6BD-E3-mxo" firstAttribute="top" secondItem="okL-Yt-kuM" secondAttribute="top" constant="10" id="J2f-K9-9YQ"/>
                                                                 <constraint firstItem="Pfw-dw-7QK" firstAttribute="top" secondItem="6BD-E3-mxo" secondAttribute="top" id="UzF-cP-4QT"/>
                                                                 <constraint firstItem="AXO-0a-qG2" firstAttribute="centerY" secondItem="okL-Yt-kuM" secondAttribute="centerY" id="VMf-wR-Qik"/>
                                                                 <constraint firstItem="fxQ-qv-FWD" firstAttribute="top" secondItem="Pfw-dw-7QK" secondAttribute="bottom" constant="9" id="Vf6-QH-ruB"/>
                                                                 <constraint firstItem="hIa-Yq-Ban" firstAttribute="centerX" secondItem="AXO-0a-qG2" secondAttribute="centerX" constant="-0.5" id="bkS-68-cFC"/>
                                                                 <constraint firstItem="Pfw-dw-7QK" firstAttribute="leading" secondItem="6BD-E3-mxo" secondAttribute="trailing" constant="15" id="eWj-5E-AD3"/>
-                                                                <constraint firstItem="AXO-0a-qG2" firstAttribute="leading" secondItem="J7Q-jo-8kg" secondAttribute="trailing" constant="45" id="f3u-Ee-Vmp"/>
+                                                                <constraint firstItem="AXO-0a-qG2" firstAttribute="leading" secondItem="J7Q-jo-8kg" secondAttribute="trailing" constant="40" id="f3u-Ee-Vmp"/>
                                                                 <constraint firstItem="J7Q-jo-8kg" firstAttribute="leading" secondItem="fxQ-qv-FWD" secondAttribute="leading" id="gRf-Jy-pgx"/>
                                                                 <constraint firstAttribute="trailing" secondItem="GcN-8m-WG4" secondAttribute="trailing" constant="12" id="kSm-J0-czZ"/>
                                                                 <constraint firstItem="hIa-Yq-Ban" firstAttribute="top" secondItem="AXO-0a-qG2" secondAttribute="bottom" constant="11" id="l5C-C2-Cqj"/>
@@ -1653,7 +1651,7 @@
                 </viewController>
                 <customObject id="QZf-Ee-S40" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="367" y="2011"/>
+            <point key="canvasLocation" x="367" y="2010.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="pHJ-cT-oAC">
@@ -1835,7 +1833,4 @@
         <image name="icons8-plus-24" width="24" height="24"/>
         <image name="no-image" width="284" height="177"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="EXC-Yf-VcU"/>
-    </inferredMetricsTieBreakers>
 </document>

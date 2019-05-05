@@ -133,8 +133,8 @@ class ObjectController {
         }
     }
     
-    func addRating(_ rating: Double, for media: Media) {
-        guard let user = currentUser else { return }
+    func addRating(_ rating: Double, for media: Media) -> Bool {
+        guard let user = currentUser else { return false }
         addedRatings = true
         user.rate(ObjectController.currentMediaType, with: media.yID, rating: rating)
         switch ObjectController.currentMediaType {
@@ -169,6 +169,7 @@ class ObjectController {
                 movieRM?.updateRatings(at: media.yID, user.bookRatingUser!.id, with: rating)
             }
         }
+        return true
     }
     
     func doneAddingRatings() {
@@ -191,7 +192,7 @@ class ObjectController {
     }
     
     func getBookAverages() -> [Double] {
-        var averages = Array(repeating: 0.0, count: books.count)
+        var averages = Array(repeating: 0.0, count: 10001)
         for book in books.values {
             averages[book.yID] = book.getAvgRating()
         }

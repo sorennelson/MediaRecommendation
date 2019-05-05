@@ -19,7 +19,7 @@ class Book: Media {
         self.author = author
         self.year = year
         
-        super.init(id: id, title: title, genres: genres, features: zeros(974 + 1), ratings: Array(repeating: 0, count: 53425))
+        super.init(id: id, title: title, genres: genres, features: zeros(994 + 1), ratings: Array(repeating: 0, count: 53425))
         self.avgRating = avgRating
         self.imageURL = imageString
         setFeatures(allBookGenres: allBookGenres)

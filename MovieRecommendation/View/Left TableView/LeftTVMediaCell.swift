@@ -71,29 +71,40 @@ class LeftTVMediaCell: NSTableCellView {
         guard let media = leftMedia else { return }
         let user = ObjectController.sharedInstance.movieUsers[0]
         let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
-        print(prediction)
         setSelectedMedia(media, prediction: prediction)
+        displayPopover()
     }
     
     @IBAction func middleButtonClicked(_ sender: Any) {
         guard let media = middleMedia else { return }
         let user = ObjectController.sharedInstance.movieUsers[0]
         let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
-        print(prediction)
         setSelectedMedia(media, prediction: prediction)
+        displayPopover()
     }
     
     @IBAction func rightButtonClicked(_ sender: Any) {
         guard let media = rightMedia else { return }
         let user = ObjectController.sharedInstance.movieUsers[0]
         let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
-        print(prediction)
         setSelectedMedia(media, prediction: prediction)
+        displayPopover()
     }
     
     func setSelectedMedia(_ media: Media, prediction: Double) {
         ObjectController.sharedInstance.selectedMedia = media
         ObjectController.sharedInstance.selectedMediaPrediction = prediction
     }
+    
+    func displayPopover() {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let popover = NSPopover()
+        let mediaDetail = storyboard.instantiateController(withIdentifier: "MediaDetailPopover") as! MediaDetailPopover
+        popover.behavior = .transient
+        popover.contentViewController = mediaDetail
+        popover.show(relativeTo: superview!.bounds, of: superview!, preferredEdge: .maxX)
+        
+    }
+    
 }
 

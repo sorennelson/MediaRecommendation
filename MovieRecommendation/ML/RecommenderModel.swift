@@ -24,20 +24,13 @@ class RecommenderModel {
     
     // Ratings: Y(movie, user) = 0.5 - 5
     var Y: matrix
-    var yTest: matrix
-    var yTrain: matrix
     
     // Binary value: R(movie, user) = 1 if rated, 0 if not
     var R: matrix
-    var rTest: matrix
-    var rTrain: matrix
     
     // Binary value for Content Based: X(movie, genres) = 1 if has that genre, 0 if not
+    var originalX: matrix
     var X: matrix
-    var originalXTrain: matrix
-    var originalXTest: matrix
-    var xTest: matrix
-    var xTrain: matrix
     
     // Trained Parameters - User
     var originalWeights: matrix
@@ -46,9 +39,6 @@ class RecommenderModel {
     var mediaCount: Int
     var featureCount: Int
     var userCount: Int
-    
-    var trainCount: Int
-    var testCount: Int
     
     /* ----------------------------------------------------------------------------------------------------
      Movie_Data:
@@ -59,23 +49,14 @@ class RecommenderModel {
     
     init() {
         Y = zeros((0,0))
-        yTest = zeros((0,0))
-        yTrain = zeros((0,0))
         R = zeros((0,0))
-        rTest = zeros((0,0))
-        rTrain = zeros((0,0))
         X = zeros((0,0))
-        originalXTrain = zeros((0,0))
-        originalXTest = zeros((0,0))
-        xTest = zeros((0,0))
-        xTrain = zeros((0,0))
+        originalX = zeros((0,0))
         weights = zeros((0,0))
         originalWeights = zeros((0,0))
         userCount = 0
         mediaCount = 0
         featureCount = 0
-        trainCount = 0
-        testCount = 0
         algorithmType = .CollaborativeFiltering
     }
 
@@ -100,19 +81,8 @@ class RecommenderModel {
             X = rand((mediaCount, featureCount))
             weights = rand((userCount, featureCount))
         }
-        originalXTrain = X
-        originalXTest = X
+        originalX = X
         originalWeights = weights
-        
-        trainCount = 0
-        testCount = 0
-        
-        yTest = zeros((0,0))
-        yTrain = zeros((0,0))
-        rTest = zeros((0,0))
-        rTrain = zeros((0,0))
-        xTest = zeros((0,0))
-        xTrain = zeros((0,0))
     }
     
     // MARK:  SETTERS
@@ -162,8 +132,7 @@ class RecommenderModel {
     
     func resetMatrices() {
         self.weights = originalWeights
-        self.xTrain = originalXTrain
-//        self.xTest = originalXTest
+        self.X = originalX
     }
     
     func addUser(averages: [Double]) {
@@ -195,8 +164,6 @@ class RecommenderModel {
             weights = newWeights
         }
         originalWeights = weights
-        
-        separateTrainingAndTestData()
     }
     
     // MARK: UPDATERS
@@ -209,28 +176,6 @@ class RecommenderModel {
         R[row - 1, column - 1] = 1
     }
     
-    func separateTrainingAndTestData() {
-        trainCount = ceil(X.rows.double * 0.7).int
-        testCount = X.rows.double - trainCount
-        
-        updateTrainingSet(xTrain: X[0..<trainCount, 0..<X.columns], yTrain: Y[0..<trainCount, 0..<Y.columns], rTrain: R[0..<trainCount, 0..<R.columns])
-        updateTestSet(xTest: X[trainCount..<X.rows, 0..<X.columns], yTest: Y[trainCount..<Y.rows, 0..<Y.columns], rTest: R[trainCount..<R.rows, 0..<R.columns])
-    }
-    
-    func updateTestSet(xTest: matrix, yTest: matrix, rTest: matrix) {
-        self.xTest = xTest
-        self.originalXTest = xTest
-        self.yTest = yTest
-        self.rTest = rTest
-    }
-    
-    func updateTrainingSet(xTrain: matrix, yTrain: matrix, rTrain: matrix) {
-        self.xTrain = xTrain
-        self.originalXTrain = xTrain
-        self.yTrain = yTrain
-        self.rTrain = rTrain
-    }
-    
     // MARK: GETTERS
     func getParametersForUser(_ id: Int) -> vector { return weights[id - 1, "all"] }
     
@@ -241,16 +186,13 @@ class RecommenderModel {
     // MARK: PREDICTION
     func predict(media: Int, user: Int) -> Double {
         // normally feature count would be +1
-        let t = weights[user, "all"]
+        let w = weights[user, "all"]
         let x = X[media, "all"]
-        var prediction = sum (x * t)
-//        should be t.t * x
-//        var prediction = x * t
+        var prediction = sum(x * w)
         
         if newUser && newUsers.contains(user) {
             prediction += averageRatings![media]
         }
-//        let rounded = round(prediction * 2) / 2
         return prediction
     }
 }

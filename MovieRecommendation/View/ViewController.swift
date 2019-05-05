@@ -65,17 +65,15 @@ class ViewController: NSViewController {
                 self.leftTableView.reloadData()
             }
             print("movies imported")
-
-            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
-            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentMovieRM)
-            print("ROOT MEAN SQUARED ERROR FOR MOVIE CONTENT BASED: " + String(err))
-
+            
             var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 8)
-            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabMovieRM)
+            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabMovieRM)
             print("ROOT MEAN SQUARED ERROR FOR MOVIE COLLABORATIVE FILTERING: " + String(err))
             ObjectController.sharedInstance.movieRM = collabMovieRM
-            
-            
+
+            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
+            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &contentMovieRM)
+            print("ROOT MEAN SQUARED ERROR FOR MOVIE CONTENT BASED: " + String(err))
         }
         
         DispatchQueue.global(qos: .background).async {
@@ -85,16 +83,14 @@ class ViewController: NSViewController {
             }
             print("Books imported")
 
-            var contentBookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
-            ObjectController.sharedInstance.bookRM = contentBookRM
-            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &contentBookRM)
-            print("ROOT MEAN SQUARED ERROR FOR BOOK CONTENT BASED: " + String(err))
-            
             var collabBookRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 10)
-            ObjectController.sharedInstance.bookRM = contentBookRM
-            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 300, RM: &collabBookRM)
+            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabBookRM)
             print("ROOT MEAN SQUARED ERROR FOR BOOK COLLAB BASED: " + String(err))
-
+            ObjectController.sharedInstance.bookRM = collabBookRM
+            
+            var contentBookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
+            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &contentBookRM)
+            print("ROOT MEAN SQUARED ERROR FOR BOOK CONTENT BASED: " + String(err))
         }
         
     }

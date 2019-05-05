@@ -14,19 +14,18 @@ class HypothesisEvaluation {
 
     func trainData(iterations: Int, RM: inout RecommenderModel) -> Double {
         
-        RM.separateTrainingAndTestData()
-        let regParam = 0.1
-        let learningRate = 0.0002
+        let regParam = 0.05
+        let learningRate = 0.0001
         let GD = GradientDescentController.sharedInstance
         
         let _ = GD.runBatchGradientDescent(RM: &RM, regParam: regParam, iterations: iterations, learningRate: learningRate)
         
-        return GD.computeTrainSetError(RM: &RM)
+        return GD.computeError(RM: &RM)
     }
     
     func findLowestCombination(iterations: Int, RM: inout RecommenderModel) {
         var weights = [Double: matrix]()
-        var testErrors = [Double: Double]()
+        var errors = [Double: Double]()
 
         let regParams = [0, 0.01, 0.05, 0.1, 0.5, 1, 5, 10]
         let learningRates = [0.0003, 0.004, 0.005]
@@ -41,10 +40,10 @@ class HypothesisEvaluation {
             for regParam in regParams {
                 weights[regParam] = GD.runBatchGradientDescent(RM: &RM, regParam: regParam, iterations: iterations, learningRate: learningRate)
 
-                testErrors[regParam] = GD.computeTestSetError(RM: &RM)
-                print(testErrors[regParam]!)
-                if testErrors[regParam]! < lowestCost {
-                    lowestCost = testErrors[regParam]!
+                errors[regParam] = GD.computeError(RM: &RM)
+                print(errors[regParam]!)
+                if errors[regParam]! < lowestCost {
+                    lowestCost = errors[regParam]!
                     lowestReg = regParam
                     lowestLearnRate = learningRate
                 }

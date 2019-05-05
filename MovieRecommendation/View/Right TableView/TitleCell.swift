@@ -31,7 +31,11 @@ class TitleCell : NSTableCellView {
     func setHeader(_ content: Content) {
         switch content {
         case .Recommendations:
-            header = "Top Recommendations"
+            if ObjectController.currentMediaType == .Movies {
+                header = "All Movies"
+            } else {
+                header = "All Books"
+            }
         case .Ratings:
             header = "My Ratings"
         case .Categories:

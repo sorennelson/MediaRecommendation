@@ -32,7 +32,7 @@ class AddRatingTVCell: NSTableCellView {
                     genres.stringValue += book.genres[i] + ", "
                 }
                 genres.stringValue += book.genres[book.genres.count - 1]
-                if let year = book.year { yearAndType.stringValue = year + "| Book" }
+                if let year = book.year { yearAndType.stringValue = year + " | Book" }
                 else { yearAndType.stringValue = "Book" }
             }
         }
@@ -76,8 +76,9 @@ class AddRatingTVCell: NSTableCellView {
     
     @IBAction func addRatingPressed(_ sender: Any) {
         if mediaRating > -1.0 {
-            ObjectController.sharedInstance.addRating(mediaRating, for: media!)
-            addButton.image = NSImage(named: "icons8-checked-100")
+            if ObjectController.sharedInstance.addRating(mediaRating, for: media!) {
+                addButton.image = NSImage(named: "icons8-checked-100")
+            }
         }
     }
     

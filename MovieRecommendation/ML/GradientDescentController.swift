@@ -47,18 +47,13 @@ class GradientDescentController {
         let (cost, weightGrad, itemFeatureGrad) = costFunction.computeCollaborativeStep()
         
         RM.weights = RM.weights - (learningRate * weightGrad)
-        RM.xTrain = RM.xTrain - (learningRate * itemFeatureGrad)
+        RM.X = RM.X - (learningRate * itemFeatureGrad)
         return cost
     }
     
-    func computeTrainSetError(RM: inout RecommenderModel) -> Double {
+    func computeError(RM: inout RecommenderModel) -> Double {
         let costFunction = CostFunction(RM: RM, regParam: 0)
         return costFunction.computeTrainError()
-    }
-    
-    func computeTestSetError(RM: inout RecommenderModel) -> Double {
-        let costFunction = CostFunction(RM: RM, regParam: 0)
-        return costFunction.computeTestError()
     }
     
     
