@@ -8,6 +8,7 @@ target 'MovieRecommendation' do
   # Pods for MovieRecommendation
 pod 'FirebaseCore'
 pod 'FirebaseAuth'
+# pod 'FirebaseFirestore'
 
   target 'MovieRecommendationTests' do
     inherit! :search_paths

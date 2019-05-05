@@ -17,6 +17,8 @@ class Media: NSObject, MediaProtocol {
     var ratings: [Double]
     var imageURL: String?
     var imageData: Data?
+    var avgRating: Double?
+    var numRatings: Double?
     
     init(id: Int, title: String, genres: [String], features: vector, ratings: [Double]) {
         self.yID = id
@@ -45,6 +47,23 @@ class Media: NSObject, MediaProtocol {
                 }
                 
             } else { completion(nil) }
+        }
+    }
+    
+    func getAvgRating() -> Double {
+        if let avgRating = avgRating {
+            return avgRating
+            
+        } else {
+            numRatings = 0.0
+            var sum = 0.0
+            for rating in ratings {
+                if rating > 0.0 {
+                    numRatings! += 1.0
+                    sum += rating
+                }
+            }
+            return sum / numRatings!
         }
     }
     

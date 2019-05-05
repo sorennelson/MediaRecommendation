@@ -13,16 +13,14 @@ class Book: Media {
     var goodreadsID: Int
     var author: String
     var year: String?
-    var avgRating: Double
-    
     
     init(id: Int, goodreadsID: Int, title: String, author: String, year: String?, genres: [String], allBookGenres:[String], avgRating: Double, imageString: String) {
         self.goodreadsID = goodreadsID
         self.author = author
         self.year = year
-        self.avgRating = avgRating
         
         super.init(id: id, title: title, genres: genres, features: zeros(974 + 1), ratings: Array(repeating: 0, count: 53425))
+        self.avgRating = avgRating
         self.imageURL = imageString
         setFeatures(allBookGenres: allBookGenres)
     }

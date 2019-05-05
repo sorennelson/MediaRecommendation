@@ -17,6 +17,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     let MediaCellID = "MovieRatingCell"
     let TitleCellID = "TitleCell"
     var titleCell: TitleCell?
+    var ratings = [Media]()
     
     func setTableView(_ tableView: NSTableView) {
         self.tableView = tableView
@@ -27,7 +28,9 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return 2
+        ratings = Array(ObjectController.sharedInstance.getRatings().keys)
+//        title + ratings
+        return ratings.count + 1
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -39,7 +42,9 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
             
         default :
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
-            //            cell.media =
+            let media = ratings[row - 1]
+            cell.userRating = ObjectController.sharedInstance.getRatings()[media]!
+            cell.media = media
             return cell
         
         }

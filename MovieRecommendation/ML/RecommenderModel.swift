@@ -18,6 +18,10 @@ class RecommenderModel {
     
     var algorithmType:RMType
     
+    var newUser = false
+    var newUsers = [Int]() // ID
+    var averageRatings: [Double]?
+    
     // Ratings: Y(movie, user) = 0.5 - 5
     var Y: matrix
     var yTest: matrix
@@ -35,7 +39,7 @@ class RecommenderModel {
     var xTest: matrix
     var xTrain: matrix
     
-    // Trained Parameters
+    // Trained Parameters - User
     var originalWeights: matrix
     var weights: matrix
     
@@ -162,6 +166,39 @@ class RecommenderModel {
 //        self.xTest = originalXTest
     }
     
+    func addUser(averages: [Double]) {
+        newUser = true
+        newUsers.append(userCount)
+        averageRatings = averages
+        // Y,R(movie, user)
+        // X
+        self.userCount += 1
+        var newR = zeros((mediaCount, userCount))
+        newR[0..<mediaCount, 0..<userCount-1] = R
+        R = newR
+        
+        var newY = zeros((mediaCount, userCount))
+        newY[0..<mediaCount, 0..<userCount-1] = Y
+        Y = newY
+        
+        if algorithmType == .ContentBased {
+//            weights = rand((userCount, featureCount + 1))
+//            weights[0..<userCount, 0] = zeros(userCount)
+            var newWeights = rand((userCount, featureCount+1))
+            newWeights[0..<userCount-1, 0..<featureCount+1] = weights
+            weights = newWeights
+            
+        } else {
+//            weights = rand((userCount, featureCount))
+            var newWeights = rand((userCount, featureCount))
+            newWeights[0..<userCount-1, 0..<featureCount] = weights
+            weights = newWeights
+        }
+        originalWeights = weights
+        
+        separateTrainingAndTestData()
+    }
+    
     // MARK: UPDATERS
     func updateX(at row: Int, _ columns: Range<Int>, with features: vector) {
         X[row, columns] = features
@@ -206,9 +243,15 @@ class RecommenderModel {
         // normally feature count would be +1
         let t = weights[user, "all"]
         let x = X[media, "all"]
-        let prediction = sum (x * t)
-        let rounded = round(prediction * 2) / 2
-        return rounded
+        var prediction = sum (x * t)
+//        should be t.t * x
+//        var prediction = x * t
+        
+        if newUser && newUsers.contains(user) {
+            prediction += averageRatings![media]
+        }
+//        let rounded = round(prediction * 2) / 2
+        return prediction
     }
 }
     

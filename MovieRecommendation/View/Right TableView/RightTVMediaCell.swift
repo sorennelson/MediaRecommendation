@@ -19,20 +19,31 @@ class RightTVMediaCell : NSTableCellView {
     @IBOutlet var genreLabel: NSTextField!
     @IBOutlet var ratingLabel: NSTextField!
     
-    // TODO: Change to type Media
-    var media: Movie! {
+    var userRating: Double?
+    var media: Media? {
         didSet {
-            titleLabel.stringValue = media.title
+            titleLabel.stringValue = media!.title
             // yearLabel.stringValue = year + "  |  " + medium
-            if !media.genres.isEmpty {
-                genreLabel.stringValue = media.genres[0]
-                for i in 1 ..< media.genres.count {
-                    genreLabel.stringValue +=  ", " + media.genres[i]
+            
+            if !media!.genres.isEmpty {
+                genreLabel.stringValue = media!.genres[0]
+                for i in 1 ..< media!.genres.count {
+                    genreLabel.stringValue +=  ", " + media!.genres[i]
                 }
             }
             
-            // TODO: Static current user
-            //ratingLabel.stringValue = String(format: "%.1f", myRating) + "  |  " + String(format: "%.1f", overallRating)
+            ratingLabel.stringValue = String(format: "%.1f", userRating!) + "  |  " + String(format: "%.1f", media!.getAvgRating())
+            
+            media!.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self.image.image = NSImage(data: data)
+                    }
+                } else {
+                    // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
+                    self.image.image = NSImage(named: "no-image")
+                }
+            })
         }
     }
     

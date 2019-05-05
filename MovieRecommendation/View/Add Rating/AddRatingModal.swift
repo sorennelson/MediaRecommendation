@@ -17,10 +17,6 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     var searchResults = [Media]()
     let CellID = "AddRatingCell"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func searchFieldDidStartSearching(_ sender: NSSearchField) { }
     func searchFieldDidEndSearching(_ sender: NSSearchField) { }
     
@@ -44,20 +40,21 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let resultsCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CellID), owner: nil) as? AddRatingTVCell
-        if searchResults.count > 0 {
+        if searchResults.count > 0 && searchResults.count > row {
             resultsCell!.media = searchResults[row]
-        } else {
-            resultsCell!.media = ObjectController.sharedInstance.books[row]
         }
+//        else {
+//            resultsCell!.media = ObjectController.sharedInstance.books[row]
+//        }
         return resultsCell
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         if searchResults.count > 0 {
             return searchResults.count
-        } else {
-            return 20
         }
+        return 0
+
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
@@ -65,6 +62,7 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        //        TODO: Add Rating
+        ObjectController.sharedInstance.doneAddingRatings()
+        presentingViewController?.dismiss(self)
     }
 }

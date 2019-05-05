@@ -40,27 +40,33 @@ class User: NSObject {
     
     var firID: String
     var bookRatingUser: RatingUser?
+    var booksRated: [Int: Double]  // [ID: Rating]
     var movieRatingUser: RatingUser?
+    var moviesRated: [Int: Double]  // [ID: Rating]
 
     init(firID: String, ubid:Int, numBooks: Int, umid:Int, numMovies: Int) {
         self.firID = firID
         self.bookRatingUser = RatingUser(id: ubid, numMedia: numBooks)
+        self.booksRated = [:]
         self.movieRatingUser = RatingUser(id: umid, numMedia: numMovies)
+        self.moviesRated = [:]
     }
     
     func rate(_ type: MediaType, with id: Int, rating: Double) {
         switch type {
         case .Books:
             if bookRatingUser!.ratings[id] > 0.0 {
-               bookRatingUser?.numMediaRatings += 1
+                bookRatingUser?.numMediaRatings += 1
             }
             bookRatingUser?.ratings[id] = rating
+            booksRated[id] = rating
         
         case .Movies:
             if movieRatingUser!.ratings[id] > 0.0 {
                 movieRatingUser?.numMediaRatings += 1
             }
             movieRatingUser?.ratings[id] = rating
+            moviesRated[id] = rating
         }
     }
     
@@ -72,23 +78,23 @@ class User: NSObject {
     private let MOVIERATINGSKEY = "movie_ratings"
     private let MOVIENUMRATINGSKEY = "num_movie_ratings"
     
-    init(firID: String, dict: [String: Any]) {
-        self.firID = firID
-        guard let bID = dict[BIDKEY] as? NSNumber,
-            let bookRatings = dict[BOOKRATINGSKEY] as? [NSNumber],
-            let numBookRatings = dict[BOOKNUMRATINGSKEY] as? NSNumber else {
-                return
-        }
-        self.bookRatingUser = RatingUser(id: bID as! Int, ratings: bookRatings as! [Double], numMediaRatings: numBookRatings as! Int)
-        
-        guard let mID = dict[MIDKEY] as? NSNumber,
-            let movieRatings = dict[MOVIERATINGSKEY] as? [NSNumber],
-            let numMovieRatings = dict[MOVIENUMRATINGSKEY] as? NSNumber else {
-                return
-        }
-        
-        self.movieRatingUser = RatingUser(id: mID as! Int, ratings: movieRatings as! [Double], numMediaRatings: numMovieRatings as! Int)
-    }
+//    init(firID: String, dict: [String: Any]) {
+//        self.firID = firID
+//        guard let bID = dict[BIDKEY] as? NSNumber,
+//            let bookRatings = dict[BOOKRATINGSKEY] as? [NSNumber],
+//            let numBookRatings = dict[BOOKNUMRATINGSKEY] as? NSNumber else {
+//                return
+//        }
+//        self.bookRatingUser = RatingUser(id: bID as! Int, ratings: bookRatings as! [Double], numMediaRatings: numBookRatings as! Int)
+//
+//        guard let mID = dict[MIDKEY] as? NSNumber,
+//            let movieRatings = dict[MOVIERATINGSKEY] as? [NSNumber],
+//            let numMovieRatings = dict[MOVIENUMRATINGSKEY] as? NSNumber else {
+//                return
+//        }
+//
+//        self.movieRatingUser = RatingUser(id: mID as! Int, ratings: movieRatings as! [Double], numMediaRatings: numMovieRatings as! Int)
+//    }
     
     func toAnyObject() -> Any {
         var userDict = [String: Any]()
@@ -102,8 +108,8 @@ class User: NSObject {
             userDict[MOVIERATINGSKEY] = movieRatingUser.ratings as [NSNumber]
             userDict[MOVIENUMRATINGSKEY] = movieRatingUser.numMediaRatings as NSNumber
         }
-        
-        return [firID: userDict]
+        return userDict
+//        return [firID: userDict]
     }
     
 //    init(firID: Int, bookRatings: [Double], movieRatings: [Double]) {

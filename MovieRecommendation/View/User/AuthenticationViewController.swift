@@ -26,8 +26,7 @@ class AuthenticationViewController: NSViewController {
                 
             } else {
                 self.showSuccessCreatingAccountNotification()
-                
-//                dismiss view
+                self.presentingViewController?.dismiss(self)
             }
         }
     }
@@ -44,8 +43,7 @@ class AuthenticationViewController: NSViewController {
                 
             } else {
                 self.showSuccessLoggingInNotification()
-                
-//                dismiss view
+                self.presentingViewController?.dismiss(self)
             }
         }
     }

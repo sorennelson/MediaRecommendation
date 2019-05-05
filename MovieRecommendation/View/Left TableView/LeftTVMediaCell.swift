@@ -72,6 +72,7 @@ class LeftTVMediaCell: NSTableCellView {
         let user = ObjectController.sharedInstance.movieUsers[0]
         let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
         print(prediction)
+        setSelectedMedia(media, prediction: prediction)
     }
     
     @IBAction func middleButtonClicked(_ sender: Any) {
@@ -79,6 +80,7 @@ class LeftTVMediaCell: NSTableCellView {
         let user = ObjectController.sharedInstance.movieUsers[0]
         let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
         print(prediction)
+        setSelectedMedia(media, prediction: prediction)
     }
     
     @IBAction func rightButtonClicked(_ sender: Any) {
@@ -86,8 +88,12 @@ class LeftTVMediaCell: NSTableCellView {
         let user = ObjectController.sharedInstance.movieUsers[0]
         let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
         print(prediction)
+        setSelectedMedia(media, prediction: prediction)
     }
     
-    
+    func setSelectedMedia(_ media: Media, prediction: Double) {
+        ObjectController.sharedInstance.selectedMedia = media
+        ObjectController.sharedInstance.selectedMediaPrediction = prediction
+    }
 }
 

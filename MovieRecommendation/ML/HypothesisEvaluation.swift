@@ -12,18 +12,16 @@ class HypothesisEvaluation {
     
     static let sharedInstance = HypothesisEvaluation()
 
-    func trainData(iterations: Int, RM: inout RecommenderModel) {
-        //TODO: Normalize ratings
+    func trainData(iterations: Int, RM: inout RecommenderModel) -> Double {
         
         RM.separateTrainingAndTestData()
         let regParam = 0.1
-        let learningRate = 0.0001
+        let learningRate = 0.0002
         let GD = GradientDescentController.sharedInstance
         
         let _ = GD.runBatchGradientDescent(RM: &RM, regParam: regParam, iterations: iterations, learningRate: learningRate)
         
-        print(GD.computeTrainSetError(RM: &RM))
-        print(GD.computeTestSetError(RM: &RM))
+        return GD.computeTrainSetError(RM: &RM)
     }
     
     func findLowestCombination(iterations: Int, RM: inout RecommenderModel) {

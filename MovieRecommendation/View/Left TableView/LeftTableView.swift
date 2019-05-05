@@ -44,20 +44,12 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
             let media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)
             cell.setMedia(media: media)
             return cell
-//            let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CollectionCellID), owner: nil) as! LeftTVContainerCell
-//            cell.reloadCollectionView()
         }
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         if row == 0 { return 90 }
         return 320
-//        else if ViewController.isExpanded {
-//            return 288 + 32
-//        }
-//        else {
-//            return 485
-//        }
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {

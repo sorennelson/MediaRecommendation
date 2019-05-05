@@ -17,7 +17,7 @@ class ImportController {
         
         for m in media {
             if m.features.count < featureCount {
-                print("IMPORT TO ML: MEDIA ERROR")
+//                print("IMPORT TO ML: MEDIA ERROR")
                 // throw error
             }
             RM.updateX(at: m.yID - 1, 1..<featureCount+1, with: m.features)
@@ -26,8 +26,8 @@ class ImportController {
         print(media.count)
         for u in users {
             if u.ratings.count < media.count {
-                print(u.ratings.count)
-                print("IMPORT TO ML: USER ERROR")
+//                print(u.ratings.count)
+//                print("IMPORT TO ML: USER ERROR")
                 // throw error
             }
             for mID in 0..<u.ratings.count {
