@@ -1,10 +1,12 @@
 # MovieRecommendation
-A Collaborative Filtering application that uses rankings from MovieLens to recommend movies to users.
+A media recommendation application that uses rankings from MovieLens and Goodbooks to recommend movies, and books to users.
 
 ## TODO
-- [ ] Clean up code structure
-- [ ] Incorporate Books
-- [ ] Fix Recommendation Model
+- [ ] Fix Predictions
+- [ ] Top n recommendations
+- [ ] Put RM into separate library
+- [ ] Move data to database
+- [ ] Incorporate Music
 - [ ] Finish UI
 
 
