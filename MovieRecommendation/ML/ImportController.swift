@@ -29,7 +29,7 @@ class ImportController {
 //                print("IMPORT TO ML: USER ERROR")
             }
             for mID in 0..<u.ratings.count {
-                RM.updateRatings(at: mID, u.id, with: u.ratings[mID])
+                RM.updateRatings(at: mID, u.id - 1, with: u.ratings[mID])
             }
         }
         return RM

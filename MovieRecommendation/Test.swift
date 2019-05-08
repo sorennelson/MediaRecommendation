@@ -25,7 +25,7 @@ class Test {
     }
     
     private func setCourseraValues() -> RecommenderModel {
-        var RM = RecommenderModel(mediaCount: 5, userCount: 4, featureCount: 3, type: .ContentBased)
+        var RM = RecommenderModel(mediaCount: 5, userCount: 4, featureCount: 3, type: .CollaborativeFiltering)
         let X = array(1, 0.99, 0, 1, 1, 0.01, 1, 0.99, 0, 1, 0.1, 1, 1, 0, 0.9)
         let Y = array(5, 5, 0, 0, 5, 0, 0, 0, 0, 4, 0, 0, 0, 0, 5, 4, 0, 0, 5, 0)
         let R = array(1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
@@ -59,7 +59,7 @@ class Test {
 //    }
     
     func testGradientDescent(RM: inout RecommenderModel) {
-//        delegate?.runGradientDescent(iterations: 2000, alpha: 0.001)
+        GradientDescentController.sharedInstance.runBatchGradientDescent(RM: &RM, regParam: 1, iterations: 3000, learningRate: 0.001)
     }
     
     func testPredict(RM: inout RecommenderModel) {

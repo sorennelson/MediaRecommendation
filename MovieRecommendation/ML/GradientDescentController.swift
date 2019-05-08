@@ -33,7 +33,7 @@ class GradientDescentController {
             costs.append(cost)
         }
         
-        print("Lambda: \(regParam) Alpha: \(learningRate) trainJ: \(costs)")
+        print("Lambda: \(regParam) Alpha: \(learningRate) Loss: \(costs)")
         return RM.weights
     }
     

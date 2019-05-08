@@ -45,6 +45,7 @@ class TitleCell : NSTableCellView {
     
     func toggleArrowButtonDirection() {
         if isArrowRight {
+            
             arrowButton.image = NSImage(named: "icons8-expand-arrow")
         } else {
             arrowButton.image = NSImage(named: "icons8-expand-arrow-right")

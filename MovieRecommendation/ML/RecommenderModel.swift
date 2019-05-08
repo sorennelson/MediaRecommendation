@@ -20,10 +20,12 @@ class RecommenderModel {
     
     var newUser = false
     var newUsers = [Int]() // ID
+    //    TODO: Remove
     var averageRatings: [Double]?
     
     // Ratings: Y(movie, user) = 0.5 - 5
     var Y: matrix
+    var YMean: matrix?
     
     // Binary value: R(movie, user) = 1 if rated, 0 if not
     var R: matrix
@@ -130,6 +132,17 @@ class RecommenderModel {
         setWeights(matrix: Theta)
     }
     
+    func normalizeRatings() {
+        YMean = zeros_like(Y)
+        for row in 0..<Y.rows {
+            let mean = sum(Y[row, 0..<Y.columns]) / sum(R[row, 0..<Y.columns])
+            for col in 0..<Y.columns {
+                YMean![row, col] = mean * R[row, col]
+            }
+        }
+        Y = Y - YMean!
+    }
+    
     func resetMatrices() {
         self.weights = originalWeights
         self.X = originalX
@@ -172,8 +185,11 @@ class RecommenderModel {
     }
     
     func updateRatings(at row: Int, _ column: Int, with rating: Double) {
-        Y[row - 1, column - 1] = rating
-        R[row - 1, column - 1] = 1
+        Y[row, column - 1] = rating
+        if rating > 0 {
+            R[row, column - 1] = 1
+//            print(row, column - 1)
+        }
     }
     
     // MARK: GETTERS
@@ -186,14 +202,17 @@ class RecommenderModel {
     // MARK: PREDICTION
     func predict(media: Int, user: Int) -> Double {
         // normally feature count would be +1
-        let w = weights[user, "all"]
-        let x = X[media, "all"]
+//        guard let mean = YMean else { return 0.0 }
+        let w = weights[user - 1, "all"]
+        let x = X[media - 1, "all"]
         var prediction = sum(x * w)
-        
-        if newUser && newUsers.contains(user) {
-            prediction += averageRatings![media]
-        }
+//        prediction += mean[media - 1, user - 1]
+//        print(mean[media - 1, user - 1])
         return prediction
+        
+//        if newUser && newUsers.contains(user) {
+//            prediction += averageRatings![media]
+//        }
     }
 }
     

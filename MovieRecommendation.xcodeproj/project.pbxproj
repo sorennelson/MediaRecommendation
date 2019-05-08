@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D4B1E52EA04B7F043B0F13E /* Pods_MovieRecommendationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDD3C4CE38DD63B16D96E4E3 /* Pods_MovieRecommendationTests.framework */; };
 		514119B118B6E28A8C81E1FE /* Pods_MovieRecommendationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01358FF8C7C1AC3F124E4B8E /* Pods_MovieRecommendationUITests.framework */; };
+		AC01F407228267060080B849 /* RightTVCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC01F406228267060080B849 /* RightTVCategoryCell.swift */; };
 		AC22D2FD2263E17800F1A045 /* BookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22D2FC2263E17800F1A045 /* BookParser.swift */; };
 		AC22D2FF2263EB0F00F1A045 /* MovieParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC22D2FE2263EB0F00F1A045 /* MovieParser.swift */; };
 		AC29A777220B7002009C055F /* Expansion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC29A776220B7002009C055F /* Expansion.swift */; };
@@ -127,6 +128,7 @@
 		6CA7C1B92FD6AB01A8F17DFB /* Pods-MovieRecommendation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRecommendation.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation.release.xcconfig"; sourceTree = "<group>"; };
 		70E22CF41EB27A4CED2426F8 /* Pods-MovieRecommendationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRecommendationUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7D58F3BE21A2599740FC315B /* Pods-MovieRecommendationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRecommendationTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests.release.xcconfig"; sourceTree = "<group>"; };
+		AC01F406228267060080B849 /* RightTVCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightTVCategoryCell.swift; sourceTree = "<group>"; };
 		AC22D2FC2263E17800F1A045 /* BookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookParser.swift; sourceTree = "<group>"; };
 		AC22D2FE2263EB0F00F1A045 /* MovieParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieParser.swift; sourceTree = "<group>"; };
 		AC29A776220B7002009C055F /* Expansion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Expansion.swift; path = "/Users/solosoren/Library/Mobile Documents/com~apple~CloudDocs/Dev/MovieRecommendation/MovieRecommendation/Expansion.swift"; sourceTree = "<absolute>"; };
@@ -307,6 +309,7 @@
 			children = (
 				AC47CCA421AE4093003572E3 /* RightTableView.swift */,
 				AC5F6B5D21C8D58700DC268A /* RightTVMediaCell.swift */,
+				AC01F406228267060080B849 /* RightTVCategoryCell.swift */,
 				AC72FBDA21CA0AB900DCF44E /* TitleCell.swift */,
 			);
 			path = "Right TableView";
@@ -669,6 +672,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -676,6 +680,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -751,6 +756,7 @@
 				ACF36C8F20FEB7EF0088BFE8 /* m-matrix.swift in Sources */,
 				ACCB9676227E89EA0027E834 /* LogoutViewController.swift in Sources */,
 				ACF36C4320FEB7B80088BFE8 /* ParseController.swift in Sources */,
+				AC01F407228267060080B849 /* RightTVCategoryCell.swift in Sources */,
 				AC7B4904226BD97200F7B5C9 /* AddRatingModal.swift in Sources */,
 				AC5947F72246C630004E8958 /* BookGenreParsing.swift in Sources */,
 				ACF36C1320FEB77C0088BFE8 /* ViewController.swift in Sources */,

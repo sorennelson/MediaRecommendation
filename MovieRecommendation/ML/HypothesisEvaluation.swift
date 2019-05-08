@@ -13,13 +13,12 @@ class HypothesisEvaluation {
     static let sharedInstance = HypothesisEvaluation()
 
     func trainData(iterations: Int, RM: inout RecommenderModel) -> Double {
-        
-        let regParam = 0.05
+        let regParam = 2.5
         let learningRate = 0.0001
         let GD = GradientDescentController.sharedInstance
+//        RM.normalizeRatings()
         
         let _ = GD.runBatchGradientDescent(RM: &RM, regParam: regParam, iterations: iterations, learningRate: learningRate)
-        
         return GD.computeError(RM: &RM)
     }
     

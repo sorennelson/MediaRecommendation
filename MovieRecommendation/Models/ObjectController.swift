@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseCore
 import FirebaseAuth
-//import FirebaseFirestore
+import FirebaseDatabase
 
 class ObjectController {
     
@@ -170,6 +170,39 @@ class ObjectController {
             }
         }
         return true
+    }
+    
+    func getAllCategories() -> [String] {
+        switch ObjectController.currentMediaType {
+        case .Books:
+            return Array(genreBooks.keys)
+        case .Movies:
+            return Array(genreMovies.keys)
+        }
+    }
+    
+    func getMediaForCategory(genreName: String) -> [Media] {
+        switch ObjectController.currentMediaType {
+        case .Books:
+            let ids = genreBooks[genreName] ?? []
+            var media = [Media]()
+            for id in ids {
+                if let book = books[id] {
+                    media.append(book)
+                }
+            }
+            return media
+            
+        case .Movies:
+            let ids = genreMovies[genreName] ?? []
+            var media = [Media]()
+            for id in ids {
+                if let movie = movies[id] {
+                    media.append(movie)
+                }
+            }
+            return media
+        }
     }
     
     func doneAddingRatings() {
