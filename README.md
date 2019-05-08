@@ -2,7 +2,7 @@
 A media recommendation application that uses rankings from MovieLens and Goodbooks to recommend movies, and books to users.
 
 ## TODO
-- [ ] Fix Predictions
+- [ ] Categories
 - [ ] Top n recommendations
 - [ ] Put RM into separate library
 - [ ] Move data to database
