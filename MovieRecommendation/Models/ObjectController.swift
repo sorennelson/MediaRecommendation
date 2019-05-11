@@ -177,7 +177,10 @@ class ObjectController {
         case .Books:
             return Array(genreBooks.keys)
         case .Movies:
-            return Array(genreMovies.keys)
+            var sorted = Array(genreMovies.keys).sorted()
+            var noGenres = sorted.remove(at: 0)
+            sorted.append("No Genres Listed")
+            return sorted
         }
     }
     

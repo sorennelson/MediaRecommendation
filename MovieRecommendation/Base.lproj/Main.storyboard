@@ -1029,10 +1029,7 @@
                                                                     <rect key="frame" x="36" y="26" width="418" height="58"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UnY-NL-JnJ">
-                                                                            <rect key="frame" x="18" y="20" width="58" height="27"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="27" id="Pli-Z0-AGs"/>
-                                                                            </constraints>
+                                                                            <rect key="frame" x="18" y="12" width="58" height="31"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="Action" id="yDx-S3-ogk">
                                                                                 <font key="font" size="18" name="Avenir-Medium"/>
                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1040,7 +1037,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="99y-jK-n89">
-                                                                            <rect key="frame" x="370" y="20" width="25" height="20"/>
+                                                                            <rect key="frame" x="370" y="18" width="25" height="20"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="125" id="5Sr-QC-Q6O">
                                                                                 <font key="font" size="12" name="Avenir-Roman"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1053,8 +1050,8 @@
                                                                         <constraint firstItem="UnY-NL-JnJ" firstAttribute="leading" secondItem="onM-Pl-rJr" secondAttribute="leading" constant="20" id="aUp-dx-P2V"/>
                                                                         <constraint firstAttribute="height" constant="58" id="bFy-Cg-PIe"/>
                                                                         <constraint firstAttribute="width" constant="418" id="kEd-Kc-vUG"/>
-                                                                        <constraint firstItem="UnY-NL-JnJ" firstAttribute="centerY" secondItem="onM-Pl-rJr" secondAttribute="centerY" constant="-4.5" id="lot-kf-Sba"/>
-                                                                        <constraint firstItem="99y-jK-n89" firstAttribute="centerY" secondItem="onM-Pl-rJr" secondAttribute="centerY" constant="-1" id="seN-bx-XkV"/>
+                                                                        <constraint firstItem="UnY-NL-JnJ" firstAttribute="centerY" secondItem="onM-Pl-rJr" secondAttribute="centerY" constant="1.5" id="lot-kf-Sba"/>
+                                                                        <constraint firstItem="99y-jK-n89" firstAttribute="centerY" secondItem="onM-Pl-rJr" secondAttribute="centerY" constant="1" id="seN-bx-XkV"/>
                                                                     </constraints>
                                                                 </customView>
                                                             </subviews>
@@ -1065,8 +1062,8 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="categoryTitle" destination="UnY-NL-JnJ" id="Hck-qo-BYt"/>
+                                                                <outlet property="countLabel" destination="99y-jK-n89" id="ayK-bz-BZa"/>
                                                                 <outlet property="customView" destination="onM-Pl-rJr" id="ABq-Yu-5Ht"/>
-                                                                <outlet property="ratingLabel" destination="99y-jK-n89" id="ayK-bz-BZa"/>
                                                                 <outlet property="selectedView" destination="onM-Pl-rJr" id="rD7-J3-xWl"/>
                                                                 <outlet property="titleLabel" destination="UnY-NL-JnJ" id="FYf-cx-2wS"/>
                                                             </connections>

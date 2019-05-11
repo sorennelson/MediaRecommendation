@@ -34,7 +34,11 @@ class MovieParser {
                 let title = movieArray[1]
                 let genres = movieArray[2].components(separatedBy: "|")
                 for genre in genres {
-                    if let _ = self.objectController.genreMovies[genre] { self.objectController.genreMovies[genre]!.append(mid) }
+                    if let _ = self.objectController.genreMovies[genre] {
+                        self.objectController.genreMovies[genre]!.append(mid)
+                    } else {
+                        self.objectController.genreMovies[genre] = [mid]
+                    }
                 }
                 let movie = Movie(yid: i, title: title, imageString: self.objectController.movieLinks[mid], genres: genres)
                 

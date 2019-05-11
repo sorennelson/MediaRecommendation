@@ -12,15 +12,15 @@ import Cocoa
 class RightTVCategoryCell: NSTableCellView {
     
     @IBOutlet var selectedView: NSView!
-    @IBOutlet var ratingLabel: NSTextField!
+    @IBOutlet var countLabel: NSTextField!
     @IBOutlet var categoryTitle: NSTextField!
     var category = "All"
     
     func select() {
-        selectedView.isHidden = true
+        selectedView.layer?.backgroundColor = .init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
     }
     
     func deselect() {
-        selectedView.isHidden = false
+        selectedView.layer?.backgroundColor = .init(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.0)
     }
 }

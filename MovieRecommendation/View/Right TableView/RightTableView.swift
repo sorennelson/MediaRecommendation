@@ -19,7 +19,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var titleCell: TitleCell?
     
     var ratings = [Media]()
-    var selectedCategoryRow = -1
+    var selectedCategoryRow = 1
     var selectedCategory = ""
     
     
@@ -67,9 +67,14 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     }
     
     private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVCategoryCell
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
         if row > 1 {
             cell.category = ObjectController.sharedInstance.getAllCategories()[row-2]
+            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getMediaForCategory(genreName: cell.category).count)
+        } else {
+            cell.category = "All"
+            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMedia().count)
+            cell.select()
         }
         cell.categoryTitle.stringValue = cell.category
         return cell
@@ -77,6 +82,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         if row == 0 { return 90 }
+        else if currentContent == .Categories { return 82 }
         return 153
     }
     

@@ -54,10 +54,8 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         setupTableViews()
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
-        //self.view.window?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1)
 
         DispatchQueue.global(qos: .background).async {
-//            print("This is run on the background queue")
             
 //          TODO: Move to OC
             ParseController.sharedInstance.importAndParseMovies()
