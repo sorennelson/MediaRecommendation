@@ -12,9 +12,13 @@ import Cocoa
 class TitleCell : NSTableCellView {
 
     @IBOutlet var titleHeaderLabel: NSTextField!
-    var isArrowRight = true
     @IBOutlet var arrowButton: NSButton!
     @IBOutlet var addButton: NSButton!
+    
+    //    TODO:
+    override func viewWillDraw() {
+        
+    }
     
     
     var leadingMargin : Double? {
@@ -43,24 +47,22 @@ class TitleCell : NSTableCellView {
         }
     }
     
-    func toggleArrowButtonDirection() {
-        if isArrowRight {
-            
+    func toggleArrowButtonDirection(_ expanding: Bool) {
+        if expanding {
             arrowButton.image = NSImage(named: "icons8-expand-arrow")
         } else {
             arrowButton.image = NSImage(named: "icons8-expand-arrow-right")
         }
-        isArrowRight = !isArrowRight
     }
     
-    func toggleHideButtons() {
-        arrowButton.isHidden = !arrowButton.isHidden
-        addButton.isHidden = !addButton.isHidden
+    func toggleHideButtons(_ hide: Bool) {
+        arrowButton.isHidden = hide
+        addButton.isHidden = hide
     }
 
     
     @IBAction func addButtonPressed(_ sender: Any) {
-        print("A")
+        print("Add")
         
     }
     

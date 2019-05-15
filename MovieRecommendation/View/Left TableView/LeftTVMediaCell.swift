@@ -23,7 +23,9 @@ class LeftTVMediaCell: NSTableCellView {
                         self.leftImageButton.image = NSImage(data: data)
                     }
                 } else {
-                    // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
+                    DispatchQueue.main.async {
+                        self.leftImageButton.image = NSImage(named: "no-image")
+                    }
                 }
             })
         }
@@ -37,7 +39,9 @@ class LeftTVMediaCell: NSTableCellView {
                         self.middleImageButton.image = NSImage(data: data)
                     }
                 } else {
-                    // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
+                    DispatchQueue.main.async {
+                        self.middleImageButton.image = NSImage(named: "no-image")
+                    }
                 }
             })
         }
@@ -51,7 +55,9 @@ class LeftTVMediaCell: NSTableCellView {
                         self.rightImageButton.image = NSImage(data: data)
                     }
                 } else {
-                    // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
+                    DispatchQueue.main.async {
+                        self.rightImageButton.image = NSImage(named: "no-image")
+                    }
                 }
             })
         }

@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
+class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, UpdateContent  {
     
 // MARK: TableView
     var tableView: NSTableView?
@@ -17,6 +17,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
     let MediaCellID = "MediaCellID"
     let TitleCellID = "TitleCell"
     var titleCell: TitleCell?
+    var selectedCategory = "All"
     
     func setTableView(_ tableView: NSTableView) {
         self.tableView = tableView
@@ -27,7 +28,12 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        let count = ObjectController.sharedInstance.getAllMediaCount()
+        var count = 0
+        if selectedCategory == "All" {
+            count = ObjectController.sharedInstance.getAllMediaCount()
+        } else {
+            count = ObjectController.sharedInstance.getCategoryCount(genreName: selectedCategory)
+        }
         if count == 0 { return 1 }
         else { return 1 + ceil(Double(count) / 3.0) }
     }
@@ -37,11 +43,17 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
         case 0 :
             titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
             titleCell!.setHeader(currentContent)
+            titleCell!.toggleArrowButtonDirection(ViewController.isExpanded)
             return titleCell
             
         default :
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
-            let media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)
+            var media: [Media]
+            if selectedCategory == "All" {
+                media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)
+            } else {
+                media = ObjectController.sharedInstance.getMediaForCategory(genreName: selectedCategory, at: (row-1)*3..<(row-1)*3+3)
+            }
             cell.setMedia(media: media)
             return cell
         }
@@ -67,7 +79,12 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource  {
     }
     
     func toggleArrowButtonDirection() {
-        titleCell!.toggleArrowButtonDirection()
+        titleCell!.toggleArrowButtonDirection(!ViewController.isExpanded)
+        tableView?.reloadData()
     }
     
+    func selectedCategory(_ category: String) {
+        selectedCategory = category
+        tableView?.reloadData()
+    }
 }

@@ -56,6 +56,4 @@ class RightTVMediaCell : NSTableCellView {
         super.init(coder: aDecoder)
     }
     
-
-    
 }

@@ -23,10 +23,10 @@ extension ViewController {
         rightTableView.reloadData()
     }
     
-    private func changeArrow(_ button: NSButton, to imageName: String) {
-        button.image = NSImage.init(named: imageName)
-    }
-    
+//    private func changeArrow(_ button: NSButton, to imageName: String) {
+//        button.image = NSImage.init(named: imageName)
+//    }
+
     private func minimize() {
         leftTVToViewConstraint.isActive = false
         leftTVToCategoriesConstraint.isActive = true

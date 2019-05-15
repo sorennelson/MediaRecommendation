@@ -43,6 +43,7 @@ class MovieParser {
                 let movie = Movie(yid: i, title: title, imageString: self.objectController.movieLinks[mid], genres: genres)
                 
                 self.objectController.movies[mid] = movie
+                self.objectController.allMoviesArr.append(movie)
                 i+=1
             }
         }

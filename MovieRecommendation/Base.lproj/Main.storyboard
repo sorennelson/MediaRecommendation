@@ -1165,7 +1165,7 @@
                                                                         <constraint firstAttribute="width" constant="180" id="oho-zY-H21"/>
                                                                         <constraint firstAttribute="height" constant="270" id="owV-sC-mpD"/>
                                                                     </constraints>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="no-image" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="E1F-Zc-DAf">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="E1F-Zc-DAf">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -1179,7 +1179,7 @@
                                                                         <constraint firstAttribute="height" constant="270" id="F2s-9a-KcK"/>
                                                                         <constraint firstAttribute="width" constant="180" id="nWz-eu-jVY"/>
                                                                     </constraints>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="no-image" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="lUP-vK-SOz">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="lUP-vK-SOz">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -1193,7 +1193,7 @@
                                                                         <constraint firstAttribute="height" constant="270" id="WCM-ra-8oV"/>
                                                                         <constraint firstAttribute="width" constant="180" id="yDa-pk-yTF"/>
                                                                     </constraints>
-                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="no-image" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="re2-0D-rH0">
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="re2-0D-rH0">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>

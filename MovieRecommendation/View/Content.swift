@@ -18,3 +18,7 @@ enum MediaType {
     case Movies
     case Books
 }
+
+protocol UpdateContent {
+    func selectedCategory(_ category: String)
+}

@@ -11,16 +11,27 @@ import Cocoa
 
 class RightTVCategoryCell: NSTableCellView {
     
+    var selected = false
     @IBOutlet var selectedView: NSView!
     @IBOutlet var countLabel: NSTextField!
     @IBOutlet var categoryTitle: NSTextField!
     var category = "All"
     
+    override func viewWillDraw() {
+        if selected {
+            selectedView.layer?.backgroundColor = .init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
+        } else {
+            selectedView.layer?.backgroundColor = .init(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.0)
+        }
+    }
+    
     func select() {
         selectedView.layer?.backgroundColor = .init(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
+        selected = true
     }
     
     func deselect() {
         selectedView.layer?.backgroundColor = .init(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.0)
+        selected = false
     }
 }

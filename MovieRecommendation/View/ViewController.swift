@@ -7,8 +7,6 @@
 //
 
 import Cocoa
-import FirebaseCore
-//import FirebaseFirestore
 
 class ViewController: NSViewController {
 
@@ -36,14 +34,13 @@ class ViewController: NSViewController {
     
     override func loadView() {
         super.loadView()
-        ObjectController.sharedInstance.setupFirebase()
-        ObjectController.sharedInstance.checkForUser(completion: { (success) in
-            if !success {
-                // TODO: Notification -> Try again
-            } else {
-                self.userLoggedIn()
-            }
-        })
+//        ObjectController.sharedInstance.checkForUser(completion: { (success) in
+//            if !success {
+//                // TODO: Notification -> Try again
+//            } else {
+//                self.userLoggedIn()
+//            }
+//        })
     }
     
     override func viewDidAppear() {
@@ -64,8 +61,8 @@ class ViewController: NSViewController {
             }
             print("Movies imported")
             
-            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 8)
-            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 500, RM: &collabMovieRM)
+            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.movies, featureCount: 10)
+            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabMovieRM)
             print("ROOT MEAN SQUARED ERROR FOR MOVIE COLLABORATIVE FILTERING: " + String(err))
             ObjectController.sharedInstance.movieRM = collabMovieRM
 
@@ -75,16 +72,16 @@ class ViewController: NSViewController {
         }
         
         DispatchQueue.global(qos: .background).async {
-            ParseController.sharedInstance.importAndParseBooks()
+//            ParseController.sharedInstance.importAndParseBooks()
             DispatchQueue.main.async {
                 self.leftTableView.reloadData()
             }
             print("Books imported")
 
-            var collabBookRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 10)
-            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 500, RM: &collabBookRM)
-            print("ROOT MEAN SQUARED ERROR FOR BOOK COLLAB BASED: " + String(err))
-            ObjectController.sharedInstance.bookRM = collabBookRM
+//            var collabBookRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(media: ObjectController.sharedInstance.books, featureCount: 10)
+//            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 500, RM: &collabBookRM)
+//            print("ROOT MEAN SQUARED ERROR FOR BOOK COLLABORATIVE FILTERING: " + String(err))
+//            ObjectController.sharedInstance.bookRM = collabBookRM
 
 //            var contentBookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
 //            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 1000, RM: &contentBookRM)
@@ -95,6 +92,7 @@ class ViewController: NSViewController {
     
     private func setupTableViews() {
         rightDataSource.setTableView(rightTableView)
+        rightDataSource.contentDelegate = leftDataSource
         
         leftDataSource.setTableView(leftTableView)
 

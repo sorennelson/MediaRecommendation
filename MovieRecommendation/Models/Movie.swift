@@ -14,7 +14,11 @@ class Movie: Media {
     
     init(yid: Int, title: String, imageString: String?, genres: [String]) {
         super.init(id: yid, title: title, genres: genres, features: zeros(19), ratings: Array(repeating: 0, count: 671) )
-        if let string = imageString { self.imageURL = "https://image.tmdb.org/t/p/w342" + string }
+        if let string = imageString {
+            if !string.isEmpty {
+                self.imageURL = "https://image.tmdb.org/t/p/w342" + string
+            }
+        }
         setFeatures()
     }
     

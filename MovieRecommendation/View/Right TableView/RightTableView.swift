@@ -13,6 +13,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
 // MARK: TableView
     var tableView: NSTableView?
+    var contentDelegate: UpdateContent?
     let MediaCellID = "MovieRatingCell"
     let CategoryCellID = "CategoryCell"
     let TitleCellID = "TitleCell"
@@ -20,7 +21,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
     var ratings = [Media]()
     var selectedCategoryRow = 1
-    var selectedCategory = ""
+    var selectedCategory = "All"
     
     
     func setTableView(_ tableView: NSTableView) {
@@ -47,6 +48,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         case 0 :
             titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
             titleCell!.setHeader(currentContent)
+            titleCell!.toggleHideButtons(currentContent == .Categories)
             return titleCell
             
         default :
@@ -70,11 +72,10 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
         if row > 1 {
             cell.category = ObjectController.sharedInstance.getAllCategories()[row-2]
-            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getMediaForCategory(genreName: cell.category).count)
+            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getCategoryCount(genreName: cell.category))
         } else {
-            cell.category = "All"
             cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMedia().count)
-            cell.select()
+            cell.selected = true
         }
         cell.categoryTitle.stringValue = cell.category
         return cell
@@ -98,7 +99,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
             
             selectedCategoryRow = row
             selectedCategory = newCell.category
-// Update the left tv content to be the genre
+            contentDelegate?.selectedCategory(selectedCategory)
             
             return false
         }
@@ -110,7 +111,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
     func changeContent(to content: Content) {
         currentContent = content
-        titleCell!.toggleHideButtons()
+        titleCell!.toggleHideButtons(currentContent == .Categories)
         tableView?.reloadData()
     }
     

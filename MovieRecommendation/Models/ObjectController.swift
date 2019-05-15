@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import FirebaseCore
-import FirebaseAuth
-import FirebaseDatabase
 
 class ObjectController {
     
@@ -19,6 +16,7 @@ class ObjectController {
     
     var addedRatings = false
     
+    var allMoviesArr: [Movie] = []
     var movies: [Int: Movie] = Dictionary.init() // YID: Movie
     var movieLinks = [Int: String]() // YID: Link
     var genreMovies: [String: [Int]] = [:] // [genre: [movieIDs]]
@@ -26,6 +24,7 @@ class ObjectController {
     var movieRatings: [Media: Double]?
     var movieRM: RecommenderModel?
     
+    var allBooksArr: [Book] = []
     var books: [Int: Book] = [:]
     var allBookGenres: [String] = []
 //    var bookGenres: [Int: [String]] = [:] // [bookID: [genres]]
@@ -51,7 +50,7 @@ class ObjectController {
         case .Books:
             return books.count
         case .Movies:
-            return movies.count
+            return allMoviesArr.count
         }
     }
     
@@ -60,7 +59,7 @@ class ObjectController {
         case .Books:
             return books[index]
         case .Movies:
-            return movies[index]
+            return allMoviesArr[index]
         }
     }
     
@@ -77,13 +76,54 @@ class ObjectController {
             
         case .Movies:
             for i in indices {
-                if let movie = movies[i] {
-                    media.append(movie)
-                }
+                if i == allMoviesArr.count { break }
+                media.append(allMoviesArr[i])
             }
             return media
         }
     }
+    
+    
+//    func sortMediaByTopPredictions(_ type: MediaType, user: RatingUser) {
+//        switch type {
+//        case .Books:
+//
+//        case .Movies:
+//
+//        }
+//    }
+    
+    func getMediaSortedByTopPredictions(genreName: String, user: RatingUser) -> [Media] {
+        switch ObjectController.currentMediaType {
+        case .Books:
+            var categoryBooks: [Media]
+            if genreName == "All" {
+                categoryBooks = allBooksArr
+            } else {
+                categoryBooks = getMediaForCategory(genreName: genreName)
+            }
+            return categoryBooks.sorted { (left, right) -> Bool in
+                let leftPred = bookRM?.predict(media: left.yID, user: user.id) ?? 0.0
+                let rightPred = bookRM?.predict(media: right.yID, user: user.id) ?? 0.0
+                return leftPred >= rightPred
+            }
+            
+        case .Movies:
+            var categoryMovies: [Media]
+            if genreName == "All" {
+                categoryMovies = allMoviesArr
+            } else {
+                categoryMovies = getMediaForCategory(genreName: genreName)
+            }
+            return categoryMovies.sorted { (left, right) -> Bool in
+                let leftPred = movieRM?.predict(media: left.yID, user: user.id) ?? 0.0
+                let rightPred = movieRM?.predict(media: right.yID, user: user.id) ?? 0.0
+                return leftPred >= rightPred
+            }
+        }
+    }
+    
+    
     
     func getRatings() -> [Media: Double] {
         guard let user = currentUser else { return [:] }
@@ -147,7 +187,7 @@ class ObjectController {
             }
             
             var avg = books[media.yID]!.getAvgRating() * books[media.yID]!.numRatings!
-            avg = (avg + rating) / books[media.yID]!.numRatings!                             // edit avg rating
+            avg = (avg + rating) / books[media.yID]!.numRatings!                            // edit avg rating
             
             if let _ = bookRM {
                 bookRM?.updateRatings(at: media.yID, user.bookRatingUser!.id, with: rating) //  add rating to RM
@@ -178,8 +218,9 @@ class ObjectController {
             return Array(genreBooks.keys)
         case .Movies:
             var sorted = Array(genreMovies.keys).sorted()
-            var noGenres = sorted.remove(at: 0)
-            sorted.append("No Genres Listed")
+            let noGenres = sorted.remove(at: 0)
+//            sorted.append("No Genres Listed")
+            sorted.append(noGenres)
             return sorted
         }
     }
@@ -200,6 +241,46 @@ class ObjectController {
             let ids = genreMovies[genreName] ?? []
             var media = [Media]()
             for id in ids {
+                if let movie = movies[id] {
+                    media.append(movie)
+                }
+            }
+            return media
+        }
+    }
+    
+    func getCategoryCount(genreName: String) -> Int {
+        switch ObjectController.currentMediaType {
+        case .Books:
+            let ids = genreBooks[genreName] ?? []
+            return ids.count
+            
+        case .Movies:
+            let ids = genreMovies[genreName] ?? []
+            return ids.count
+        }
+    }
+    
+    func getMediaForCategory(genreName: String, at indices: Range<Int>) -> [Media] {
+        switch ObjectController.currentMediaType {
+        case .Books:
+            let ids = genreBooks[genreName] ?? []
+            var media = [Media]()
+            for i in indices {
+                if i == ids.count { break }
+                let id = ids[i]
+                if let book = books[id] {
+                    media.append(book)
+                }
+            }
+            return media
+            
+        case .Movies:
+            let ids = genreMovies[genreName] ?? []
+            var media = [Media]()
+            for i in indices {
+                if i == ids.count { break }
+                let id = ids[i]
                 if let movie = movies[id] {
                     media.append(movie)
                 }
@@ -243,113 +324,59 @@ class ObjectController {
         return averages
     }
     
-// Firebase
-    func setupFirebase() {
-        FirebaseApp.configure()
-    }
     
     // MARK: User Authentication
     func checkForUser(completion:@escaping (Bool) -> ()) {
-        logout()
-        guard let firUser = Auth.auth().currentUser else {
-            completion(false)
-            return
-        }
-        login(firID: firUser.uid, completion: { (success) in
-            completion(success)
-        })
-    }
-    
-    func createUser(email: String, password: String, completion: @escaping (Bool) -> ()) {
-        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                completion(false)
-            }
-            
-            guard let authResult = authResult else {
-                completion(false)
-                return
-            }
-            
-            self.createUser(authResult: authResult, completion: { (success) in
-                completion(success)
-            })
-        }
-    }
-    
-    private func createUser(authResult: AuthDataResult, completion:@escaping (Bool) -> ()) {
-        self.currentUser = User(firID: authResult.user.uid,
-                                ubid: bookUsers.count, numBooks: books.count,
-                                umid: movieUsers.count, numMovies: movies.count)
-        self.bookUsers.append(currentUser!.bookRatingUser!)
-        self.movieUsers.append(currentUser!.movieRatingUser!)
-        
-        for movie in movies {
-            movie.value.ratings.append(0)
-        }
-        for book in books {
-            book.value.ratings.append(0)
-        }
-        
-        if let _ = bookRM {
-            let averages = getBookAverages()
-            bookRM!.addUser(averages: averages)
-            // TODO: run
-        }
-        
-        if let _ = movieRM {
-            let averages = getMovieAverages()
-            movieRM!.addUser(averages: averages)
-            // TODO: run
-        }
-        completion(true)
-        
-//      TODO: Save User to database
-//        let firUser = currentUser?.toAnyObject() as! [String: Any]
-//        print(Firestore.firestore().collection("users"))
-//        Firestore.firestore().collection("users").document(currentUser!.firID).setData(firUser) { (error) in
-//            if let error = error {
-//                print(error)
-//            } else {
-//                print("success")
-//            }
-//        }
-//        Firestore.firestore().collection("users").addDocument(data: firUser) { (error) in
-//            if let error = error {
-//                print(error)
-//            } else {
-//                print("success")
-//            }
-//        }
 
     }
     
-    func signIn(email: String, password: String, completion: @escaping (Bool) -> ()) {
-        Auth.auth().signIn(withEmail: email, password: password) { (authResult, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                completion(false)
-            }
-            
-            if let authResult = authResult {
-                self.login(firID: authResult.user.uid, completion: { (success) in
-                    completion(success)
-                })
-                
-            } else {
-                completion(false)
-            }
-        }
+    func createUser(email: String, password: String, completion: @escaping (Bool) -> ()) {
+
     }
     
-    func login(firID: String, completion: @escaping (Bool) -> ()) {
-        //        TODO:
-        
+//    private func createUser(authResult: AuthDataResult, completion:@escaping (Bool) -> ()) {
+//        self.currentUser = User(firID: authResult.user.uid,
+//                                ubid: bookUsers.count, numBooks: books.count,
+//                                umid: movieUsers.count, numMovies: movies.count)
+//        self.bookUsers.append(currentUser!.bookRatingUser!)
+//        self.movieUsers.append(currentUser!.movieRatingUser!)
+//
+//        for movie in movies {
+//            movie.value.ratings.append(0)
+//        }
+//        for book in books {
+//            book.value.ratings.append(0)
+//        }
+//
+//        if let _ = bookRM {
+//            let averages = getBookAverages()
+//            bookRM!.addUser(averages: averages)
+//            // TODO: run
+//        }
+//
+//        if let _ = movieRM {
+//            let averages = getMovieAverages()
+//            movieRM!.addUser(averages: averages)
+//            // TODO: run
+//        }
+//        completion(true)
+//
+////      TODO: Save User to database
+//
+//
+//    }
+    
+    func signIn(email: String, password: String, completion: @escaping (Bool) -> ()) {
+
     }
+    
+//    func login(firID: String, completion: @escaping (Bool) -> ()) {
+//        //        TODO:
+//
+//    }
     
     func logout() {
-        do { try? Auth.auth().signOut() }
+
     }
     
     
