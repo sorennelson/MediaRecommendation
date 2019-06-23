@@ -21,7 +21,7 @@ protocol UserProtocol: Hashable {
 extension UserProtocol {
     mutating func addRating(_ rating: Double, for media: Int) {
         numMediaRatings += 1
-        ratings[media - 1] = rating;
+        ratings[media] = rating;
     }
 }
 

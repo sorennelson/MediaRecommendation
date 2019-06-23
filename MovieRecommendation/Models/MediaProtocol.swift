@@ -21,7 +21,7 @@ protocol MediaProtocol: Hashable {
 
 extension MediaProtocol {
     mutating func addRating(_ rating: Double, for user: Int) {
-        ratings[user - 1] = rating;
+        ratings[user] = rating;
     }
 }
 

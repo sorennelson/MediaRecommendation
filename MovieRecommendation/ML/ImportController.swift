@@ -13,7 +13,7 @@ class ImportController {
     static let sharedInstance = ImportController()
     
     func addMediaAndRatings<T: Media, U: UserProtocol>(_ media: [T], for users: [U], featureCount: Int) -> RecommenderModel {
-        var RM = RecommenderModel(mediaCount: media.count, userCount: users.count, featureCount: featureCount, type: RMType.ContentBased)
+        let RM = RecommenderModel(mediaCount: media.count, userCount: users.count, featureCount: featureCount, type: RMType.ContentBased)
         
         for m in media {
             if m.features.count < featureCount {
@@ -25,7 +25,6 @@ class ImportController {
         print(media.count)
         for u in users {
             if u.ratings.count < media.count {
-//                print(u.ratings.count)
 //                print("IMPORT TO ML: USER ERROR")
             }
             for mID in 0..<u.ratings.count {
@@ -37,11 +36,11 @@ class ImportController {
     
     
     func addRatings<T: Media, U: UserProtocol>(_ media: [T], for users: [U], featureCount: Int) -> RecommenderModel {
-        var RM = RecommenderModel(mediaCount: media.count, userCount: users.count, featureCount: featureCount, type: RMType.CollaborativeFiltering)
+        let RM = RecommenderModel(mediaCount: media.count, userCount: users.count, featureCount: featureCount, type: RMType.CollaborativeFiltering)
 
         for u in users {
             if u.ratings.count < media.count {
-//                print("ERROR")
+                print("ERROR")
             }
             for mID in 0..<u.ratings.count {
                 RM.updateRatings(at: mID, u.id, with: u.ratings[mID])

@@ -26,7 +26,7 @@ class MovieParser {
         }
     
     private func parseMovies(_ text: String) {
-        var i = 1
+        var i = 0
         text.enumerateLines { (line, _) in
             let movieArray = line.components(separatedBy: ",")
             
@@ -47,6 +47,7 @@ class MovieParser {
                 i+=1
             }
         }
+        print("a")
     }
     
     private func parseMovieLinks(_ text: String) {
@@ -64,7 +65,9 @@ class MovieParser {
     
     // MARK: Ratings
     private func parseMovieRatings(_ text: String) {
-        var user = RatingUser(id: 1, numMedia: 9125)
+        for i in 0..<671 {
+            self.objectController.movieUsers.append(RatingUser(id: i, numMedia: 9125))
+        }
         
         text.enumerateLines { (line, _) in
             let ratingArray = line.components(separatedBy: ",")
@@ -72,52 +75,89 @@ class MovieParser {
             if let uID = Int(ratingArray[0]),
                 let movieID = Int(ratingArray[1]),
                 let rating = Double(ratingArray[2]) {
+                self.objectController.movies[movieID]?.addRating(rating, for: uID - 1)
                 
-                if user.id == uID {
-                    self.addMovieRatingsForCreatedUser(&user, with: uID, movieID, rating)
-                    
-                } else {
-                    self.addMovieRatingsForNewUser(&user, with: uID, movieID, rating)
-                }
+                var mID = movieID
+                self.getMID(&mID)
+                self.objectController.movieUsers[uID - 1].addRating(rating, for: mID)
             }
         }
     }
     
-    private func addMovieRatingsForCreatedUser(_ user: inout RatingUser, with uID: Int, _ movieID: Int, _ rating: Double) {
-        addMovieRating(rating, for: uID, movieID)
-        
-        var mID = movieID
-        getMID(&mID)
-        
-        if user.id == 671 {
-            objectController.movieUsers[670].addRating(rating, for: mID)
-        } else {
-            user.addRating(rating, for: mID)
-        }
-    }
+//    private func parseBookRatings(_ text: String) {
+//        for i in 0..<53425 {
+//            self.objectController.bookUsers.append(RatingUser(id: i, numMedia: 10000))
+//        }
+//
+//        text.enumerateLines { (line, _) in
+//            let ratingArray = line.components(separatedBy: ",")
+//
+//            if let uID = Int(ratingArray[0]),
+//                let bID = Int(ratingArray[1]) {
+//                let rating = Double(ratingArray[2]) ?? 0.0
+//
+//                self.objectController.bookUsers[uID].addRating(rating, for: bID)
+//                self.objectController.books[bID]?.addRating(rating, for: uID)
+//            }
+//        }
+//    }
     
-    private func addMovieRatingsForNewUser(_ user: inout RatingUser, with uID: Int, _ movieID: Int, _ rating: Double) {
-        addMovieRating(rating, for: uID, movieID)
-        
-        objectController.movieUsers.append(user)
-        user = RatingUser(id: uID, numMedia: 9125)
-        
-        var mID = movieID
-        getMID(&mID)
-        
-        user.addRating(rating, for: mID)
-        if user.id == 671 {
-            objectController.movieUsers.append(user)
-        }
-    }
     
-    private func addMovieRating(_ rating: Double, for uID: Int, _ movieID: Int) {
-        guard let _ = objectController.movies[movieID] else {
-            print("Rating a nil Movie")
-            return
-        }
-        objectController.movies[movieID]!.addRating(rating, for: uID)
-    }
+//    private func parseMovieRatings(_ text: String) {
+//        var user = RatingUser(id: 1, numMedia: 9125)
+//
+//        text.enumerateLines { (line, _) in
+//            let ratingArray = line.components(separatedBy: ",")
+//
+//            if let uID = Int(ratingArray[0]),
+//                let movieID = Int(ratingArray[1]),
+//                let rating = Double(ratingArray[2]) {
+//
+//                if user.id == uID {
+//                    self.addMovieRatingsForCreatedUser(&user, with: uID, movieID, rating)
+//
+//                } else {
+//                    self.addMovieRatingsForNewUser(&user, with: uID, movieID, rating)
+//                }
+//            }
+//        }
+//    }
+    
+//    private func addMovieRatingsForCreatedUser(_ user: inout RatingUser, with uID: Int, _ movieID: Int, _ rating: Double) {
+//        addMovieRating(rating, for: uID, movieID)
+//        
+//        var mID = movieID
+//        getMID(&mID)
+//        
+//        if user.id == 671 {
+//            objectController.movieUsers[670].addRating(rating, for: mID)
+//        } else {
+//            user.addRating(rating, for: mID)
+//        }
+//    }
+//    
+//    private func addMovieRatingsForNewUser(_ user: inout RatingUser, with uID: Int, _ movieID: Int, _ rating: Double) {
+//        addMovieRating(rating, for: uID, movieID)
+//        
+//        objectController.movieUsers.append(user)
+//        user = RatingUser(id: uID, numMedia: 9125)
+//        
+//        var mID = movieID
+//        getMID(&mID)
+//        
+//        user.addRating(rating, for: mID)
+//        if user.id == 671 {
+//            objectController.movieUsers.append(user)
+//        }
+//    }
+//    
+//    private func addMovieRating(_ rating: Double, for uID: Int, _ movieID: Int) {
+//        guard let _ = objectController.movies[movieID] else {
+//            print("Rating a nil Movie")
+//            return
+//        }
+//        objectController.movies[movieID]!.addRating(rating, for: uID)
+//    }
     
     /**
      Used to swap from moviesID to yID

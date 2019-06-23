@@ -11,12 +11,11 @@ import Foundation
 class GradientDescentController {
     
     static var sharedInstance = GradientDescentController()
-    // var test: Test?
     
     func runBatchGradientDescent(RM: inout RecommenderModel, regParam: Double, iterations: Int, learningRate: Double) -> matrix {
         var costs = [Double]()
         RM.resetMatrices()
-//        RM.weights = RM.originalWeights
+        RM.weights = RM.originalWeights
 
         let costFunction = CostFunction(RM: RM, regParam: regParam)
         
@@ -55,12 +54,5 @@ class GradientDescentController {
         let costFunction = CostFunction(RM: RM, regParam: 0)
         return costFunction.computeTrainError()
     }
-    
-    
-    // MARK: TESTING
-//    func takeStep(RM: inout RecommenderModel, lambda: Double) -> (Double, matrix) {
-//        let costFunction = CostFunction(RM: &RM, regParam: lambda)
-//        return costFunction.computeStep()
-//    }
     
 }

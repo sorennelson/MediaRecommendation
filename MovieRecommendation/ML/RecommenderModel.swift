@@ -23,14 +23,14 @@ class RecommenderModel {
     //    TODO: Remove
     var averageRatings: [Double]?
     
-    // Ratings: Y(movie, user) = 0.5 - 5
+    // Ratings: Y(media, user) = 0.5 - 5
     var Y: matrix
     var YMean: matrix?
     
-    // Binary value: R(movie, user) = 1 if rated, 0 if not
+    // Binary value: R(media, user) = 1 if rated, 0 if not
     var R: matrix
     
-    // Binary value for Content Based: X(movie, genres) = 1 if has that genre, 0 if not
+    // Binary value for Content Based: X(media, genres) = 1 if has that genre, 0 if not
     var originalX: matrix
     var X: matrix
     
@@ -164,14 +164,11 @@ class RecommenderModel {
         Y = newY
         
         if algorithmType == .ContentBased {
-//            weights = rand((userCount, featureCount + 1))
-//            weights[0..<userCount, 0] = zeros(userCount)
             var newWeights = rand((userCount, featureCount+1))
             newWeights[0..<userCount-1, 0..<featureCount+1] = weights
             weights = newWeights
             
         } else {
-//            weights = rand((userCount, featureCount))
             var newWeights = rand((userCount, featureCount))
             newWeights[0..<userCount-1, 0..<featureCount] = weights
             weights = newWeights
@@ -185,9 +182,9 @@ class RecommenderModel {
     }
     
     func updateRatings(at row: Int, _ column: Int, with rating: Double) {
-        Y[row, column - 1] = rating
+        Y[row, column] = rating
         if rating > 0 {
-            R[row, column - 1] = 1
+            R[row, column] = 1
 //            print(row, column - 1)
         }
     }
@@ -203,16 +200,14 @@ class RecommenderModel {
     func predict(media: Int, user: Int) -> Double {
         // normally feature count would be +1
 //        guard let mean = YMean else { return 0.0 }
-        let w = weights[user - 1, "all"]
-        let x = X[media - 1, "all"]
+        let w = weights[user, "all"]
+        let x = X[media, "all"]
         var prediction = sum(x * w)
-//        prediction += mean[media - 1, user - 1]
-//        print(mean[media - 1, user - 1])
-        return prediction
         
-//        if newUser && newUsers.contains(user) {
-//            prediction += averageRatings![media]
-//        }
+//        prediction += mean[media, user]
+//        print(mean[media, user])
+        
+        return prediction
     }
 }
     

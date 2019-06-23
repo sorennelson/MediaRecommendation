@@ -324,9 +324,8 @@ class ObjectController {
         return averages
     }
     
-    
     // MARK: User Authentication
-    func checkForUser(completion:@escaping (Bool) -> ()) {
+    func createUser(completion:@escaping (Bool) -> ()) {
 
     }
     
