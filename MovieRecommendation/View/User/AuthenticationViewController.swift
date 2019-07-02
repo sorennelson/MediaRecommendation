@@ -20,9 +20,9 @@ class AuthenticationViewController: NSViewController {
             return
         }
         
-        ObjectController.sharedInstance.createUser(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success) in
+        UserController.sharedInstance.createUser(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success, error)in
             if !success {
-                self.showErrorCreatingAccountNotification()
+                self.showErrorCreatingAccountNotification(error!)
                 
             } else {
                 self.showSuccessCreatingAccountNotification()
@@ -37,9 +37,9 @@ class AuthenticationViewController: NSViewController {
             return
         }
         
-        ObjectController.sharedInstance.signIn(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success) in
+        UserController.sharedInstance.signIn(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success, error) in
             if !success {
-                self.showErrorLoggingInNotification()
+                self.showErrorLoggingInNotification(error!)
                 
             } else {
                 self.showSuccessLoggingInNotification()
@@ -52,7 +52,6 @@ class AuthenticationViewController: NSViewController {
         if emailTextField.stringValue.contains("@")
             && emailTextField.stringValue.contains(".")
             && passwordTextField.stringValue.isEmpty == false {
-//            TODO: force better password
             return true
         }
         return false
@@ -63,12 +62,12 @@ class AuthenticationViewController: NSViewController {
 //            TODO:
     }
     
-    func showErrorCreatingAccountNotification() {
+    func showErrorCreatingAccountNotification(_ error: String) {
         print("Error creating Account")
         //        TODO:
     }
     
-    func showErrorLoggingInNotification() {
+    func showErrorLoggingInNotification(_ error: String) {
         print("Error creating Account")
         //        TODO:
     }

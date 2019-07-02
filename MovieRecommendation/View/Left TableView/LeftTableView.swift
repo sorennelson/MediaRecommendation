@@ -50,9 +50,9 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
             var media: [Media]
             if selectedCategory == "All" {
-                media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)
+                media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)!
             } else {
-                media = ObjectController.sharedInstance.getMediaForCategory(genreName: selectedCategory, at: (row-1)*3..<(row-1)*3+3)
+                media = ObjectController.sharedInstance.getMediaForCategory(genreName: selectedCategory, at: (row-1)*3..<(row-1)*3+3)!
             }
             cell.setMedia(media: media)
             return cell

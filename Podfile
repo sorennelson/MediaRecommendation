@@ -5,19 +5,8 @@ target 'MovieRecommendation' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for MovieRecommendation
-pod 'FirebaseCore'
-pod 'FirebaseAuth'
-# pod 'FirebaseFirestore'
-
-  target 'MovieRecommendationTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'MovieRecommendationUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  # Pods for MediaRecommendation
+  pod 'Alamofire','~> 4.7.0'
+  pod 'Starscream', '~> 3.0.2'
 
 end

@@ -34,12 +34,14 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         if currentContent == .Ratings {
-            ratings = Array(ObjectController.sharedInstance.getRatings().keys)
+//            ratings = Array(ObjectController.sharedInstance.getRatings().keys)
             // Title + ratings
-            return ratings.count + 1
+//            return ratings.count + 1
+            return 1
         } else {
             // Title + "all categories" + categories
-            return ObjectController.sharedInstance.getAllCategories().count + 2
+//            return ObjectController.sharedInstance.getAllCategories().count + 2
+            return 2
         }
     }
     
@@ -63,7 +65,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
         let media = ratings[row - 1]
-        cell.userRating = ObjectController.sharedInstance.getRatings()[media]!
+        cell.userRating = ObjectController.sharedInstance.getRatings()?[media]!
         cell.media = media
         return cell
     }
@@ -71,10 +73,10 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
         if row > 1 {
-            cell.category = ObjectController.sharedInstance.getAllCategories()[row-2]
+            cell.category = ObjectController.sharedInstance.getAllCategories()![row-2]
             cell.countLabel.stringValue = String(ObjectController.sharedInstance.getCategoryCount(genreName: cell.category))
         } else {
-            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMedia().count)
+            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMedia()!.count)
             cell.selected = true
         }
         cell.categoryTitle.stringValue = cell.category

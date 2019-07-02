@@ -32,7 +32,7 @@ class RightTVMediaCell : NSTableCellView {
                 }
             }
             
-            ratingLabel.stringValue = String(format: "%.1f", userRating!) + "  |  " + String(format: "%.1f", media!.getAvgRating())
+            ratingLabel.stringValue = String(format: "%.1f", userRating!) + "  |  " + String(format: "%.1f", media!.avgRating)
             
             media!.getImageData(completion: { (data) in
                 if let data = data {

@@ -75,24 +75,21 @@ class LeftTVMediaCell: NSTableCellView {
     
     @IBAction func leftButtonClicked(_ sender: Any) {
         guard let media = leftMedia else { return }
-        let user = ObjectController.sharedInstance.movieUsers[1]
-        let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
+        let prediction = ObjectController.sharedInstance.getPrediction(for: media)
         setSelectedMedia(media, prediction: prediction)
         displayPopover()
     }
     
     @IBAction func middleButtonClicked(_ sender: Any) {
         guard let media = middleMedia else { return }
-        let user = ObjectController.sharedInstance.movieUsers[1]
-        let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
+        let prediction = ObjectController.sharedInstance.getPrediction(for: media)
         setSelectedMedia(media, prediction: prediction)
         displayPopover()
     }
     
     @IBAction func rightButtonClicked(_ sender: Any) {
         guard let media = rightMedia else { return }
-        let user = ObjectController.sharedInstance.movieUsers[1]
-        let prediction = ObjectController.sharedInstance.getPrediction(for: user, media: media)
+        let prediction = ObjectController.sharedInstance.getPrediction(for: media)
         setSelectedMedia(media, prediction: prediction)
         displayPopover()
     }

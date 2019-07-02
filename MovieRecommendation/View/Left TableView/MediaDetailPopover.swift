@@ -42,11 +42,11 @@ class MediaDetailPopover: NSViewController {
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
             }
-            if let rating = ObjectController.sharedInstance.currentUser?.booksRated[media.yID] {
-                self.userRating.stringValue = String(rating)
-            } else {
+//            if let rating = ObjectController.sharedInstance.currentUser?.booksRated[media.yID] {
+//                self.userRating.stringValue = String(rating)
+//            } else {
                 self.userRating.stringValue = "Not Yet Rated"
-            }
+//            }
             
         } else {
             if ObjectController.sharedInstance.movieRM == nil {
@@ -56,13 +56,13 @@ class MediaDetailPopover: NSViewController {
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
             }
-            if let rating = ObjectController.sharedInstance.currentUser?.moviesRated[media.yID] {
-                self.userRating.stringValue = String(rating)
-            } else {
+//            if let rating = ObjectController.sharedInstance.currentUser?.moviesRated[media.yID] {
+//                self.userRating.stringValue = String(rating)
+//            } else {
                 self.userRating.stringValue = "Not Yet Rated"
-            }
+//            }
         }
-        let avg = Double(Int(media.getAvgRating() * 100) / 100.0)
+        let avg = Double(Int(media.avgRating * 100) / 100.0)
         self.avgRating.stringValue = String(avg)
         self.titleLabel.stringValue = media.title
     }

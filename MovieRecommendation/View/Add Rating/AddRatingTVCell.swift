@@ -32,8 +32,8 @@ class AddRatingTVCell: NSTableCellView {
                     genres.stringValue += book.genres[i] + ", "
                 }
                 genres.stringValue += book.genres[book.genres.count - 1]
-                if let year = book.year { yearAndType.stringValue = year + " | Book" }
-                else { yearAndType.stringValue = "Book" }
+                yearAndType.stringValue = String(book.year) + " | Book"
+
             }
         }
     }

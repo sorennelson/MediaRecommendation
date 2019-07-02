@@ -8,28 +8,24 @@
 
 import Foundation
 
-class Media: NSObject, MediaProtocol {
+class Media: Hashable, Codable {
     
-    var yID: Int
+    var id: Int
     var title: String
     var genres: [String]
-    var features: vector
-    var ratings: [Double]
+    var year: Int
+    var avgRating: Double
+    
     var imageURL: String?
     var imageData: Data?
-    var avgRating: Double?
-    var numRatings: Double?
     
-    init(id: Int, title: String, genres: [String], features: vector, ratings: [Double]) {
-        self.yID = id
+    init(id: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL:String?) {
+        self.id = id
         self.title = title
         self.genres = genres
-        self.features = features
-        self.ratings = ratings
-    }
-    
-    override public var description: String {
-        return String("ID: \(yID) \nTitle: \(title) \ngenre: \(genres) \nratings: \(ratings)")
+        self.year = year
+        self.avgRating = avgRating
+        self.imageURL = imageURL
     }
     
     func getImageData(completion:@escaping (Data?) -> ()) {
@@ -50,21 +46,13 @@ class Media: NSObject, MediaProtocol {
         }
     }
     
-    func getAvgRating() -> Double {
-        if let avgRating = avgRating {
-            return avgRating
-            
-        } else {
-            numRatings = 0.0
-            var sum = 0.0
-            for rating in ratings {
-                if rating > 0.0 {
-                    numRatings! += 1.0
-                    sum += rating
-                }
-            }
-            return sum / numRatings!
-        }
+    //    MARK: Hashable
+    static func == (lhs: Media, rhs: Media) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
 }

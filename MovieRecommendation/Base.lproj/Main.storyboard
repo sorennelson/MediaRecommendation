@@ -846,10 +846,10 @@
             </objects>
             <point key="canvasLocation" x="-752" y="872"/>
         </scene>
-        <!--View Controller-->
+        <!--Logout-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="MovieRecommendation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Logout" id="XfG-lQ-9wD" customClass="ViewController" customModule="MovieRecommendation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="1265" height="900"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1421,7 +1421,6 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="userButtonPressed:" target="XfG-lQ-9wD" id="dFk-ox-5yO"/>
-                                    <segue destination="oNa-O4-uGW" kind="popover" popoverAnchorView="EpX-pa-IMd" popoverBehavior="t" preferredEdge="maxY" id="vdB-XU-lZT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1458,6 +1457,8 @@
                         <outlet property="rightTableView" destination="r8R-el-7Vr" id="bfz-vv-rOG"/>
                         <outlet property="userButton" destination="EpX-pa-IMd" id="QOf-Z1-ElM"/>
                         <segue destination="Y1m-k3-eVn" kind="popover" identifier="MediaPopover" popoverAnchorView="m2S-Jp-Qdl" popoverBehavior="t" preferredEdge="maxY" id="aCF-YA-Zxp"/>
+                        <segue destination="oNa-O4-uGW" kind="popover" identifier="Authentication" popoverBehavior="t" preferredEdge="maxY" id="XNQ-6t-VdY"/>
+                        <segue destination="oRn-aD-jed" kind="popover" popoverBehavior="t" preferredEdge="maxY" id="QpU-HO-yJV"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

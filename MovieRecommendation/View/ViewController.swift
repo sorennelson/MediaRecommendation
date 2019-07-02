@@ -54,40 +54,9 @@ class ViewController: NSViewController {
 
         DispatchQueue.global(qos: .background).async {
             
-//          TODO: Move to OC
-            ParseController.sharedInstance.importAndParseMovies()
-            DispatchQueue.main.async {
-                self.leftTableView.reloadData()
-            }
-            print("Movies imported")
-            
-            
-//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(mediaType: .Movies, media: ObjectController.sharedInstance.movies, featureCount: 8)
-//            let err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabMovieRM)
-//            print("RMSE FOR MOVIE COLLABORATIVE FILTERING: " + String(err))
-//            ObjectController.sharedInstance.movieRM = collabMovieRM
+            ImportController.sharedInstance.loadMovies()
 
-//            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
-//            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 1000, RM: &contentMovieRM)
-//            print("ROOT MEAN SQUARED ERROR FOR MOVIE CONTENT BASED: " + String(err))
         }
-        
-//        DispatchQueue.global(qos: .background).async {
-//            ParseController.sharedInstance.importAndParseBooks()
-//            DispatchQueue.main.async {
-//                self.leftTableView.reloadData()
-//            }
-//            print("Books imported")
-
-//            var collabBookRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(mediaType: .Books, media: ObjectController.sharedInstance.books, featureCount: 10)
-//            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 50, RM: &collabBookRM)
-//            print("ROOT MEAN SQUARED ERROR FOR BOOK COLLABORATIVE FILTERING: " + String(err))
-//            ObjectController.sharedInstance.bookRM = collabBookRM
-
-//            var contentBookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
-//            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 1000, RM: &contentBookRM)
-//            print("ROOT MEAN SQUARED ERROR FOR BOOK CONTENT BASED: " + String(err))
-//        }
         
     }
     
@@ -132,7 +101,22 @@ class ViewController: NSViewController {
     }
     
     @IBAction func userButtonPressed(_ sender: Any) {
-        
+        if User.current != nil {
+            performSegue(withIdentifier: "Authentication", sender: sender)
+        } else {
+            performSegue(withIdentifier: "Logout", sender: sender)
+        }
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "Authentication":
+            print("Auth")
+        case "Logout":
+            print("Logout")
+        default:
+            print("")
+        }
     }
     
     override func dismiss(_ viewController: NSViewController) {
@@ -143,6 +127,5 @@ class ViewController: NSViewController {
     
     private func runTests() {
         let test = Test.sharedInstance
-        test.runGradientTests()
     }
 }

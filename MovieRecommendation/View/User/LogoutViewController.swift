@@ -12,7 +12,7 @@ import Cocoa
 class LogoutViewController: NSViewController {
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
-        
+         UserController.sharedInstance.logout()
     }
     
 }
