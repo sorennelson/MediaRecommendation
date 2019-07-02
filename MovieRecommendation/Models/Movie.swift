@@ -10,11 +10,7 @@ import Foundation
 
 class Movie: Media {
     
-    var imbdbID: Int
-    
-    init(id: Int, imdbID: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL: String?) {
-        
-        self.imbdbID = imdbID
+    override init(id: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL: URL?) {
         super.init(id: id, title: title, genres: genres, year: year, avgRating: avgRating, imageURL: imageURL)
         //        if let string = imageString {
         //            if !string.isEmpty {
@@ -24,8 +20,15 @@ class Movie: Media {
     }
     
     required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let superDecoder = try container.superDecoder()
+        try super.init(from: superDecoder)
     }
+}
+
+class Movies: Codable {
+    let results: [Movie]
+}
     
 //    private func setFeatures() {
 //        for genre in genres {
@@ -72,5 +75,5 @@ class Movie: Media {
 //            }
 //        }
 //    }
-}
+
 

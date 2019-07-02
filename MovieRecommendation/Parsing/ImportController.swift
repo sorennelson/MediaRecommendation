@@ -13,22 +13,48 @@ class ImportController {
     
     static let sharedInstance = ImportController()
     
-    func loadMovies() {
-        Alamofire.request(API_HOST+"movies").responseData { (response) in
+    func loadMedia(mediaType: MediaType, completion:@escaping ([Media], String) -> ()) {
+        let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books")
+        loadData(requestString: requestString) { (data, str) in
+            print(str)
+            guard let data = data else {
+                completion([], str)
+                return
+            }
+            
+            do {
+                if mediaType == .Movies {
+                    let movies = try JSONDecoder().decode(Movies.self, from: data)
+                    for movie in movies.results {
+                        print(movie.title)
+                    }
+                } else {
+                    let books = try JSONDecoder().decode([Book].self, from: data)
+                    print(books.count)
+                }
+            } catch let error {
+                print(error)
+                completion([], error.localizedDescription)
+            }
+        }
+    }
+    
+    private func loadData(requestString: String, completion:@escaping (Data?, String) -> ()) {
+        Alamofire.request(requestString).responseData { (response) in
             switch response.result {
+                
             case .success(let data):
                 switch response.response?.statusCode ?? -1 {
                 case 200:
-                    print("Success")
+                    completion(data, "Success")
                 default:
-                    print("Unexpected Error")
+                    completion(data, "Unexpected Error")
                 }
+                
             case .failure(let error):
-                print(error.localizedDescription)
+                completion(nil, error.localizedDescription)
             }
         }
-        
-        
     }
     
 }

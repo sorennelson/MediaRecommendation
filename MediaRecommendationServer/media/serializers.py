@@ -5,7 +5,7 @@ from rest_framework import serializers
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ('id', 'title', 'author', 'genres', 'year', 'average_rating', 'image_url')
+        fields = ('id', 'title', 'author', 'genres', 'year', 'average_rating', 'image_url', 'small_image_url')
 
 
 class MovieSerializer(serializers.ModelSerializer):

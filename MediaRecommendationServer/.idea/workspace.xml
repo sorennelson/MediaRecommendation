@@ -2,62 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25ad6e99-5732-4c01-becd-5f29b77b9ecc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/User.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Parsing/UserController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation.xcworkspace/xcuserdata/solosoren.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation.xcworkspace/xcuserdata/solosoren.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/ML/ImportController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ImportController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/Book.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/Book.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/Media.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/Media.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/MediaProtocol.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/Movie.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/Movie.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/ObjectController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ObjectController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/RatingUser.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/UserProtocol.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Parsing/BookParser.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Parsing/MovieParser.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ParseController.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Test.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Test.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Add Rating/AddRatingTVCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Add Rating/AddRatingTVCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Left TableView/MediaDetailPopover.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Left TableView/MediaDetailPopover.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTVMediaCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTVMediaCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTableView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTableView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/User/AuthenticationViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/User/AuthenticationViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/User/LogoutViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/User/LogoutViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/ViewController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/../Podfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Podfile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Manifest.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/xcuserdata/solosoren.xcuserdatad/xcschemes/Pods-MovieRecommendation.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/xcuserdata/solosoren.xcuserdatad/xcschemes/Pods-MovieRecommendation.xcscheme" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/xcuserdata/solosoren.xcuserdatad/xcschemes/Pods-MovieRecommendationTests.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/xcuserdata/solosoren.xcuserdatad/xcschemes/Pods-MovieRecommendationUITests.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/xcuserdata/solosoren.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Pods.xcodeproj/xcuserdata/solosoren.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-acknowledgements.markdown" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-acknowledgements.plist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-frameworks.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-frameworks.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation.debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation.release.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests-acknowledgements.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests-acknowledgements.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests-dummy.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests-frameworks.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests-resources.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests-umbrella.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests.debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests.modulemap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationTests/Pods-MovieRecommendationTests.release.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests-acknowledgements.markdown" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests-acknowledgements.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests-dummy.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests-frameworks.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests-resources.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests-umbrella.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests.debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests.modulemap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Pods/Target Support Files/Pods-MovieRecommendationUITests/Pods-MovieRecommendationUITests.release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/media/serializers.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +39,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userauth/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
+            <state relative-caret-position="566">
               <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -106,8 +51,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/media/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="315">
+              <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -118,8 +63,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/media/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+            <state>
+              <caret line="1" column="38" lean-forward="true" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -153,10 +98,10 @@
         <option value="$PROJECT_DIR$/media/urls.py" />
         <option value="$PROJECT_DIR$/userauth/serializers.py" />
         <option value="$PROJECT_DIR$/userauth/views.py" />
-        <option value="$PROJECT_DIR$/media/serializers.py" />
         <option value="$PROJECT_DIR$/media/models.py" />
         <option value="$PROJECT_DIR$/MediaRecommendationServer/urls.py" />
         <option value="$PROJECT_DIR$/userauth/urls.py" />
+        <option value="$PROJECT_DIR$/media/serializers.py" />
       </list>
     </option>
   </component>
@@ -273,12 +218,12 @@
       <workItem from="1561828561964" duration="11198000" />
       <workItem from="1561933347035" duration="9301000" />
       <workItem from="1561994122866" duration="4480000" />
-      <workItem from="1562006041532" duration="333000" />
+      <workItem from="1562006041532" duration="1714000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36346000" />
+    <option name="totallyTimeSpent" value="37727000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -430,30 +375,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/userauth/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="38" selection-start-column="38" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/userauth/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -463,10 +384,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/userauth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/userauth/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="1" column="38" lean-forward="true" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/media/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        <state relative-caret-position="315">
+          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>

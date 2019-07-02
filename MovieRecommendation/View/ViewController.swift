@@ -53,9 +53,9 @@ class ViewController: NSViewController {
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
 
         DispatchQueue.global(qos: .background).async {
-            
-            ImportController.sharedInstance.loadMovies()
-
+            ImportController.sharedInstance.loadMedia(mediaType: .Movies, completion: { (media, str) in
+                print(str)
+            })
         }
         
     }
