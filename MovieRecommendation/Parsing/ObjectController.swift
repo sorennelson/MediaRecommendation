@@ -17,16 +17,14 @@ class ObjectController {
     
     var addedRatings = false
     
-    var allMoviesArr: [Movie] = []
-    var movies: [Int: Movie] = Dictionary.init() // YID: Movie
+    var movies: [Movie] = [] // YID: Movie
     var movieLinks = [Int: String]() // YID: Link
     var genreMovies: [String: [Int]] = [:] // [genre: [movieIDs]]
     var movieUsers: [User] = []
     var movieRatings: [Media: Double]?
     var movieRM: RecommenderModel?
     
-    var allBooksArr: [Book] = []
-    var books: [Int: Book] = [:]
+    var books: [Book] = []
     var allBookGenres: [String] = []
     //    var bookGenres: [Int: [String]] = [:] // [bookID: [genres]]
     var genreBooks: [String: [Int]] = [:] // [genre: [bookIDs]]

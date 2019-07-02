@@ -20,14 +20,16 @@ class Movie: Media {
     }
     
     required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let superDecoder = try container.superDecoder()
-        try super.init(from: superDecoder)
+        try super.init(from: decoder)
     }
 }
 
-class Movies: Codable {
+struct Movies: Codable {
+    let count: Int
+    let next: URL?
+    let previous: URL?
     let results: [Movie]
+    
 }
     
 //    private func setFeatures() {

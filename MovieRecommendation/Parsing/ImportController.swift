@@ -13,28 +13,27 @@ class ImportController {
     
     static let sharedInstance = ImportController()
     
-    func loadMedia(mediaType: MediaType, completion:@escaping ([Media], String) -> ()) {
+    func loadAllMedia(_ mediaType: MediaType, completion:@escaping (String) -> ()) {
         let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books")
         loadData(requestString: requestString) { (data, str) in
-            print(str)
             guard let data = data else {
-                completion([], str)
+                completion(str)
                 return
             }
-            
             do {
                 if mediaType == .Movies {
-                    let movies = try JSONDecoder().decode(Movies.self, from: data)
-                    for movie in movies.results {
-                        print(movie.title)
-                    }
+                    let movies = try JSONDecoder().decode([Movie].self, from: data)
+                    ObjectController.sharedInstance.movies = movies.sorted { $0.title < $1.title }
+                    completion(str)
+                    
                 } else {
                     let books = try JSONDecoder().decode([Book].self, from: data)
-                    print(books.count)
+                    ObjectController.sharedInstance.books = books.sorted { $0.title < $1.title }
+                    completion(str)
                 }
             } catch let error {
                 print(error)
-                completion([], error.localizedDescription)
+                completion(error.localizedDescription)
             }
         }
     }

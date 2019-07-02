@@ -9157,3 +9157,5 @@ venv/lib/python3.7/types.py
 venv/lib/python3.7/warnings.py
 venv/lib/python3.7/weakref.py
 MovieRecommendation/Media_Recommendation.sqlite
+*.xcbkptlist
+MovieRecommendation.xcworkspace/xcuserdata/solosoren.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist

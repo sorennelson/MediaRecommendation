@@ -43,17 +43,17 @@ class ViewController: NSViewController {
 //        })
     }
     
-    override func viewDidAppear() {
-        super.viewDidAppear()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableViews()
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
 
         DispatchQueue.global(qos: .background).async {
-            ImportController.sharedInstance.loadMedia(mediaType: .Movies, completion: { (media, str) in
+            ImportController.sharedInstance.loadAllMedia(.Books, completion: { str in
+                print(str)
+            })
+            
+            ImportController.sharedInstance.loadAllMedia(.Movies, completion: { str in
                 print(str)
             })
         }
