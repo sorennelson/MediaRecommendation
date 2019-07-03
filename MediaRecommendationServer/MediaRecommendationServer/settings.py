@@ -40,6 +40,7 @@ INSTALLED_APPS = [
       'userauth',
       'media',
       'mlmodels',
+      'ratings',
       'rest_framework',
       'django_extensions',
 ]

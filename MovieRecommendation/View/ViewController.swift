@@ -48,16 +48,13 @@ class ViewController: NSViewController {
         setupTableViews()
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
 
-        DispatchQueue.global(qos: .background).async {
-            ImportController.sharedInstance.loadAllMedia(.Books, completion: { str in
-                print(str)
-            })
-            
-            ImportController.sharedInstance.loadAllMedia(.Movies, completion: { str in
-                print(str)
-            })
-        }
+        ImportController.sharedInstance.loadAllMedia(.Books, completion: { str in
+            print(str)
+        })
         
+        ImportController.sharedInstance.loadAllMedia(.Movies, completion: { str in
+            print(str)
+        })
     }
     
     private func setupTableViews() {

@@ -15,10 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+from media.views import BookViewSet, MovieViewSet
+from ratings.views import BookRatingUserViewSet, MovieRatingUserViewSet
+
+router = routers.DefaultRouter()
+router.register(r'books', BookViewSet)
+router.register(r'movies', MovieViewSet)
+
+router.register(r'bookratings', BookRatingUserViewSet)
+router.register(r'movieratings', MovieRatingUserViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('^/', include('rest_framework.urls', namespace='rest_framework')),
     path('', include('userauth.urls')),
-    path('', include('media.urls')),
+    path('', include(router.urls)),
 ]

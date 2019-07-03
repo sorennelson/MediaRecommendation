@@ -27,7 +27,6 @@ class ObjectController {
     var books: [Book] = []
     var allBookGenres: [String] = []
     //    var bookGenres: [Int: [String]] = [:] // [bookID: [genres]]
-    var genreBooks: [String: [Int]] = [:] // [genre: [bookIDs]]
     var bookUsers: [User] = []
     var bookRatings: [Media: Double]?
     var bookRM: RecommenderModel?

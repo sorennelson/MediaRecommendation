@@ -1,11 +1,7 @@
-import json
-
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login, logout
 from django.contrib.auth import authenticate
-
-from rest_framework import status
 
 from . import serializers
 from . import models
@@ -51,9 +47,5 @@ def auth_logout(request):
     """Clears the session """
     logout(request)
     return HttpResponse(status=200)
-
-
-
-
 
 
