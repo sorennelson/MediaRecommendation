@@ -7,50 +7,64 @@ from ratings.models import BookRatingUser, MovieRatingUser
 
 def run_collaborative_filtering(media_type):
     if media_type == "books":
-        num_media, user_params, item_params, ratings, rated = __setup_book_matrices(10)
+        num_media, num_users, ratings, ratings_mean, rated = __setup_book_matrices()
+        reg_params = [0.05, 0.1, 2.5]
+        learning_rates = [0.0001, 0.0005]
     else:
-        num_media, user_params, item_params, ratings, rated = __setup_movie_matrices(10)
+        # reg_params = [0.01, 0.05, 0.1]
+        # learning_rates = [0.00005, 0.0001]
+        reg_params = [2.5]
+        learning_rates = [0.0001]
+        mapping, num_media, num_users, ratings, ratings_mean, rated = __setup_movie_matrices()
 
-    # reg_params = [0.05, 0.1, 2.5]
-    # learning_rates = [0.0001, 0.001, 0.1]
-    reg_params = [2.5]
-    learning_rates = [0.0001]
-    best = [0, 0, 1.0]
+    best = [0, 0, 0, 1.0]
+    param_count = [10, 12, 20]
+    # param_count = [8]
     rated_indices = __get_rated_indices(rated)
 
-    i = 0
-    for reg_param in reg_params:
-        for learning_rate in learning_rates:
-            train_ratings, train_rated, val_ratings = __separate_validation_set(i, ratings, rated, rated_indices)
+    for num_params in param_count:
+        i = 0
+        for reg_param in reg_params:
+            for learning_rate in learning_rates:
+                print(num_params, ', R:', reg_param, ', LR:', learning_rate)
 
-            losses, _, _ = __run_gradient_descent(50, reg_param, learning_rate, user_params, item_params, train_ratings, train_rated)
-            print("LOSS:", losses)
+                user_params, item_params = __set_user_item_params(num_media, num_params, num_users)
+                train_ratings, train_rated, val_ratings, val_indices = __separate_validation_set(i, ratings, rated, rated_indices)
 
-            rmse = __compute_rmse(user_params, item_params, ratings)
-            print("RMSE:", rmse)
+                losses, item_params, user_params = \
+                    __run_gradient_descent(500, reg_param, learning_rate, user_params, item_params, train_ratings, train_rated)
+                # print("LOSS:", losses)
 
-            val_rmse = __compute_val_rmse(user_params, item_params, val_ratings, rated_indices)
-            print("VAL RMSE:", val_rmse)
+                rmse = __compute_rmse(user_params, item_params, ratings, ratings_mean)
+                print("RMSE:", rmse)
 
-            if val_rmse < best[2]:
-                best = [reg_param, learning_rate, val_rmse]
+                val_rmse = __compute_val_rmse(user_params, item_params, val_ratings, val_indices, ratings_mean)
+                print("VAL RMSE:", val_rmse)
 
-            i += 1
-    print("BEST MODEL:", best[0], best[1], best[2])
+                if val_rmse < best[3]:
+                    best = [num_params, reg_param, learning_rate, val_rmse]
+
+                i += 1
+    print("BEST MODEL:", best[0], best[1], best[2], best[3])
+
+    user_params, item_params = __set_user_item_params(num_media, best[0], num_users)
+    losses, item_params, user_params = \
+        __run_gradient_descent(300, best[1], best[2], user_params, item_params, ratings, rated)
+
+    rmse = __compute_rmse(user_params, item_params, ratings, ratings_mean)
+    print("RMSE:", rmse)
+
+    __create_movie_predictions(mapping, user_params, item_params, ratings_mean)
+
+#     Train best model on full data
+#     After CV, create predictions
 
 
-# After CV, create predictions
-
-
-def __setup_book_matrices(num_features):
+def __setup_book_matrices():
     num_media = Book.objects.count() + 9
-    item_params = np.random.rand(num_media, num_features)
-
     users = BookRatingUser.objects.order_by('id')
-    user_params = np.random.rand(users.count(), num_features)
 
     ratings = np.zeros((num_media, users.count()))
-    # Demean: https://beckernick.github.io/matrix-factorization-recommender/
     rated = np.zeros((num_media, users.count()))
 
     for u in range(users.count()):
@@ -63,10 +77,13 @@ def __setup_book_matrices(num_features):
             ratings[book_id, u] = rating
             rated[book_id, u] = 1
 
-    return num_media, user_params, item_params, ratings, rated
+    ratings_mean = np.mean(ratings, axis=1)
+    ratings = ratings - ratings_mean.reshape(-1, 1)     # De-mean: https://beckernick.github.io/matrix-factorization-recommender/
+
+    return num_media, users.count(), ratings, ratings_mean, rated
 
 
-def __setup_movie_matrices(num_features):
+def __setup_movie_matrices():
     movies = Movie.objects.all()
     num_media = movies.count()
 
@@ -74,11 +91,7 @@ def __setup_movie_matrices(num_features):
     for i in range(num_media):
         mapping[movies[i].id] = i
 
-    item_params = np.random.rand(num_media, num_features)
-
     users = MovieRatingUser.objects.order_by('id')
-    user_params = np.random.rand(users.count(), num_features)
-
     ratings = np.zeros((num_media, users.count()))
     rated = np.zeros((num_media, users.count()))
 
@@ -94,7 +107,16 @@ def __setup_movie_matrices(num_features):
             ratings[map_id, u] = rating
             rated[map_id, u] = 1
 
-    return num_media, user_params, item_params, ratings, rated
+    ratings_mean = np.mean(ratings, axis=1)
+    ratings = ratings - ratings_mean.reshape(-1, 1)
+
+    return mapping, num_media, users.count(), ratings, ratings_mean, rated
+
+
+def __set_user_item_params(num_media, num_features, num_users):
+    item_params = np.random.rand(num_media, num_features)
+    user_params = np.random.rand(num_users, num_features)
+    return user_params, item_params
 
 
 def __get_rated_indices(rated):
@@ -105,12 +127,10 @@ def __get_rated_indices(rated):
 
 
 def __separate_validation_set(i, ratings, rated, rated_indices):
-    print(len(rated_indices))
     start = int(0.1 * len(rated_indices) * i)
     end = int(0.1 * len(rated_indices) * (i+1))
-    print(0.1 * len(rated_indices) * (i+1))
-    print(end)
 
+    val_indices = []
     val_ratings = []
 
     train_ratings = ratings.copy()
@@ -119,15 +139,16 @@ def __separate_validation_set(i, ratings, rated, rated_indices):
     for i in range(start, end):
         x, y = rated_indices[i]
 
+        val_indices.append(rated_indices[i])
         val_ratings.append(ratings[x, y])
 
         train_ratings[x, y] = 0
         train_rated[x, y] = 0
 
+    val_indices = np.array(val_indices)
     val_ratings = np.array(val_ratings)
-    print(val_ratings)
 
-    return train_ratings, train_rated, val_ratings
+    return train_ratings, train_rated, val_ratings, val_indices
 
 
 # MARK: Gradient Descent
@@ -173,13 +194,16 @@ def __compute_loss(reg_param, error, user_params, item_params):
 
 
 # MARK: TESTING
-def __compute_rmse(user_params, item_params, ratings):
+def __compute_rmse(user_params, item_params, ratings, ratings_mean):
     predictions = np.dot(item_params, user_params.T)
-    return np.sqrt(mean_squared_error(ratings, predictions)) / len(ratings)
+    predictions += ratings_mean.reshape(-1, 1)
+    return np.sqrt(mean_squared_error(ratings, predictions)) / 5
 
 
-def __compute_val_rmse(user_params, item_params, val_ratings, val_indices):
+def __compute_val_rmse(user_params, item_params, val_ratings, val_indices, ratings_mean):
     all_predictions = np.dot(item_params, user_params.T)
+    all_predictions += ratings_mean.reshape(-1, 1)
+
     predictions = []
 
     for i in range(len(val_indices)):
@@ -188,14 +212,29 @@ def __compute_val_rmse(user_params, item_params, val_ratings, val_indices):
 
     predictions = np.array(predictions)
 
-    return np.sqrt(mean_squared_error(val_ratings, predictions)) / len(predictions)
+    return np.sqrt(mean_squared_error(val_ratings, predictions)) / 5
 
 
 # MARK: PREDICTIONS
-# def __create_predictions(media_type, item_id, user_id):
-    # user = models.BookRatingUser(book_ratings=ratings)
-    # user.save()
-    # user.book_rating_ids.set(book_ids)
+def __create_movie_predictions(mapping, user_params, item_params, ratings_mean):
+    predictions = np.dot(item_params, user_params.T)
+    predictions += ratings_mean.reshape(-1, 1)
+
+    users = MovieRatingUser.objects.order_by('id')
+    for user in users:
+        movie_id_predictions = []
+        for key, value in mapping.items():
+            movie_id_predictions.append((key, predictions[value, user.id-1]))
+
+        sorted_predictions = sorted(movie_id_predictions, key=lambda tup: tup[1], reverse=True)
+        user.predictions.set([i[0] for i in sorted_predictions])
+        user.save()
+
+    # remove predictions of movies they've already seen?
+    # add to serializers
 
 
-# def predict_book(book_id, user_id):
+def get_similar_items(id):
+    #   find smallest ||item_params(id) - item_params(j)||
+    #   will need to store user/item params then
+    print('similar')
