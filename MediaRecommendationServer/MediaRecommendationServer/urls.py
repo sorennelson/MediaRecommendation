@@ -18,14 +18,14 @@ from django.urls import path, include
 from rest_framework import routers
 
 from media.views import BookViewSet, MovieViewSet
-from ratings.views import BookRatingUserViewSet, MovieRatingUserViewSet
+from ratings.views import BookRatingViewSet, MovieRatingViewSet
 
 router = routers.DefaultRouter()
 router.register(r'books', BookViewSet)
 router.register(r'movies', MovieViewSet)
 
-router.register(r'bookratings', BookRatingUserViewSet)
-router.register(r'movieratings', MovieRatingUserViewSet)
+router.register(r'bookratings', BookRatingViewSet)
+router.register(r'movieratings', MovieRatingViewSet)
 
 
 urlpatterns = [

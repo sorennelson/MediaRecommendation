@@ -9,47 +9,54 @@ def import_movie_ratings():
     path = './movie_ratings.csv'
     with open(path, 'r') as f:
         uid = 1
-        movie_ids = []
-        ratings = []
+        user = models.MovieRatingUser(id=uid)
+        user.save()
 
         for line in f:
             terms = line.strip().split(',')
 
             if terms[0] != uid and terms[1] != str(62437):
-                user = models.MovieRatingUser(movie_ratings=ratings)
-                user.save()
-                user.movie_rating_ids.set(movie_ids)
-
                 uid = terms[0]
-                movie_ids = [int(terms[1])]
-                ratings = [float(terms[2])]
+                user = models.MovieRatingUser(id=uid)
+                user.save()
+
+                rating = models.MovieRating(rating_user=user,
+                                            movie=models.Movie.objects.get(id=int(terms[1])),
+                                            rating=float(terms[2]))
+                rating.save()
+
             elif terms[1] != str(62437):
-                movie_ids.append(int(terms[1]))
-                ratings.append(float(terms[2]))
+                rating = models.MovieRating(rating_user=user,
+                                            movie=models.Movie.objects.get(id=int(terms[1])),
+                                            rating=float(terms[2]))
+                rating.save()
 
 
 def import_book_ratings():
     path = './book_ratings.csv'
     with open(path, 'r') as f:
         uid = 1
-        book_ids = []
-        ratings = []
+        user = models.BookRatingUser(id=uid)
+        user.save()
 
         for line in f:
             terms = line.strip().split(',')
 
             if terms[0] != uid and terms[1] != str(3618):
-                user = models.BookRatingUser(book_ratings=ratings)
-                user.save()
-                user.book_rating_ids.set(book_ids)
-
                 uid = terms[0]
-                book_ids = [int(terms[1])]
-                ratings = [float(terms[2])]
+                user = models.BookRatingUser(id=uid)
+                user.save()
+
+                rating = models.BookRating(rating_user=user,
+                                           book=models.Book.objects.get(id=int(terms[1])),
+                                           rating=float(terms[2]))
+                rating.save()
 
             elif terms[1] != str(3618):
-                book_ids.append(int(terms[1]))
-                ratings.append(float(terms[2]))
+                rating = models.BookRating(rating_user=user,
+                                           book=models.Book.objects.get(id=int(terms[1])),
+                                           rating=float(terms[2]))
+                rating.save()
 
 
 # def update_movie_ids():

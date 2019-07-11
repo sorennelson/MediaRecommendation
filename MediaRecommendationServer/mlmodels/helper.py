@@ -54,7 +54,7 @@ def run_collaborative_filtering(media_type):
     rmse = __compute_rmse(user_params, item_params, ratings, ratings_mean)
     print("RMSE:", rmse)
 
-    __create_movie_predictions(mapping, user_params, item_params, ratings_mean)
+    __create_movie_predictions(mapping, user_params, item_params, rated, ratings_mean)
 
 #     Train best model on full data
 #     After CV, create predictions
@@ -216,17 +216,25 @@ def __compute_val_rmse(user_params, item_params, val_ratings, val_indices, ratin
 
 
 # MARK: PREDICTIONS
-def __create_movie_predictions(mapping, user_params, item_params, ratings_mean):
+def __create_movie_predictions(mapping, user_params, item_params, rated, ratings_mean):
     predictions = np.dot(item_params, user_params.T)
     predictions += ratings_mean.reshape(-1, 1)
+
+    non_rated = (rated - 1) * (- 1)
+    print(rated[0, 0], non_rated[0, 0])
+    predictions *= non_rated
 
     users = MovieRatingUser.objects.order_by('id')
     for user in users:
         movie_id_predictions = []
+
         for key, value in mapping.items():
-            movie_id_predictions.append((key, predictions[value, user.id-1]))
+            prediction = predictions[value, user.id-1]
+            if prediction != 0:
+                movie_id_predictions.append((key, prediction))
 
         sorted_predictions = sorted(movie_id_predictions, key=lambda tup: tup[1], reverse=True)
+        print(sorted_predictions[0])
         user.predictions.set([i[0] for i in sorted_predictions])
         user.save()
 
