@@ -9,7 +9,7 @@ def import_movie_ratings():
     path = './movie_ratings.csv'
     with open(path, 'r') as f:
         uid = 1
-        user = models.MovieRatingUser(id=uid)
+        user = MovieUser(id=uid)
         user.save()
 
         for line in f:
@@ -17,18 +17,18 @@ def import_movie_ratings():
 
             if terms[0] != uid and terms[1] != str(62437):
                 uid = terms[0]
-                user = models.MovieRatingUser(id=uid)
+                user = MovieUser(id=uid)
                 user.save()
 
-                rating = models.MovieRating(rating_user=user,
-                                            movie=models.Movie.objects.get(id=int(terms[1])),
-                                            rating=float(terms[2]))
+                rating = MovieRating(rating_user=user,
+                                     movie=Movie.objects.get(id=int(terms[1])),
+                                     rating=float(terms[2]))
                 rating.save()
 
             elif terms[1] != str(62437):
-                rating = models.MovieRating(rating_user=user,
-                                            movie=models.Movie.objects.get(id=int(terms[1])),
-                                            rating=float(terms[2]))
+                rating = MovieRating(rating_user=user,
+                                     movie=Movie.objects.get(id=int(terms[1])),
+                                     rating=float(terms[2]))
                 rating.save()
 
 
@@ -36,26 +36,29 @@ def import_book_ratings():
     path = './book_ratings.csv'
     with open(path, 'r') as f:
         uid = 1
-        user = models.BookRatingUser(id=uid)
+        csv_uid = 1
+        user = BookUser(id=uid)
         user.save()
 
         for line in f:
             terms = line.strip().split(',')
 
-            if terms[0] != uid and terms[1] != str(3618):
-                uid = terms[0]
-                user = models.BookRatingUser(id=uid)
+            if terms[0] != csv_uid and terms[1] != str(3618):
+                csv_uid = terms[0]
+                uid += 1
+
+                user = BookUser(id=uid)
                 user.save()
 
-                rating = models.BookRating(rating_user=user,
-                                           book=models.Book.objects.get(id=int(terms[1])),
-                                           rating=float(terms[2]))
+                rating = BookRating(rating_user=user,
+                                    book=Book.objects.get(id=int(terms[1])),
+                                    rating=float(terms[2]))
                 rating.save()
 
             elif terms[1] != str(3618):
-                rating = models.BookRating(rating_user=user,
-                                           book=models.Book.objects.get(id=int(terms[1])),
-                                           rating=float(terms[2]))
+                rating = BookRating(rating_user=user,
+                                    book=Book.objects.get(id=int(terms[1])),
+                                    rating=float(terms[2]))
                 rating.save()
 
 
@@ -77,15 +80,15 @@ if __name__ == "__main__":
 
     django.setup()
     from MediaRecommendationServer import *
-    import ratings.models as models
     import mlmodels.helper as ml
-    from media.models import Movie
-    from ratings.models import MovieRatingUser
+    from media.models import Movie, Book
+    from userauth.models import MovieUser, BookUser
+    from ratings.models import MovieRating, BookRating
 
-    if sys.argv[1] == "import_books":
+    if sys.argv[1] == "import_book_ratings":
         import_book_ratings()
 
-    elif sys.argv[1] == "import_movies":
+    elif sys.argv[1] == "import_movie_ratings":
         import_movie_ratings()
 
     elif sys.argv[1] == "run_book_ml":

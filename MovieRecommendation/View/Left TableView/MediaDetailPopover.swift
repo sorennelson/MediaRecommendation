@@ -35,13 +35,9 @@ class MediaDetailPopover: NSViewController {
         
         let mediaType = ObjectController.currentMediaType
         if mediaType == .Books {
-            if ObjectController.sharedInstance.bookRM == nil {
-                predictionMessageLabel.stringValue = "The model is not done being trained"
-            } else {
                 let pred = Double(Int(prediction * 100) / 100.0)
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
-            }
 //            if let rating = ObjectController.sharedInstance.currentUser?.booksRated[media.yID] {
 //                self.userRating.stringValue = String(rating)
 //            } else {
@@ -49,13 +45,9 @@ class MediaDetailPopover: NSViewController {
 //            }
             
         } else {
-            if ObjectController.sharedInstance.movieRM == nil {
-                predictionMessageLabel.stringValue = "The model is not done being trained"
-            } else {
                 let pred = Double(Int(prediction * 100) / 100.0)
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
-            }
 //            if let rating = ObjectController.sharedInstance.currentUser?.moviesRated[media.yID] {
 //                self.userRating.stringValue = String(rating)
 //            } else {

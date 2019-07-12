@@ -34,13 +34,17 @@ class ViewController: NSViewController {
     
     override func loadView() {
         super.loadView()
-//        ObjectController.sharedInstance.checkForUser(completion: { (success) in
-//            if !success {
-//                // TODO: Notification -> Try again
-//            } else {
-//                self.userLoggedIn()
-//            }
-//        })
+        UserController.sharedInstance.attemptLogin(completion: { (error, success, data) in
+            if let _ = error {
+                // TODO: Notification -> Try again
+            } else if success == true {
+                if let _ = UserController.sharedInstance.didLogin(userData: data!) {
+                // TODO: Notification -> Try again
+                } else {
+                    self.userLoggedIn()
+                }
+            }
+        })
     }
     
     override func viewDidLoad() {
@@ -49,11 +53,11 @@ class ViewController: NSViewController {
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
 
         ImportController.sharedInstance.loadAllMedia(.Books, completion: { str in
-            print(str)
+            print("BOOKS IMPORT: " + str)
         })
         
         ImportController.sharedInstance.loadAllMedia(.Movies, completion: { str in
-            print(str)
+            print("MOVIES IMPORT: " + str)
         })
     }
     
@@ -73,6 +77,7 @@ class ViewController: NSViewController {
     
     private func userLoggedIn() {
         // TODO: edit sign in page
+        // TODO: Load user ratings / predictions
         reloadTableViews()
     }
     
@@ -82,9 +87,7 @@ class ViewController: NSViewController {
         categoriesTableView.reloadData()
     }
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        
-    }
+    @IBAction func addButtonPressed(_ sender: Any) {}
     
     @IBAction func bookButtonPressed(_ sender: Any) {
         // TODO: Check if books have been imported
@@ -98,22 +101,25 @@ class ViewController: NSViewController {
     }
     
     @IBAction func userButtonPressed(_ sender: Any) {
-        if User.current != nil {
-            performSegue(withIdentifier: "Authentication", sender: sender)
+        if User.current == nil {
+            performSegue(withIdentifier: "Authentication", sender: self)
         } else {
             performSegue(withIdentifier: "Logout", sender: sender)
         }
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "Authentication":
-            print("Auth")
-        case "Logout":
-            print("Logout")
-        default:
-            print("")
-        }
+//        switch segue.identifier {
+//        case "Authentication":
+//            let popoverViewController = segue.destinationController as! AuthenticationViewController
+//            print("Auth")
+//
+//        case "Logout":
+//            print("Logout")
+//
+//        default:
+//            print("")
+//        }
     }
     
     override func dismiss(_ viewController: NSViewController) {

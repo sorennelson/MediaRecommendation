@@ -12,13 +12,13 @@ class User: Codable {
     
     static var current:User?
     
-    var email: String
+    var username: String
     var id: String
     
-    var bookRatingIDs: [Int]
-    var bookRatings: [Double]
-    var movieRatingIDs: [Int]
-    var movieRatings: [Double]
+//    var bookRatingIDs: [Int]
+//    var bookRatings: [Double]
+//    var movieRatingIDs: [Int]
+//    var movieRatings: [Double]
     
     
     //    init() {

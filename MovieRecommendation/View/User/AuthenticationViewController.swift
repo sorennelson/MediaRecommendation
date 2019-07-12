@@ -11,46 +11,65 @@ import Cocoa
 
 class AuthenticationViewController: NSViewController {
     
-    @IBOutlet var emailTextField: NSTextField!
+    @IBOutlet var usernameTextField: NSTextField!
     @IBOutlet var passwordTextField: NSSecureTextField!
     
+    override func viewDidLoad() {
+        
+    }
+        
+    override func dismiss(_ sender: Any?) {
+        //        TODO: reload main view
+    }
+    
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        if !isValidEmailPassword() {
+        if !isValidUsernamePassword() {
             self.showInvalidEmailPasswordNotification()
             return
         }
         
-        UserController.sharedInstance.createUser(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success, error)in
+        UserController.sharedInstance.createUser(username: usernameTextField.stringValue,
+                                                 password: passwordTextField.stringValue) {
+        (success, error, data) in
             if !success {
                 self.showErrorCreatingAccountNotification(error!)
                 
             } else {
-                self.showSuccessCreatingAccountNotification()
-                self.presentingViewController?.dismiss(self)
+                if let _ = UserController.sharedInstance.didLogin(userData: data!) {
+                    print("Internal Error")
+                } else {
+                    self.showSuccessCreatingAccountNotification()
+                    self.presentingViewController?.dismiss(self)
+                }
             }
         }
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        if !isValidEmailPassword() {
+        if !isValidUsernamePassword() {
             self.showInvalidEmailPasswordNotification()
             return
         }
         
-        UserController.sharedInstance.signIn(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success, error) in
+        UserController.sharedInstance.login(username: usernameTextField.stringValue,
+                                            password: passwordTextField.stringValue) {
+            (success, error, data) in
             if !success {
-                self.showErrorLoggingInNotification(error!)
+                self.showErrorCreatingAccountNotification(error!)
                 
             } else {
-                self.showSuccessLoggingInNotification()
-                self.presentingViewController?.dismiss(self)
+                if let _ = UserController.sharedInstance.didLogin(userData: data!) {
+                    print("Internal Error")
+                } else {
+                    self.showSuccessLoggingInNotification()
+                    self.presentingViewController?.dismiss(self)
+                }
             }
         }
     }
     
-    func isValidEmailPassword() -> Bool {
-        if emailTextField.stringValue.contains("@")
-            && emailTextField.stringValue.contains(".")
+    func isValidUsernamePassword() -> Bool {
+        if usernameTextField.stringValue.isEmpty == false
             && passwordTextField.stringValue.isEmpty == false {
             return true
         }

@@ -13,6 +13,9 @@ class Book(models.Model):
     image_url = models.URLField(null=True)
     small_image_url = models.URLField(null=True)
 
+    class Meta:
+        ordering = ['-average_rating', 'title']
+
 
 class Movie(models.Model):
     # id primary key is implicit
@@ -22,5 +25,8 @@ class Movie(models.Model):
     imdb_id = models.IntegerField(unique=True)
     average_rating = models.FloatField(default=0.0)
     image_url = models.URLField(null=True)
+
+    class Meta:
+        ordering = ['-average_rating', 'title']
 
 #     \copy media_book FROM '/users/solosoren/desktop/new_books.csv' DELIMITER ',' CSV;

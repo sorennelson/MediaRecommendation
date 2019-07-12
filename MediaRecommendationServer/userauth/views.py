@@ -14,9 +14,9 @@ def auth_login(request):
      - Check for username and password
      - Return serialized user data
     """
-    email = request.POST['email']
+    username = request.POST['username']
     password = request.POST['password']
-    user = authenticate(email=email, password=password)
+    user = authenticate(username=username, password=password)
 
     if user:
         login(request, user)
@@ -32,10 +32,15 @@ def signup(request):
      - If username does not already exist we create and authenticate new account
      - Otherwise return 403
     """
-    if models.User.objects.filter(email=request.POST['email']).exists():
+    if models.User.objects.filter(username=request.POST['username']).exists():
         return HttpResponse(status=403)
     else:
-        u = models.User(email=request.POST['email'])
+        book_user = models.BookUser()
+        book_user.save()
+        movie_user = models.MovieUser()
+        movie_user.save()
+
+        u = models.User(username=request.POST['username'], book_user=book_user, movie_user=movie_user)
         u.set_password(request.POST['password'])
         u.save()
         login(request, u)

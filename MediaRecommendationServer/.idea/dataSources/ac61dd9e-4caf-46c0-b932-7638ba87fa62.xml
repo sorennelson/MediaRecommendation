@@ -13,7 +13,7 @@
       <ObjectId>16384</ObjectId>
       <StateNumber>568</StateNumber>
       <Owner>solosoren</Owner>
-      <IntrospectionStateNumber>102580</IntrospectionStateNumber>
+      <IntrospectionStateNumber>635906</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
       <Relations>sequence|table|24576|24578|1
@@ -28,9 +28,11 @@ sequence|table|24714|24716|1
 sequence|table|24738|24740|1
 sequence|table|24752|24754|1
 sequence|table|25401|25403|1
-sequence|table|25412|25414|1
 sequence|table|25420|25422|1
-sequence|table|25431|25433|1
+sequence|table|25634|25636|1
+sequence|table|25644|25646|1
+sequence|table|25693|25695|1
+sequence|table|25701|25703|1
 </Relations>
     </database>
     <database id="4" parent="1" name="postgres">
@@ -122,7 +124,7 @@ sequence|table|25431|25433|1
       <Comment>standard public schema</Comment>
       <StateNumber>359</StateNumber>
       <Owner>solosoren</Owner>
-      <IntrospectionStateNumber>102581</IntrospectionStateNumber>
+      <IntrospectionStateNumber>636022</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -246,15 +248,23 @@ sequence|table|25431|25433|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="35" parent="19" name="ratings_bookratinguser_book_rating_ids_id_seq">
-      <ObjectId>25431</ObjectId>
-      <StateNumber>75004</StateNumber>
+    <sequence id="35" parent="19" name="ratings_bookprediction_id_seq">
+      <ObjectId>25701</ObjectId>
+      <StateNumber>172226</StateNumber>
       <Owner>solosoren</Owner>
       <SequenceIdentity>1..2147483647</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="36" parent="19" name="ratings_bookratinguser_id_seq">
+    <sequence id="36" parent="19" name="ratings_bookrating_id_seq">
+      <ObjectId>25693</ObjectId>
+      <StateNumber>172226</StateNumber>
+      <Owner>solosoren</Owner>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="37" parent="19" name="ratings_bookratinguser_id_seq">
       <ObjectId>25420</ObjectId>
       <StateNumber>75004</StateNumber>
       <Owner>solosoren</Owner>
@@ -262,7 +272,23 @@ sequence|table|25431|25433|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="37" parent="19" name="ratings_movieratinguser_id_seq">
+    <sequence id="38" parent="19" name="ratings_movieprediction_id_seq">
+      <ObjectId>25644</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <Owner>solosoren</Owner>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="39" parent="19" name="ratings_movierating_id_seq">
+      <ObjectId>25634</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <Owner>solosoren</Owner>
+      <SequenceIdentity>1..2147483647</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>integer</DataType>
+    </sequence>
+    <sequence id="40" parent="19" name="ratings_movieratinguser_id_seq">
       <ObjectId>25401</ObjectId>
       <StateNumber>75004</StateNumber>
       <Owner>solosoren</Owner>
@@ -270,15 +296,7 @@ sequence|table|25431|25433|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="38" parent="19" name="ratings_movieratinguser_movie_rating_ids_id_seq">
-      <ObjectId>25412</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <Owner>solosoren</Owner>
-      <SequenceIdentity>1..2147483647</SequenceIdentity>
-      <CacheSize>1</CacheSize>
-      <DataType>integer</DataType>
-    </sequence>
-    <sequence id="39" parent="19" name="userauth_user_groups_id_seq">
+    <sequence id="41" parent="19" name="userauth_user_groups_id_seq">
       <ObjectId>24668</ObjectId>
       <StateNumber>589</StateNumber>
       <Owner>solosoren</Owner>
@@ -286,7 +304,7 @@ sequence|table|25431|25433|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="40" parent="19" name="userauth_user_id_seq">
+    <sequence id="42" parent="19" name="userauth_user_id_seq">
       <ObjectId>24649</ObjectId>
       <StateNumber>589</StateNumber>
       <Owner>solosoren</Owner>
@@ -294,7 +312,7 @@ sequence|table|25431|25433|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="41" parent="19" name="userauth_user_user_permissions_id_seq">
+    <sequence id="43" parent="19" name="userauth_user_user_permissions_id_seq">
       <ObjectId>24676</ObjectId>
       <StateNumber>589</StateNumber>
       <Owner>solosoren</Owner>
@@ -302,87 +320,97 @@ sequence|table|25431|25433|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <table id="42" parent="19" name="auth_group">
+    <table id="44" parent="19" name="auth_group">
       <ObjectId>24607</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>578</StateNumber>
     </table>
-    <table id="43" parent="19" name="auth_group_permissions">
+    <table id="45" parent="19" name="auth_group_permissions">
       <ObjectId>24617</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>578</StateNumber>
     </table>
-    <table id="44" parent="19" name="auth_permission">
+    <table id="46" parent="19" name="auth_permission">
       <ObjectId>24599</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>578</StateNumber>
     </table>
-    <table id="45" parent="19" name="django_admin_log">
+    <table id="47" parent="19" name="django_admin_log">
       <ObjectId>24716</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>590</StateNumber>
     </table>
-    <table id="46" parent="19" name="django_content_type">
+    <table id="48" parent="19" name="django_content_type">
       <ObjectId>24589</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>578</StateNumber>
     </table>
-    <table id="47" parent="19" name="django_migrations">
+    <table id="49" parent="19" name="django_migrations">
       <ObjectId>24578</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>575</StateNumber>
     </table>
-    <table id="48" parent="19" name="django_session">
+    <table id="50" parent="19" name="django_session">
       <ObjectId>24766</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>594</StateNumber>
     </table>
-    <table id="49" parent="19" name="media_book">
+    <table id="51" parent="19" name="media_book">
       <ObjectId>24740</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>652</StateNumber>
     </table>
-    <table id="50" parent="19" name="media_movie">
+    <table id="52" parent="19" name="media_movie">
       <ObjectId>24754</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>595</StateNumber>
     </table>
-    <table id="51" parent="19" name="ratings_bookratinguser">
+    <table id="53" parent="19" name="ratings_bookprediction">
+      <ObjectId>25703</ObjectId>
+      <Owner>solosoren</Owner>
+      <StateNumber>172226</StateNumber>
+    </table>
+    <table id="54" parent="19" name="ratings_bookrating">
+      <ObjectId>25695</ObjectId>
+      <Owner>solosoren</Owner>
+      <StateNumber>172226</StateNumber>
+    </table>
+    <table id="55" parent="19" name="ratings_bookratinguser">
       <ObjectId>25422</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>75004</StateNumber>
     </table>
-    <table id="52" parent="19" name="ratings_bookratinguser_book_rating_ids">
-      <ObjectId>25433</ObjectId>
+    <table id="56" parent="19" name="ratings_movieprediction">
+      <ObjectId>25646</ObjectId>
       <Owner>solosoren</Owner>
-      <StateNumber>75004</StateNumber>
+      <StateNumber>105878</StateNumber>
     </table>
-    <table id="53" parent="19" name="ratings_movieratinguser">
+    <table id="57" parent="19" name="ratings_movierating">
+      <ObjectId>25636</ObjectId>
+      <Owner>solosoren</Owner>
+      <StateNumber>105878</StateNumber>
+    </table>
+    <table id="58" parent="19" name="ratings_movieratinguser">
       <ObjectId>25403</ObjectId>
       <Owner>solosoren</Owner>
-      <StateNumber>75004</StateNumber>
+      <StateNumber>105877</StateNumber>
     </table>
-    <table id="54" parent="19" name="ratings_movieratinguser_movie_rating_ids">
-      <ObjectId>25414</ObjectId>
-      <Owner>solosoren</Owner>
-      <StateNumber>75004</StateNumber>
-    </table>
-    <table id="55" parent="19" name="userauth_user">
+    <table id="59" parent="19" name="userauth_user">
       <ObjectId>24651</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>733</StateNumber>
     </table>
-    <table id="56" parent="19" name="userauth_user_groups">
+    <table id="60" parent="19" name="userauth_user_groups">
       <ObjectId>24670</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>589</StateNumber>
     </table>
-    <table id="57" parent="19" name="userauth_user_user_permissions">
+    <table id="61" parent="19" name="userauth_user_user_permissions">
       <ObjectId>24678</ObjectId>
       <Owner>solosoren</Owner>
       <StateNumber>589</StateNumber>
     </table>
-    <column id="58" parent="42" name="id">
+    <column id="62" parent="44" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -390,45 +418,45 @@ sequence|table|25431|25433|1
       <DefaultExpression>nextval(&apos;auth_group_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="59" parent="42" name="name">
+    <column id="63" parent="44" name="name">
       <Position>2</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>587</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="60" parent="42" name="auth_group_pkey">
+    <index id="64" parent="44" name="auth_group_pkey">
       <ObjectId>24611</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="61" parent="42" name="auth_group_name_key">
+    <index id="65" parent="44" name="auth_group_name_key">
       <ObjectId>24646</ObjectId>
       <StateNumber>587</StateNumber>
       <ColNames>name</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="62" parent="42" name="auth_group_name_a6ea08ec_like">
+    <index id="66" parent="44" name="auth_group_name_a6ea08ec_like">
       <ObjectId>24648</ObjectId>
       <StateNumber>587</StateNumber>
       <ColNames>name</ColNames>
     </index>
-    <key id="63" parent="42" name="auth_group_pkey">
+    <key id="67" parent="44" name="auth_group_pkey">
       <ObjectId>24612</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>auth_group_pkey</UnderlyingIndexName>
     </key>
-    <key id="64" parent="42" name="auth_group_name_key">
+    <key id="68" parent="44" name="auth_group_name_key">
       <ObjectId>24647</ObjectId>
       <StateNumber>587</StateNumber>
       <ColNames>name</ColNames>
       <UnderlyingIndexName>auth_group_name_key</UnderlyingIndexName>
     </key>
-    <column id="65" parent="43" name="id">
+    <column id="69" parent="45" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -436,59 +464,59 @@ sequence|table|25431|25433|1
       <DefaultExpression>nextval(&apos;auth_group_permissions_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="66" parent="43" name="group_id">
+    <column id="70" parent="45" name="group_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>578</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="67" parent="43" name="permission_id">
+    <column id="71" parent="45" name="permission_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>578</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="68" parent="43" name="auth_group_permissions_pkey">
+    <index id="72" parent="45" name="auth_group_permissions_pkey">
       <ObjectId>24621</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="69" parent="43" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
+    <index id="73" parent="45" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
       <ObjectId>24642</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>group_id
 permission_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="70" parent="43" name="auth_group_permissions_group_id_b120cbf9">
+    <index id="74" parent="45" name="auth_group_permissions_group_id_b120cbf9">
       <ObjectId>24644</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>group_id</ColNames>
     </index>
-    <index id="71" parent="43" name="auth_group_permissions_permission_id_84c5c92e">
+    <index id="75" parent="45" name="auth_group_permissions_permission_id_84c5c92e">
       <ObjectId>24645</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>permission_id</ColNames>
     </index>
-    <key id="72" parent="43" name="auth_group_permissions_pkey">
+    <key id="76" parent="45" name="auth_group_permissions_pkey">
       <ObjectId>24622</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>auth_group_permissions_pkey</UnderlyingIndexName>
     </key>
-    <key id="73" parent="43" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
+    <key id="77" parent="45" name="auth_group_permissions_group_id_permission_id_0cd325b0_uniq">
       <ObjectId>24643</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>group_id
 permission_id</ColNames>
       <UnderlyingIndexName>auth_group_permissions_group_id_permission_id_0cd325b0_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="74" parent="43" name="auth_group_permissions_group_id_b120cbf9_fk_auth_group_id">
+    <foreign-key id="78" parent="45" name="auth_group_permissions_group_id_b120cbf9_fk_auth_group_id">
       <ObjectId>24632</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -500,7 +528,7 @@ permission_id</ColNames>
       <RefKeyName>auth_group_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="75" parent="43" name="auth_group_permissio_permission_id_84c5c92e_fk_auth_perm">
+    <foreign-key id="79" parent="45" name="auth_group_permissio_permission_id_84c5c92e_fk_auth_perm">
       <ObjectId>24637</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -512,7 +540,7 @@ permission_id</ColNames>
       <RefKeyName>auth_permission_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="76" parent="44" name="id">
+    <column id="80" parent="46" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -520,61 +548,61 @@ permission_id</ColNames>
       <DefaultExpression>nextval(&apos;auth_permission_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="77" parent="44" name="name">
+    <column id="81" parent="46" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>579</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="78" parent="44" name="content_type_id">
+    <column id="82" parent="46" name="content_type_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>578</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="79" parent="44" name="codename">
+    <column id="83" parent="46" name="codename">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>578</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="80" parent="44" name="auth_permission_pkey">
+    <index id="84" parent="46" name="auth_permission_pkey">
       <ObjectId>24603</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="81" parent="44" name="auth_permission_content_type_id_codename_01ab375a_uniq">
+    <index id="85" parent="46" name="auth_permission_content_type_id_codename_01ab375a_uniq">
       <ObjectId>24628</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>content_type_id
 codename</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="82" parent="44" name="auth_permission_content_type_id_2f476e4b">
+    <index id="86" parent="46" name="auth_permission_content_type_id_2f476e4b">
       <ObjectId>24630</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>content_type_id</ColNames>
     </index>
-    <key id="83" parent="44" name="auth_permission_pkey">
+    <key id="87" parent="46" name="auth_permission_pkey">
       <ObjectId>24604</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>auth_permission_pkey</UnderlyingIndexName>
     </key>
-    <key id="84" parent="44" name="auth_permission_content_type_id_codename_01ab375a_uniq">
+    <key id="88" parent="46" name="auth_permission_content_type_id_codename_01ab375a_uniq">
       <ObjectId>24629</ObjectId>
       <StateNumber>578</StateNumber>
       <ColNames>content_type_id
 codename</ColNames>
       <UnderlyingIndexName>auth_permission_content_type_id_codename_01ab375a_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="85" parent="44" name="auth_permission_content_type_id_2f476e4b_fk_django_co">
+    <foreign-key id="89" parent="46" name="auth_permission_content_type_id_2f476e4b_fk_django_co">
       <ObjectId>24623</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -586,7 +614,7 @@ codename</ColNames>
       <RefKeyName>django_content_type_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="86" parent="45" name="id">
+    <column id="90" parent="47" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -594,78 +622,78 @@ codename</ColNames>
       <DefaultExpression>nextval(&apos;django_admin_log_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="87" parent="45" name="action_time">
+    <column id="91" parent="47" name="action_time">
       <Position>2</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>590</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="88" parent="45" name="object_id">
+    <column id="92" parent="47" name="object_id">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <StateNumber>590</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="89" parent="45" name="object_repr">
+    <column id="93" parent="47" name="object_repr">
       <Position>4</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>590</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="90" parent="45" name="action_flag">
+    <column id="94" parent="47" name="action_flag">
       <Position>5</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>590</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="91" parent="45" name="change_message">
+    <column id="95" parent="47" name="change_message">
       <Position>6</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>590</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="92" parent="45" name="content_type_id">
+    <column id="96" parent="47" name="content_type_id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>590</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="93" parent="45" name="user_id">
+    <column id="97" parent="47" name="user_id">
       <Position>8</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>590</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="94" parent="45" name="django_admin_log_pkey">
+    <index id="98" parent="47" name="django_admin_log_pkey">
       <ObjectId>24724</ObjectId>
       <StateNumber>590</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="95" parent="45" name="django_admin_log_content_type_id_c4bce8eb">
+    <index id="99" parent="47" name="django_admin_log_content_type_id_c4bce8eb">
       <ObjectId>24736</ObjectId>
       <StateNumber>590</StateNumber>
       <ColNames>content_type_id</ColNames>
     </index>
-    <index id="96" parent="45" name="django_admin_log_user_id_c564eba6">
+    <index id="100" parent="47" name="django_admin_log_user_id_c564eba6">
       <ObjectId>24737</ObjectId>
       <StateNumber>590</StateNumber>
       <ColNames>user_id</ColNames>
     </index>
-    <key id="97" parent="45" name="django_admin_log_pkey">
+    <key id="101" parent="47" name="django_admin_log_pkey">
       <ObjectId>24725</ObjectId>
       <StateNumber>590</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>django_admin_log_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="98" parent="45" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+    <foreign-key id="102" parent="47" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
       <ObjectId>24726</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -677,7 +705,7 @@ codename</ColNames>
       <RefKeyName>django_content_type_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="99" parent="45" name="django_admin_log_user_id_c564eba6_fk_userauth_user_id">
+    <foreign-key id="103" parent="47" name="django_admin_log_user_id_c564eba6_fk_userauth_user_id">
       <ObjectId>24731</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -689,13 +717,13 @@ codename</ColNames>
       <RefKeyName>userauth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <check id="100" parent="45" name="django_admin_log_action_flag_check">
+    <check id="104" parent="47" name="django_admin_log_action_flag_check">
       <ObjectId>24720</ObjectId>
       <StateNumber>590</StateNumber>
       <ColNames>action_flag</ColNames>
       <Predicate>action_flag &gt;= 0</Predicate>
     </check>
-    <column id="101" parent="46" name="id">
+    <column id="105" parent="48" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -703,49 +731,49 @@ codename</ColNames>
       <DefaultExpression>nextval(&apos;django_content_type_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="102" parent="46" name="app_label">
+    <column id="106" parent="48" name="app_label">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>576</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="103" parent="46" name="model">
+    <column id="107" parent="48" name="model">
       <Position>4</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>576</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="104" parent="46" name="django_content_type_pkey">
+    <index id="108" parent="48" name="django_content_type_pkey">
       <ObjectId>24593</ObjectId>
       <StateNumber>576</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="105" parent="46" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <index id="109" parent="48" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ObjectId>24595</ObjectId>
       <StateNumber>576</StateNumber>
       <ColNames>app_label
 model</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="106" parent="46" name="django_content_type_pkey">
+    <key id="110" parent="48" name="django_content_type_pkey">
       <ObjectId>24594</ObjectId>
       <StateNumber>576</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>django_content_type_pkey</UnderlyingIndexName>
     </key>
-    <key id="107" parent="46" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <key id="111" parent="48" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ObjectId>24596</ObjectId>
       <StateNumber>576</StateNumber>
       <ColNames>app_label
 model</ColNames>
       <UnderlyingIndexName>django_content_type_app_label_model_76bd3d3b_uniq</UnderlyingIndexName>
     </key>
-    <column id="108" parent="47" name="id">
+    <column id="112" parent="49" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -753,87 +781,87 @@ model</ColNames>
       <DefaultExpression>nextval(&apos;django_migrations_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="109" parent="47" name="app">
+    <column id="113" parent="49" name="app">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>575</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="110" parent="47" name="name">
+    <column id="114" parent="49" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>575</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="111" parent="47" name="applied">
+    <column id="115" parent="49" name="applied">
       <Position>4</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>575</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="112" parent="47" name="django_migrations_pkey">
+    <index id="116" parent="49" name="django_migrations_pkey">
       <ObjectId>24585</ObjectId>
       <StateNumber>575</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="113" parent="47" name="django_migrations_pkey">
+    <key id="117" parent="49" name="django_migrations_pkey">
       <ObjectId>24586</ObjectId>
       <StateNumber>575</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>django_migrations_pkey</UnderlyingIndexName>
     </key>
-    <column id="114" parent="48" name="session_key">
+    <column id="118" parent="50" name="session_key">
       <Position>1</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="115" parent="48" name="session_data">
+    <column id="119" parent="50" name="session_data">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <column id="116" parent="48" name="expire_date">
+    <column id="120" parent="50" name="expire_date">
       <Position>3</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>594</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <index id="117" parent="48" name="django_session_pkey">
+    <index id="121" parent="50" name="django_session_pkey">
       <ObjectId>24772</ObjectId>
       <StateNumber>594</StateNumber>
       <ColNames>session_key</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="118" parent="48" name="django_session_session_key_c0390e0f_like">
+    <index id="122" parent="50" name="django_session_session_key_c0390e0f_like">
       <ObjectId>24774</ObjectId>
       <StateNumber>594</StateNumber>
       <ColNames>session_key</ColNames>
     </index>
-    <index id="119" parent="48" name="django_session_expire_date_a5c62663">
+    <index id="123" parent="50" name="django_session_expire_date_a5c62663">
       <ObjectId>24775</ObjectId>
       <StateNumber>594</StateNumber>
       <ColNames>expire_date</ColNames>
     </index>
-    <key id="120" parent="48" name="django_session_pkey">
+    <key id="124" parent="50" name="django_session_pkey">
       <ObjectId>24773</ObjectId>
       <StateNumber>594</StateNumber>
       <ColNames>session_key</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>django_session_pkey</UnderlyingIndexName>
     </key>
-    <column id="121" parent="49" name="id">
+    <column id="125" parent="51" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -841,87 +869,87 @@ model</ColNames>
       <DefaultExpression>nextval(&apos;media_book_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="122" parent="49" name="title">
+    <column id="126" parent="51" name="title">
       <Position>2</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>664</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="123" parent="49" name="author">
+    <column id="127" parent="51" name="author">
       <Position>3</Position>
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>661</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="124" parent="49" name="genres">
+    <column id="128" parent="51" name="genres">
       <Position>4</Position>
       <DataType>varchar(50) []|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>651</StateNumber>
       <TypeId>1015</TypeId>
     </column>
-    <column id="125" parent="49" name="year">
+    <column id="129" parent="51" name="year">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>652</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="126" parent="49" name="goodreads_id">
+    <column id="130" parent="51" name="goodreads_id">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>593</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="127" parent="49" name="average_rating">
+    <column id="131" parent="51" name="average_rating">
       <Position>7</Position>
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>593</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="128" parent="49" name="image_url">
+    <column id="132" parent="51" name="image_url">
       <Position>8</Position>
       <DataType>varchar(200)|0s</DataType>
       <StateNumber>650</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="129" parent="49" name="small_image_url">
+    <column id="133" parent="51" name="small_image_url">
       <Position>9</Position>
       <DataType>varchar(200)|0s</DataType>
       <StateNumber>650</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="130" parent="49" name="media_book_pkey">
+    <index id="134" parent="51" name="media_book_pkey">
       <ObjectId>24748</ObjectId>
       <StateNumber>652</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="131" parent="49" name="media_book_goodreads_id_key">
+    <index id="135" parent="51" name="media_book_goodreads_id_key">
       <ObjectId>24750</ObjectId>
       <StateNumber>652</StateNumber>
       <ColNames>goodreads_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="132" parent="49" name="media_book_pkey">
+    <key id="136" parent="51" name="media_book_pkey">
       <ObjectId>24749</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>media_book_pkey</UnderlyingIndexName>
     </key>
-    <key id="133" parent="49" name="media_book_goodreads_id_key">
+    <key id="137" parent="51" name="media_book_goodreads_id_key">
       <ObjectId>24751</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>goodreads_id</ColNames>
       <UnderlyingIndexName>media_book_goodreads_id_key</UnderlyingIndexName>
     </key>
-    <column id="134" parent="50" name="id">
+    <column id="138" parent="52" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -929,185 +957,137 @@ model</ColNames>
       <DefaultExpression>nextval(&apos;media_movie_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="135" parent="50" name="title">
+    <column id="139" parent="52" name="title">
       <Position>2</Position>
       <DataType>varchar(300)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>664</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="136" parent="50" name="genres">
+    <column id="140" parent="52" name="genres">
       <Position>3</Position>
       <DataType>varchar(20) []|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>593</StateNumber>
       <TypeId>1015</TypeId>
     </column>
-    <column id="137" parent="50" name="year">
+    <column id="141" parent="52" name="year">
       <Position>4</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>593</StateNumber>
       <TypeId>21</TypeId>
     </column>
-    <column id="138" parent="50" name="imdb_id">
+    <column id="142" parent="52" name="imdb_id">
       <Position>5</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>593</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="139" parent="50" name="average_rating">
+    <column id="143" parent="52" name="average_rating">
       <Position>6</Position>
       <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>593</StateNumber>
       <TypeId>701</TypeId>
     </column>
-    <column id="140" parent="50" name="image_url">
+    <column id="144" parent="52" name="image_url">
       <Position>7</Position>
       <DataType>varchar(200)|0s</DataType>
       <StateNumber>593</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="141" parent="50" name="media_movie_pkey">
+    <index id="145" parent="52" name="media_movie_pkey">
       <ObjectId>24762</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="142" parent="50" name="media_movie_imdb_id_key">
+    <index id="146" parent="52" name="media_movie_imdb_id_key">
       <ObjectId>24764</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>imdb_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="143" parent="50" name="media_movie_pkey">
+    <key id="147" parent="52" name="media_movie_pkey">
       <ObjectId>24763</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>media_movie_pkey</UnderlyingIndexName>
     </key>
-    <key id="144" parent="50" name="media_movie_imdb_id_key">
+    <key id="148" parent="52" name="media_movie_imdb_id_key">
       <ObjectId>24765</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>imdb_id</ColNames>
       <UnderlyingIndexName>media_movie_imdb_id_key</UnderlyingIndexName>
     </key>
-    <check id="145" parent="50" name="media_movie_year_check">
+    <check id="149" parent="52" name="media_movie_year_check">
       <ObjectId>24758</ObjectId>
       <StateNumber>593</StateNumber>
       <ColNames>year</ColNames>
       <Predicate>year &gt;= 0</Predicate>
     </check>
-    <column id="146" parent="51" name="id">
+    <column id="150" parent="53" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <DefaultExpression>nextval(&apos;ratings_bookratinguser_id_seq&apos;::regclass)</DefaultExpression>
+      <StateNumber>172226</StateNumber>
+      <DefaultExpression>nextval(&apos;ratings_bookprediction_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="147" parent="51" name="book_ratings">
+    <column id="151" parent="53" name="prediction">
       <Position>2</Position>
-      <DataType>double precision[]|0s</DataType>
+      <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <TypeId>1022</TypeId>
+      <StateNumber>172226</StateNumber>
+      <TypeId>701</TypeId>
     </column>
-    <index id="148" parent="51" name="ratings_bookratinguser_pkey">
-      <ObjectId>25429</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-    </index>
-    <key id="149" parent="51" name="ratings_bookratinguser_pkey">
-      <ObjectId>25430</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>ratings_bookratinguser_pkey</UnderlyingIndexName>
-    </key>
-    <column id="150" parent="52" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <DefaultExpression>nextval(&apos;ratings_bookratinguser_book_rating_ids_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="151" parent="52" name="bookratinguser_id">
-      <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="152" parent="52" name="book_id">
+    <column id="152" parent="53" name="book_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
+      <StateNumber>172226</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="153" parent="52" name="ratings_bookratinguser_book_rating_ids_pkey">
-      <ObjectId>25437</ObjectId>
-      <StateNumber>75004</StateNumber>
+    <column id="153" parent="53" name="prediction_user_id">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>172226</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="154" parent="53" name="ratings_bookprediction_pkey">
+      <ObjectId>25707</ObjectId>
+      <StateNumber>172226</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="154" parent="52" name="ratings_bookratinguser_b_bookratinguser_id_book_i_903a1de9_uniq">
-      <ObjectId>25463</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>bookratinguser_id
-book_id</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="155" parent="52" name="ratings_bookratinguser_boo_bookratinguser_id_6a01f3e8">
-      <ObjectId>25465</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>bookratinguser_id</ColNames>
-    </index>
-    <index id="156" parent="52" name="ratings_bookratinguser_book_rating_ids_book_id_c933bdc4">
-      <ObjectId>25466</ObjectId>
-      <StateNumber>75004</StateNumber>
+    <index id="155" parent="53" name="ratings_bookprediction_book_id_799e04d6">
+      <ObjectId>25731</ObjectId>
+      <StateNumber>172226</StateNumber>
       <ColNames>book_id</ColNames>
     </index>
-    <key id="157" parent="52" name="ratings_bookratinguser_book_rating_ids_pkey">
-      <ObjectId>25438</ObjectId>
-      <StateNumber>75004</StateNumber>
+    <index id="156" parent="53" name="ratings_bookprediction_prediction_user_id_3fc0a52d">
+      <ObjectId>25732</ObjectId>
+      <StateNumber>172226</StateNumber>
+      <ColNames>prediction_user_id</ColNames>
+    </index>
+    <key id="157" parent="53" name="ratings_bookprediction_pkey">
+      <ObjectId>25708</ObjectId>
+      <StateNumber>172226</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>ratings_bookratinguser_book_rating_ids_pkey</UnderlyingIndexName>
+      <UnderlyingIndexName>ratings_bookprediction_pkey</UnderlyingIndexName>
     </key>
-    <key id="158" parent="52" name="ratings_bookratinguser_b_bookratinguser_id_book_i_903a1de9_uniq">
-      <ObjectId>25464</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>bookratinguser_id
-book_id</ColNames>
-      <UnderlyingIndexName>ratings_bookratinguser_b_bookratinguser_id_book_i_903a1de9_uniq</UnderlyingIndexName>
-    </key>
-    <foreign-key id="159" parent="52" name="ratings_bookratingus_bookratinguser_id_6a01f3e8_fk_ratings_b">
-      <ObjectId>25453</ObjectId>
+    <foreign-key id="158" parent="53" name="ratings_bookprediction_book_id_799e04d6_fk_media_book_id">
+      <ObjectId>25721</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
-      <StateNumber>75004</StateNumber>
-      <ColNames>bookratinguser_id</ColNames>
-      <RefTableId>25422</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>ratings_bookratinguser</RefTableName>
-      <RefKeyName>ratings_bookratinguser_pkey</RefKeyName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="160" parent="52" name="ratings_bookratingus_book_id_c933bdc4_fk_media_boo">
-      <ObjectId>25458</ObjectId>
-      <Deferrable>1</Deferrable>
-      <InitiallyDeferred>1</InitiallyDeferred>
-      <StateNumber>75004</StateNumber>
+      <StateNumber>172226</StateNumber>
       <ColNames>book_id</ColNames>
       <RefTableId>24740</RefTableId>
       <RefColPositions>1</RefColPositions>
@@ -1115,112 +1095,175 @@ book_id</ColNames>
       <RefKeyName>media_book_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="161" parent="53" name="id">
+    <foreign-key id="159" parent="53" name="ratings_bookpredicti_prediction_user_id_3fc0a52d_fk_ratings_b">
+      <ObjectId>25726</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <StateNumber>172226</StateNumber>
+      <ColNames>prediction_user_id</ColNames>
+      <RefTableId>25422</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>ratings_bookratinguser</RefTableName>
+      <RefKeyName>ratings_bookratinguser_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="160" parent="54" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <DefaultExpression>nextval(&apos;ratings_movieratinguser_id_seq&apos;::regclass)</DefaultExpression>
+      <StateNumber>172226</StateNumber>
+      <DefaultExpression>nextval(&apos;ratings_bookrating_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="162" parent="53" name="movie_ratings">
+    <column id="161" parent="54" name="rating">
       <Position>2</Position>
-      <DataType>double precision[]|0s</DataType>
+      <DataType>double precision|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <TypeId>1022</TypeId>
+      <StateNumber>172226</StateNumber>
+      <TypeId>701</TypeId>
     </column>
-    <index id="163" parent="53" name="ratings_movieratinguser_pkey">
-      <ObjectId>25410</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>id</ColNames>
-      <Unique>1</Unique>
-      <Primary>1</Primary>
-    </index>
-    <key id="164" parent="53" name="ratings_movieratinguser_pkey">
-      <ObjectId>25411</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>ratings_movieratinguser_pkey</UnderlyingIndexName>
-    </key>
-    <column id="165" parent="54" name="id">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <DefaultExpression>nextval(&apos;ratings_movieratinguser_movie_rating_ids_id_seq&apos;::regclass)</DefaultExpression>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="166" parent="54" name="movieratinguser_id">
-      <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="167" parent="54" name="movie_id">
+    <column id="162" parent="54" name="book_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>75004</StateNumber>
+      <StateNumber>172226</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="168" parent="54" name="ratings_movieratinguser_movie_rating_ids_pkey">
-      <ObjectId>25418</ObjectId>
-      <StateNumber>75004</StateNumber>
+    <column id="163" parent="54" name="rating_user_id">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>172226</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="164" parent="54" name="ratings_bookrating_pkey">
+      <ObjectId>25699</ObjectId>
+      <StateNumber>172226</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="169" parent="54" name="ratings_movieratinguser__movieratinguser_id_movie_3c529fe3_uniq">
-      <ObjectId>25449</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>movieratinguser_id
-movie_id</ColNames>
-      <Unique>1</Unique>
+    <index id="165" parent="54" name="ratings_bookrating_book_id_e06340bc">
+      <ObjectId>25719</ObjectId>
+      <StateNumber>172226</StateNumber>
+      <ColNames>book_id</ColNames>
     </index>
-    <index id="170" parent="54" name="ratings_movieratinguser_mo_movieratinguser_id_c5752754">
-      <ObjectId>25451</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>movieratinguser_id</ColNames>
+    <index id="166" parent="54" name="ratings_bookrating_rating_user_id_95cc8fa5">
+      <ObjectId>25720</ObjectId>
+      <StateNumber>172226</StateNumber>
+      <ColNames>rating_user_id</ColNames>
     </index>
-    <index id="171" parent="54" name="ratings_movieratinguser_movie_rating_ids_movie_id_2a795487">
-      <ObjectId>25452</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>movie_id</ColNames>
-    </index>
-    <key id="172" parent="54" name="ratings_movieratinguser_movie_rating_ids_pkey">
-      <ObjectId>25419</ObjectId>
-      <StateNumber>75004</StateNumber>
+    <key id="167" parent="54" name="ratings_bookrating_pkey">
+      <ObjectId>25700</ObjectId>
+      <StateNumber>172226</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>ratings_movieratinguser_movie_rating_ids_pkey</UnderlyingIndexName>
+      <UnderlyingIndexName>ratings_bookrating_pkey</UnderlyingIndexName>
     </key>
-    <key id="173" parent="54" name="ratings_movieratinguser__movieratinguser_id_movie_3c529fe3_uniq">
-      <ObjectId>25450</ObjectId>
-      <StateNumber>75004</StateNumber>
-      <ColNames>movieratinguser_id
-movie_id</ColNames>
-      <UnderlyingIndexName>ratings_movieratinguser__movieratinguser_id_movie_3c529fe3_uniq</UnderlyingIndexName>
-    </key>
-    <foreign-key id="174" parent="54" name="ratings_movieratingu_movieratinguser_id_c5752754_fk_ratings_m">
-      <ObjectId>25439</ObjectId>
+    <foreign-key id="168" parent="54" name="ratings_bookrating_book_id_e06340bc_fk_media_book_id">
+      <ObjectId>25709</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
-      <StateNumber>75004</StateNumber>
-      <ColNames>movieratinguser_id</ColNames>
-      <RefTableId>25403</RefTableId>
+      <StateNumber>172226</StateNumber>
+      <ColNames>book_id</ColNames>
+      <RefTableId>24740</RefTableId>
       <RefColPositions>1</RefColPositions>
-      <RefTableName>ratings_movieratinguser</RefTableName>
-      <RefKeyName>ratings_movieratinguser_pkey</RefKeyName>
+      <RefTableName>media_book</RefTableName>
+      <RefKeyName>media_book_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="175" parent="54" name="ratings_movieratingu_movie_id_2a795487_fk_media_mov">
-      <ObjectId>25444</ObjectId>
+    <foreign-key id="169" parent="54" name="ratings_bookrating_rating_user_id_95cc8fa5_fk_ratings_b">
+      <ObjectId>25714</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
+      <StateNumber>172226</StateNumber>
+      <ColNames>rating_user_id</ColNames>
+      <RefTableId>25422</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>ratings_bookratinguser</RefTableName>
+      <RefKeyName>ratings_bookratinguser_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="170" parent="55" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
       <StateNumber>75004</StateNumber>
+      <DefaultExpression>nextval(&apos;ratings_bookratinguser_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="171" parent="55" name="ratings_bookratinguser_pkey">
+      <ObjectId>25429</ObjectId>
+      <StateNumber>75004</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="172" parent="55" name="ratings_bookratinguser_pkey">
+      <ObjectId>25430</ObjectId>
+      <StateNumber>75004</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ratings_bookratinguser_pkey</UnderlyingIndexName>
+    </key>
+    <column id="173" parent="56" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <DefaultExpression>nextval(&apos;ratings_movieprediction_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="174" parent="56" name="prediction">
+      <Position>2</Position>
+      <DataType>double precision|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="175" parent="56" name="movie_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="176" parent="56" name="prediction_user_id">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>172225</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="177" parent="56" name="ratings_movieprediction_pkey">
+      <ObjectId>25650</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <index id="178" parent="56" name="ratings_movieprediction_movie_id_9248239f">
+      <ObjectId>25676</ObjectId>
+      <StateNumber>106222</StateNumber>
+      <ColNames>movie_id</ColNames>
+    </index>
+    <index id="179" parent="56" name="ratings_movieprediction_rating_user_id_974f59af">
+      <ObjectId>25675</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <ColNames>prediction_user_id</ColNames>
+    </index>
+    <key id="180" parent="56" name="ratings_movieprediction_pkey">
+      <ObjectId>25651</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ratings_movieprediction_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="181" parent="56" name="ratings_movieprediction_movie_id_9248239f_fk_media_movie_id">
+      <ObjectId>25677</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <StateNumber>106222</StateNumber>
       <ColNames>movie_id</ColNames>
       <RefTableId>24754</RefTableId>
       <RefColPositions>1</RefColPositions>
@@ -1228,7 +1271,118 @@ movie_id</ColNames>
       <RefKeyName>media_movie_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="176" parent="55" name="id">
+    <foreign-key id="182" parent="56" name="ratings_moviepredict_prediction_user_id_badddbbf_fk_ratings_m">
+      <ObjectId>25688</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <StateNumber>172225</StateNumber>
+      <ColNames>prediction_user_id</ColNames>
+      <RefTableId>25403</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>ratings_movieratinguser</RefTableName>
+      <RefKeyName>ratings_movieratinguser_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="183" parent="57" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <DefaultExpression>nextval(&apos;ratings_movierating_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="184" parent="57" name="rating">
+      <Position>2</Position>
+      <DataType>double precision|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <TypeId>701</TypeId>
+    </column>
+    <column id="185" parent="57" name="movie_id">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="186" parent="57" name="rating_user_id">
+      <Position>4</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>105878</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="187" parent="57" name="ratings_movierating_pkey">
+      <ObjectId>25640</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <index id="188" parent="57" name="ratings_movierating_movie_id_584e075c">
+      <ObjectId>25682</ObjectId>
+      <StateNumber>106222</StateNumber>
+      <ColNames>movie_id</ColNames>
+    </index>
+    <index id="189" parent="57" name="ratings_movierating_rating_user_id_0b8fe615">
+      <ObjectId>25664</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <ColNames>rating_user_id</ColNames>
+    </index>
+    <key id="190" parent="57" name="ratings_movierating_pkey">
+      <ObjectId>25641</ObjectId>
+      <StateNumber>105878</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ratings_movierating_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="191" parent="57" name="ratings_movierating_movie_id_584e075c_fk_media_movie_id">
+      <ObjectId>25683</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <StateNumber>106222</StateNumber>
+      <ColNames>movie_id</ColNames>
+      <RefTableId>24754</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>media_movie</RefTableName>
+      <RefKeyName>media_movie_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="192" parent="57" name="ratings_movierating_rating_user_id_0b8fe615_fk_ratings_m">
+      <ObjectId>25659</ObjectId>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <StateNumber>105878</StateNumber>
+      <ColNames>rating_user_id</ColNames>
+      <RefTableId>25403</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>ratings_movieratinguser</RefTableName>
+      <RefKeyName>ratings_movieratinguser_pkey</RefKeyName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="193" parent="58" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>75004</StateNumber>
+      <DefaultExpression>nextval(&apos;ratings_movieratinguser_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="194" parent="58" name="ratings_movieratinguser_pkey">
+      <ObjectId>25410</ObjectId>
+      <StateNumber>75004</StateNumber>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="195" parent="58" name="ratings_movieratinguser_pkey">
+      <ObjectId>25411</ObjectId>
+      <StateNumber>75004</StateNumber>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>ratings_movieratinguser_pkey</UnderlyingIndexName>
+    </key>
+    <column id="196" parent="59" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1236,167 +1390,167 @@ movie_id</ColNames>
       <DefaultExpression>nextval(&apos;userauth_user_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="177" parent="55" name="password">
+    <column id="197" parent="59" name="password">
       <Position>2</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="178" parent="55" name="last_login">
+    <column id="198" parent="59" name="last_login">
       <Position>3</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <StateNumber>589</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="179" parent="55" name="is_superuser">
+    <column id="199" parent="59" name="is_superuser">
       <Position>4</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="180" parent="55" name="username">
+    <column id="200" parent="59" name="username">
       <Position>5</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="181" parent="55" name="first_name">
+    <column id="201" parent="59" name="first_name">
       <Position>6</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="182" parent="55" name="last_name">
+    <column id="202" parent="59" name="last_name">
       <Position>7</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="183" parent="55" name="email">
+    <column id="203" parent="59" name="email">
       <Position>8</Position>
       <DataType>varchar(254)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="184" parent="55" name="is_staff">
+    <column id="204" parent="59" name="is_staff">
       <Position>9</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="185" parent="55" name="is_active">
+    <column id="205" parent="59" name="is_active">
       <Position>10</Position>
       <DataType>boolean|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>16</TypeId>
     </column>
-    <column id="186" parent="55" name="date_joined">
+    <column id="206" parent="59" name="date_joined">
       <Position>11</Position>
       <DataType>timestamp with time zone|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1184</TypeId>
     </column>
-    <column id="187" parent="55" name="hash_id">
+    <column id="207" parent="59" name="hash_id">
       <Position>14</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="188" parent="55" name="book_uid_id">
+    <column id="208" parent="59" name="book_uid_id">
       <Position>21</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>722</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="189" parent="55" name="movie_uid_id">
+    <column id="209" parent="59" name="movie_uid_id">
       <Position>23</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>733</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="190" parent="55" name="userauth_user_pkey">
+    <index id="210" parent="59" name="userauth_user_pkey">
       <ObjectId>24658</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="191" parent="55" name="userauth_user_username_key">
+    <index id="211" parent="59" name="userauth_user_username_key">
       <ObjectId>24660</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="192" parent="55" name="userauth_user_hash_id_key">
+    <index id="212" parent="59" name="userauth_user_hash_id_key">
       <ObjectId>24666</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>hash_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="193" parent="55" name="userauth_user_book_uid_id_key">
+    <index id="213" parent="59" name="userauth_user_book_uid_id_key">
       <ObjectId>25342</ObjectId>
       <StateNumber>722</StateNumber>
       <ColNames>book_uid_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="194" parent="55" name="userauth_user_movie_uid_id_key">
+    <index id="214" parent="59" name="userauth_user_movie_uid_id_key">
       <ObjectId>25363</ObjectId>
       <StateNumber>733</StateNumber>
       <ColNames>movie_uid_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="195" parent="55" name="userauth_user_username_31ec6e87_like">
+    <index id="215" parent="59" name="userauth_user_username_31ec6e87_like">
       <ObjectId>24684</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>username</ColNames>
     </index>
-    <index id="196" parent="55" name="userauth_user_hash_id_5c08ee12_like">
+    <index id="216" parent="59" name="userauth_user_hash_id_5c08ee12_like">
       <ObjectId>24685</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>hash_id</ColNames>
     </index>
-    <key id="197" parent="55" name="userauth_user_pkey">
+    <key id="217" parent="59" name="userauth_user_pkey">
       <ObjectId>24659</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>userauth_user_pkey</UnderlyingIndexName>
     </key>
-    <key id="198" parent="55" name="userauth_user_username_key">
+    <key id="218" parent="59" name="userauth_user_username_key">
       <ObjectId>24661</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>username</ColNames>
       <UnderlyingIndexName>userauth_user_username_key</UnderlyingIndexName>
     </key>
-    <key id="199" parent="55" name="userauth_user_hash_id_key">
+    <key id="219" parent="59" name="userauth_user_hash_id_key">
       <ObjectId>24667</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>hash_id</ColNames>
       <UnderlyingIndexName>userauth_user_hash_id_key</UnderlyingIndexName>
     </key>
-    <key id="200" parent="55" name="userauth_user_book_uid_id_key">
+    <key id="220" parent="59" name="userauth_user_book_uid_id_key">
       <ObjectId>25343</ObjectId>
       <StateNumber>722</StateNumber>
       <ColNames>book_uid_id</ColNames>
       <UnderlyingIndexName>userauth_user_book_uid_id_key</UnderlyingIndexName>
     </key>
-    <key id="201" parent="55" name="userauth_user_movie_uid_id_key">
+    <key id="221" parent="59" name="userauth_user_movie_uid_id_key">
       <ObjectId>25364</ObjectId>
       <StateNumber>733</StateNumber>
       <ColNames>movie_uid_id</ColNames>
       <UnderlyingIndexName>userauth_user_movie_uid_id_key</UnderlyingIndexName>
     </key>
-    <foreign-key id="202" parent="55" name="userauth_user_book_uid_id_47fc924b_fk_ratings_bookratinguser_id">
+    <foreign-key id="222" parent="59" name="userauth_user_book_uid_id_47fc924b_fk_ratings_bookratinguser_id">
       <ObjectId>25467</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1408,7 +1562,7 @@ movie_id</ColNames>
       <RefKeyName>ratings_bookratinguser_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="203" parent="55" name="userauth_user_movie_uid_id_30d1c74f_fk_ratings_m">
+    <foreign-key id="223" parent="59" name="userauth_user_movie_uid_id_30d1c74f_fk_ratings_m">
       <ObjectId>25472</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1420,7 +1574,7 @@ movie_id</ColNames>
       <RefKeyName>ratings_movieratinguser_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="204" parent="56" name="id">
+    <column id="224" parent="60" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1428,59 +1582,59 @@ movie_id</ColNames>
       <DefaultExpression>nextval(&apos;userauth_user_groups_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="205" parent="56" name="user_id">
+    <column id="225" parent="60" name="user_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="206" parent="56" name="group_id">
+    <column id="226" parent="60" name="group_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="207" parent="56" name="userauth_user_groups_pkey">
+    <index id="227" parent="60" name="userauth_user_groups_pkey">
       <ObjectId>24674</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="208" parent="56" name="userauth_user_groups_user_id_group_id_46e5f227_uniq">
+    <index id="228" parent="60" name="userauth_user_groups_user_id_group_id_46e5f227_uniq">
       <ObjectId>24696</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>user_id
 group_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="209" parent="56" name="userauth_user_groups_user_id_4e653733">
+    <index id="229" parent="60" name="userauth_user_groups_user_id_4e653733">
       <ObjectId>24698</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>user_id</ColNames>
     </index>
-    <index id="210" parent="56" name="userauth_user_groups_group_id_248add28">
+    <index id="230" parent="60" name="userauth_user_groups_group_id_248add28">
       <ObjectId>24699</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>group_id</ColNames>
     </index>
-    <key id="211" parent="56" name="userauth_user_groups_pkey">
+    <key id="231" parent="60" name="userauth_user_groups_pkey">
       <ObjectId>24675</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>userauth_user_groups_pkey</UnderlyingIndexName>
     </key>
-    <key id="212" parent="56" name="userauth_user_groups_user_id_group_id_46e5f227_uniq">
+    <key id="232" parent="60" name="userauth_user_groups_user_id_group_id_46e5f227_uniq">
       <ObjectId>24697</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>user_id
 group_id</ColNames>
       <UnderlyingIndexName>userauth_user_groups_user_id_group_id_46e5f227_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="213" parent="56" name="userauth_user_groups_user_id_4e653733_fk_userauth_user_id">
+    <foreign-key id="233" parent="60" name="userauth_user_groups_user_id_4e653733_fk_userauth_user_id">
       <ObjectId>24686</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1492,7 +1646,7 @@ group_id</ColNames>
       <RefKeyName>userauth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="214" parent="56" name="userauth_user_groups_group_id_248add28_fk_auth_group_id">
+    <foreign-key id="234" parent="60" name="userauth_user_groups_group_id_248add28_fk_auth_group_id">
       <ObjectId>24691</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1504,7 +1658,7 @@ group_id</ColNames>
       <RefKeyName>auth_group_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="215" parent="57" name="id">
+    <column id="235" parent="61" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -1512,59 +1666,59 @@ group_id</ColNames>
       <DefaultExpression>nextval(&apos;userauth_user_user_permissions_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="216" parent="57" name="user_id">
+    <column id="236" parent="61" name="user_id">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="217" parent="57" name="permission_id">
+    <column id="237" parent="61" name="permission_id">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>589</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="218" parent="57" name="userauth_user_user_permissions_pkey">
+    <index id="238" parent="61" name="userauth_user_user_permissions_pkey">
       <ObjectId>24682</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="219" parent="57" name="userauth_user_user_permi_user_id_permission_id_ce5f9d7d_uniq">
+    <index id="239" parent="61" name="userauth_user_user_permi_user_id_permission_id_ce5f9d7d_uniq">
       <ObjectId>24710</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>user_id
 permission_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="220" parent="57" name="userauth_user_user_permissions_user_id_e644b2fd">
+    <index id="240" parent="61" name="userauth_user_user_permissions_user_id_e644b2fd">
       <ObjectId>24712</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>user_id</ColNames>
     </index>
-    <index id="221" parent="57" name="userauth_user_user_permissions_permission_id_f1415beb">
+    <index id="241" parent="61" name="userauth_user_user_permissions_permission_id_f1415beb">
       <ObjectId>24713</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>permission_id</ColNames>
     </index>
-    <key id="222" parent="57" name="userauth_user_user_permissions_pkey">
+    <key id="242" parent="61" name="userauth_user_user_permissions_pkey">
       <ObjectId>24683</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>userauth_user_user_permissions_pkey</UnderlyingIndexName>
     </key>
-    <key id="223" parent="57" name="userauth_user_user_permi_user_id_permission_id_ce5f9d7d_uniq">
+    <key id="243" parent="61" name="userauth_user_user_permi_user_id_permission_id_ce5f9d7d_uniq">
       <ObjectId>24711</ObjectId>
       <StateNumber>589</StateNumber>
       <ColNames>user_id
 permission_id</ColNames>
       <UnderlyingIndexName>userauth_user_user_permi_user_id_permission_id_ce5f9d7d_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="224" parent="57" name="userauth_user_user_p_user_id_e644b2fd_fk_userauth_">
+    <foreign-key id="244" parent="61" name="userauth_user_user_p_user_id_e644b2fd_fk_userauth_">
       <ObjectId>24700</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
@@ -1576,7 +1730,7 @@ permission_id</ColNames>
       <RefKeyName>userauth_user_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="225" parent="57" name="userauth_user_user_p_permission_id_f1415beb_fk_auth_perm">
+    <foreign-key id="245" parent="61" name="userauth_user_user_p_permission_id_f1415beb_fk_auth_perm">
       <ObjectId>24705</ObjectId>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>

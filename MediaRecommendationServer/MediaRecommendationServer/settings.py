@@ -41,6 +41,7 @@ INSTALLED_APPS = [
       'media',
       'mlmodels',
       'ratings',
+      'predictions',
       'rest_framework',
       'django_extensions',
 ]
@@ -131,7 +132,7 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'userauth.User'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 50,
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 50,
+# }

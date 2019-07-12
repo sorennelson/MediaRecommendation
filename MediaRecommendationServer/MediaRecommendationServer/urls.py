@@ -19,13 +19,16 @@ from rest_framework import routers
 
 from media.views import BookViewSet, MovieViewSet
 from ratings.views import BookRatingViewSet, MovieRatingViewSet
+from predictions.views import BookPredictionViewSet, MoviePredictionViewSet
 
 router = routers.DefaultRouter()
-router.register(r'books', BookViewSet)
-router.register(r'movies', MovieViewSet)
+router.register(r'books/all', BookViewSet)
+router.register(r'books/ratings', BookRatingViewSet)
+router.register(r'books/predictions', BookPredictionViewSet)
 
-router.register(r'bookratings', BookRatingViewSet)
-router.register(r'movieratings', MovieRatingViewSet)
+router.register(r'movies/all', MovieViewSet)
+router.register(r'movies/ratings', MovieRatingViewSet)
+router.register(r'movies/predictions', MoviePredictionViewSet)
 
 
 urlpatterns = [

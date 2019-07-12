@@ -10,14 +10,14 @@ import Foundation
 
 class Movie: Media {
     
-    override init(id: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL: URL?) {
-        super.init(id: id, title: title, genres: genres, year: year, avgRating: avgRating, imageURL: imageURL)
+//    override init(id: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL: URL?) {
+//        super.init(id: id, title: title, genres: genres, year: year, avgRating: avgRating, imageURL: imageURL)
         //        if let string = imageString {
         //            if !string.isEmpty {
         //                self.imageURL = "https://image.tmdb.org/t/p/w342" + string
         //            }
         //        }
-    }
+//    }
     
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)

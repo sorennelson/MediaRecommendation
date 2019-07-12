@@ -13,101 +13,114 @@ class UserController {
     
     static var sharedInstance = UserController()
     
-    func createUser(email:String, password:String, completion: @escaping (Bool, String?) -> ()) {
-        let params = ["username":email,"password":password] as [String:Any]
-        Alamofire.request(API_HOST+"auth/signup",method:.post,parameters:params).responseData
-            { response in switch response.result {
-            case .success(let data):
-                switch response.response?.statusCode ?? -1 {
-                case 200:
-                    self.decodeUserFrom(userData: data, completion: { (success, error) in
-                        completion(success, error)
-                    })
-                case 401:
-                    completion(false, "That email is already in use")
-                default:
-                    completion(false, "Unexpected Error")
-                }
-            case .failure(let error):
-                completion(false, error.localizedDescription)
-                }
-        }
-    }
     
-    func signIn(email: String, password: String, completion: @escaping (Bool, String?) -> ()) {
-        let params = ["username":email,"password":password] as [String:Any]
-        Alamofire.request(API_HOST+"auth/login",method:.post,parameters:params).responseData
-            { response in switch response.result {
-                
+    /// Creates an account for a new User.
+    ///
+    /// - Parameters:
+    ///   - email: String. A valid email address.
+    ///   - password: String. A valid password
+    ///   - completion: (success signing up bool, error string?, user data?)
+    func createUser(username:String, password:String, completion: @escaping (Bool, String?, Data?) -> ()) {
+        let params = ["username": username, "password": password] as [String:Any]
+        Alamofire.request(API_HOST + "signup/", method: .post, parameters: params).responseData { response in
+            switch response.result {
             case .success(let data):
+    
                 switch response.response?.statusCode ?? -1 {
                 case 200:
-                    self.decodeUserFrom(userData: data, completion: { (success, error) in
-                        //                        if let user = User.current {
-                        //                            UserDefaults.standard.setValue(user.id, forKey: "user")
-                        //                        }
-                        completion(success, error)
-                    })
-                case 401:
-                    completion(false, "Username or Password Incorrect")
+                    UserDefaults.standard.setValue(username, forKey: "username")
+                    UserDefaults.standard.setValue(password, forKey: "password")
+                    completion(true, nil, data)
+                case 403:
+                    completion(false, "That email is already in use", data)
                 default:
-                    completion(false, "Unexpected Error")
+                    completion(false, "Unexpected Error", data)
                 }
                 
             case .failure(let error):
-                completion(false, error.localizedDescription)
-                }
+                completion(false, error.localizedDescription, nil)
+            }
         }
     }
     
-    func decodeUserFrom(userData: Data, completion: @escaping (Bool, String?) -> ()) {
+    
+    /// Logs the user in on the server.
+    ///
+    /// - Parameters:
+    ///   - email: String. the User's email used when they signed up
+    ///   - password: String. the User's password used when they signed up
+    ///   - completion: (success logging in bool, error string?, user data?)
+    func login(username: String, password: String, completion: @escaping (Bool, String?, Data?) -> ()) {
+        let params = ["username": username, "password": password] as [String:Any]
+        Alamofire.request(API_HOST + "login/", method: .post, parameters: params).responseData{ response in
+            switch response.result {
+            case .success(let data):
+                
+                switch response.response?.statusCode ?? -1 {
+                case 200:
+                    UserDefaults.standard.setValue(username, forKey: "username")
+                    UserDefaults.standard.setValue(password, forKey: "password")
+                    completion(true, nil, data)
+                case 401:
+                    completion(false, "Username or Password Incorrect", data)
+                default:
+                    completion(false, "Unexpected Error", data)
+                }
+                
+            case .failure(let error):
+                completion(false, error.localizedDescription, nil)
+            }
+        }
+    }
+    
+    /// Checks whether the User already is logged in on the server.
+    ///
+    /// - Parameter completion: (error string?, is logged in bool, user data?)
+    func attemptLogin(completion:@escaping (String?, Bool, Data?) -> ()) {
+        guard let username = UserDefaults.standard.string(forKey: "username"),
+              let password = UserDefaults.standard.string(forKey: "password") else {
+            completion("Not Logged In", false, nil)
+            return
+        }
+        let params = ["username": username, "password": password] as [String:Any]
+        Alamofire.request(API_HOST+"login/", method:.post, parameters:params).responseData { response in
+            switch response.result {
+            case .success(let data):
+                if response.response?.statusCode == 200 {
+                    print("LOGGED IN")
+                    completion(nil, true, data)
+                    
+                } else {
+                    print("Not Logged In")
+                    completion(nil, false, data)
+                }
+                
+            case .failure(let error):
+                print("ERROR LOGGING IN: " + error.localizedDescription)
+                completion(error.localizedDescription, false, nil)
+            }
+        }
+    }
+    
+    /// Call when the User is logged in on the server to decode the JSON User data into the current User.
+    ///
+    /// - Parameter userData: the JSON User data from the server
+    /// - Returns: error string?. if no error string the User was successfully decoded.
+    func didLogin(userData: Data) -> String? {
         do {
-            //decode data into user object
             User.current = try JSONDecoder().decode(User.self, from: userData)
-            completion(true, nil)
+            return nil
         } catch {
-            completion(false, error.localizedDescription)
+//            print(String(error))
+            return error.localizedDescription
         }
     }
     
     func logout() {
         User.current = nil
-        //        SocketController.sharedInstance.sock.disconnect()
-        UserDefaults.standard.setValue(nil, forKey: "user")
-        //        Alamofire.reques
-        Alamofire.request(API_HOST+"auth/logout")
+        UserDefaults.standard.setValue(nil, forKey: "username")
+        UserDefaults.standard.setValue(nil, forKey: "password")
+        Alamofire.request(API_HOST+"logout/")
     }
     
 }
-
-//    private func createUser(authResult: AuthDataResult, completion:@escaping (Bool) -> ()) {
-//        self.currentUser = User(firID: authResult.user.uid,
-//                                ubid: bookUsers.count, numBooks: books.count,
-//                                umid: movieUsers.count, numMovies: movies.count)
-//        self.bookUsers.append(currentUser!.bookRatingUser!)
-//        self.movieUsers.append(currentUser!.movieRatingUser!)
-//
-//        for movie in movies {
-//            movie.value.ratings.append(0)
-//        }
-//        for book in books {
-//            book.value.ratings.append(0)
-//        }
-//
-//        if let _ = bookRM {
-//            let averages = getBookAverages()
-//            bookRM!.addUser(averages: averages)
-//            // TODO: run
-//        }
-//
-//        if let _ = movieRM {
-//            let averages = getMovieAverages()
-//            movieRM!.addUser(averages: averages)
-//            // TODO: run
-//        }
-//        completion(true)
-//
-////      TODO: Save User to database
-//
-//
-//    }
