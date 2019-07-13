@@ -15,8 +15,8 @@ def run_collaborative_filtering(media_type):
     # param_count = [8]
 
     if media_type == "books":
-        reg_params = [0.05, 0.1, 2.5]
-        learning_rates = [0.0001, 0.0005]
+        reg_params = [0.05, 0.1, 1, 2]
+        learning_rates = [0.00005, 0.0001]
     else:
         # reg_params = [0.01, 0.05, 0.1]
         # learning_rates = [0.00005, 0.0001]
@@ -37,7 +37,10 @@ def run_collaborative_filtering(media_type):
     rmse = __compute_rmse(model)
     print("RMSE:", rmse)
 
-    __create_movie_predictions(model)
+    if media_type == 'books':
+        __create_movie_predictions(model)
+    else:
+        __create_book_predictions(model)
 
 
 def __run_hyperparameters(model, features_num, reg_param, learning_rate, iteration, best):
@@ -124,6 +127,30 @@ def __compute_val_rmse(model):
 
 
 # MARK: PREDICTIONS
+def __create_book_predictions(model):
+    predictions = np.dot(model.item_params, model.user_params.T)
+    predictions += model.ratings_mean.reshape(-1, 1)
+
+    non_rated = (model.rated - 1) * (- 1)
+    predictions *= non_rated  # zero out rated movies
+
+    users = BookUser.objects.order_by('id')
+    for user in users:
+
+        for psql_bid, np_bid in model.mapping.items():
+            # user_predictions = predictions[:, user.id-1]
+            # user_predictions
+            # TODO: Top n predictions only
+            prediction_val = predictions[np_bid, user.id - 1]
+
+            if prediction_val != 0:
+                prediction_obj = MoviePrediction(prediction_user=user,
+                                                 book=Book.objects.get(id=psql_bid),
+                                                 prediction=prediction_val)
+                prediction_obj.save()
+        print(user.id)
+
+
 def __create_movie_predictions(model):
     predictions = np.dot(model.item_params, model.user_params.T)
     predictions += model.ratings_mean.reshape(-1, 1)

@@ -13,7 +13,7 @@ class User: Codable {
     static var current:User?
     
     var username: String
-    var id: String
+    var id: Int
     
 //    var bookRatingIDs: [Int]
 //    var bookRatings: [Double]

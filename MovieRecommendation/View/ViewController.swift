@@ -40,6 +40,7 @@ class ViewController: NSViewController {
             } else if success == true {
                 if let _ = UserController.sharedInstance.didLogin(userData: data!) {
                 // TODO: Notification -> Try again
+                    print("Try again")
                 } else {
                     self.userLoggedIn()
                 }
@@ -52,11 +53,11 @@ class ViewController: NSViewController {
         setupTableViews()
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
 
-        ImportController.sharedInstance.loadAllMedia(.Books, completion: { str in
+        ImportController.sharedInstance.loadAllMedia(.Books, completion: { (success, str) in
             print("BOOKS IMPORT: " + str)
         })
         
-        ImportController.sharedInstance.loadAllMedia(.Movies, completion: { str in
+        ImportController.sharedInstance.loadAllMedia(.Movies, completion: { (success, str) in
             print("MOVIES IMPORT: " + str)
         })
     }
@@ -79,6 +80,10 @@ class ViewController: NSViewController {
         // TODO: edit sign in page
         // TODO: Load user ratings / predictions
         reloadTableViews()
+        
+        ImportController.sharedInstance.loadRecommended(0, to: 100, .Movies, completion: { (success, str) in
+            print("MOVIES RECOMMENDED IMPORT: " + str)
+        })
     }
     
     func reloadTableViews() {
@@ -127,8 +132,7 @@ class ViewController: NSViewController {
         reloadTableViews()
     }
     
-    
-    private func runTests() {
-        let test = Test.sharedInstance
-    }
+//    private func runTests() {
+//        let test = Test.sharedInstance
+//    }
 }

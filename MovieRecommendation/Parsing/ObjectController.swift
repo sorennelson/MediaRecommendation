@@ -17,7 +17,8 @@ class ObjectController {
     var addedRatings = false
     
     var movies: [Movie] = [] // YID: Movie
-    var movieLinks = [Int: String]() // YID: Link
+    var recommendedMovies: [Movie] = []
+    
     var genreMovies: [String: [Int]] = [:] // [genre: [movieIDs]]
     var movieRatings: [Media: Double]?
     

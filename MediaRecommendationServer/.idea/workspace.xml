@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25ad6e99-5732-4c01-becd-5f29b77b9ecc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mlmodels/cfmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ac61dd9e-4caf-46c0-b932-7638ba87fa62.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ac61dd9e-4caf-46c0-b932-7638ba87fa62.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ac61dd9e-4caf-46c0-b932-7638ba87fa62/storage_v2/_src_/database/MediaRecommendationDB.2_n_WA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ac61dd9e-4caf-46c0-b932-7638ba87fa62/storage_v2/_src_/database/MediaRecommendationDB.2_n_WA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaRecommendationServer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaRecommendationServer/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaRecommendationServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaRecommendationServer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/media/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/media/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/media/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mlmodels/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlmodels/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ratings/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/ratings/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ratings/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ratings/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ratings/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/ratings/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ratings/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ratings/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userauth/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/userauth/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userauth/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/userauth/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/userauth/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/userauth/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userauth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/userauth/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/.Media_Recommendation.sqlite.icloud" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/ML/CostFunction.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/ML/GradientDescentController.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/ML/HypothesisEvaluation.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/ML/RecommenderModel.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Movie_Data/.ratings.csv.icloud" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,10 +32,13 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/settings.py">
+        <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="134" selection-start-line="134" selection-start-column="2" selection-end-line="137" selection-end-column="3" />
+            <state relative-caret-position="540">
+              <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,10 +53,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mlmodels/helper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/media/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
+            <state relative-caret-position="442">
+              <caret line="41" column="59" lean-forward="true" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -84,43 +77,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/predictions/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="44" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
-              <folding>
-                <element signature="e#649#681#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/userauth/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userauth/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="73" selection-start-line="7" selection-start-column="73" selection-end-line="7" selection-end-column="73" />
+            <state relative-caret-position="300">
+              <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -131,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/userauth/serializers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="150">
+              <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
               </folding>
@@ -184,14 +144,14 @@
         <option value="$PROJECT_DIR$/mlmodels/cfmodel.py" />
         <option value="$PROJECT_DIR$/media/models.py" />
         <option value="$PROJECT_DIR$/MediaRecommendationServer/settings.py" />
-        <option value="$PROJECT_DIR$/mlmodels/helper.py" />
         <option value="$PROJECT_DIR$/userauth/urls.py" />
         <option value="$PROJECT_DIR$/ratings/models.py" />
         <option value="$PROJECT_DIR$/helper.py" />
-        <option value="$PROJECT_DIR$/media/views.py" />
-        <option value="$PROJECT_DIR$/userauth/views.py" />
         <option value="$PROJECT_DIR$/userauth/models.py" />
+        <option value="$PROJECT_DIR$/mlmodels/helper.py" />
+        <option value="$PROJECT_DIR$/userauth/views.py" />
         <option value="$PROJECT_DIR$/userauth/serializers.py" />
+        <option value="$PROJECT_DIR$/media/views.py" />
       </list>
     </option>
   </component>
@@ -221,12 +181,7 @@
             <path>
               <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
-              <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
-              <item name="ratings" type="462c0819:PsiDirectoryNode" />
+              <item name="mlmodels" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
@@ -337,12 +292,12 @@
       <workItem from="1562130546054" duration="11375000" />
       <workItem from="1562468978131" duration="25233000" />
       <workItem from="1562634699652" duration="51809000" />
-      <workItem from="1562894679716" duration="12933000" />
+      <workItem from="1562894679716" duration="18384000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142867000" />
+    <option name="totallyTimeSpent" value="148318000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -355,9 +310,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14896215" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14896215" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -371,27 +325,20 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32985386" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.24739039" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.24739039" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32463464" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.49930653" weight="0.32967034" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.8585298" weight="0.1996337" />
-      <window_info anchor="right" x="0" y="0" width="370" height="850" id="Documentation" order="5" sideWeight="0.5006935" side_tool="true" visible="true" weight="0.08547009" />
+      <window_info anchor="right" x="0" y="0" width="370" height="850" id="Documentation" order="5" sideWeight="0.5006935" side_tool="true" visible="true" weight="0.25641027" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/django/contrib/admin/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ratings_parser.py" />
     <entry file="file://$PROJECT_DIR$/../import_ratings.py" />
     <entry file="file://$PROJECT_DIR$/../Import/import_ratings.py" />
@@ -535,13 +482,6 @@
     <entry file="file://$PROJECT_DIR$/book_ratings.csv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="1" column="38" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mlmodels/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -622,42 +562,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="134" selection-start-line="134" selection-start-column="2" selection-end-line="137" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="90" column="45" selection-start-line="90" selection-start-column="45" selection-end-line="90" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mlmodels/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="126" column="15" selection-start-line="126" selection-start-column="15" selection-end-line="126" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mlmodels/cfmodel.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -676,20 +582,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/views.py">
+    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="65" lean-forward="true" selection-start-line="31" selection-start-column="65" selection-end-line="31" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="539">
+          <caret line="134" selection-start-line="134" selection-start-column="2" selection-end-line="137" selection-end-column="3" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/predictions/models.py">
+    <entry file="file://$PROJECT_DIR$/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="8" lean-forward="true" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+        <state relative-caret-position="540">
+          <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -703,32 +609,80 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/media/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predictions/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/lib/python3.7/site-packages/django/db/models/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="393" column="8" selection-start-line="393" selection-start-column="8" selection-end-line="393" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlmodels/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="22" selection-start-line="17" selection-start-column="22" selection-end-line="17" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/userauth/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="150">
+          <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/userauth/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="50" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/userauth/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="73" selection-start-line="7" selection-start-column="73" selection-end-line="7" selection-end-column="73" />
+        <state relative-caret-position="300">
+          <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/userauth/views.py">
+    <entry file="file://$PROJECT_DIR$/media/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="32" lean-forward="true" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+        <state relative-caret-position="442">
+          <caret line="41" column="59" lean-forward="true" selection-start-line="41" selection-start-column="59" selection-end-line="41" selection-end-column="59" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
