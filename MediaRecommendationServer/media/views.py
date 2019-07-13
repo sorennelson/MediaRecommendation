@@ -9,32 +9,55 @@ from media.serializers import BookSerializer, MovieSerializer
 from predictions.models import BookPrediction, MoviePrediction
 from predictions.serializers import BookPredictionSerializer, MoviePredictionSerializer
 
-from userauth.models import User, BookUser, MovieUser
+from userauth.models import User
 
 
 class BookViewSet(viewsets.ModelViewSet):
-    # Fetch all books
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+    @action(detail=False)
+    def get_top_recommendations(self, request):
+        """Get the top book recommendations from the given [start index, end index) for the User with the given ID
+
+        :param request: /books/all/get_top_recommendations/ -- 'start': int, 'end': int, 'id': int (user id)
+        :return: Response with the serialized [Book]
+        """
+        try:
+            start = int(request.GET['start'])
+            end = int(request.GET['end'])
+            user = User.objects.get(pk=request.GET['id'])
+        except User.DoesNotExist or ValueError:
+            Response(status=status.HTTP_400_BAD_REQUEST)
+
+        book_user = user.book_user
+        predictions = BookPrediction.objects.filter(prediction_user=book_user)
+        print(predictions)
+        predictions = predictions[start:end]
+
+        books = []
+        for prediction in predictions:
+            books.append(prediction.book)
+        serializer = BookSerializer(books, many=True)
+
+        return Response(serializer.data)
+
 
 class MovieViewSet(viewsets.ModelViewSet):
-    # Fetch all movies
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
 
     @action(detail=False)
     def get_top_recommendations(self, request):
-        start = request.GET['start']
-        end = request.GET['end']
-        uid = request.GET['id']
-        print(type(start))
-        print(type(end))
+        """Get the top movie recommendations from the given [start index, end index) for the User with the given ID
 
+        :param request: /movies/all/get_top_recommendations/ -- 'start': int, 'end': int, 'id': int (user id)
+        :return: Response with the serialized [Movie]
+        """
         try:
-            start = int(start)
-            end = int(end)
-            user = User.objects.get(pk=uid)
+            start = int(request.GET['start'])
+            end = int(request.GET['end'])
+            user = User.objects.get(pk=request.GET['id'])
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 

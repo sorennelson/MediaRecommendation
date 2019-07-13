@@ -14,17 +14,16 @@ class ObjectController {
     static var sharedInstance = ObjectController()
     static var currentMediaType = MediaType.Movies
     
+    var movies: [Movie] = []
+    var recommendedMovies: [Movie] = []
+    var books: [Book] = []
+    var recommendedBooks: [Book] = []
+    
+    // Not currently using
     var addedRatings = false
     
-    var movies: [Movie] = [] // YID: Movie
-    var recommendedMovies: [Movie] = []
-    
     var genreMovies: [String: [Int]] = [:] // [genre: [movieIDs]]
-    var movieRatings: [Media: Double]?
-    
-    var books: [Book] = []
     var allBookGenres: [String] = []
-    //    var bookGenres: [Int: [String]] = [:] // [bookID: [genres]]
     var bookRatings: [Media: Double]?
     
     var selectedMedia: Media?
@@ -53,11 +52,6 @@ class ObjectController {
     
     func getMediaSortedByTopPredictions(genreName: String, user: User) -> [Media]? {
 
-        return nil
-    }
-    
-    func getRatings() -> [Media: Double]? {
-        
         return nil
     }
     

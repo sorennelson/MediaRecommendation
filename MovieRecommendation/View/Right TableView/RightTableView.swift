@@ -19,7 +19,6 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     let TitleCellID = "TitleCell"
     var titleCell: TitleCell?
     
-    var ratings = [Media]()
     var selectedCategoryRow = 1
     var selectedCategory = "All"
     
@@ -34,10 +33,15 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         if currentContent == .Ratings {
-//            ratings = Array(ObjectController.sharedInstance.getRatings().keys)
             // Title + ratings
-//            return ratings.count + 1
-            return 1
+            if ObjectController.currentMediaType == .Books {
+                guard let bookRatings = User.current?.bookRatings else { return 1 }
+                return bookRatings.count + 1
+            } else {
+                guard let movieRatings = User.current?.movieRatings else { return 1 }
+                return movieRatings.count + 1
+            }
+            
         } else {
             // Title + "all categories" + categories
 //            return ObjectController.sharedInstance.getAllCategories().count + 2
@@ -63,10 +67,21 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     }
     
     private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
+        var media:Media
+        var rating:Double
+        if ObjectController.currentMediaType == .Books {
+            guard let bookRatings = User.current?.bookRatings else { return nil }
+            media = bookRatings[row-1].book
+            rating = Double(bookRatings[row-1].rating)
+        } else {
+            guard let movieRatings = User.current?.movieRatings else { return nil }
+            media = movieRatings[row-1].movie
+            rating = Double(movieRatings[row-1].rating)
+        }
+        
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
-        let media = ratings[row - 1]
-        cell.userRating = ObjectController.sharedInstance.getRatings()?[media]!
         cell.media = media
+        cell.userRating = rating
         return cell
     }
     

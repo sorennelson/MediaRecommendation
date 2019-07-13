@@ -31,15 +31,11 @@ class Book: Media {
         author = try container.decode(String.self, forKey: .author)
         smallImageURL = try container.decode(URL?.self, forKey: .smallImageURL)
         
-//        let superDecoder = try container.superDecoder()
         try super.init(from: decoder)
     }
 }
 
-struct Books: Codable {
-    let count: Int
-    let next: URL?
-    let previous: URL?
-    let results: [Book]
-    
+struct BookRating: Codable {
+    let book: Book
+    var rating: Float
 }

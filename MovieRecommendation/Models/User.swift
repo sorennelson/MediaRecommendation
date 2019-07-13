@@ -11,35 +11,18 @@ import Foundation
 class User: Codable {
     
     static var current:User?
-    
-    var username: String
     var id: Int
+    var username: String
     
-//    var bookRatingIDs: [Int]
-//    var bookRatings: [Double]
-//    var movieRatingIDs: [Int]
-//    var movieRatings: [Double]
+    var bookRatings: [BookRating]?
+    var movieRatings: [MovieRating]?
     
-    
-    //    init() {
-    //
-    //    }
-    
-    func rate(_ type: MediaType, with id: Int, rating: Double) {
-        //        switch type {
-        //        case .Books:
-        //            if bookRatingUser!.ratings[id] > 0.0 {
-        //                bookRatingUser?.numMediaRatings += 1
-        //            }
-        //            bookRatingUser?.ratings[id] = rating
-        //            booksRated[id] = rating
-        //
-        //        case .Movies:
-        //            if movieRatingUser!.ratings[id] > 0.0 {
-        //                movieRatingUser?.numMediaRatings += 1
-        //            }
-        //            movieRatingUser?.ratings[id] = rating
-        //            moviesRated[id] = rating
-        //        }
+    private enum UserKeys: String, CodingKey {
+        case id
+        case username
     }
+    
+    func rate(_ type: MediaType, with id: Int, rating: Double) { }
 }
+
+

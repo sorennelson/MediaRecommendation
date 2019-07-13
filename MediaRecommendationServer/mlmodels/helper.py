@@ -38,9 +38,9 @@ def run_collaborative_filtering(media_type):
     print("RMSE:", rmse)
 
     if media_type == 'books':
-        __create_movie_predictions(model)
-    else:
         __create_book_predictions(model)
+    else:
+        __create_movie_predictions(model)
 
 
 def __run_hyperparameters(model, features_num, reg_param, learning_rate, iteration, best):
@@ -144,9 +144,9 @@ def __create_book_predictions(model):
             prediction_val = predictions[np_bid, user.id - 1]
 
             if prediction_val != 0:
-                prediction_obj = MoviePrediction(prediction_user=user,
-                                                 book=Book.objects.get(id=psql_bid),
-                                                 prediction=prediction_val)
+                prediction_obj = BookPrediction(prediction_user=user,
+                                                book=Book.objects.get(id=psql_bid),
+                                                prediction=prediction_val)
                 prediction_obj.save()
         print(user.id)
 
