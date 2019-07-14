@@ -63,13 +63,12 @@ class MovieViewSet(viewsets.ModelViewSet):
 
         movie_user = user.movie_user
         predictions = MoviePrediction.objects.filter(prediction_user=movie_user)
-        print(predictions)
         predictions = predictions[start:end]
 
         movies = []
         for prediction in predictions:
             movies.append(prediction.movie)
-        serializer = MoviePredictionSerializer(movies, many=True)
+        serializer = MovieSerializer(movies, many=True)
 
         return Response(serializer.data)
 

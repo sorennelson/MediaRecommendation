@@ -30,9 +30,9 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     func updateResults(stringValue: String, completion:@escaping() -> ()) {
         DispatchQueue.global(qos: .background).async {
-            self.searchResults = ObjectController.sharedInstance.getAllMedia()!.values.filter {
-                return $0.title.lowercased().contains(stringValue)
-            }
+//            self.searchResults = ObjectController.sharedInstance.getAllMedia()!.values.filter {
+//                return $0.title.lowercased().contains(stringValue)
+//            }
             print(self.searchResults.count)
             completion()
         }

@@ -29,18 +29,12 @@ class AuthenticationViewController: NSViewController {
         }
         
         UserController.sharedInstance.createUser(username: usernameTextField.stringValue,
-                                                 password: passwordTextField.stringValue) {
-        (success, error, data) in
+                                                 password: passwordTextField.stringValue) { (success, error) in
             if !success {
                 self.showErrorCreatingAccountNotification(error!)
-                
             } else {
-                if let _ = UserController.sharedInstance.didLogin(userData: data!) {
-                    print("Internal Error")
-                } else {
-                    self.showSuccessCreatingAccountNotification()
-                    self.presentingViewController?.dismiss(self)
-                }
+                self.showSuccessCreatingAccountNotification()
+                self.presentingViewController?.dismiss(self)
             }
         }
     }
@@ -52,18 +46,13 @@ class AuthenticationViewController: NSViewController {
         }
         
         UserController.sharedInstance.login(username: usernameTextField.stringValue,
-                                            password: passwordTextField.stringValue) {
-            (success, error, data) in
+                                            password: passwordTextField.stringValue) { (success, error) in
             if !success {
                 self.showErrorCreatingAccountNotification(error!)
                 
             } else {
-                if let _ = UserController.sharedInstance.didLogin(userData: data!) {
-                    print("Internal Error")
-                } else {
-                    self.showSuccessLoggingInNotification()
-                    self.presentingViewController?.dismiss(self)
-                }
+                self.showSuccessLoggingInNotification()
+                self.presentingViewController?.dismiss(self)
             }
         }
     }

@@ -14,9 +14,9 @@ class ObjectController {
     static var sharedInstance = ObjectController()
     static var currentMediaType = MediaType.Movies
     
-    var movies: [Movie] = []
+    var allMovies: [Movie] = []
     var recommendedMovies: [Movie] = []
-    var books: [Book] = []
+    var allBooks: [Book] = []
     var recommendedBooks: [Book] = []
     
     // Not currently using
@@ -29,15 +29,50 @@ class ObjectController {
     var selectedMedia: Media?
     var selectedMediaPrediction: Double?
     
+    func noRecommendations() -> Bool {
+        return ObjectController.currentMediaType == .Books ? recommendedBooks.count > 0 : recommendedMovies.count > 0
+    }
     
-    func getAllMedia() -> [Int: Media]? {
-
-        return nil
+    func getMedia(for indices: Range<Int>) -> [Media] {
+        if let _ = User.current {
+            switch ObjectController.currentMediaType {
+            case .Books:
+                return getMedia(for: indices, in: recommendedBooks)
+                
+            case .Movies:
+                return getMedia(for: indices, in: recommendedMovies)
+            }
+        } else {
+            switch ObjectController.currentMediaType {
+            case .Books:
+                return getMedia(for: indices, in: allBooks)
+                
+            case .Movies:
+                return getMedia(for: indices, in: allMovies)
+            }
+        }
+    }
+    
+    private func getMedia(for indices: Range<Int>, in array: [Media]) -> [Media] {
+        var media = [Media]()
+        for i in indices {
+            if array.indices.contains(i) {
+                media.append(array[i])
+            }
+        }
+        return media
+    }
+    
+    func getMediaCount() -> Int {
+        if let _ = User.current {
+            return ObjectController.currentMediaType == .Books ? recommendedBooks.count : recommendedMovies.count
+        } else {
+            return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
+        }
     }
     
     func getAllMediaCount() -> Int {
-
-        return 0
+        return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
     }
     
     func getAllMedia(for index: Int) -> Media? {
@@ -46,11 +81,6 @@ class ObjectController {
     }
     
     func getAllMedia(for indices: Range<Int>) -> [Media]? {
-
-        return nil
-    }
-    
-    func getMediaSortedByTopPredictions(genreName: String, user: User) -> [Media]? {
 
         return nil
     }

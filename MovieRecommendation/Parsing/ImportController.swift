@@ -13,6 +13,64 @@ class ImportController {
     
     static let sharedInstance = ImportController()
     
+    /// Loads either the recommended movies or all media (sorted by highest avg, title) depending on whether their is a current user or not.
+    /// If their is an error loading the recommended media, or the model is not done recommending, attempts to load all media.
+    /// Call before using media.
+    ///
+    /// - Parameter completion: (was media successful to load bool, were ratings successful to load bool)
+    func loadMediaAndRatings(_ mediaType: MediaType, completion:@escaping (Bool, Bool) -> ()) {
+        var completeCount = 0
+        var mediaLoaded = false
+        var ratingsLoaded = false
+        
+        if let _ = User.current {
+            ImportController.sharedInstance.loadRecommended(0, to: 300, mediaType) { (success, error) in
+                if !success || ObjectController.sharedInstance.noRecommendations() {
+                    ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
+                        //            TODO: Handle error
+                        if success {
+                            mediaLoaded = true
+                        }
+                        if self.isComplete(&completeCount) {
+                            completion(mediaLoaded, ratingsLoaded)
+                        }
+                    }
+                } else {
+                    //            TODO: Handle error
+                    mediaLoaded = true
+                    if self.isComplete(&completeCount) {
+                        completion(mediaLoaded, ratingsLoaded)
+                    }
+                }
+            }
+        } else {
+            ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
+                //            TODO: Handle error
+                if success {
+                    mediaLoaded = true
+                }
+                if self.isComplete(&completeCount) {
+                    completion(mediaLoaded, ratingsLoaded)
+                }
+            }
+        }
+        
+        ImportController.sharedInstance.loadRatings(mediaType) { (success, error) in
+            //            TODO: Handle error
+            if success {
+                ratingsLoaded = true
+            }
+            if self.isComplete(&completeCount) {
+                completion(mediaLoaded, ratingsLoaded)
+            }
+        }
+    }
+    
+    private func isComplete(_ completeCount: inout Int) -> Bool {
+        completeCount += 1
+        return completeCount == 2
+    }
+    
     /// Forms an Alamofire request and gives back the data if their is any and any error description
     ///
     /// - Parameters:
@@ -43,7 +101,7 @@ class ImportController {
     /// - Parameters:
     ///   - mediaType: MediaType.
     ///   - completion: (success bool, error description)
-    func loadAllMedia(_ mediaType: MediaType, completion:@escaping (Bool, String) -> ()) {
+    private func loadAllMedia(_ mediaType: MediaType, completion:@escaping (Bool, String) -> ()) {
         
         let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/all/"
         loadData(requestString: requestString, params:nil) { (success, str, data) in
@@ -54,12 +112,12 @@ class ImportController {
             do {
                 if mediaType == .Movies {
                     let movies = try JSONDecoder().decode([Movie].self, from: data)
-                    ObjectController.sharedInstance.movies = movies
+                    ObjectController.sharedInstance.allMovies = movies
                     completion(true, str)
                     
                 } else {
                     let books = try JSONDecoder().decode([Book].self, from: data)
-                    ObjectController.sharedInstance.books = books
+                    ObjectController.sharedInstance.allBooks = books
                     completion(true, str)
                 }
             } catch let error {
@@ -97,7 +155,7 @@ class ImportController {
                     
                 } else {
                     let books = try JSONDecoder().decode([Book].self, from: data)
-                    ObjectController.sharedInstance.books = books
+                    ObjectController.sharedInstance.allBooks = books
                     completion(true, str)
                 }
                 
@@ -115,7 +173,7 @@ class ImportController {
     ///   - m: Int. end index
     ///   - mediaType: MediaType
     ///   - completion: (success bool, error description)
-    func loadRatings(_ mediaType:MediaType, completion:@escaping (Bool, String) -> ()) {
+    private func loadRatings(_ mediaType:MediaType, completion:@escaping (Bool, String) -> ()) {
         
         guard let user = User.current else { completion(false, "No User"); return }
         

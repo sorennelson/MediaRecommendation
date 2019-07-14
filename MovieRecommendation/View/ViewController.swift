@@ -34,32 +34,21 @@ class ViewController: NSViewController {
     
     override func loadView() {
         super.loadView()
-        UserController.sharedInstance.attemptLogin(completion: { (error, success, data) in
-            if let _ = error {
-                // TODO: Notification -> Try again
-            } else if success == true {
-                if let _ = UserController.sharedInstance.didLogin(userData: data!) {
-                // TODO: Notification -> Try again
-                    print("Try again")
-                } else {
-                    self.userLoggedIn()
-                }
+        
+        UserController.sharedInstance.attemptLogin { (success) in
+            // TODO: If not logged in, prompt them
+            ImportController.sharedInstance.loadMediaAndRatings(.Movies) { (media, ratings) in
+            // TODO: Notification if something didn't load
+                self.reloadTableViews()
             }
-        })
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableViews()
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
-
-        ImportController.sharedInstance.loadAllMedia(.Books, completion: { (success, str) in
-            print("BOOKS IMPORT: " + str)
-        })
-        
-        ImportController.sharedInstance.loadAllMedia(.Movies, completion: { (success, str) in
-            print("MOVIES IMPORT: " + str)
-        })
     }
     
     private func setupTableViews() {
@@ -80,10 +69,6 @@ class ViewController: NSViewController {
         // TODO: edit sign in page
         // TODO: Load user ratings / predictions
         reloadTableViews()
-        
-        ImportController.sharedInstance.loadRecommended(0, to: 100, .Movies, completion: { (success, str) in
-            print("MOVIES RECOMMENDED IMPORT: " + str)
-        })
     }
     
     func reloadTableViews() {
@@ -95,7 +80,10 @@ class ViewController: NSViewController {
     @IBAction func addButtonPressed(_ sender: Any) {}
     
     @IBAction func bookButtonPressed(_ sender: Any) {
-        // TODO: Check if books have been imported
+        ImportController.sharedInstance.loadMediaAndRatings(.Books) { (media, ratings) in
+            // TODO: Notification if something didn't load
+            self.reloadTableViews()
+        }
         ObjectController.currentMediaType = .Books
         reloadTableViews()
     }

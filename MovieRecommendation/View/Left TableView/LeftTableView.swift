@@ -30,7 +30,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     func numberOfRows(in tableView: NSTableView) -> Int {
         var count = 0
         if selectedCategory == "All" {
-            count = ObjectController.sharedInstance.getAllMediaCount()
+            count = ObjectController.sharedInstance.getMediaCount()
         } else {
             count = ObjectController.sharedInstance.getCategoryCount(genreName: selectedCategory)
         }
@@ -50,9 +50,10 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
             var media: [Media]
             if selectedCategory == "All" {
-                media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)!
+                media = ObjectController.sharedInstance.getMedia(for: (row-1)*3..<(row-1)*3+3)
             } else {
-                media = ObjectController.sharedInstance.getMediaForCategory(genreName: selectedCategory, at: (row-1)*3..<(row-1)*3+3)!
+//                media = ObjectController.sharedInstance.getMediaForCategory(genreName: selectedCategory, at: (row-1)*3..<(row-1)*3+3)!
+                media = []
             }
             cell.setMedia(media: media)
             return cell

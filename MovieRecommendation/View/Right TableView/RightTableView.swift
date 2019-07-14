@@ -22,7 +22,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var selectedCategoryRow = 1
     var selectedCategory = "All"
     
-    
+    //    MARK: Tableview
     func setTableView(_ tableView: NSTableView) {
         self.tableView = tableView
         self.tableView!.dataSource = self
@@ -34,68 +34,13 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         if currentContent == .Ratings {
             // Title + ratings
-            if ObjectController.currentMediaType == .Books {
-                guard let bookRatings = User.current?.bookRatings else { return 1 }
-                return bookRatings.count + 1
-            } else {
-                guard let movieRatings = User.current?.movieRatings else { return 1 }
-                return movieRatings.count + 1
-            }
+            return 1 + UserController.sharedInstance.getRatingsCount()
             
         } else {
             // Title + "all categories" + categories
 //            return ObjectController.sharedInstance.getAllCategories().count + 2
             return 2
         }
-    }
-    
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        switch row {
-        case 0 :
-            titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
-            titleCell!.setHeader(currentContent)
-            titleCell!.toggleHideButtons(currentContent == .Categories)
-            return titleCell
-            
-        default :
-            if currentContent == .Ratings {
-                return getRatingCellView(tableView: tableView, row: row)
-            } else {
-                return getCategoryCellView(tableView: tableView, row: row)
-            }
-        }
-    }
-    
-    private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
-        var media:Media
-        var rating:Double
-        if ObjectController.currentMediaType == .Books {
-            guard let bookRatings = User.current?.bookRatings else { return nil }
-            media = bookRatings[row-1].book
-            rating = Double(bookRatings[row-1].rating)
-        } else {
-            guard let movieRatings = User.current?.movieRatings else { return nil }
-            media = movieRatings[row-1].movie
-            rating = Double(movieRatings[row-1].rating)
-        }
-        
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
-        cell.media = media
-        cell.userRating = rating
-        return cell
-    }
-    
-    private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
-        if row > 1 {
-            cell.category = ObjectController.sharedInstance.getAllCategories()![row-2]
-            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getCategoryCount(genreName: cell.category))
-        } else {
-            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMedia()!.count)
-            cell.selected = true
-        }
-        cell.categoryTitle.stringValue = cell.category
-        return cell
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
@@ -120,6 +65,47 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
             
             return false
         }
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        switch row {
+        case 0 :
+            titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
+            titleCell!.setHeader(currentContent)
+            titleCell!.toggleHideButtons(currentContent == .Categories)
+            return titleCell
+            
+        default :
+            if currentContent == .Ratings {
+                return getRatingCellView(tableView: tableView, row: row)
+            } else {
+                return getCategoryCellView(tableView: tableView, row: row)
+            }
+        }
+    }
+    
+    //    MARK: Rating Cell
+    private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
+        guard let (media, rating) = UserController.sharedInstance.getMediaAndRating(for: row - 1) else { return nil }
+        cell.media = media
+        cell.userRating = rating
+        return cell
+    }
+    
+    //    MARK: Category Cell
+    private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
+        if row > 1 {
+            cell.category = ObjectController.sharedInstance.getAllCategories()![row-2]
+            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getCategoryCount(genreName: cell.category))
+            
+        } else {
+            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMediaCount())
+            cell.selected = true
+        }
+        cell.categoryTitle.stringValue = cell.category
+        return cell
     }
     
 // MARK: Content
