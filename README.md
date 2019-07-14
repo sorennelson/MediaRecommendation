@@ -3,9 +3,6 @@ A media recommendation application that uses rankings from MovieLens and Goodboo
 
 ## TODO
 - [ ] Categories
-- [ ] Top n recommendations
-- [ ] Put RM into separate library
-- [ ] Move data to database
 - [ ] Incorporate Music
 - [ ] Finish UI
 
