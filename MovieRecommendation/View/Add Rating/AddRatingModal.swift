@@ -43,9 +43,9 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
         if searchResults.count > 0 && searchResults.count > row {
             resultsCell!.media = searchResults[row]
         }
-        else {
-            resultsCell!.media = ObjectController.sharedInstance.get[row]
-        }
+//        else {
+//            resultsCell!.media = ObjectController.sharedInstance.books[row]
+//        }
         return resultsCell
     }
     
