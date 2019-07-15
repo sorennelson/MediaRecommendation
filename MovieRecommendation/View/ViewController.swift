@@ -42,7 +42,6 @@ class ViewController: NSViewController {
                 self.reloadTableViews()
             }
         }
-        
     }
     
     override func viewDidLoad() {
@@ -72,9 +71,11 @@ class ViewController: NSViewController {
     }
     
     func reloadTableViews() {
-        rightTableView.reloadData()
-        leftTableView.reloadData()
-        categoriesTableView.reloadData()
+        DispatchQueue.main.async {
+            self.rightTableView.reloadData()
+            self.leftTableView.reloadData()
+            self.categoriesTableView.reloadData()
+        }
     }
     
     @IBAction func addButtonPressed(_ sender: Any) {}
@@ -82,10 +83,10 @@ class ViewController: NSViewController {
     @IBAction func bookButtonPressed(_ sender: Any) {
         ImportController.sharedInstance.loadMediaAndRatings(.Books) { (media, ratings) in
             // TODO: Notification if something didn't load
+            
+            ObjectController.currentMediaType = .Books
             self.reloadTableViews()
         }
-        ObjectController.currentMediaType = .Books
-        reloadTableViews()
     }
     
     @IBAction func movieButtonPressed(_ sender: Any) {

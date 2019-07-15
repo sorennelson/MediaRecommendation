@@ -27,9 +27,7 @@ class MediaDetailPopover: NSViewController {
         }
         media.getImageData(completion: { (data) in
             if let data = data {
-                DispatchQueue.main.async {
-                    self.image.image = NSImage(data: data)
-                }
+                DispatchQueue.main.async { self.image.image = NSImage(data: data) }
             }
         })
         

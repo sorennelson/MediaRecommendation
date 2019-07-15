@@ -15,12 +15,6 @@ class TitleCell : NSTableCellView {
     @IBOutlet var arrowButton: NSButton!
     @IBOutlet var addButton: NSButton!
     
-    //    TODO:
-    override func viewWillDraw() {
-        
-    }
-    
-    
     var leadingMargin : Double? {
         didSet {
             // TODO: Connect leading margin and set constant
@@ -63,7 +57,6 @@ class TitleCell : NSTableCellView {
     
     @IBAction func addButtonPressed(_ sender: Any) {
         print("Add")
-        
     }
     
 }

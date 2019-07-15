@@ -70,9 +70,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         switch row {
         case 0 :
-            titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
-            titleCell!.setHeader(currentContent)
-            titleCell!.toggleHideButtons(currentContent == .Categories)
+            titleCell = getTitleCellView(tableView: tableView)
             return titleCell
             
         default :
@@ -82,6 +80,14 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
                 return getCategoryCellView(tableView: tableView, row: row)
             }
         }
+    }
+    
+    //    MARK: Title Cell
+    private func getTitleCellView(tableView: NSTableView) -> TitleCell? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
+        cell!.setHeader(currentContent)
+        cell!.toggleHideButtons(currentContent == .Categories)
+        return cell
     }
     
     //    MARK: Rating Cell
