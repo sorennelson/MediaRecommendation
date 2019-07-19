@@ -62,6 +62,40 @@ def import_book_ratings():
                 rating.save()
 
 
+def add_movie_genres():
+    movies = Movie.objects.all()
+
+    for movie in movies:
+        for genre_name in movie.genres:
+            if MovieGenre.objects.filter(name=genre_name).exists():
+                psql_genre = MovieGenre.objects.get(name=genre_name)
+                psql_genre.movies.add(movie)
+                psql_genre.movies_count += 1
+                psql_genre.save()
+            else:
+                psql_genre = MovieGenre(name=genre_name,
+                                        movies_count=1)
+                psql_genre.save()
+                psql_genre.movies.add(movie)
+
+
+def add_book_genres():
+    books = Book.objects.all()
+
+    for book in books:
+        for genre_name in book.genres:
+            if BookGenre.objects.filter(name=genre_name).exists():
+                psql_genre = BookGenre.objects.get(name=genre_name)
+                psql_genre.books.add(book)
+                psql_genre.books_count += 1
+                psql_genre.save()
+            else:
+                psql_genre = BookGenre(name=genre_name,
+                                        books_count=1)
+                psql_genre.save()
+                psql_genre.books.add(book)
+
+
 # def update_movie_ids():
 #     movies = Movie.objects.all()
 #     num_media = movies.count()
@@ -84,6 +118,7 @@ if __name__ == "__main__":
     from media.models import Movie, Book
     from userauth.models import MovieUser, BookUser
     from ratings.models import MovieRating, BookRating
+    from genres.models import MovieGenre, BookGenre
 
     if sys.argv[1] == "import_book_ratings":
         import_book_ratings()
@@ -91,8 +126,17 @@ if __name__ == "__main__":
     elif sys.argv[1] == "import_movie_ratings":
         import_movie_ratings()
 
+    elif sys.argv[1] == "overfit_movie":
+        ml.overfit_collaborative_filtering('movies')
+
     elif sys.argv[1] == "run_book_ml":
         ml.run_collaborative_filtering('books')
 
     elif sys.argv[1] == "run_movie_ml":
         ml.run_collaborative_filtering('movies')
+
+    elif sys.argv[1] == "add_movie_genres":
+        add_movie_genres()
+
+    elif sys.argv[1] == "add_book_genres":
+        add_book_genres()

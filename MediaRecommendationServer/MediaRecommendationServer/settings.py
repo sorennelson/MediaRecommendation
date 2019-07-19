@@ -42,6 +42,7 @@ INSTALLED_APPS = [
       'mlmodels',
       'ratings',
       'predictions',
+      'genres',
       'rest_framework',
       'django_extensions',
 ]

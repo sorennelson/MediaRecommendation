@@ -1,5 +1,6 @@
 import numpy as np
 from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
 
 from . import cfmodel
 
@@ -16,7 +17,7 @@ def run_collaborative_filtering(media_type):
 
     if media_type == "books":
         reg_params = [0.05, 0.1, 1, 2]
-        learning_rates = [0.00005, 0.0001]
+        learning_rates = [0.0001]
     else:
         # reg_params = [0.01, 0.05, 0.1]
         # learning_rates = [0.00005, 0.0001]
@@ -27,91 +28,147 @@ def run_collaborative_filtering(media_type):
         i = 0
         for reg_param in reg_params:
             for learning_rate in learning_rates:
-                best = __run_hyperparameters(model, features_num, reg_param, learning_rate, i, best)
+                best = _run_hyperparameters(model, 500, features_num, learning_rate, i, best, reg_param)
                 i += 1
     print("BEST MODEL:", best[0], best[1], best[2], best[3])
 
     model.set_user_item_params(best[0])
-    losses = __run_gradient_descent(500, model, best[1], best[2])
+    losses, _ = _run_gradient_descent(500, model, best[2], best[1])
 
-    rmse = __compute_rmse(model)
+    rmse = _compute_rmse(model)
     print("RMSE:", rmse)
 
     if media_type == 'books':
-        __create_book_predictions(model)
+        _create_book_predictions(model)
     else:
-        __create_movie_predictions(model)
+        _create_movie_predictions(model)
 
 
-def __run_hyperparameters(model, features_num, reg_param, learning_rate, iteration, best):
+def overfit_collaborative_filtering(media_type):
+    model = cfmodel.CollaborativeFilteringModel(media_type)
+    best = [0, 0, 0, 1.0]
+    param_count = [10, 20, 30, 50]
+
+    if media_type == "books":
+        learning_rates = [0.0001]
+    else:
+        learning_rates = [0.001]
+
+    i = 0
+    for features_num in param_count:
+        for learning_rate in learning_rates:
+            best = _run_hyperparameters(model, 300, features_num, learning_rate, i, best)
+            i += 1
+
+
+def _run_hyperparameters(model, num_epochs, features_num, learning_rate, iteration, best, reg_param=0):
     print(features_num, ', R:', reg_param, ', LR:', learning_rate)
 
-    model.set_user_item_params( features_num)
+    model.set_user_item_params(features_num)
     model.separate_validation_set(iteration)
 
-    losses = __run_gradient_descent(500, model, reg_param, learning_rate)
-    # print("LOSS:", losses)
+    losses, val_losses = _run_gradient_descent(num_epochs, model, learning_rate, reg_param)
+    _create_loss_graph(losses, val_losses)
 
-    rmse = __compute_rmse(model)
+    rmse = _compute_rmse(model)
     print("RMSE:", rmse)
 
-    val_rmse = __compute_val_rmse(model)
+    val_rmse = _compute_val_rmse(model)
     print("VAL RMSE:", val_rmse)
 
     return [model.features_num, reg_param, learning_rate, val_rmse] if val_rmse < best[3] else best
 
 
 # MARK: Gradient Descent
-def __run_gradient_descent(num_iters, model, reg_param, learning_rate):
-    losses = []
+def _run_gradient_descent(num_iters, model, learning_rate, reg_param):
+    train_losses = []
+    val_losses = []
 
     for i in range(num_iters):
-        error = __compute_error(model)
-        item_gradient = __compute_item_gradient(error, model, reg_param)
-        user_gradient = __compute_user_gradient(error, model, reg_param)
+        error = _compute_error(model)
+        item_gradient = _compute_item_gradient(error, model, reg_param)
+        user_gradient = _compute_user_gradient(error, model, reg_param)
 
-        loss = __compute_loss(error, model, reg_param)
-        losses.append(loss)
+        loss = _compute_loss(error, model, reg_param)
+        train_losses.append(loss)
+
+        val_loss = _compute_val_loss(model)
+        val_losses.append(val_loss)
 
         model.item_params -= learning_rate * item_gradient
         model.user_params -= learning_rate * user_gradient
 
-    return losses
+    return train_losses, val_losses
 
 
-def __compute_error(model):
-    error = np.dot(model.item_params, model.user_params.T) - model.ratings
-    return model.rated * error  # only for rated media
+def _compute_error(model):
+    error = np.dot(model.item_params, model.user_params.T) - model.train_ratings
+    return model.train_rated * error  # only for rated media
 
 
-def __compute_item_gradient(error, model, reg_param):
+def _compute_item_gradient(error, model, reg_param):
     gradient = np.dot(error, model.user_params)
-    regularization = reg_param * model.item_params
+    regularization = reg_param * model.item_params if reg_param != 0 else 0
     return gradient + regularization
 
 
-def __compute_user_gradient(error, model, reg_param):
+def _compute_user_gradient(error, model, reg_param):
     gradient = np.dot(error.T, model.item_params)
-    regularization = reg_param * model.user_params
+    regularization = reg_param * model.user_params if reg_param != 0 else 0
     return gradient + regularization
 
 
-def __compute_loss(error, model, reg_param):
+def _compute_loss(error, model, reg_param):
     loss = np.sum(np.square(error)) / 2
-    item_regularization = (reg_param / 2) * np.sum(np.square(model.item_params))
-    user_regularization = (reg_param / 2) * np.sum(np.square(model.user_params))
+    item_regularization = (reg_param / 2) * np.sum(np.square(model.item_params)) if reg_param != 0 else 0
+    user_regularization = (reg_param / 2) * np.sum(np.square(model.user_params)) if reg_param != 0 else 0
+
     return loss + item_regularization + user_regularization
 
-# TODO: Add training testing
+
+def _compute_val_loss(model):
+    all_predictions = np.dot(model.item_params, model.user_params.T)
+    predictions = []
+
+    for i in range(len(model.val_indices)):
+        x, y = model.val_indices[i]
+        predictions.append(all_predictions[x, y])
+
+    predictions = np.array(predictions)
+    error = predictions - model.val_ratings
+    loss = np.sum(np.square(error)) / 2
+    return loss
+
 
 # MARK: TESTING
-def __compute_rmse(model):
+def _create_loss_graph(train_losses, val_losses):
+    train_losses = [train_losses[i] for i in range(len(train_losses)) if i % 10 == 0]
+    val_losses = [val_losses[i] for i in range(len(val_losses)) if i % 10 == 0]
+
+    epochs = range(1, len(train_losses) + 1)
+    plt.plot(epochs, train_losses, 'bo', label='Train Loss')
+    plt.plot(epochs, val_losses, 'b', label='Validation Loss')
+    plt.title('Training and Validation Loss')
+    plt.legend()
+    plt.show()
+
+
+# TODO: Add training testing
+def _compute_rmse(model):
     predictions = np.dot(model.item_params, model.user_params.T)
     predictions += model.ratings_mean.reshape(-1, 1)
-    return np.sqrt(mean_squared_error(model.ratings, predictions)) / 5
+
+    ratings = model.ratings.copy()
+
+    for i in range(len(model.val_indices)):
+        x, y = model.val_indices[i]
+        predictions[x, y] = 0
+        ratings[x, y] = 0
+
+    return np.sqrt(mean_squared_error(ratings, predictions)) / 5
 
 
-def __compute_val_rmse(model):
+def _compute_val_rmse(model):
     all_predictions = np.dot(model.item_params, model.user_params.T)
     all_predictions += model.ratings_mean.reshape(-1, 1)
 
@@ -127,7 +184,7 @@ def __compute_val_rmse(model):
 
 
 # MARK: PREDICTIONS
-def __create_book_predictions(model):
+def _create_book_predictions(model):
     predictions = np.dot(model.item_params, model.user_params.T)
     predictions += model.ratings_mean.reshape(-1, 1)
 
@@ -151,7 +208,7 @@ def __create_book_predictions(model):
         print(user.id)
 
 
-def __create_movie_predictions(model):
+def _create_movie_predictions(model):
     predictions = np.dot(model.item_params, model.user_params.T)
     predictions += model.ratings_mean.reshape(-1, 1)
 

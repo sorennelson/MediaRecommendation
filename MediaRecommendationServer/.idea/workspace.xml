@@ -2,146 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25ad6e99-5732-4c01-becd-5f29b77b9ecc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/ScalarArithmetic-bleed.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/imshow.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/io.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/machine_learning/machine_learning.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-complex-math.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-helper-functions.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-image.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-initing.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-matrix.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-operators.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/matrix/m-simple-math.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/numbers.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/OpenCV.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/conversion.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/machine_learning.mm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/math.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv.mm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Headers" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Resources" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/.!41639!opencv2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/calib3d/calib3d.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/contrib/contrib.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/contrib/detection_based_tracker.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/contrib/hybridtracker.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/contrib/openfabmap.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/contrib/retina.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/affine.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/core.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/core_c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/cuda_devptrs.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/devmem2d.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/eigen.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/gpumat.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/internal.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/mat.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/opengl_interop.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/opengl_interop_deprecated.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/operations.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/types_c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/version.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/core/wimage.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/features2d/features2d.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/all_indices.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/allocator.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/any.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/autotuned_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/composite_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/config.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/defines.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/dist.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/dummy.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/dynamic_bitset.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/flann.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/flann_base.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/general.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/ground_truth.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/hdf5.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/heap.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/hierarchical_clustering_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/index_testing.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/kdtree_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/kdtree_single_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/kmeans_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/linear_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/logger.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/lsh_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/lsh_table.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/matrix.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/miniflann.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/nn_index.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/object_factory.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/params.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/random.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/result_set.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/sampling.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/saving.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/simplex_downhill.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/flann/timer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/highgui/cap_ios.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/highgui/highgui.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/highgui/highgui_c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/highgui/ios.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/imgproc/imgproc.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/imgproc/imgproc_c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/imgproc/types_c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/legacy/blobtrack.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/legacy/compat.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/legacy/legacy.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/legacy/streams.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/ml/ml.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/nonfree/features2d.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/nonfree/gpu.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/nonfree/nonfree.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/nonfree/ocl.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/objdetect/objdetect.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/opencv.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/opencv_modules.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/photo/photo.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/photo/photo_c.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/autocalib.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/blenders.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/camera.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/exposure_compensate.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/matchers.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/motion_estimators.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/seam_finders.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/util.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/util_inl.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/warpers.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/detail/warpers_inl.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/stitcher.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/stitching/warpers.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/video/background_segm.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/video/tracking.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/video/video.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/deblurring.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/fast_marching.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/fast_marching_inl.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/frame_source.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/global_motion.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/inpainting.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/log.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/motion_stabilizing.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/optical_flow.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/stabilizer.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/videostab/videostab.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Headers/world/world.hpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/Resources/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/A/opencv2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/Versions/Current" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/opencv2.framework/opencv2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/operations-and-indexing.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/objc/swix-Bridging-Header.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/vector/complex-math.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/vector/helper-functions.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/vector/initing.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/vector/operators.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/vector/simple-math.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swix/vector/vector.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MediaRecommendationServer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaRecommendationServer/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MediaRecommendationServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaRecommendationServer/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mlmodels/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlmodels/helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Movie_Data/movie_ratings.numbers" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../User_Data/books.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -168,46 +35,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mlmodels/helper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mlmodels/cfmodel.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="335">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/genres/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/media/views.py">
+        <entry file="file://$PROJECT_DIR$/helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="404">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="510">
+              <caret line="103" column="32" lean-forward="true" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
               <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ratings/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="40" column="15" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ratings/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ratings/serializers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -225,6 +92,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Movie</find>
+      <find>1,1,</find>
+      <find>1,1,5</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -250,26 +119,30 @@
         <option value="$PROJECT_DIR$/ratings/admin.py" />
         <option value="$PROJECT_DIR$/userauth/admin.py" />
         <option value="$PROJECT_DIR$/predictions/views.py" />
-        <option value="$PROJECT_DIR$/MediaRecommendationServer/urls.py" />
         <option value="$PROJECT_DIR$/predictions/models.py" />
-        <option value="$PROJECT_DIR$/mlmodels/cfmodel.py" />
         <option value="$PROJECT_DIR$/media/models.py" />
-        <option value="$PROJECT_DIR$/MediaRecommendationServer/settings.py" />
         <option value="$PROJECT_DIR$/userauth/urls.py" />
         <option value="$PROJECT_DIR$/ratings/models.py" />
-        <option value="$PROJECT_DIR$/helper.py" />
         <option value="$PROJECT_DIR$/userauth/views.py" />
         <option value="$PROJECT_DIR$/userauth/serializers.py" />
-        <option value="$PROJECT_DIR$/mlmodels/helper.py" />
         <option value="$PROJECT_DIR$/userauth/models.py" />
         <option value="$PROJECT_DIR$/ratings/serializers.py" />
         <option value="$PROJECT_DIR$/ratings/views.py" />
+        <option value="$PROJECT_DIR$/mlmodels/cfmodel.py" />
+        <option value="$PROJECT_DIR$/mlmodels/helper.py" />
+        <option value="$PROJECT_DIR$/MediaRecommendationServer/settings.py" />
         <option value="$PROJECT_DIR$/media/views.py" />
+        <option value="$PROJECT_DIR$/genres/views.py" />
+        <option value="$PROJECT_DIR$/genres/admin.py" />
+        <option value="$PROJECT_DIR$/MediaRecommendationServer/urls.py" />
+        <option value="$PROJECT_DIR$/genres/models.py" />
+        <option value="$PROJECT_DIR$/genres/serializers.py" />
+        <option value="$PROJECT_DIR$/helper.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1354" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="width" value="1680" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -278,13 +151,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
               <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
+              <item name="genres" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
@@ -296,20 +173,11 @@
               <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
               <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
-              <item name="ratings" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MediaRecommendationServer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MediaRecommendationServer" type="462c0819:PsiDirectoryNode" />
-              <item name="userauth" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -317,8 +185,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -411,12 +282,16 @@
       <workItem from="1562468978131" duration="25233000" />
       <workItem from="1562634699652" duration="51809000" />
       <workItem from="1562894679716" duration="22407000" />
-      <workItem from="1563152365459" duration="569000" />
+      <workItem from="1563152365459" duration="600000" />
+      <workItem from="1563305574699" duration="546000" />
+      <workItem from="1563316424063" duration="14221000" />
+      <workItem from="1563342463208" duration="1319000" />
+      <workItem from="1563550450940" duration="4547000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="152910000" />
+    <option name="totallyTimeSpent" value="173574000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -428,9 +303,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="1" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15079366" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15811966" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -441,7 +316,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.29749477" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32985386" />
       <window_info anchor="bottom" id="Database Changes" order="9" weight="0.32985386" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.24739039" />
@@ -449,28 +324,15 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.49930653" weight="0.32967034" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.37309292" visible="true" weight="0.22039072" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.8585298" weight="0.1996337" />
-      <window_info anchor="right" x="0" y="0" width="370" height="850" id="Documentation" order="5" sideWeight="0.5006935" side_tool="true" visible="true" weight="0.16544567" />
+      <window_info anchor="right" x="0" y="0" width="370" height="850" id="Documentation" order="5" sideWeight="0.62690705" side_tool="true" visible="true" weight="0.22039072" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ratings_parser.py" />
-    <entry file="file://$PROJECT_DIR$/../import_ratings.py" />
-    <entry file="file://$PROJECT_DIR$/../Import/import_ratings.py" />
-    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/Conda/anaconda/lib/python3.6/site-packages/django/db/models/fields/related_descriptors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="537" selection-start-line="537" selection-end-line="537" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Conda/anaconda/lib/python3.6/site-packages/django/db/models/fields/related.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -496,13 +358,6 @@
     <entry file="file://$PROJECT_DIR$/ratings/urls.py" />
     <entry file="file://$PROJECT_DIR$/ratings/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/media/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -598,9 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/book_ratings.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/mlmodels/models.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -660,13 +512,6 @@
     <entry file="file://$PROJECT_DIR$/media/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/mlmodels/cfmodel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-480">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/userauth/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -674,13 +519,6 @@
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="134" selection-start-line="134" selection-start-column="2" selection-end-line="137" selection-end-column="3" />
         </state>
       </provider>
     </entry>
@@ -695,13 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
           <caret line="393" column="8" selection-start-line="393" selection-start-column="8" selection-end-line="393" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/serializers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
@@ -725,43 +556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="31" />
-          <folding>
-            <element signature="e#649#681#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mlmodels/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="148" column="48" lean-forward="true" selection-start-line="148" selection-start-column="48" selection-end-line="148" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="90" column="44" lean-forward="true" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/userauth/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -772,13 +566,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/views.py">
+    <entry file="file://$PROJECT_DIR$/movie_ratings.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/book_ratings.csv">
+      <provider selected="true" editor-type-id="csv-text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="7" lean-forward="true" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="395">
+          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlmodels/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
           <folding>
-            <element signature="e#0#43#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="47" lean-forward="true" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ratings/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="66" lean-forward="true" selection-start-line="14" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ratings/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -792,19 +644,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ratings/models.py">
+    <entry file="file://$PROJECT_DIR$/media/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="5" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ratings/serializers.py">
+    <entry file="file://$PROJECT_DIR$/MediaRecommendationServer/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="285">
+          <caret line="19" column="49" lean-forward="true" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genres/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genres/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="43" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlmodels/cfmodel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genres/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genres/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="103" column="32" lean-forward="true" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
