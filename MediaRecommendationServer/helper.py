@@ -91,9 +91,26 @@ def add_book_genres():
                 psql_genre.save()
             else:
                 psql_genre = BookGenre(name=genre_name,
-                                        books_count=1)
+                                       books_count=1)
                 psql_genre.save()
                 psql_genre.books.add(book)
+
+
+def add_all_genre():
+    books_count = Book.objects.count()
+    book_genre = BookGenre(name='All', books_count=books_count)
+    book_genre.save()
+
+    movies_count = Movie.objects.count()
+    movie_genre = MovieGenre(name='All', movies_count=movies_count)
+    movie_genre.save()
+
+
+def remove_small_book_genres():
+    for count in range(5, 10):
+        genres = BookGenre.objects.filter(count=count)
+        for genre in genres:
+            genre.delete()
 
 
 # def update_movie_ids():
@@ -140,3 +157,9 @@ if __name__ == "__main__":
 
     elif sys.argv[1] == "add_book_genres":
         add_book_genres()
+
+    elif sys.argv[1] == "add_all_genre":
+        add_all_genre()
+
+    elif sys.argv[1] == "remove_small_book_genres":
+        remove_small_book_genres()

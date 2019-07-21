@@ -2,8 +2,8 @@ from django.db import models
 
 
 class BookGenre(models.Model):
-    name = models.CharField(max_length=300)
-    books_count = models.IntegerField()
+    name = models.CharField(max_length=300, unique=True)
+    count = models.IntegerField()
     books = models.ManyToManyField('media.Book')
 
     class Meta:
@@ -11,8 +11,8 @@ class BookGenre(models.Model):
 
 
 class MovieGenre(models.Model):
-    name = models.CharField(max_length=300)
-    movies_count = models.IntegerField()
+    name = models.CharField(max_length=300, unique=True)
+    count = models.IntegerField()
     movies = models.ManyToManyField('media.Movie')
 
     class Meta:

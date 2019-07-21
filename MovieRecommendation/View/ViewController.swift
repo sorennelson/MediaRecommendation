@@ -32,21 +32,15 @@ class ViewController: NSViewController {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-        
-        UserController.sharedInstance.attemptLogin { (success) in
-            // TODO: If not logged in, prompt them
-            ImportController.sharedInstance.loadMediaAndRatings(.Movies) { (media, ratings) in
-            // TODO: Notification if something didn't load
-                self.reloadTableViews()
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableViews()
+        UserController.sharedInstance.attemptLogin { (success) in
+            // TODO: If not logged in, prompt them
+            ImportController.sharedInstance.loadMediaRatingsAndGenres(.Movies) { (media, ratings, genres) in
+                // TODO: Notification if something didn't load
+                self.setupTableViews()
+            }
+        }
         self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
     }
     
@@ -81,7 +75,7 @@ class ViewController: NSViewController {
     @IBAction func addButtonPressed(_ sender: Any) {}
     
     @IBAction func bookButtonPressed(_ sender: Any) {
-        ImportController.sharedInstance.loadMediaAndRatings(.Books) { (media, ratings) in
+        ImportController.sharedInstance.loadMediaRatingsAndGenres(.Books) { (media, ratings, genres) in
             // TODO: Notification if something didn't load
             
             ObjectController.currentMediaType = .Books

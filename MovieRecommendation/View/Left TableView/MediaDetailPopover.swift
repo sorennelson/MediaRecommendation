@@ -33,7 +33,7 @@ class MediaDetailPopover: NSViewController {
         
         let mediaType = ObjectController.currentMediaType
         if mediaType == .Books {
-                let pred = Double(Int(prediction * 100) / 100.0)
+                let pred = Double(prediction * 100 / 100.0)
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
 //            if let rating = ObjectController.sharedInstance.currentUser?.booksRated[media.yID] {
@@ -43,7 +43,7 @@ class MediaDetailPopover: NSViewController {
 //            }
             
         } else {
-                let pred = Double(Int(prediction * 100) / 100.0)
+                let pred = Double(prediction * 100 / 100.0)
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
 //            if let rating = ObjectController.sharedInstance.currentUser?.moviesRated[media.yID] {
@@ -52,7 +52,7 @@ class MediaDetailPopover: NSViewController {
                 self.userRating.stringValue = "Not Yet Rated"
 //            }
         }
-        let avg = Double(Int(media.avgRating * 100) / 100.0)
+        let avg = Double(media.avgRating * 100 / 100.0)
         self.avgRating.stringValue = String(avg)
         self.titleLabel.stringValue = media.title
     }

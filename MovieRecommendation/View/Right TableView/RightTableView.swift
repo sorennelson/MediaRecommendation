@@ -20,7 +20,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var titleCell: TitleCell?
     
     var selectedCategoryRow = 1
-    var selectedCategory = "All"
+    var selectedCategory = Category(name: "All", count: 0)
     
     //    MARK: Tableview
     func setTableView(_ tableView: NSTableView) {
@@ -38,8 +38,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
             
         } else {
             // Title + "all categories" + categories
-//            return ObjectController.sharedInstance.getAllCategories().count + 2
-            return 2
+            return 1 + ObjectController.sharedInstance.getCategoryCount() 
         }
     }
     
@@ -60,8 +59,8 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
             newCell.select()
             
             selectedCategoryRow = row
-            selectedCategory = newCell.category
-            contentDelegate?.selectedCategory(selectedCategory)
+            selectedCategory = newCell.category!
+            contentDelegate?.selectedCategory(selectedCategoryRow, category: selectedCategory)
             
             return false
         }
@@ -102,15 +101,8 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     //    MARK: Category Cell
     private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
-        if row > 1 {
-            cell.category = ObjectController.sharedInstance.getAllCategories()![row-2]
-            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getCategoryCount(genreName: cell.category))
-            
-        } else {
-            cell.countLabel.stringValue = String(ObjectController.sharedInstance.getAllMediaCount())
-            cell.selected = true
-        }
-        cell.categoryTitle.stringValue = cell.category
+        cell.category = ObjectController.sharedInstance.getCategory(at: row - 1)
+        if row == 1  {  cell.selected = true  }
         return cell
     }
     

@@ -8,6 +8,14 @@
 
 import Foundation
 
+
+struct Category: Codable {
+    let name: String
+    let count: Int
+    
+}
+
+
 class Media: Hashable, Codable {
     
     var id: Int

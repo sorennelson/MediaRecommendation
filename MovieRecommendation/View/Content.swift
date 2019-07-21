@@ -20,5 +20,5 @@ enum MediaType {
 }
 
 protocol UpdateContent {
-    func selectedCategory(_ category: String)
+    func selectedCategory(_ categoryRow: Int, category: Category)
 }

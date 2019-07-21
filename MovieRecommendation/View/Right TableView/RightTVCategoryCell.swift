@@ -15,7 +15,13 @@ class RightTVCategoryCell: NSTableCellView {
     @IBOutlet var selectedView: NSView!
     @IBOutlet var countLabel: NSTextField!
     @IBOutlet var categoryTitle: NSTextField!
-    var category = "All"
+    
+    var category: Category? {
+        didSet {
+            self.categoryTitle.stringValue = category!.name
+            self.countLabel.stringValue = String(category!.count)
+        }
+    }
     
     override func viewWillDraw() {
         if selected {

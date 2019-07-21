@@ -16,16 +16,16 @@ class ObjectController {
     
     var allMovies: [Movie] = []
     var recommendedMovies: [Movie] = []
+    var movieCategories: [Category] = []
+    var categoryMovies: [String: [Movie]] = [:]
+    
     var allBooks: [Book] = []
     var recommendedBooks: [Book] = []
+    var bookCategories: [Category] = []
+    var categoryBooks: [String: [Book]] = [:]
     
     // Not currently using
     var addedRatings = false
-    
-    var genreMovies: [String: [Int]] = [:] // [genre: [movieIDs]]
-    var allBookGenres: [String] = []
-    var bookRatings: [Media: Double]?
-    
     var selectedMedia: Media?
     var selectedMediaPrediction: Double?
     
@@ -63,24 +63,19 @@ class ObjectController {
         return media
     }
     
-    func getMediaCount() -> Int {
-        if let _ = User.current {
-            return ObjectController.currentMediaType == .Books ? recommendedBooks.count : recommendedMovies.count
-        } else {
-            return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
-        }
-    }
+//    func getMediaCount() -> Int {
+//        if let _ = User.current {
+//            return ObjectController.currentMediaType == .Books ? recommendedBooks.count : recommendedMovies.count
+//        } else {
+//            return getAllMediaCount()
+//        }
+//    }
+//    
+//    func getAllMediaCount() -> Int {
+//        return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
+//    }
     
-    func getAllMediaCount() -> Int {
-        return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
-    }
-    
-    func getAllMedia(for index: Int) -> Media? {
-
-        return nil
-    }
-    
-    func getAllMedia(for indices: Range<Int>) -> [Media]? {
+    func getMedia(for index: Int) -> Media? {
 
         return nil
     }
@@ -90,32 +85,60 @@ class ObjectController {
         return true
     }
     
-    func getAllCategories() -> [String]? {
-        
-        return nil
-    }
-    
-    func getMediaForCategory(genreName: String) -> [Media]? {
-        
-        return nil
-    }
-    
-    func getCategoryCount(genreName: String) -> Int {
-        
-        return 0
-    }
-    
-    func getMediaForCategory(genreName: String, at indices: Range<Int>) -> [Media]? {
-        
-        return nil
-    }
-    
     func doneAddingRatings() {
         
     }
     
     func getPrediction(for media: Media) -> Double {
-
+        
         return 0.0
+    }
+    
+    
+//     MARK: Categories
+    
+    
+    func getCategoryCount() -> Int {
+        if ObjectController.currentMediaType == .Books  {  return bookCategories.count  }
+        else  {  return movieCategories.count  }
+    }
+    
+    func getCategory(at index: Int) -> Category? {
+        if ObjectController.currentMediaType == .Books && bookCategories.count > 0    {  return bookCategories[index]  }
+        if ObjectController.currentMediaType == .Movies && movieCategories.count > 0  {  return movieCategories[index]  }
+        return nil
+    }
+    
+    func getMediaForCategory(withName categoryName: String, for indices: Range<Int>) -> [Media]? {
+        if categoryName == "All"  {  return getMedia(for: indices)  }
+        
+        if ObjectController.currentMediaType == .Books && categoryBooks.keys.contains(categoryName) {
+            return self.getMedia(for: indices, in: categoryBooks[categoryName]!)
+        }
+        if ObjectController.currentMediaType == .Movies && categoryMovies.keys.contains(categoryName) {
+            return self.getMedia(for: indices, in: categoryMovies[categoryName]!)
+        }
+        
+        return nil
+    }
+    
+    /// Imports the given Category's Media
+    ///
+    /// - Parameters:
+    ///   - categoryName: String
+    ///   - mediaType: MediaType
+    ///   - completion: [Media]? -- nil if their was an issue importing
+    func getMediaForCategory(withName categoryName: String, completion:@escaping ([Media]?) -> ()) {
+        ImportController.sharedInstance.loadCategoryMedia(for: categoryName, of: ObjectController.currentMediaType) { (success, err, media) in
+            if !success {
+                print(err)
+                completion(nil)
+            }
+            else {
+                if ObjectController.currentMediaType == .Books { self.categoryBooks[categoryName] = media as? [Book] }
+                else { self.categoryMovies[categoryName] = media as? [Movie] }
+                completion(media)
+            }
+        }
     }
 }

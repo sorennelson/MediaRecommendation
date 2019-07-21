@@ -23,24 +23,21 @@ class RightTVMediaCell : NSTableCellView {
     var media: Media? {
         didSet {
             titleLabel.stringValue = media!.title
-            // yearLabel.stringValue = year + "  |  " + medium
             
-            if !media!.genres.isEmpty {
-                genreLabel.stringValue = media!.genres[0]
-                for i in 1 ..< media!.genres.count {
-                    genreLabel.stringValue +=  ", " + media!.genres[i]
-                }
+            let medium = ObjectController.currentMediaType == .Books ? "Book" : "Movie"
+            yearLabel.stringValue = String(media!.year) + "  |  " + medium
+            
+            genreLabel.stringValue = media!.genres[0]
+            for i in 1 ..< media!.genres.count {
+                genreLabel.stringValue +=  ", " + media!.genres[i]
             }
             
             ratingLabel.stringValue = String(format: "%.1f", userRating!) + "  |  " + String(format: "%.1f", media!.avgRating)
             
             media!.getImageData(completion: { (data) in
                 if let data = data {
-                    DispatchQueue.main.async {
-                        self.image.image = NSImage(data: data)
-                    }
+                    DispatchQueue.main.async  {  self.image.image = NSImage(data: data)  }
                 } else {
-                    // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
                     self.image.image = NSImage(named: "no-image")
                 }
             })

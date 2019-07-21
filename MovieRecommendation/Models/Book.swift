@@ -39,3 +39,5 @@ struct BookRating: Codable {
     let book: Book
     var rating: Float
 }
+
+

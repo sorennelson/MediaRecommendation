@@ -69,4 +69,8 @@ extension ViewController {
         leftDataSource.toggleArrowButtonDirection()
     }
     
+    func loadCategories() {
+        
+    }
+    
 }

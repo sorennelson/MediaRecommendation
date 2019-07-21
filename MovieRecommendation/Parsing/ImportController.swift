@@ -17,11 +17,12 @@ class ImportController {
     /// If their is an error loading the recommended media, or the model is not done recommending, attempts to load all media.
     /// Call before using media.
     ///
-    /// - Parameter completion: (was media successful to load bool, were ratings successful to load bool)
-    func loadMediaAndRatings(_ mediaType: MediaType, completion:@escaping (Bool, Bool) -> ()) {
+    /// - Parameter completion: (was media successful to load bool, were ratings successful to load bool, were genres successful to load bool)
+    func loadMediaRatingsAndGenres(_ mediaType: MediaType, completion:@escaping (Bool, Bool, Bool) -> ()) {
         var completeCount = 0
         var mediaLoaded = false
         var ratingsLoaded = false
+        var genresLoaded = false
         
         if let _ = User.current {
             ImportController.sharedInstance.loadRecommended(0, to: 300, mediaType) { (success, error) in
@@ -32,14 +33,14 @@ class ImportController {
                             mediaLoaded = true
                         }
                         if self.isComplete(&completeCount) {
-                            completion(mediaLoaded, ratingsLoaded)
+                            completion(mediaLoaded, ratingsLoaded, genresLoaded)
                         }
                     }
                 } else {
                     //            TODO: Handle error
                     mediaLoaded = true
                     if self.isComplete(&completeCount) {
-                        completion(mediaLoaded, ratingsLoaded)
+                        completion(mediaLoaded, ratingsLoaded, genresLoaded)
                     }
                 }
             }
@@ -50,28 +51,38 @@ class ImportController {
                     mediaLoaded = true
                 }
                 if self.isComplete(&completeCount) {
-                    completion(mediaLoaded, ratingsLoaded)
+                    completion(mediaLoaded, ratingsLoaded, genresLoaded)
                 }
             }
         }
         
         ImportController.sharedInstance.loadRatings(mediaType) { (success, error) in
-            //            TODO: Handle error
+//            TODO: Handle error
             if success {
                 ratingsLoaded = true
             }
             if self.isComplete(&completeCount) {
-                completion(mediaLoaded, ratingsLoaded)
+                completion(mediaLoaded, ratingsLoaded, genresLoaded)
+            }
+        }
+        
+        ImportController.sharedInstance.loadAllGenres(of: mediaType) { (success, error) in
+//            TODO: Handle error
+            if success {
+                genresLoaded = true
+            }
+            if self.isComplete(&completeCount) {
+                completion(mediaLoaded, ratingsLoaded, genresLoaded)
             }
         }
     }
     
     private func isComplete(_ completeCount: inout Int) -> Bool {
         completeCount += 1
-        return completeCount == 2
+        return completeCount == 3
     }
     
-    /// Forms an Alamofire request and gives back the data if their is any and any error description
+    /// Forms an Alamofire request and gives back the data if their is any, and any error description
     ///
     /// - Parameters:
     ///   - requestString: String. The full http request string
@@ -200,6 +211,55 @@ class ImportController {
             } catch let error {
                 print(error)
                 completion(false, error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func loadAllGenres(of mediaType: MediaType, completion:@escaping (Bool, String) -> ()) {
+        let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/genres/"
+        loadData(requestString: requestString, params:nil) { (success, str, data) in
+            
+            if !success { completion(false, str) }
+            guard let data = data else { completion(false, "No Data Error");  return }
+            
+            do {
+                let genres = try JSONDecoder().decode([Category].self, from: data)
+                
+                if mediaType == .Books { ObjectController.sharedInstance.bookCategories = genres }
+                else {  ObjectController.sharedInstance.movieCategories = genres}
+                completion(true, str)
+                
+            } catch let error {
+                print(error)
+                completion(false, error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    func loadCategoryMedia(for category: String, of mediaType: MediaType, completion:@escaping (Bool, String, [Media]) -> ()) {
+        let params = ["name":category] as [String:Any]
+        let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/genres/get_genre_media/"
+        loadData(requestString: requestString, params:params) { (success, str, data) in
+            
+            if !success { completion(false, str, []) }
+            guard let data = data else { completion(false, "No Data Error", []);  return }
+            
+            do {
+                
+                if mediaType == .Movies {
+                    let movies = try JSONDecoder().decode([Movie].self, from: data)
+                    completion(true, str, movies)
+                    
+                } else {
+                    let books = try JSONDecoder().decode([Book].self, from: data)
+                    completion(true, str, books)
+                }
+                
+            } catch let error {
+                print(error)
+                completion(false, error.localizedDescription, [])
             }
         }
     }
