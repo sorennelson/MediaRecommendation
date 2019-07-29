@@ -30,17 +30,19 @@ class ObjectController {
     var selectedMediaPrediction: Double?
     
     func noRecommendations() -> Bool {
-        return ObjectController.currentMediaType == .Books ? recommendedBooks.count > 0 : recommendedMovies.count > 0
+        return ObjectController.currentMediaType == .Books ? recommendedBooks.count == 0 : recommendedMovies.count == 0
     }
-    
+        
     func getMedia(for indices: Range<Int>) -> [Media] {
         if let _ = User.current {
             switch ObjectController.currentMediaType {
             case .Books:
-                return getMedia(for: indices, in: recommendedBooks)
+                if recommendedBooks.count > 0  {  return getMedia(for: indices, in: recommendedBooks)  }
+                else {  return getMedia(for: indices, in: allBooks)  }
                 
             case .Movies:
-                return getMedia(for: indices, in: recommendedMovies)
+                if recommendedMovies.count > 0 {  return getMedia(for: indices, in: recommendedMovies)  }
+                else {  return getMedia(for: indices, in: allMovies)  }
             }
         } else {
             switch ObjectController.currentMediaType {
@@ -63,14 +65,10 @@ class ObjectController {
         return media
     }
     
-//    func getMediaCount() -> Int {
-//        if let _ = User.current {
-//            return ObjectController.currentMediaType == .Books ? recommendedBooks.count : recommendedMovies.count
-//        } else {
-//            return getAllMediaCount()
-//        }
-//    }
-//    
+    func getAllMedia() -> [Media] {
+        return ObjectController.currentMediaType == .Books ? recommendedBooks : recommendedMovies
+    }
+    
 //    func getAllMediaCount() -> Int {
 //        return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
 //    }
@@ -96,7 +94,6 @@ class ObjectController {
     
     
 //     MARK: Categories
-    
     
     func getCategoryCount() -> Int {
         if ObjectController.currentMediaType == .Books  {  return bookCategories.count  }

@@ -77,7 +77,7 @@ class ViewController: NSViewController {
     @IBAction func bookButtonPressed(_ sender: Any) {
         ImportController.sharedInstance.loadMediaRatingsAndGenres(.Books) { (media, ratings, genres) in
             // TODO: Notification if something didn't load
-            
+//            print(media, ratings, genres)
             ObjectController.currentMediaType = .Books
             self.reloadTableViews()
         }

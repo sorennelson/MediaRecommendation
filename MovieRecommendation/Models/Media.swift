@@ -12,9 +12,7 @@ import Foundation
 struct Category: Codable {
     let name: String
     let count: Int
-    
 }
-
 
 class Media: Hashable, Codable {
     
@@ -25,7 +23,7 @@ class Media: Hashable, Codable {
     var avgRating: Double
     
     var imageURL: URL?
-//    var imageData: Data?
+    var imageData: Data?
     
     init(id: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL:URL?) {
         self.id = id
@@ -58,21 +56,20 @@ class Media: Hashable, Codable {
     
     func getImageData(completion:@escaping (Data?) -> ()) {
         completion(nil)
-//        if let imageData = imageData {
-//            completion(imageData)
-//
-//        } else {
-//            if let imageString = imageURL,
-//                let url = URL(string: imageString) {
-//
-//                DispatchQueue.global(qos: .background).async {
-//                    let data = try? Data(contentsOf: url)
-//                    self.imageData = data
-//                    completion(data)
-//                }
-//
-//            } else { completion(nil) }
-//        }
+        if let imageData = imageData {
+            completion(imageData)
+
+        } else {
+            if let imageURL = imageURL {
+
+                DispatchQueue.global(qos: .background).async {
+                    let data = try? Data(contentsOf: imageURL)
+                    self.imageData = data
+                    completion(data)
+                }
+
+            } else { completion(nil) }
+        }
     }
     
     //    MARK: Hashable

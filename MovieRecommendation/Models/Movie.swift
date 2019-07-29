@@ -19,3 +19,10 @@ struct MovieRating: Codable {
     let movie: Movie
     var rating: Float
 }
+
+
+//if let string = imageString {
+//    if !string.isEmpty {
+//        self.imageURL = "https://image.tmdb.org/t/p/w342" + string
+//    }
+//}

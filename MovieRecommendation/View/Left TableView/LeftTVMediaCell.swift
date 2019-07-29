@@ -12,11 +12,17 @@ import Cocoa
 class LeftTVMediaCell: NSTableCellView {
     
     @IBOutlet var leftImageButton: NSButton!
+    @IBOutlet var leftLabel: NSTextField!
+    
     @IBOutlet var middleImageButton: NSButton!
+    @IBOutlet var middleLabel: NSTextField!
+    
     @IBOutlet var rightImageButton: NSButton!
+    @IBOutlet var rightLabel: NSTextField!
     
     var leftMedia: Media? {
         didSet {
+            leftLabel.stringValue = leftMedia!.title
             leftMedia!.getImageData(completion: { (data) in
                 if let data = data {
                     DispatchQueue.main.async {
@@ -33,6 +39,7 @@ class LeftTVMediaCell: NSTableCellView {
     
     var middleMedia: Media? {
         didSet {
+            middleLabel.stringValue = middleMedia!.title
             middleMedia!.getImageData(completion: { (data) in
                 if let data = data {
                     DispatchQueue.main.async {
@@ -49,6 +56,7 @@ class LeftTVMediaCell: NSTableCellView {
     
     var rightMedia: Media? {
         didSet {
+            rightLabel.stringValue = rightMedia!.title
             rightMedia!.getImageData(completion: { (data) in
                 if let data = data {
                     DispatchQueue.main.async {
@@ -73,21 +81,21 @@ class LeftTVMediaCell: NSTableCellView {
         guard let media = leftMedia else { return }
         let prediction = ObjectController.sharedInstance.getPrediction(for: media)
         setSelectedMedia(media, prediction: prediction)
-        displayPopover()
+//        displayPopover()
     }
     
     @IBAction func middleButtonClicked(_ sender: Any) {
         guard let media = middleMedia else { return }
         let prediction = ObjectController.sharedInstance.getPrediction(for: media)
         setSelectedMedia(media, prediction: prediction)
-        displayPopover()
+//        displayPopover()
     }
     
     @IBAction func rightButtonClicked(_ sender: Any) {
         guard let media = rightMedia else { return }
         let prediction = ObjectController.sharedInstance.getPrediction(for: media)
         setSelectedMedia(media, prediction: prediction)
-        displayPopover()
+//        displayPopover()
     }
     
     func setSelectedMedia(_ media: Media, prediction: Double) {

@@ -15,9 +15,6 @@ class AddRatingTVCell: NSTableCellView {
     @IBOutlet var title: NSTextField!
     @IBOutlet var yearAndType: NSTextField!
     @IBOutlet var genres: NSTextField!
-    @IBOutlet var rating: NSTextField!
-    
-    @IBOutlet var addButton: NSButton!
     
     var mediaRating = -1.0
     var media: Media? {
@@ -52,34 +49,6 @@ class AddRatingTVCell: NSTableCellView {
         }
         self.genres.stringValue += movie.genres[movie.genres.count - 1]
         self.yearAndType.stringValue = "Movie"
-    }
-    
-    @IBAction func upRating(_ sender: Any) {
-        if mediaRating == -1.0 {
-            mediaRating = 5.0
-            
-        } else if mediaRating < 5.0 {
-            mediaRating += 0.5
-        }
-        rating.stringValue = String(mediaRating)
-    }
-    
-    @IBAction func downRating(_ sender: Any) {
-        if mediaRating == -1.0 {
-            mediaRating = 0.0
-            
-        } else if mediaRating > 0.5 {
-            mediaRating -= 0.5
-        }
-        rating.stringValue = String(mediaRating)
-    }
-    
-    @IBAction func addRatingPressed(_ sender: Any) {
-        if mediaRating > -1.0 {
-            if ObjectController.sharedInstance.addRating(mediaRating, for: media!) {
-                addButton.image = NSImage(named: "icons8-checked-100")
-            }
-        }
     }
     
 }

@@ -30,9 +30,9 @@ class TitleCell : NSTableCellView {
         switch content {
         case .Recommendations:
             if ObjectController.currentMediaType == .Movies {
-                header = "All Movies"
+                header = "Movie Recommendations"
             } else {
-                header = "All Books"
+                header = "Book Recommendations"
             }
         case .Ratings:
             header = "My Ratings"

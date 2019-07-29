@@ -3,6 +3,11 @@ import os
 import django
 from django.conf import settings
 
+import re
+import http.client
+import time
+
+
 
 def import_movie_ratings():
     """Imports the data at the given path to a csv file."""
@@ -113,17 +118,61 @@ def remove_small_book_genres():
             genre.delete()
 
 
-# def update_movie_ids():
-#     movies = Movie.objects.all()
-#     num_media = movies.count()
+# def get_movie_image():
+#     conn = http.client.HTTPSConnection("api.themoviedb.org")
 #
-#     mapping = {}
-#     for i in range(num_media):
-#         mapping[movies[i].id] = i
+#     payload = "{}"
+#     url = "/3/movie/" + str(862) + "?language=en-US&api_key=60d78c7cfee3c407c714903efd4c3359"
+#     conn.request("GET", url, payload)
 #
-#     users = MovieRatingUser.objects.order_by('id')
+#     res = conn.getresponse()
+#     data = res.read()
+#     json = data.decode("utf-8")
+#     print(json)
+#
+#     poster_str = re.search(r'"poster_path":".{28}\.jpg"', json)[0]
+#     poster_url = re.search(r'.{28}\.jpg', poster_str)[0]
+#     print(avg)
 
-    # for user in users:
+
+def set_movie_images():
+    conn = http.client.HTTPSConnection("api.themoviedb.org")
+
+    path = './links.csv'
+    with open(path, 'r') as f:
+        i = 1
+        for line in f:
+            terms = line.strip().split(',')
+
+            if int(terms[0]) > 66934:
+                print(terms[0])
+
+                if i % 40 == 0:
+                    time.sleep(11)
+                payload = "{}"
+                url = "/3/movie/" + terms[2] + "?language=en-US&api_key=60d78c7cfee3c407c714903efd4c3359"
+                conn.request("GET", url, payload)
+
+                res = conn.getresponse()
+                data = res.read()
+                json = data.decode("utf-8")
+
+                poster_str = re.search(r'"poster_path":\s?"\/.{25}.?.?.?\.jpg"', json)
+                try:
+                    poster_str = poster_str[0]
+                    poster_url = re.search(r'\/.*', poster_str)[0]
+                    poster_url = poster_url[:-1]
+
+                    avg_str = re.search(r'"vote_average":\d\d?\.\d\d?', json)[0]
+                    avg = float(re.search(r'\d\d?\.\d', avg_str)[0])
+
+                    movie = Movie.objects.get(pk=terms[0])
+                    movie.image_url = 'https://image.tmdb.org/t/p/w342' + poster_url
+                    movie.average_rating = avg
+                    movie.save()
+                except TypeError:
+                    print(i, json)
+                i += 1
 
 
 if __name__ == "__main__":
@@ -143,14 +192,11 @@ if __name__ == "__main__":
     elif sys.argv[1] == "import_movie_ratings":
         import_movie_ratings()
 
-    elif sys.argv[1] == "overfit_movie":
-        ml.overfit_collaborative_filtering('movies')
-
     elif sys.argv[1] == "run_book_ml":
-        ml.run_collaborative_filtering('books')
+        ml.run_collaborative_filtering('books', sys.argv[2])
 
     elif sys.argv[1] == "run_movie_ml":
-        ml.run_collaborative_filtering('movies')
+        ml.run_collaborative_filtering('movies', sys.argv[2])
 
     elif sys.argv[1] == "add_movie_genres":
         add_movie_genres()
@@ -163,3 +209,6 @@ if __name__ == "__main__":
 
     elif sys.argv[1] == "remove_small_book_genres":
         remove_small_book_genres()
+
+    elif sys.argv[1] == "set_movie_images":
+        set_movie_images()

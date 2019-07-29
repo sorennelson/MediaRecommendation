@@ -54,12 +54,8 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     private func getMediaCellView(tableView: NSTableView, row: Int) -> LeftTVMediaCell? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
         
-        if let media = ObjectController.sharedInstance.getMediaForCategory(withName: selectedCategory.name, for: (row)*3..<(row)*3+3) {
+        if let media = ObjectController.sharedInstance.getMediaForCategory(withName: selectedCategory.name, for: row*3..<row*3+3) {
             cell.setMedia(media: media)
-        } else {
-            ObjectController.sharedInstance.getMediaForCategory(withName: selectedCategory.name) { (_) in
-                self.tableView?.reloadData()
-            }
         }
         return cell
     }
@@ -67,7 +63,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         if row == 0 { return 90 }
-        return 320
+        return 335
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
@@ -92,6 +88,9 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     func selectedCategory(_ categoryRow: Int, category: Category) {
         selectedCategoryRow = categoryRow
         selectedCategory = category
-        tableView?.reloadData()
+        tableView?.scrollRowToVisible(0)
+        ObjectController.sharedInstance.getMediaForCategory(withName: selectedCategory.name) { (_) in
+            self.tableView?.reloadData()
+        }
     }
 }

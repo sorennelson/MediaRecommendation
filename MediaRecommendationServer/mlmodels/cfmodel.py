@@ -60,7 +60,8 @@ class CollaborativeFilteringModel(object):
                 self.rated[map_id, u] = 1
 
         self.ratings_mean = np.mean(self.ratings, axis=1)
-        self.ratings = self.ratings - self.ratings_mean.reshape(-1, 1)  # De-mean: https://beckernick.github.io/matrix-factorization-recommender/
+        self.ratings = self.ratings - self.ratings_mean.reshape(-1, 1)
+        self.ratings /= 5
 
     def set_user_item_params(self, features_num):
         """Sets the media and user parameters randomly for a given number of features."""
@@ -69,6 +70,7 @@ class CollaborativeFilteringModel(object):
         self.user_params = np.random.rand(self.users_num, features_num)
 
     def separate_validation_set(self, iteration):
+        self.reset_ratings()
         start = int(0.1 * len(self.rated_indices) * iteration)
         end = int(0.1 * len(self.rated_indices) * (iteration+1))
 
@@ -86,3 +88,7 @@ class CollaborativeFilteringModel(object):
 
         self.val_indices = np.array(self.val_indices)
         self.val_ratings = np.array(self.val_ratings)
+
+    def reset_ratings(self):
+        self.train_ratings = self.ratings.copy()
+        self.train_rated = self.rated.copy()

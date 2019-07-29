@@ -7,6 +7,7 @@ class BookPrediction(models.Model):
     prediction = models.FloatField(default=0.0)
 
     class Meta:
+        unique_together=['prediction_user', 'book']
         ordering = ['-prediction', 'prediction_user']
 
 
@@ -16,4 +17,5 @@ class MoviePrediction(models.Model):
     prediction = models.FloatField(default=0.0)
 
     class Meta:
+        unique_together = ['prediction_user', 'movie']
         ordering = ['-prediction', 'prediction_user']

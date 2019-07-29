@@ -25,12 +25,13 @@ class ImportController {
         var genresLoaded = false
         
         if let _ = User.current {
-            ImportController.sharedInstance.loadRecommended(0, to: 300, mediaType) { (success, error) in
+            ImportController.sharedInstance.loadRecommended(0, to: 500, mediaType) { (success, error) in
                 if !success || ObjectController.sharedInstance.noRecommendations() {
                     ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
                         //            TODO: Handle error
                         if success {
                             mediaLoaded = true
+                            print("All")
                         }
                         if self.isComplete(&completeCount) {
                             completion(mediaLoaded, ratingsLoaded, genresLoaded)
@@ -38,6 +39,7 @@ class ImportController {
                     }
                 } else {
                     //            TODO: Handle error
+                    print("Recommended")
                     mediaLoaded = true
                     if self.isComplete(&completeCount) {
                         completion(mediaLoaded, ratingsLoaded, genresLoaded)
@@ -239,7 +241,13 @@ class ImportController {
     
     
     func loadCategoryMedia(for category: String, of mediaType: MediaType, completion:@escaping (Bool, String, [Media]) -> ()) {
-        let params = ["name":category] as [String:Any]
+        let params: [String:Any]
+        if let current = User.current {
+            params = ["name":category, "id":current.id]
+        } else {
+            params = ["name":category]
+        }
+        
         let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/genres/get_genre_media/"
         loadData(requestString: requestString, params:params) { (success, str, data) in
             
