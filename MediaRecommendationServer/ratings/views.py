@@ -13,6 +13,22 @@ class BookRatingViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.BookRatingSerializer
 
     @action(detail=False)
+    def set_user_ratings(self, request):
+        """Gets all the Book Ratings for the given User.
+
+        :param request: /books/ratings/get_user_ratings/ -- 'id': int (user id)
+        :return: Response with the serialized [BookRating]
+        """
+        try:
+            user = User.objects.get(pk=request.GET['id'])
+        except User.DoesNotExist or ValueError:
+            Response(status=status.HTTP_400_BAD_REQUEST)
+
+        ratings = user.book_user.ratings
+        serializer = serializers.BookRatingSerializer(ratings, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False)
     def get_user_ratings(self, request):
         """Gets all the Book Ratings for the given User.
 

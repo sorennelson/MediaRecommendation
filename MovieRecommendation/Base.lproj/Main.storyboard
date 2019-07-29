@@ -1693,10 +1693,7 @@
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="no-image" id="VbY-pR-of7"/>
                                                                 </imageView>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pfw-dw-7QK">
-                                                                    <rect key="frame" x="105" y="108" width="224" height="22"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="220" id="Fa8-hQ-tCW"/>
-                                                                    </constraints>
+                                                                    <rect key="frame" x="105" y="108" width="317" height="22"/>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Inglorious Bastards" id="ZLt-mc-Rmq">
                                                                         <font key="font" metaFont="system" size="18"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1712,7 +1709,10 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="J7Q-jo-8kg">
-                                                                    <rect key="frame" x="105" y="61" width="84" height="16"/>
+                                                                    <rect key="frame" x="105" y="61" width="243" height="16"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="239" id="kuH-AW-Blp"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Drama, Action" id="S6V-la-DPI">
                                                                         <font key="font" metaFont="cellTitle"/>
                                                                         <color key="textColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1734,6 +1734,7 @@
                                                                 <constraint firstItem="Pfw-dw-7QK" firstAttribute="top" secondItem="6BD-E3-mxo" secondAttribute="top" id="UzF-cP-4QT"/>
                                                                 <constraint firstItem="fxQ-qv-FWD" firstAttribute="top" secondItem="Pfw-dw-7QK" secondAttribute="bottom" constant="9" id="Vf6-QH-ruB"/>
                                                                 <constraint firstAttribute="trailing" secondItem="jHY-7S-3Vo" secondAttribute="trailing" constant="25" id="aiH-pW-erE"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Pfw-dw-7QK" secondAttribute="trailing" constant="25" id="b6v-hS-UYQ"/>
                                                                 <constraint firstItem="Pfw-dw-7QK" firstAttribute="leading" secondItem="6BD-E3-mxo" secondAttribute="trailing" constant="15" id="eWj-5E-AD3"/>
                                                                 <constraint firstItem="J7Q-jo-8kg" firstAttribute="leading" secondItem="fxQ-qv-FWD" secondAttribute="leading" id="gRf-Jy-pgx"/>
                                                                 <constraint firstItem="J7Q-jo-8kg" firstAttribute="top" secondItem="fxQ-qv-FWD" secondAttribute="bottom" constant="6" id="rEy-jA-L52"/>
@@ -1741,6 +1742,7 @@
                                                                 <constraint firstItem="6BD-E3-mxo" firstAttribute="leading" secondItem="okL-Yt-kuM" secondAttribute="leading" constant="12" id="yna-zD-3vN"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="average" destination="jHY-7S-3Vo" id="3GP-89-eXK"/>
                                                                 <outlet property="genres" destination="J7Q-jo-8kg" id="ZrJ-r6-EJ7"/>
                                                                 <outlet property="mediaImage" destination="6BD-E3-mxo" id="P7e-Z7-jRp"/>
                                                                 <outlet property="title" destination="Pfw-dw-7QK" id="6NU-gP-bJT"/>

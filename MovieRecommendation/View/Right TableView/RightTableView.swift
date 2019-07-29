@@ -93,8 +93,8 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
         guard let (media, rating) = UserController.sharedInstance.getMediaAndRating(for: row - 1) else { return nil }
-        cell.media = media
         cell.userRating = rating
+        cell.media = media
         return cell
     }
     

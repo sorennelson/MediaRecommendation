@@ -26,6 +26,7 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     let CellID = "AddRatingCell"
     
     var rating = 0
+    var selectedMedia: Media?
     
     
     func searchFieldDidStartSearching(_ sender: NSSearchField) { }
@@ -44,7 +45,6 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             self.searchResults = ObjectController.sharedInstance.getAllMedia().filter {
                 return $0.title.lowercased().contains(stringValue)
             }
-            print(self.searchResults.count)
             completion()
         }
     }
@@ -69,6 +69,10 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        let cell = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as! AddRatingTVCell
+        guard let media = cell.media  else  {  return false  }
+
+        selectedMedia = media
         bottomTVConstraint.constant = 60.0
         resetStates(except: 0)
         return true
@@ -124,8 +128,16 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        //        TODO: Add Rating
-        ObjectController.sharedInstance.doneAddingRatings()
+        guard let selectedMedia = selectedMedia else { return }
+        ObjectController.sharedInstance.addRating(Float(rating), for: selectedMedia)
+        
         presentingViewController?.dismiss(self)
     }
+    
+//    override func dismiss(_ sender: Any?) {
+//        print("HERE")
+//        let view = presentingViewController as! ViewController
+//        view.reloadTableViews()
+//    }
+    
 }

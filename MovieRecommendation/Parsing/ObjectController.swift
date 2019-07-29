@@ -69,28 +69,52 @@ class ObjectController {
         return ObjectController.currentMediaType == .Books ? recommendedBooks : recommendedMovies
     }
     
-//    func getAllMediaCount() -> Int {
-//        return ObjectController.currentMediaType == .Books ? allBooks.count : allMovies.count
-//    }
-    
-    func getMedia(for index: Int) -> Media? {
-
+    func getRating(for media: Media) -> Float? {
+        if ObjectController.currentMediaType == .Books {
+            guard let user = User.current, let ratings = user.bookRatings else { return nil }
+            for rating in ratings {
+                if rating.book.id == media.id  {  return rating.rating  }
+            }
+            
+        } else {
+            guard let user = User.current, let ratings = user.movieRatings else { return nil }
+            for rating in ratings {
+                if rating.movie.id == media.id  {  return rating.rating  }
+            }
+        }
         return nil
     }
     
-    func addRating(_ rating: Double, for media: Media) -> Bool {
-       
+    func addRating(_ rating: Float, for media: Media) -> Bool {
+        let success = addLocalRating(rating, for: media)
+        if !success  {  return false  }
+        // TODO: Post rating to DB
         return true
     }
     
-    func doneAddingRatings() {
-        
+    private func addLocalRating(_ rating: Float, for media: Media) -> Bool {
+        guard let user = User.current else { return false }
+        if ObjectController.currentMediaType == .Books {
+            if let _ = user.bookRatings {
+                user.bookRatings!.append(BookRating(book: media as! Book, rating: rating))
+            } else {
+                user.bookRatings = [BookRating(book: media as! Book, rating: rating)]
+            }
+            
+        } else {
+            if let _ = user.movieRatings {
+                user.movieRatings!.append(MovieRating(movie: media as! Movie, rating: rating))
+            } else {
+                user.movieRatings = [MovieRating(movie: media as! Movie, rating: rating)]
+            }
+        }
+        return true
     }
     
-    func getPrediction(for media: Media) -> Double {
-        
-        return 0.0
-    }
+//    func getPrediction(for media: Media) -> Double {
+//
+//        return 0.0
+//    }
     
     
 //     MARK: Categories

@@ -77,26 +77,11 @@ class LeftTVMediaCell: NSTableCellView {
         if media.count > 2 { rightMedia = media[2] }
     }
     
-    @IBAction func leftButtonClicked(_ sender: Any) {
-        guard let media = leftMedia else { return }
-        let prediction = ObjectController.sharedInstance.getPrediction(for: media)
-        setSelectedMedia(media, prediction: prediction)
-//        displayPopover()
-    }
+    @IBAction func leftButtonClicked(_ sender: Any) {}
     
-    @IBAction func middleButtonClicked(_ sender: Any) {
-        guard let media = middleMedia else { return }
-        let prediction = ObjectController.sharedInstance.getPrediction(for: media)
-        setSelectedMedia(media, prediction: prediction)
-//        displayPopover()
-    }
+    @IBAction func middleButtonClicked(_ sender: Any) {}
     
-    @IBAction func rightButtonClicked(_ sender: Any) {
-        guard let media = rightMedia else { return }
-        let prediction = ObjectController.sharedInstance.getPrediction(for: media)
-        setSelectedMedia(media, prediction: prediction)
-//        displayPopover()
-    }
+    @IBAction func rightButtonClicked(_ sender: Any) {}
     
     func setSelectedMedia(_ media: Media, prediction: Double) {
         ObjectController.sharedInstance.selectedMedia = media
@@ -110,7 +95,6 @@ class LeftTVMediaCell: NSTableCellView {
         popover.behavior = .transient
         popover.contentViewController = mediaDetail
         popover.show(relativeTo: superview!.bounds, of: superview!, preferredEdge: .maxX)
-        
     }
     
 }
