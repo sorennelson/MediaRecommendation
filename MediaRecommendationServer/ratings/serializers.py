@@ -1,9 +1,11 @@
 from rest_framework import serializers
+
 from . import models
+from media.serializers import BookSerializer, MovieSerializer
 
 
 class BookRatingSerializer(serializers.ModelSerializer):
-    book = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    book = BookSerializer()
     rating = serializers.FloatField()
 
     class Meta:
@@ -12,7 +14,7 @@ class BookRatingSerializer(serializers.ModelSerializer):
 
 
 class MovieRatingSerializer(serializers.ModelSerializer):
-    movie = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    movie = MovieSerializer()
     rating = serializers.FloatField()
 
     class Meta:

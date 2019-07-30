@@ -89,6 +89,9 @@ class ObjectController {
         let success = addLocalRating(rating, for: media)
         if !success  {  return false  }
         // TODO: Post rating to DB
+        ImportController.sharedInstance.post(rating: rating, for: media) { (success, err) in
+            
+        }
         return true
     }
     

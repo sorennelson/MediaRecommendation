@@ -21,8 +21,6 @@ class User: Codable {
         case id
         case username
     }
-    
-    func rate(_ type: MediaType, with id: Int, rating: Double) { }
 }
 
 

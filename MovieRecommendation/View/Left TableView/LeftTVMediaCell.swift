@@ -72,7 +72,7 @@ class LeftTVMediaCell: NSTableCellView {
     }
     
     func setMedia(media: [Media]) {
-        leftMedia = media[0]
+        if media.count > 0 { leftMedia = media[0] }
         if media.count > 1 { middleMedia = media[1] }
         if media.count > 2 { rightMedia = media[2] }
     }

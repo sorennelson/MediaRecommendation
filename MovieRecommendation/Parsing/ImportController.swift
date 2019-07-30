@@ -179,11 +179,9 @@ class ImportController {
         }
     }
     
-    /// Load the top recommended media of given type for given indexes [n, m).
+    /// Load the User Ratings
     ///
     /// - Parameters:
-    ///   - n: Int. start index
-    ///   - m: Int. end index
     ///   - mediaType: MediaType
     ///   - completion: (success bool, error description)
     private func loadRatings(_ mediaType:MediaType, completion:@escaping (Bool, String) -> ()) {
@@ -241,7 +239,7 @@ class ImportController {
     
     
     func loadCategoryMedia(for category: String, of mediaType: MediaType, completion:@escaping (Bool, String, [Media]) -> ()) {
-        let params: [String:Any]
+        let params: [String: Any]
         if let current = User.current {
             params = ["name":category, "id":current.id]
         } else {
@@ -270,6 +268,33 @@ class ImportController {
                 completion(false, error.localizedDescription, [])
             }
         }
+    }
+    
+    func post(rating: Float, for media: Media, completion:@escaping (Bool, String) -> ()) {
+        let params: [String: Any]
+        if ObjectController.currentMediaType == .Books {
+            params = ["id": User.current!.id, "rating": rating, "book": media.id]
+        } else {
+            params = ["id": User.current!.id, "rating": rating, "movie": media.id]
+        }
+    
+        let requestString = API_HOST + (ObjectController.currentMediaType == .Movies ? "movies" : "books") + "/ratings/new/"
+        Alamofire.request(requestString, method: .post, parameters:params).responseData { (response) in
+            switch response.result {
+            case .success:
+                
+                switch response.response?.statusCode ?? -1 {
+                case 201:
+                    completion(true, "Success")
+                default:
+                    completion(false, "Error posting rating")
+                }
+                
+            case .failure(let error):
+                completion(false, error.localizedDescription)
+            }
+        }
+        
     }
     
     

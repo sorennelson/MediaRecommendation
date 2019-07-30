@@ -44,9 +44,8 @@ class RightTVMediaCell : NSTableCellView {
         }
     }
     
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        customView.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
+    override func viewWillDraw() {
+        customView.layer?.backgroundColor = CGColor(red: 0.15, green: 0.16, blue: 0.17, alpha: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {

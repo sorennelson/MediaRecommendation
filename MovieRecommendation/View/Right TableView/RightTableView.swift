@@ -84,6 +84,8 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     //    MARK: Title Cell
     private func getTitleCellView(tableView: NSTableView) -> TitleCell? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
+        cell?.layer?.backgroundColor = CGColor(red: 0.13, green: 0.13, blue: 0.14, alpha: 1)
+
         cell!.setHeader(currentContent)
         cell!.toggleHideButtons(currentContent == .Categories)
         return cell
@@ -92,6 +94,8 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     //    MARK: Rating Cell
     private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
+        cell.layer?.backgroundColor = CGColor(red: 0.13, green: 0.13, blue: 0.14, alpha: 1)
+        
         guard let (media, rating) = UserController.sharedInstance.getMediaAndRating(for: row - 1) else { return nil }
         cell.userRating = rating
         cell.media = media

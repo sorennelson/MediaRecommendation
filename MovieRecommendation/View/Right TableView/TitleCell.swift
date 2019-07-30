@@ -37,7 +37,7 @@ class TitleCell : NSTableCellView {
         case .Ratings:
             header = "My Ratings"
         case .Categories:
-            header = "Categories"
+            header = "Genres"
         }
     }
     
