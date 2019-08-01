@@ -1,5 +1,5 @@
 # Media Recommendation
-A media recommendation application that uses rankings from MovieLens and Goodbooks datasets to recommend movies, and books to users via a Collaborative Filtering Algorithm.
+A MacOS application that uses rankings from MovieLens and Goodbooks datasets to recommend movies, and books to users via a Collaborative Filtering Algorithm.
 
 ## TODO
 - [ ] Categories
