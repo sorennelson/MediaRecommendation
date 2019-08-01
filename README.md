@@ -1,10 +1,10 @@
 # Media Recommendation
 A MacOS application that uses rankings from MovieLens and Goodbooks datasets to recommend movies, and books to users via a Collaborative Filtering Algorithm.
 
-## TODO
-- [ ] Categories
-- [ ] Incorporate Music
-
-## Resources
+## Datasets
 [MovieLens](https://grouplens.org/datasets/movielens/) \
 [Goodbooks](http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/)
+
+## TODO
+- [ ] Categories
+- [ ] Add Music
