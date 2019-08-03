@@ -1,22 +1,62 @@
 import numpy as np
 from sklearn.metrics import mean_squared_error
 
-from . import cfmodel
+from . import cfmodel, models
 
 from media.models import Book, Movie
 from userauth.models import BookUser, MovieUser
 from predictions.models import BookPrediction, MoviePrediction
 
 
+def add_user(media_type, uid):
+    if media_type == 'books':
+        mlmodel = models.MLModel.objects.get(pk=1)
+    else:
+        mlmodel = models.MLModel.objects.get(pk=1)
+    model = mlmodel.cfmodel
+
+    model.add_user()
+    model.reset_ratings()
+
+    if media_type == 'books':
+        _, _ = _run_gradient_descent(5, model, 0.0002, 120, False)
+    else:
+        _, _ = _run_gradient_descent(5, model, 0.001, 100, False)
+        _create_movie_predictions(model, uid)
+
+    mlmodel.cfmodel = model
+    mlmodel.save()
+
+
+def add_rating(media_type, media_id, user_id, rating):
+    if media_type == 'books':
+        mlmodel = models.MLModel.objects.get(pk=1)
+    else:
+        mlmodel = models.MLModel.objects.get(pk=1)
+    model = mlmodel.cfmodel
+
+    model.add_rating(media_id, user_id, rating)
+    model.reset_ratings()
+
+    if media_type == 'books':
+        _, _ = _run_gradient_descent(5, model, 0.0002, 120, False)
+    else:
+        _, _ = _run_gradient_descent(5, model, 0.001, 100, False)
+        _create_movie_predictions(model)
+
+    mlmodel.cfmodel = model
+    mlmodel.save()
+
+
 def run_collaborative_filtering(media_type, predict):
     model = cfmodel.CollaborativeFilteringModel(media_type)
     best = [0, 0, 0, 1.0]
-    param_count = [10, 12, 20]
 
     if media_type == "books":
-        iterations = 500
-        reg_params = [0.05, 0.1, 1, 2]
-        learning_rates = [0.0001]
+        iterations = 300
+        param_count = [6]
+        reg_params = [120]
+        learning_rates = [0.0002]
     else:
         iterations = 300
         param_count = [8]
@@ -41,7 +81,13 @@ def run_collaborative_filtering(media_type, predict):
     if media_type == 'books' and predict:
         _create_book_predictions(model)
     elif predict:
+        print('PREDICT')
         _create_movie_predictions(model)
+
+    mlmodel = models.MLModel()
+    mlmodel.cfmodel = model
+    mlmodel.save()
+    print('SAVED!!')
 
 
 def _run_hyperparameters(model, num_epochs, features_num, learning_rate, iteration, best, val, reg_param=0):
@@ -156,7 +202,7 @@ def _create_book_predictions(model):
     predictions *= non_rated  # zero out rated movies
 
     users = BookUser.objects.order_by('id')
-    for user in users:
+    for user in [user for user in users if user.id > 13124]:
 
         for psql_bid, np_bid in model.mapping.items():
             curr_prediction = BookPrediction.objects.filter(prediction_user=user.id,
@@ -164,7 +210,7 @@ def _create_book_predictions(model):
             if curr_prediction.exists():
                 curr_prediction.delete()
 
-            prediction_val = predictions[np_bid, user.id - 1]
+            prediction_val = predictions[np_bid, user.id-1]
             if prediction_val != 0:
                 prediction_obj = BookPrediction(prediction_user=user,
                                                 book=Book.objects.get(id=psql_bid),
@@ -173,7 +219,7 @@ def _create_book_predictions(model):
         print(user.id)
 
 
-def _create_movie_predictions(model):
+def _create_movie_predictions(model, uid=467):
     predictions = np.dot(model.item_params, model.user_params.T)
     predictions += model.ratings_mean.reshape(-1, 1)
 
@@ -181,15 +227,17 @@ def _create_movie_predictions(model):
     predictions *= non_rated    # zero out rated movies
 
     users = MovieUser.objects.order_by('id')
-    for user in users:
+    for user in [user for user in users if user.id >= uid]:
 
         for psql_mid, np_mid in model.mapping.items():
             curr_prediction = MoviePrediction.objects.filter(prediction_user=user.id,
                                                              movie=Movie.objects.get(id=psql_mid))
+
             if curr_prediction.exists():
                 curr_prediction.delete()
 
-            prediction_val = predictions[np_mid, user.id-1]
+            prediction_val = predictions[np_mid, user.id - 1]
+
             if prediction_val != 0:
                 prediction_obj = MoviePrediction(prediction_user=user,
                                                  movie=Movie.objects.get(id=psql_mid),

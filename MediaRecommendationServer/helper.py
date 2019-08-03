@@ -118,26 +118,22 @@ def remove_small_book_genres():
             genre.delete()
 
 
-# def get_movie_image():
-#     conn = http.client.HTTPSConnection("api.themoviedb.org")
-#
-#     payload = "{}"
-#     url = "/3/movie/" + str(862) + "?language=en-US&api_key=60d78c7cfee3c407c714903efd4c3359"
-#     conn.request("GET", url, payload)
-#
-#     res = conn.getresponse()
-#     data = res.read()
-#     json = data.decode("utf-8")
-#     print(json)
-#
-#     poster_str = re.search(r'"poster_path":".{28}\.jpg"', json)[0]
-#     poster_url = re.search(r'.{28}\.jpg', poster_str)[0]
-#     print(avg)
+def set_num_watched():
+    movies = Movie.objects.all()
+    for movie in movies:
+        num_watched = MovieRating.objects.filter(movie=movie).count()
+        movie.num_watched = num_watched
+        movie.save()
+
+    books = Book.objects.all()
+    for book in books:
+        num_watched = BookRating.objects.filter(book=book).count()
+        book.num_watched = num_watched
+        book.save()
 
 
 def set_movie_images():
     conn = http.client.HTTPSConnection("api.themoviedb.org")
-
     path = './links.csv'
     with open(path, 'r') as f:
         i = 1
@@ -193,10 +189,10 @@ if __name__ == "__main__":
         import_movie_ratings()
 
     elif sys.argv[1] == "run_book_ml":
-        ml.run_collaborative_filtering('books', sys.argv[2])
+        ml.run_collaborative_filtering('books', int(sys.argv[2]))
 
     elif sys.argv[1] == "run_movie_ml":
-        ml.run_collaborative_filtering('movies', sys.argv[2])
+        ml.run_collaborative_filtering('movies', int(sys.argv[2]))
 
     elif sys.argv[1] == "add_movie_genres":
         add_movie_genres()
@@ -212,3 +208,9 @@ if __name__ == "__main__":
 
     elif sys.argv[1] == "set_movie_images":
         set_movie_images()
+
+    elif sys.argv[1] == 'add_movie_rating':
+        ml.add_rating('movie', 1, 467, 3.0)
+
+    elif sys.argv[1] == 'set_num_watched':
+        set_num_watched()

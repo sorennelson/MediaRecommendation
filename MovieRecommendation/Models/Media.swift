@@ -14,13 +14,14 @@ struct Category: Codable {
     let count: Int
 }
 
-class Media: Hashable, Codable {
+class Media: Equatable, Codable {
     
     var id: Int
     var title: String
     var genres: [String]
     var year: Int
     var avgRating: Double
+    var numWatched: Int
     
     var imageURL: URL?
     var imageData: Data?
@@ -31,6 +32,7 @@ class Media: Hashable, Codable {
         self.genres = genres
         self.year = year
         self.avgRating = avgRating
+        self.numWatched = 1
         self.imageURL = imageURL
     }
     
@@ -40,6 +42,7 @@ class Media: Hashable, Codable {
         case genres
         case year
         case avgRating = "average_rating"
+        case numWatched = "num_watched"
         case imageURL = "image_url"
     }
     
@@ -51,6 +54,7 @@ class Media: Hashable, Codable {
         year = try container.decode(Int.self, forKey: .year)
         let avgFloat = try container.decode(Float.self, forKey: .avgRating)
         avgRating = Double(avgFloat)
+        numWatched = try container.decode(Int.self, forKey: .numWatched)
         imageURL = try container.decode(URL?.self, forKey: .imageURL)
     }
     
@@ -76,9 +80,4 @@ class Media: Hashable, Codable {
     static func == (lhs: Media, rhs: Media) -> Bool {
         return lhs.id == rhs.id
     }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
 }

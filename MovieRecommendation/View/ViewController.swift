@@ -47,7 +47,6 @@ class ViewController: NSViewController {
     private func setupTableViews() {
         rightDataSource.setTableView(rightTableView)
         rightDataSource.contentDelegate = leftDataSource
-//        rightTableView.backgroundColor = NSColor(red: 0.13, green: 0.13, blue: 0.14, alpha: 1)
         
         leftDataSource.setTableView(leftTableView)
 

@@ -35,9 +35,13 @@ class Book: Media {
     }
 }
 
-struct BookRating: Codable {
+struct BookRating: Codable, Equatable {
     let book: Book
     var rating: Float
+    
+    static func == (lhs: BookRating, rhs: BookRating) -> Bool {
+        return lhs.book == rhs.book
+    }
 }
 
 

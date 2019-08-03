@@ -60,8 +60,8 @@ class CollaborativeFilteringModel(object):
                 self.rated[map_id, u] = 1
 
         self.ratings_mean = np.mean(self.ratings, axis=1)
-        self.ratings = self.ratings - self.ratings_mean.reshape(-1, 1)
-        self.ratings /= 5
+        self._demean()
+        self._normalize_ratings()
 
     def set_user_item_params(self, features_num):
         """Sets the media and user parameters randomly for a given number of features."""
@@ -92,3 +92,45 @@ class CollaborativeFilteringModel(object):
     def reset_ratings(self):
         self.train_ratings = self.ratings.copy()
         self.train_rated = self.rated.copy()
+
+    def add_rating(self, media_id, user_id, rating):
+        self._denormalize_ratings()
+        self._remean()
+
+        self.ratings[self.mapping[media_id], user_id-1] = rating
+        self.rated[self.mapping[media_id], user_id-1] = 1
+        self.ratings_mean = np.mean(self.ratings, axis=1)
+
+        self._demean()
+        self._normalize_ratings()
+
+    def add_user(self):
+        self.users_num += 1
+
+        new_rated = np.zeros((self.media_num, self.users_num))
+        new_rated[:, :-1] = self.rated
+        self.rated = new_rated
+
+        new_ratings = np.zeros((self.media_num, self.users_num))
+        new_ratings[:, :-1] = self.ratings
+        self.ratings = new_ratings
+
+        self._denormalize_ratings()
+        self.ratings[:, -1] -= self.ratings_mean.reshape(-1, 1) # Demean new user
+        self._normalize_ratings()
+
+        new_user_params = np.random.random((self.users_num, self.user_params.shape[1]))
+        new_user_params[:, :-1] = self.user_params
+        self.user_params = new_user_params
+
+    def _demean(self):
+        self.ratings -= self.ratings_mean.reshape(-1, 1)
+
+    def _remean(self):
+        self.ratings += self.ratings_mean.reshape(-1, 1)
+
+    def _normalize_ratings(self):
+        self.ratings /= 5
+
+    def _denormalize_ratings(self):
+        self.ratings *= 5

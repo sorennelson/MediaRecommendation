@@ -8,6 +8,7 @@ from . import models
 
 from userauth.models import User
 from media.models import Book, Movie
+from mlmodels import helper as ml
 
 
 class BookRatingViewSet(viewsets.ModelViewSet):
@@ -20,11 +21,19 @@ class BookRatingViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'])
     def new(self, request):
         user = User.objects.get(pk=request.data['id'])
-        book_rating = models.MovieRating(rating_user=user.book_user,
-                                         book=Book.objects.get(pk=int(request.data['book'])),
-                                         rating=float(request.data['rating']))
 
+        if models.BookRating.objects.filter(rating_user=user.book_user,
+                                            book=Book.objects.get(pk=int(request.data['book']))).exists():
+            book_rating = models.BookRating.objects.get(rating_user=user.book_user,
+                                                        book=Book.objects.get(pk=int(request.data['movie'])))
+            book_rating.rating = float(request.data['rating'])
+
+        else:
+            book_rating = models.MovieRating(rating_user=user.book_user,
+                                             book=Book.objects.get(pk=int(request.data['book'])),
+                                             rating=float(request.data['rating']))
         book_rating.save()
+        ml.add_rating('books', book_rating.book.id, user.book_user.id, book_rating.rating)
         return Response(status=status.HTTP_201_CREATED)
 
     @action(detail=False)
@@ -53,12 +62,20 @@ class MovieRatingViewSet(viewsets.ModelViewSet):
     @csrf_exempt
     @action(detail=False, methods=['post'])
     def new(self, request):
-        user = User.objects.get(pk=request.data['id'])
-        movie_rating = models.MovieRating(rating_user=user.movie_user,
-                                          movie=Movie.objects.get(pk=int(request.data['movie'])),
-                                          rating=float(request.data['rating']))
+        user = User.objects.get(pk=int(request.data['id']))
 
+        if models.MovieRating.objects.filter(rating_user=user.movie_user,
+                                             movie=Movie.objects.get(pk=int(request.data['movie']))).exists():
+            movie_rating = models.MovieRating.objects.get(rating_user=user.movie_user,
+                                                          movie=Movie.objects.get(pk=int(request.data['movie'])))
+            movie_rating.rating = float(request.data['rating'])
+
+        else:
+            movie_rating = models.MovieRating(rating_user=user.movie_user,
+                                              movie=Movie.objects.get(pk=int(request.data['movie'])),
+                                              rating=float(request.data['rating']))
         movie_rating.save()
+        ml.add_rating('movies', movie_rating.movie.id, user.movie_user.id, movie_rating.rating)
         return Response(status=status.HTTP_201_CREATED)
 
     @action(detail=False)

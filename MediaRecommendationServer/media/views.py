@@ -32,7 +32,6 @@ class BookViewSet(viewsets.ModelViewSet):
 
         book_user = user.book_user
         predictions = BookPrediction.objects.filter(prediction_user=book_user)
-        print(predictions)
         predictions = predictions[start:end]
 
         books = []
@@ -61,6 +60,9 @@ class MovieViewSet(viewsets.ModelViewSet):
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 
+        print(user.id)
+        print(user.book_user.id)
+        print(user.movie_user.id)
         movie_user = user.movie_user
         predictions = MoviePrediction.objects.filter(prediction_user=movie_user)
         predictions = predictions[start:end]

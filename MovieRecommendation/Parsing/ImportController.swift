@@ -291,6 +291,9 @@ class ImportController {
                 }
                 
             case .failure(let error):
+                if error.localizedDescription.contains("timed out") {
+                    print("HERE")
+                }
                 completion(false, error.localizedDescription)
             }
         }

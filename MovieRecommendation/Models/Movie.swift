@@ -15,9 +15,13 @@ class Movie: Media {
     }
 }
 
-struct MovieRating: Codable {
+struct MovieRating: Codable, Equatable {
     let movie: Movie
     var rating: Float
+    
+    static func == (lhs: MovieRating, rhs: MovieRating) -> Bool {
+        return lhs.movie == rhs.movie
+    }
 }
 
 

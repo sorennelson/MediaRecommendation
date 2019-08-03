@@ -940,7 +940,7 @@
                                                                 <outlet property="titleHeaderLabel" destination="XA1-E0-Grs" id="sqJ-mr-NeI"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="MovieRatingCell" id="jSo-od-m4Y" customClass="RightTVMediaCell" customModule="MovieRecommendation" customModuleProvider="target">
+                                                        <tableCellView identifier="MovieRatingCell" focusRingType="none" id="jSo-od-m4Y" customClass="RightTVMediaCell" customModule="MovieRecommendation" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="65" width="521" height="153"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1206,7 +1206,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="QKd-Ls-Olt"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="anq-UP-qRs">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="anq-UP-qRs">
                                                                         <font key="font" size="15" name="Avenir-Medium"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1217,7 +1217,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="G0I-17-0HA"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="gQz-JD-ZGR">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="gQz-JD-ZGR">
                                                                         <font key="font" size="15" name="Avenir-Medium"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1228,7 +1228,7 @@
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="25" id="4cA-34-lRV"/>
                                                                     </constraints>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Label" id="IEl-mN-Kkq">
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="IEl-mN-Kkq">
                                                                         <font key="font" size="15" name="Avenir-Medium"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

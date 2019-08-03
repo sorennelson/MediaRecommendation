@@ -24,8 +24,6 @@ class ObjectController {
     var bookCategories: [Category] = []
     var categoryBooks: [String: [Book]] = [:]
     
-    // Not currently using
-    var addedRatings = false
     var selectedMedia: Media?
     var selectedMediaPrediction: Double?
     
@@ -69,6 +67,7 @@ class ObjectController {
         return ObjectController.currentMediaType == .Books ? recommendedBooks : recommendedMovies
     }
     
+//    MARK: RATINGS
     func getRating(for media: Media) -> Float? {
         if ObjectController.currentMediaType == .Books {
             guard let user = User.current, let ratings = user.bookRatings else { return nil }
@@ -85,12 +84,12 @@ class ObjectController {
         return nil
     }
     
-    func addRating(_ rating: Float, for media: Media) -> Bool {
+    func addRating(_ rating: Float, for media: Media, completion:@escaping (Bool, String) -> ()) -> Bool {
         let success = addLocalRating(rating, for: media)
         if !success  {  return false  }
         // TODO: Post rating to DB
         ImportController.sharedInstance.post(rating: rating, for: media) { (success, err) in
-            
+            completion(success, err)
         }
         return true
     }
@@ -99,26 +98,27 @@ class ObjectController {
         guard let user = User.current else { return false }
         if ObjectController.currentMediaType == .Books {
             if let _ = user.bookRatings {
-                user.bookRatings!.append(BookRating(book: media as! Book, rating: rating))
+                if let i = user.bookRatings!.firstIndex(of: BookRating(book: media as! Book, rating: 0.0)) {
+                    user.bookRatings![i].rating = rating
+                } else {
+                    user.bookRatings!.insert(BookRating(book: media as! Book, rating: rating), at: 0)
+                }
             } else {
                 user.bookRatings = [BookRating(book: media as! Book, rating: rating)]
             }
-            
         } else {
             if let _ = user.movieRatings {
-                user.movieRatings!.append(MovieRating(movie: media as! Movie, rating: rating))
+                if let i = user.movieRatings!.firstIndex(of: MovieRating(movie: media as! Movie, rating: 0.0)) {
+                    user.movieRatings![i].rating = rating
+                } else {
+                    user.movieRatings!.insert(MovieRating(movie: media as! Movie, rating: rating), at: 0)
+                }
             } else {
                 user.movieRatings = [MovieRating(movie: media as! Movie, rating: rating)]
             }
         }
         return true
     }
-    
-//    func getPrediction(for media: Media) -> Double {
-//
-//        return 0.0
-//    }
-    
     
 //     MARK: Categories
     

@@ -129,15 +129,10 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let selectedMedia = selectedMedia else { return }
-        ObjectController.sharedInstance.addRating(Float(rating), for: selectedMedia)
-        
+        ObjectController.sharedInstance.addRating(Float(rating), for: selectedMedia, completion: { (success, err) in
+
+        })
         presentingViewController?.dismiss(self)
     }
-    
-//    override func dismiss(_ sender: Any?) {
-//        print("HERE")
-//        let view = presentingViewController as! ViewController
-//        view.reloadTableViews()
-//    }
     
 }

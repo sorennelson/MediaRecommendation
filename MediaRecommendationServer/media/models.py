@@ -10,11 +10,12 @@ class Book(models.Model):
     year = models.IntegerField()
     goodreads_id = models.IntegerField(unique=True)
     average_rating = models.FloatField(default=0.0)
+    num_watched = models.IntegerField(default=0)
     image_url = models.URLField(null=True)
     small_image_url = models.URLField(null=True)
 
     class Meta:
-        ordering = ['-average_rating', 'title']
+        ordering = ['-average_rating', '-num_watched', 'title']
 
 
 class Movie(models.Model):
@@ -24,9 +25,10 @@ class Movie(models.Model):
     year = models.PositiveSmallIntegerField()
     imdb_id = models.IntegerField(unique=True)
     average_rating = models.FloatField(default=0.0)
+    num_watched = models.IntegerField(default=0)
     image_url = models.URLField(null=True)
 
     class Meta:
-        ordering = ['-average_rating', 'title']
+        ordering = ['-average_rating', '-num_watched', 'title']
 
 #     \copy media_book FROM '/users/solosoren/desktop/new_books.csv' DELIMITER ',' CSV;

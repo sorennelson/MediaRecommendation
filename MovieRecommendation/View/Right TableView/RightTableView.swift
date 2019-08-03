@@ -27,7 +27,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         self.tableView = tableView
         self.tableView!.dataSource = self
         self.tableView!.delegate = self
-        self.tableView!.backgroundColor = NSColor(red: 0.1205, green: 0.1232, blue: 0.1287, alpha: 1)
+        self.tableView!.backgroundColor = NSColor(red: 0.13, green: 0.13, blue: 0.14, alpha: 1)
         self.tableView!.reloadData()
     }
     
@@ -49,8 +49,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        if (row == 0) { return false }
-        if currentContent == .Ratings { return true }
+        if row == 0 || currentContent == .Ratings  { return false }
         else {
             let oldCell = tableView.view(atColumn: 0, row: selectedCategoryRow, makeIfNecessary: false) as! RightTVCategoryCell
             oldCell.deselect()
@@ -84,8 +83,6 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     //    MARK: Title Cell
     private func getTitleCellView(tableView: NSTableView) -> TitleCell? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
-        cell?.layer?.backgroundColor = CGColor(red: 0.13, green: 0.13, blue: 0.14, alpha: 1)
-
         cell!.setHeader(currentContent)
         cell!.toggleHideButtons(currentContent == .Categories)
         return cell
@@ -94,8 +91,6 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     //    MARK: Rating Cell
     private func getRatingCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! RightTVMediaCell
-        cell.layer?.backgroundColor = CGColor(red: 0.13, green: 0.13, blue: 0.14, alpha: 1)
-        
         guard let (media, rating) = UserController.sharedInstance.getMediaAndRating(for: row - 1) else { return nil }
         cell.userRating = rating
         cell.media = media
