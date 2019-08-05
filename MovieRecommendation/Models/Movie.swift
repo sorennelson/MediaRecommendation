@@ -41,9 +41,3 @@ class MovieSeries: Codable {
         showMedia = try container.decode(Movie.self, forKey: .showMedia)
     }
 }
-
-//if let string = imageString {
-//    if !string.isEmpty {
-//        self.imageURL = "https://image.tmdb.org/t/p/w342" + string
-//    }
-//}
