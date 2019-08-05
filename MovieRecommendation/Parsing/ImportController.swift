@@ -1,6 +1,6 @@
 //
 //  ImportController.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 1/10/19.
 //  Copyright © 2019 SORN. All rights reserved.

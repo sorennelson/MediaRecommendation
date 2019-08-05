@@ -1,6 +1,6 @@
 //
 //  CreateUserViewController.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 5/2/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -13,10 +13,6 @@ class AuthenticationViewController: NSViewController {
     
     @IBOutlet var usernameTextField: NSTextField!
     @IBOutlet var passwordTextField: NSSecureTextField!
-    
-    override func viewDidLoad() {
-        
-    }
         
     override func dismiss(_ sender: Any?) {
         //        TODO: reload main view

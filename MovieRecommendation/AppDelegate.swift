@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 7/17/18.
 //  Copyright © 2018 SORN. All rights reserved.

@@ -7,6 +7,5 @@ target 'MovieRecommendation' do
 
   # Pods for MediaRecommendation
   pod 'Alamofire','~> 4.7.0'
-  pod 'Starscream', '~> 3.0.2'
 
 end

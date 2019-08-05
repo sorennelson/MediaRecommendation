@@ -1,6 +1,6 @@
 //
 //  Expansion.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 2/6/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -22,10 +22,6 @@ extension ViewController {
         leftTableView.reloadData()
         rightTableView.reloadData()
     }
-    
-//    private func changeArrow(_ button: NSButton, to imageName: String) {
-//        button.image = NSImage.init(named: imageName)
-//    }
 
     private func minimize() {
         leftTVToViewConstraint.isActive = false

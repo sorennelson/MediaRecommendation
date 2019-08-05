@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 7/1/19.
 //  Copyright © 2019 SORN. All rights reserved.

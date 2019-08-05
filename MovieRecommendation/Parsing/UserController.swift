@@ -1,6 +1,6 @@
 //
 //  UserController.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 6/23/19.
 //  Copyright © 2019 SORN. All rights reserved.

@@ -37,8 +37,6 @@
 		ACF36C2F20FEB77D0088BFE8 /* MovieRecommendationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C2E20FEB77D0088BFE8 /* MovieRecommendationUITests.swift */; };
 		ACF36C4220FEB7B80088BFE8 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C3E20FEB7B80088BFE8 /* Movie.swift */; };
 		ACF36C4420FEB7B80088BFE8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36C4020FEB7B80088BFE8 /* User.swift */; };
-		ACF36CBE20FEC0320088BFE8 /* Movie_Data in Resources */ = {isa = PBXBuildFile; fileRef = ACF36CBD20FEC0320088BFE8 /* Movie_Data */; };
-		ACF36CC220FEC6CE0088BFE8 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF36CC120FEC6CE0088BFE8 /* Test.swift */; };
 		AD2BF1F7071AA4CBB55ADE60 /* Pods_MovieRecommendation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277332A4124A23143CB09579 /* Pods_MovieRecommendation.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,8 +98,6 @@
 		ACF36C3020FEB77D0088BFE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACF36C3E20FEB7B80088BFE8 /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		ACF36C4020FEB7B80088BFE8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		ACF36CBD20FEC0320088BFE8 /* Movie_Data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Movie_Data; sourceTree = "<group>"; };
-		ACF36CC120FEC6CE0088BFE8 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		EDD3C4CE38DD63B16D96E4E3 /* Pods_MovieRecommendationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieRecommendationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61ED24FA8862D550F83CDDE /* Pods-MovieRecommendation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieRecommendation.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,13 +243,11 @@
 		ACF36C0F20FEB77C0088BFE8 /* MovieRecommendation */ = {
 			isa = PBXGroup;
 			children = (
-				ACF36CBD20FEC0320088BFE8 /* Movie_Data */,
 				ACF36C1020FEB77C0088BFE8 /* AppDelegate.swift */,
 				ACC0A56F22CAE449000410A4 /* Constants.swift */,
 				AC324E6A21F1354400270BD1 /* View */,
 				AC7B4907226CBBC900F7B5C9 /* Parsing */,
 				ACF36C3C20FEB7B80088BFE8 /* Models */,
-				ACF36CC120FEC6CE0088BFE8 /* Test.swift */,
 				AC92D81822F798CB007EEA41 /* Assets.xcassets */,
 				ACF36C1620FEB77D0088BFE8 /* Main.storyboard */,
 				AC60DA5421CAF75300A46711 /* RecommendationCVCell.xib */,
@@ -416,7 +410,6 @@
 				AC60DA5621CAF75300A46711 /* RecommendationCVCell.xib in Resources */,
 				ACF36C1820FEB77D0088BFE8 /* Main.storyboard in Resources */,
 				AC92D81922F798CB007EEA41 /* Assets.xcassets in Resources */,
-				ACF36CBE20FEC0320088BFE8 /* Movie_Data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,14 +440,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieRecommendation/Pods-MovieRecommendation-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -511,7 +502,6 @@
 				AC5F6B5E21C8D58700DC268A /* RightTVMediaCell.swift in Sources */,
 				AC72FBDE21CA1AF800DCF44E /* LeftTableView.swift in Sources */,
 				ACCB9679227E9D1E0027E834 /* MediaDetailPopover.swift in Sources */,
-				ACF36CC220FEC6CE0088BFE8 /* Test.swift in Sources */,
 				ACD511A6226BB1B8006D9FFA /* ObjectController.swift in Sources */,
 				ACF36C4220FEB7B80088BFE8 /* Movie.swift in Sources */,
 				ACF36C1120FEB77C0088BFE8 /* AppDelegate.swift in Sources */,

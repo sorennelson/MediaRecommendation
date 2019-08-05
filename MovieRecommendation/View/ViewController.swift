@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 7/17/18.
 //  Copyright © 2018 SORN. All rights reserved.
@@ -70,7 +70,6 @@ class ViewController: NSViewController {
     @IBAction func bookButtonPressed(_ sender: Any) {
         ImportController.sharedInstance.loadMediaRatingsAndGenres(.Books) { (media, ratings, genres) in
             // TODO: Notification if something didn't load
-//            print(media, ratings, genres)
             ObjectController.currentMediaType = .Books
             self.reloadTableViews()
         }
@@ -89,26 +88,8 @@ class ViewController: NSViewController {
         }
     }
     
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-//        switch segue.identifier {
-//        case "Authentication":
-//            let popoverViewController = segue.destinationController as! AuthenticationViewController
-//            print("Auth")
-//
-//        case "Logout":
-//            print("Logout")
-//
-//        default:
-//            print("")
-//        }
-    }
-    
     override func dismiss(_ viewController: NSViewController) {
         super.dismiss(viewController)
         reloadTableViews()
     }
-    
-//    private func runTests() {
-//        let test = Test.sharedInstance
-//    }
 }

@@ -1,6 +1,6 @@
 //
 //  RightTVCategoryCell.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 5/7/19.
 //  Copyright © 2019 SORN. All rights reserved.
