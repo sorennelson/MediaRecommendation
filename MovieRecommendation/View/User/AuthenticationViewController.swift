@@ -1,6 +1,6 @@
 //
 //  CreateUserViewController.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 5/2/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -11,19 +11,23 @@ import Cocoa
 
 class AuthenticationViewController: NSViewController {
     
-    @IBOutlet var emailTextField: NSTextField!
+    @IBOutlet var usernameTextField: NSTextField!
     @IBOutlet var passwordTextField: NSSecureTextField!
+        
+    override func dismiss(_ sender: Any?) {
+        //        TODO: reload main view
+    }
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        if !isValidEmailPassword() {
+        if !isValidUsernamePassword() {
             self.showInvalidEmailPasswordNotification()
             return
         }
         
-        ObjectController.sharedInstance.createUser(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success) in
+        UserController.sharedInstance.createUser(username: usernameTextField.stringValue,
+                                                 password: passwordTextField.stringValue) { (success, error) in
             if !success {
-                self.showErrorCreatingAccountNotification()
-                
+                self.showErrorCreatingAccountNotification(error!)
             } else {
                 self.showSuccessCreatingAccountNotification()
                 self.presentingViewController?.dismiss(self)
@@ -32,14 +36,15 @@ class AuthenticationViewController: NSViewController {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        if !isValidEmailPassword() {
+        if !isValidUsernamePassword() {
             self.showInvalidEmailPasswordNotification()
             return
         }
         
-        ObjectController.sharedInstance.signIn(email: emailTextField.stringValue, password: passwordTextField.stringValue) { (success) in
+        UserController.sharedInstance.login(username: usernameTextField.stringValue,
+                                            password: passwordTextField.stringValue) { (success, error) in
             if !success {
-                self.showErrorLoggingInNotification()
+                self.showErrorCreatingAccountNotification(error!)
                 
             } else {
                 self.showSuccessLoggingInNotification()
@@ -48,11 +53,9 @@ class AuthenticationViewController: NSViewController {
         }
     }
     
-    func isValidEmailPassword() -> Bool {
-        if emailTextField.stringValue.contains("@")
-            && emailTextField.stringValue.contains(".")
+    func isValidUsernamePassword() -> Bool {
+        if usernameTextField.stringValue.isEmpty == false
             && passwordTextField.stringValue.isEmpty == false {
-//            TODO: force better password
             return true
         }
         return false
@@ -63,12 +66,12 @@ class AuthenticationViewController: NSViewController {
 //            TODO:
     }
     
-    func showErrorCreatingAccountNotification() {
+    func showErrorCreatingAccountNotification(_ error: String) {
         print("Error creating Account")
         //        TODO:
     }
     
-    func showErrorLoggingInNotification() {
+    func showErrorLoggingInNotification(_ error: String) {
         print("Error creating Account")
         //        TODO:
     }

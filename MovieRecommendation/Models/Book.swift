@@ -1,6 +1,6 @@
 //
 //  Book.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 3/21/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -10,42 +10,57 @@ import Foundation
 
 class Book: Media {
     
-    var goodreadsID: Int
     var author: String
-    var year: String?
+    var smallImageURL: URL?
     
-    init(id: Int, goodreadsID: Int, title: String, author: String, year: String?, genres: [String], allBookGenres:[String], avgRating: Double, imageString: String) {
-        self.goodreadsID = goodreadsID
+    init(id: Int, title: String, author: String, year: Int, genres: [String], avgRating: Double,
+         imageURL: URL?, smallImageURL: URL?) {
         self.author = author
-        self.year = year
+        self.smallImageURL = smallImageURL
         
-        super.init(id: id, title: title, genres: genres, features: zeros(994 + 1), ratings: Array(repeating: 0, count: 53425))
-        self.avgRating = avgRating
-        self.imageURL = imageString
-        setFeatures(allBookGenres: allBookGenres)
+        super.init(id: id, title: title, genres: genres, year: year, avgRating: avgRating, imageURL: imageURL)
     }
     
-    private func setFeatures(allBookGenres: [String]) {
-        for genre in genres {
-            if let i = allBookGenres.firstIndex(of: genre) {
-                self.features[i] = 1
-            } else {
-                print("Couldn't find Genre in Features")
-            }
-        }
+    private enum BookKeys: String, CodingKey {
+        case author
+        case smallImageURL = "small_image_url"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: BookKeys.self)
+        author = try container.decode(String.self, forKey: .author)
+        smallImageURL = try container.decode(URL?.self, forKey: .smallImageURL)
+        
+        try super.init(from: decoder)
     }
 }
 
-// MARK: Book Genre Work
-extension Book {
-    static let genreExceptions = [
-        "to-read", "currently-reading", "owned", "default", "favorites", "books-i-own",
-        "ebook", "kindle", "library", "audiobook", "owned-books", "audiobooks", "my-books",
-        "ebooks", "to-buy", "english", "calibre", "books", "british", "audio", "my-library",
-        "favourites", "re-read", "general", "e-books"
-    ]
+struct BookRating: Codable, Equatable {
+    let book: Book
+    var rating: Float
     
-    static func isValid(genre: String) -> Bool {
-        return !genreExceptions.contains(genre)
+    static func == (lhs: BookRating, rhs: BookRating) -> Bool {
+        return lhs.book == rhs.book
     }
 }
+
+class BookSeries: Codable {
+    let name: String
+    let books: [Book]
+    var showMedia: Book
+    
+    enum BookSeriesKeys: String, CodingKey {
+        case name
+        case books
+        case showMedia = "most_viewed"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: BookSeriesKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        books = try container.decode([Book].self, forKey: .books)
+        showMedia = try container.decode(Book.self, forKey: .showMedia)
+    }
+}
+
+

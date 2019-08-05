@@ -1,6 +1,6 @@
 //
 //  TitleCell.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 12/18/18.
 //  Copyright © 2018 SORN. All rights reserved.
@@ -14,12 +14,6 @@ class TitleCell : NSTableCellView {
     @IBOutlet var titleHeaderLabel: NSTextField!
     @IBOutlet var arrowButton: NSButton!
     @IBOutlet var addButton: NSButton!
-    
-    //    TODO:
-    override func viewWillDraw() {
-        
-    }
-    
     
     var leadingMargin : Double? {
         didSet {
@@ -35,15 +29,21 @@ class TitleCell : NSTableCellView {
     func setHeader(_ content: Content) {
         switch content {
         case .Recommendations:
-            if ObjectController.currentMediaType == .Movies {
-                header = "All Movies"
-            } else {
-                header = "All Books"
-            }
+            if ObjectController.currentMediaType == .Movies  {  header = "Movie Recommendations"  }
+            else  {  header = "Book Recommendations"  }
         case .Ratings:
             header = "My Ratings"
         case .Categories:
-            header = "Categories"
+            header = "Genres"
+        case .MostRecent:
+            if ObjectController.currentMediaType == .Movies  {  header = "Most Recent Movies"  }
+            else  {  header = "Most Recent Books"  }
+        case .MostViewed:
+            if ObjectController.currentMediaType == .Movies  {  header = "Most Viewed Movies"  }
+            else  {  header = "Most Viewed Books"  }
+        case .Series:
+            if ObjectController.currentMediaType == .Movies  {  header = "Movie Series"  }
+            else  {  header = "Book Series"  }
         }
     }
     
@@ -63,7 +63,6 @@ class TitleCell : NSTableCellView {
     
     @IBAction func addButtonPressed(_ sender: Any) {
         print("Add")
-        
     }
     
 }

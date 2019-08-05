@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 7/17/18.
 //  Copyright © 2018 SORN. All rights reserved.
@@ -32,63 +32,16 @@ class ViewController: NSViewController {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-//        ObjectController.sharedInstance.checkForUser(completion: { (success) in
-//            if !success {
-//                // TODO: Notification -> Try again
-//            } else {
-//                self.userLoggedIn()
-//            }
-//        })
-    }
-    
-    override func viewDidAppear() {
-        super.viewDidAppear()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableViews()
-        self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
-
-        DispatchQueue.global(qos: .background).async {
-            
-//          TODO: Move to OC
-            ParseController.sharedInstance.importAndParseMovies()
-            DispatchQueue.main.async {
-                self.leftTableView.reloadData()
+        UserController.sharedInstance.attemptLogin { (success) in
+            // TODO: If not logged in, prompt them
+            ImportController.sharedInstance.loadMediaRatingsAndGenres(.Movies) { (media, ratings, genres) in
+                // TODO: Notification if something didn't load
+                self.setupTableViews()
             }
-            print("Movies imported")
-            
-            
-//            var collabMovieRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(mediaType: .Movies, media: ObjectController.sharedInstance.movies, featureCount: 8)
-//            let err = HypothesisEvaluation.sharedInstance.trainData(iterations: 100, RM: &collabMovieRM)
-//            print("RMSE FOR MOVIE COLLABORATIVE FILTERING: " + String(err))
-//            ObjectController.sharedInstance.movieRM = collabMovieRM
-
-//            var contentMovieRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.movies, featureCount: 18)
-//            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 1000, RM: &contentMovieRM)
-//            print("ROOT MEAN SQUARED ERROR FOR MOVIE CONTENT BASED: " + String(err))
         }
-        
-//        DispatchQueue.global(qos: .background).async {
-//            ParseController.sharedInstance.importAndParseBooks()
-//            DispatchQueue.main.async {
-//                self.leftTableView.reloadData()
-//            }
-//            print("Books imported")
-
-//            var collabBookRM = ParseController.sharedInstance.importToCollaborativeFilteringMLModel(mediaType: .Books, media: ObjectController.sharedInstance.books, featureCount: 10)
-//            var err = HypothesisEvaluation.sharedInstance.trainData(iterations: 50, RM: &collabBookRM)
-//            print("ROOT MEAN SQUARED ERROR FOR BOOK COLLABORATIVE FILTERING: " + String(err))
-//            ObjectController.sharedInstance.bookRM = collabBookRM
-
-//            var contentBookRM = ParseController.sharedInstance.importToContentBasedMLModel(media: ObjectController.sharedInstance.books, featureCount: ObjectController.sharedInstance.allBookGenres.count)
-//            err = HypothesisEvaluation.sharedInstance.trainData(iterations: 1000, RM: &contentBookRM)
-//            print("ROOT MEAN SQUARED ERROR FOR BOOK CONTENT BASED: " + String(err))
-//        }
-        
+        self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
     }
     
     private func setupTableViews() {
@@ -99,31 +52,27 @@ class ViewController: NSViewController {
 
         categoriesTableView.dataSource = categoriesDataSource
         categoriesTableView.delegate = categoriesDataSource
+        categoriesDataSource.contentDelegate = leftDataSource
         categoriesTableView.backgroundColor = NSColor(red: 0.152, green: 0.215, blue: 0.246, alpha: 1)
-        // 39 55 63
         categoriesTableView.reloadData()
-    }
-    
-    
-    private func userLoggedIn() {
-        // TODO: edit sign in page
-        reloadTableViews()
     }
     
     func reloadTableViews() {
-        rightTableView.reloadData()
-        leftTableView.reloadData()
-        categoriesTableView.reloadData()
+        DispatchQueue.main.async {
+            self.rightTableView.reloadData()
+            self.leftTableView.reloadData()
+            self.categoriesTableView.reloadData()
+        }
     }
     
-    @IBAction func addButtonPressed(_ sender: Any) {
-        
-    }
+    @IBAction func addButtonPressed(_ sender: Any) {}
     
     @IBAction func bookButtonPressed(_ sender: Any) {
-        // TODO: Check if books have been imported
-        ObjectController.currentMediaType = .Books
-        reloadTableViews()
+        ImportController.sharedInstance.loadMediaRatingsAndGenres(.Books) { (media, ratings, genres) in
+            // TODO: Notification if something didn't load
+            ObjectController.currentMediaType = .Books
+            self.reloadTableViews()
+        }
     }
     
     @IBAction func movieButtonPressed(_ sender: Any) {
@@ -132,17 +81,15 @@ class ViewController: NSViewController {
     }
     
     @IBAction func userButtonPressed(_ sender: Any) {
-        
+        if User.current == nil {
+            performSegue(withIdentifier: "Authentication", sender: self)
+        } else {
+            performSegue(withIdentifier: "Logout", sender: sender)
+        }
     }
     
     override func dismiss(_ viewController: NSViewController) {
         super.dismiss(viewController)
         reloadTableViews()
-    }
-    
-    
-    private func runTests() {
-        let test = Test.sharedInstance
-        test.runGradientTests()
     }
 }

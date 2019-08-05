@@ -1,6 +1,6 @@
 //
 //  Media.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 4/18/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -8,63 +8,76 @@
 
 import Foundation
 
-class Media: NSObject, MediaProtocol {
+
+struct Genre: Codable {
+    let name: String
+    let count: Int
+}
+
+class Media: Equatable, Codable {
     
-    var yID: Int
+    var id: Int
     var title: String
     var genres: [String]
-    var features: vector
-    var ratings: [Double]
-    var imageURL: String?
-    var imageData: Data?
-    var avgRating: Double?
-    var numRatings: Double?
+    var year: Int
+    var avgRating: Double
+    var numViewed: Int
     
-    init(id: Int, title: String, genres: [String], features: vector, ratings: [Double]) {
-        self.yID = id
+    var imageURL: URL?
+    var imageData: Data?
+    
+    init(id: Int, title: String, genres: [String], year: Int, avgRating: Double, imageURL:URL?) {
+        self.id = id
         self.title = title
         self.genres = genres
-        self.features = features
-        self.ratings = ratings
+        self.year = year
+        self.avgRating = avgRating
+        self.numViewed = 1
+        self.imageURL = imageURL
     }
     
-    override public var description: String {
-        return String("ID: \(yID) \nTitle: \(title) \ngenre: \(genres) \nratings: \(ratings)")
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case genres
+        case year
+        case avgRating = "average_rating"
+        case numViewed = "num_watched"
+        case imageURL = "image_url"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        title = try container.decode(String.self, forKey: .title)
+        genres = try container.decode([String].self, forKey: .genres)
+        year = try container.decode(Int.self, forKey: .year)
+        let avgFloat = try container.decode(Float.self, forKey: .avgRating)
+        avgRating = Double(avgFloat)
+        numViewed = try container.decode(Int.self, forKey: .numViewed)
+        imageURL = try container.decode(URL?.self, forKey: .imageURL)
     }
     
     func getImageData(completion:@escaping (Data?) -> ()) {
+        completion(nil)
         if let imageData = imageData {
             completion(imageData)
-            
+
         } else {
-            if let imageString = imageURL,
-                let url = URL(string: imageString) {
-                
+            if let imageURL = imageURL {
+
                 DispatchQueue.global(qos: .background).async {
-                    let data = try? Data(contentsOf: url)
+                    let data = try? Data(contentsOf: imageURL)
                     self.imageData = data
                     completion(data)
                 }
-                
+
             } else { completion(nil) }
         }
     }
     
-    func getAvgRating() -> Double {
-        if let avgRating = avgRating {
-            return avgRating
-            
-        } else {
-            numRatings = 0.0
-            var sum = 0.0
-            for rating in ratings {
-                if rating > 0.0 {
-                    numRatings! += 1.0
-                    sum += rating
-                }
-            }
-            return sum / numRatings!
-        }
+    //    MARK: Hashable
+    static func == (lhs: Media, rhs: Media) -> Bool {
+        return lhs.id == rhs.id
     }
-    
 }

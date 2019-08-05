@@ -1,6 +1,6 @@
 //
 //  MediaDetailPopover.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 5/4/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -27,42 +27,32 @@ class MediaDetailPopover: NSViewController {
         }
         media.getImageData(completion: { (data) in
             if let data = data {
-                DispatchQueue.main.async {
-                    self.image.image = NSImage(data: data)
-                }
+                DispatchQueue.main.async { self.image.image = NSImage(data: data) }
             }
         })
         
         let mediaType = ObjectController.currentMediaType
         if mediaType == .Books {
-            if ObjectController.sharedInstance.bookRM == nil {
-                predictionMessageLabel.stringValue = "The model is not done being trained"
-            } else {
-                let pred = Double(Int(prediction * 100) / 100.0)
+                let pred = Double(prediction * 100 / 100.0)
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
-            }
-            if let rating = ObjectController.sharedInstance.currentUser?.booksRated[media.yID] {
-                self.userRating.stringValue = String(rating)
-            } else {
+//            if let rating = ObjectController.sharedInstance.currentUser?.booksRated[media.yID] {
+//                self.userRating.stringValue = String(rating)
+//            } else {
                 self.userRating.stringValue = "Not Yet Rated"
-            }
+//            }
             
         } else {
-            if ObjectController.sharedInstance.movieRM == nil {
-                predictionMessageLabel.stringValue = "The model is not done being trained"
-            } else {
-                let pred = Double(Int(prediction * 100) / 100.0)
+                let pred = Double(prediction * 100 / 100.0)
                 self.prediction.stringValue = String(pred)
                 self.predictionMessageLabel.stringValue = ""
-            }
-            if let rating = ObjectController.sharedInstance.currentUser?.moviesRated[media.yID] {
-                self.userRating.stringValue = String(rating)
-            } else {
+//            if let rating = ObjectController.sharedInstance.currentUser?.moviesRated[media.yID] {
+//                self.userRating.stringValue = String(rating)
+//            } else {
                 self.userRating.stringValue = "Not Yet Rated"
-            }
+//            }
         }
-        let avg = Double(Int(media.getAvgRating() * 100) / 100.0)
+        let avg = Double(media.avgRating * 100 / 100.0)
         self.avgRating.stringValue = String(avg)
         self.titleLabel.stringValue = media.title
     }

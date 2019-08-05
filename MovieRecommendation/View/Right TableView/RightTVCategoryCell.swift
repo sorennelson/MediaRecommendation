@@ -1,6 +1,6 @@
 //
 //  RightTVCategoryCell.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 5/7/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -15,7 +15,13 @@ class RightTVCategoryCell: NSTableCellView {
     @IBOutlet var selectedView: NSView!
     @IBOutlet var countLabel: NSTextField!
     @IBOutlet var categoryTitle: NSTextField!
-    var category = "All"
+    
+    var category: Genre? {
+        didSet {
+            self.categoryTitle.stringValue = category!.name
+            self.countLabel.stringValue = String(category!.count)
+        }
+    }
     
     override func viewWillDraw() {
         if selected {

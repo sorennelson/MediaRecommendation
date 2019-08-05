@@ -1,6 +1,6 @@
 //
 //  RightTVMediaCell.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 12/18/18.
 //  Copyright © 2018 SORN. All rights reserved.
@@ -23,33 +23,29 @@ class RightTVMediaCell : NSTableCellView {
     var media: Media? {
         didSet {
             titleLabel.stringValue = media!.title
-            // yearLabel.stringValue = year + "  |  " + medium
             
-            if !media!.genres.isEmpty {
-                genreLabel.stringValue = media!.genres[0]
-                for i in 1 ..< media!.genres.count {
-                    genreLabel.stringValue +=  ", " + media!.genres[i]
-                }
+            let medium = ObjectController.currentMediaType == .Books ? "Book" : "Movie"
+            yearLabel.stringValue = String(media!.year) + "  |  " + medium
+            
+            genreLabel.stringValue = media!.genres[0]
+            for i in 1 ..< media!.genres.count {
+                genreLabel.stringValue +=  ", " + media!.genres[i]
             }
             
-            ratingLabel.stringValue = String(format: "%.1f", userRating!) + "  |  " + String(format: "%.1f", media!.getAvgRating())
+            ratingLabel.stringValue = "Rating: " + String(format: "%.1f", userRating!) + "  |  Avg: " + String(format: "%.1f", media!.avgRating / 2)
             
             media!.getImageData(completion: { (data) in
                 if let data = data {
-                    DispatchQueue.main.async {
-                        self.image.image = NSImage(data: data)
-                    }
+                    DispatchQueue.main.async  {  self.image.image = NSImage(data: data)  }
                 } else {
-                    // TODO: ImageView set to default. Set here so regardless of how long completion takes, it will be set
                     self.image.image = NSImage(named: "no-image")
                 }
             })
         }
     }
     
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        customView.layer?.backgroundColor = NSColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
+    override func viewWillDraw() {
+        customView.layer?.backgroundColor = CGColor(red: 0.15, green: 0.16, blue: 0.17, alpha: 1)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -1,6 +1,6 @@
 //
 //  Expansion.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 2/6/19.
 //  Copyright © 2019 SORN. All rights reserved.
@@ -22,10 +22,6 @@ extension ViewController {
         leftTableView.reloadData()
         rightTableView.reloadData()
     }
-    
-//    private func changeArrow(_ button: NSButton, to imageName: String) {
-//        button.image = NSImage.init(named: imageName)
-//    }
 
     private func minimize() {
         leftTVToViewConstraint.isActive = false
@@ -55,7 +51,6 @@ extension ViewController {
             leftDataSource.toggleArrowButtonDirection()
             
         } else {
-            leftDataSource.changeContent(to: Content.Recommendations)
             rightDataSource.changeContent(to: Content.Ratings)
             leftDataSource.toggleArrowButtonDirection()
         }
@@ -64,9 +59,12 @@ extension ViewController {
     
     @IBAction func ratingsExpandButtonPressed(_ sender: Any) {
         toggleExpansion()
-        leftDataSource.changeContent(to: Content.Ratings)
         rightDataSource.changeContent(to: Content.Categories)
         leftDataSource.toggleArrowButtonDirection()
+    }
+    
+    func loadCategories() {
+        
     }
     
 }

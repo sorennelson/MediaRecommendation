@@ -1,6 +1,6 @@
 //
 //  LeftTableView.swift
-//  MovieRecommendation
+//  MediaRecommendation
 //
 //  Created by Soren Nelson on 12/18/18.
 //  Copyright © 2018 SORN. All rights reserved.
@@ -17,7 +17,8 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     let MediaCellID = "MediaCellID"
     let TitleCellID = "TitleCell"
     var titleCell: TitleCell?
-    var selectedCategory = "All"
+    var selectedCategoryRow = 0
+    var selectedCategory = Genre(name: "All", count: 0)
     
     func setTableView(_ tableView: NSTableView) {
         self.tableView = tableView
@@ -28,40 +29,74 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        var count = 0
-        if selectedCategory == "All" {
-            count = ObjectController.sharedInstance.getAllMediaCount()
+        if currentContent == .Recommendations {
+            guard let category = ObjectController.sharedInstance.getGenre(at: selectedCategoryRow)
+                else {  return 1  }
+            return 1 + Int(ceil(Double(category.count) / 3.0))
+            
+        } else if currentContent == .MostRecent {
+            return 1 + Int(ceil(Double(ObjectController.sharedInstance.getMostRecentCount()) / 3.0))
+            
+        } else if currentContent == .MostViewed {
+            return 1 + Int(ceil(Double(ObjectController.sharedInstance.getMostViewedCount()) / 3.0))
+            
+        } else if currentContent == .Series {
+            return 1 + Int(ceil(Double(ObjectController.sharedInstance.getSeriesCount()) / 3.0))
+            
         } else {
-            count = ObjectController.sharedInstance.getCategoryCount(genreName: selectedCategory)
+            return 1
         }
-        if count == 0 { return 1 }
-        else { return 1 + ceil(Double(count) / 3.0) }
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         switch row {
         case 0 :
-            titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
-            titleCell!.setHeader(currentContent)
-            titleCell!.toggleArrowButtonDirection(ViewController.isExpanded)
-            return titleCell
+            return getTitleCellView(tableView: tableView)
             
         default :
-            let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
-            var media: [Media]
-            if selectedCategory == "All" {
-                media = ObjectController.sharedInstance.getAllMedia(for: (row-1)*3..<(row-1)*3+3)
-            } else {
-                media = ObjectController.sharedInstance.getMediaForCategory(genreName: selectedCategory, at: (row-1)*3..<(row-1)*3+3)
-            }
-            cell.setMedia(media: media)
-            return cell
+            return getMediaCellView(tableView: tableView, row: row-1)
         }
     }
     
+    private func getTitleCellView(tableView: NSTableView) -> TitleCell? {
+        titleCell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: TitleCellID), owner: nil) as? TitleCell
+        titleCell!.setHeader(currentContent)
+        titleCell!.toggleArrowButtonDirection(ViewController.isExpanded)
+        return titleCell
+    }
+    
+    private func getMediaCellView(tableView: NSTableView, row: Int) -> LeftTVMediaCell? {
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
+        
+        if currentContent == .Recommendations {
+            if let media = ObjectController.sharedInstance.getMediaForGenre(withName: selectedCategory.name, for: row*3..<row*3+3) {
+                cell.setMedia(media: media)
+            }
+        } else if currentContent == .MostRecent {
+            let media = ObjectController.sharedInstance.getMostRecent(for: row*3..<row*3+3)
+            cell.setMedia(media: media)
+            
+        } else if currentContent == .MostViewed {
+            let media = ObjectController.sharedInstance.getMostViewed(for: row*3..<row*3+3)
+            cell.setMedia(media: media)
+        
+        } else if currentContent == .Series {
+            if ObjectController.currentMediaType == .Books {
+                let series = ObjectController.sharedInstance.getBookSeries(for: row*3..<row*3+3)
+                cell.setBookSeries(series: series)
+            } else {
+                let series = ObjectController.sharedInstance.getMovieSeries(for: row*3..<row*3+3)
+                cell.setMovieSeries(series: series)
+            }
+        }
+        
+        return cell
+    }
+    
+    
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         if row == 0 { return 90 }
-        return 320
+        return 335
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
@@ -83,8 +118,12 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
         tableView?.reloadData()
     }
     
-    func selectedCategory(_ category: String) {
+    func selectedCategory(_ categoryRow: Int, category: Genre) {
+        selectedCategoryRow = categoryRow
         selectedCategory = category
-        tableView?.reloadData()
+        tableView?.scrollRowToVisible(0)
+        ObjectController.sharedInstance.getMediaForGenre(withName: selectedCategory.name) { (_) in
+            self.tableView?.reloadData()
+        }
     }
 }
