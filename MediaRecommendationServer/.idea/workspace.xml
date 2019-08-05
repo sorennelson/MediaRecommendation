@@ -1,50 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25ad6e99-5732-4c01-becd-5f29b77b9ecc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Read.imageset/Best of all time@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Read.imageset/Best of all time@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Read.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Read.imageset/Most_Read.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent.imageset/Best of 2018.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent.imageset/Best of 2018@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent.imageset/Best of 2018@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent_Book.imageset/Best of 2018@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent_Book.imageset/Best of 2018@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent_Book.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Recent_Book.imageset/Most_Recent_Book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Watched.imageset/Best of all time@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Watched.imageset/Best of all time@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Watched.imageset/Best of all time@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MovieRecommendation/Assets.xcassets/Most_Watched.imageset/Contents.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaRecommendationServer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaRecommendationServer/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MediaRecommendationServer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/MediaRecommendationServer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/genres/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/genres/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/media/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mlmodels/cfmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlmodels/cfmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mlmodels/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/mlmodels/helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation.xcworkspace/xcuserdata/solosoren.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation.xcworkspace/xcuserdata/solosoren.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Base.lproj/Main.storyboard" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Base.lproj/Main.storyboard" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Expansion.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Expansion.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/Book.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/Book.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/Media.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/Media.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Models/Movie.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Models/Movie.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ImportController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ImportController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ObjectController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/Parsing/ObjectController.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Category TableView/CategoriesTableView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Category TableView/CategoriesTableView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Category TableView/CategoryCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Category TableView/CategoryCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Content.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Content.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Left TableView/LeftTVMediaCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Left TableView/LeftTVMediaCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Left TableView/LeftTableView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Left TableView/LeftTableView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTVCategoryCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTVCategoryCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTableView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/RightTableView.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/TitleCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/Right TableView/TitleCell.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MovieRecommendation/View/ViewController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/../MovieRecommendation/View/ViewController.swift" afterDir="false" />
-    </list>
+    <list default="true" id="25ad6e99-5732-4c01-becd-5f29b77b9ecc" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -353,12 +310,12 @@
       <workItem from="1564446824094" duration="9999000" />
       <workItem from="1564545566060" duration="14062000" />
       <workItem from="1564785889514" duration="2600000" />
-      <workItem from="1564849690184" duration="27471000" />
+      <workItem from="1564849690184" duration="27481000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="262754000" />
+    <option name="totallyTimeSpent" value="262764000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -371,7 +328,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16910867" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
