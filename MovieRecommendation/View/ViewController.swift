@@ -52,16 +52,9 @@ class ViewController: NSViewController {
 
         categoriesTableView.dataSource = categoriesDataSource
         categoriesTableView.delegate = categoriesDataSource
+        categoriesDataSource.contentDelegate = leftDataSource
         categoriesTableView.backgroundColor = NSColor(red: 0.152, green: 0.215, blue: 0.246, alpha: 1)
-        // 39 55 63
         categoriesTableView.reloadData()
-    }
-    
-    
-    private func userLoggedIn() {
-        // TODO: edit sign in page
-        // TODO: Load user ratings / predictions
-        reloadTableViews()
     }
     
     func reloadTableViews() {

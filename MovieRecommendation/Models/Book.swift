@@ -44,4 +44,23 @@ struct BookRating: Codable, Equatable {
     }
 }
 
+class BookSeries: Codable {
+    let name: String
+    let books: [Book]
+    var showMedia: Book
+    
+    enum BookSeriesKeys: String, CodingKey {
+        case name
+        case books
+        case showMedia = "most_viewed"
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: BookSeriesKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        books = try container.decode([Book].self, forKey: .books)
+        showMedia = try container.decode(Book.self, forKey: .showMedia)
+    }
+}
+
 

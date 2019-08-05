@@ -29,15 +29,21 @@ class TitleCell : NSTableCellView {
     func setHeader(_ content: Content) {
         switch content {
         case .Recommendations:
-            if ObjectController.currentMediaType == .Movies {
-                header = "Movie Recommendations"
-            } else {
-                header = "Book Recommendations"
-            }
+            if ObjectController.currentMediaType == .Movies  {  header = "Movie Recommendations"  }
+            else  {  header = "Book Recommendations"  }
         case .Ratings:
             header = "My Ratings"
         case .Categories:
             header = "Genres"
+        case .MostRecent:
+            if ObjectController.currentMediaType == .Movies  {  header = "Most Recent Movies"  }
+            else  {  header = "Most Recent Books"  }
+        case .MostViewed:
+            if ObjectController.currentMediaType == .Movies  {  header = "Most Viewed Movies"  }
+            else  {  header = "Most Viewed Books"  }
+        case .Series:
+            if ObjectController.currentMediaType == .Movies  {  header = "Movie Series"  }
+            else  {  header = "Book Series"  }
         }
     }
     

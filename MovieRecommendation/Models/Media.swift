@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct Category: Codable {
+struct Genre: Codable {
     let name: String
     let count: Int
 }
@@ -21,7 +21,7 @@ class Media: Equatable, Codable {
     var genres: [String]
     var year: Int
     var avgRating: Double
-    var numWatched: Int
+    var numViewed: Int
     
     var imageURL: URL?
     var imageData: Data?
@@ -32,7 +32,7 @@ class Media: Equatable, Codable {
         self.genres = genres
         self.year = year
         self.avgRating = avgRating
-        self.numWatched = 1
+        self.numViewed = 1
         self.imageURL = imageURL
     }
     
@@ -42,7 +42,7 @@ class Media: Equatable, Codable {
         case genres
         case year
         case avgRating = "average_rating"
-        case numWatched = "num_watched"
+        case numViewed = "num_watched"
         case imageURL = "image_url"
     }
     
@@ -54,7 +54,7 @@ class Media: Equatable, Codable {
         year = try container.decode(Int.self, forKey: .year)
         let avgFloat = try container.decode(Float.self, forKey: .avgRating)
         avgRating = Double(avgFloat)
-        numWatched = try container.decode(Int.self, forKey: .numWatched)
+        numViewed = try container.decode(Int.self, forKey: .numViewed)
         imageURL = try container.decode(URL?.self, forKey: .imageURL)
     }
     

@@ -116,11 +116,11 @@ class CollaborativeFilteringModel(object):
         self.ratings = new_ratings
 
         self._denormalize_ratings()
-        self.ratings[:, -1] -= self.ratings_mean.reshape(-1, 1) # Demean new user
+        self.ratings[:, -1] -= self.ratings_mean # Demean new user
         self._normalize_ratings()
 
         new_user_params = np.random.random((self.users_num, self.user_params.shape[1]))
-        new_user_params[:, :-1] = self.user_params
+        new_user_params[:-1, :] = self.user_params
         self.user_params = new_user_params
 
     def _demean(self):

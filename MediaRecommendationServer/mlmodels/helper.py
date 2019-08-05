@@ -20,6 +20,7 @@ def add_user(media_type, uid):
 
     if media_type == 'books':
         _, _ = _run_gradient_descent(5, model, 0.0002, 120, False)
+
     else:
         _, _ = _run_gradient_descent(5, model, 0.001, 100, False)
         _create_movie_predictions(model, uid)
@@ -39,9 +40,8 @@ def add_rating(media_type, media_id, user_id, rating):
     model.reset_ratings()
 
     if media_type == 'books':
-        _, _ = _run_gradient_descent(5, model, 0.0002, 120, False)
+        _create_book_predictions(model)
     else:
-        _, _ = _run_gradient_descent(5, model, 0.001, 100, False)
         _create_movie_predictions(model)
 
     mlmodel.cfmodel = model
@@ -194,15 +194,15 @@ def _compute_val_rmse(model):
 
 
 # MARK: PREDICTIONS
-def _create_book_predictions(model):
+def _create_book_predictions(model, uid=13124):
     predictions = np.dot(model.item_params, model.user_params.T)
     predictions += model.ratings_mean.reshape(-1, 1)
 
     non_rated = (model.rated - 1) * (- 1)
-    predictions *= non_rated  # zero out rated movies
+    predictions *= non_rated  # zero out rated books
 
     users = BookUser.objects.order_by('id')
-    for user in [user for user in users if user.id > 13124]:
+    for user in [user for user in users if user.id > uid]:
 
         for psql_bid, np_bid in model.mapping.items():
             curr_prediction = BookPrediction.objects.filter(prediction_user=user.id,
@@ -224,7 +224,7 @@ def _create_movie_predictions(model, uid=467):
     predictions += model.ratings_mean.reshape(-1, 1)
 
     non_rated = (model.rated - 1) * (- 1)
-    predictions *= non_rated    # zero out rated movies
+    predictions *= non_rated  # zero out rated movies
 
     users = MovieUser.objects.order_by('id')
     for user in [user for user in users if user.id >= uid]:

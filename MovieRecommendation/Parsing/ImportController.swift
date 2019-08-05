@@ -168,7 +168,7 @@ class ImportController {
                     
                 } else {
                     let books = try JSONDecoder().decode([Book].self, from: data)
-                    ObjectController.sharedInstance.allBooks = books
+                    ObjectController.sharedInstance.recommendedBooks = books
                     completion(true, str)
                 }
                 
@@ -224,10 +224,10 @@ class ImportController {
             guard let data = data else { completion(false, "No Data Error");  return }
             
             do {
-                let genres = try JSONDecoder().decode([Category].self, from: data)
+                let genres = try JSONDecoder().decode([Genre].self, from: data)
                 
-                if mediaType == .Books { ObjectController.sharedInstance.bookCategories = genres }
-                else {  ObjectController.sharedInstance.movieCategories = genres}
+                if mediaType == .Books { ObjectController.sharedInstance.bookGenre = genres }
+                else {  ObjectController.sharedInstance.movieGenres = genres}
                 completion(true, str)
                 
             } catch let error {
@@ -238,12 +238,12 @@ class ImportController {
     }
     
     
-    func loadCategoryMedia(for category: String, of mediaType: MediaType, completion:@escaping (Bool, String, [Media]) -> ()) {
+    func loadGenreMedia(for genre: String, of mediaType: MediaType, completion:@escaping (Bool, String, [Media]) -> ()) {
         let params: [String: Any]
         if let current = User.current {
-            params = ["name":category, "id":current.id]
+            params = ["name":genre, "id":current.id]
         } else {
-            params = ["name":category]
+            params = ["name":genre]
         }
         
         let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/genres/get_genre_media/"
@@ -266,6 +266,32 @@ class ImportController {
             } catch let error {
                 print(error)
                 completion(false, error.localizedDescription, [])
+            }
+        }
+    }
+    
+    func loadSeries(completion:@escaping (Bool, String) -> ()) {
+        let requestString = API_HOST + (ObjectController.currentMediaType == .Movies ? "movies" : "books") + "/series/"
+        loadData(requestString: requestString, params: nil) { (success, str, data) in
+            
+            if !success { completion(false, str) }
+            guard let data = data else { completion(false, "No Data Error");  return }
+            
+            do {
+                if ObjectController.currentMediaType == .Movies {
+                    let series = try JSONDecoder().decode([MovieSeries].self, from: data)
+                    ObjectController.sharedInstance.seriesMovies = series
+                    completion(true, str)
+                    
+                } else {
+                    let series = try JSONDecoder().decode([BookSeries].self, from: data)
+                    ObjectController.sharedInstance.seriesBooks = series
+                    completion(true, str)
+                }
+                
+            } catch let error {
+                print(error)
+                completion(false, error.localizedDescription)
             }
         }
     }
@@ -297,7 +323,6 @@ class ImportController {
                 completion(false, error.localizedDescription)
             }
         }
-        
     }
     
     

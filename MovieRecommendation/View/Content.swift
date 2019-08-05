@@ -10,8 +10,11 @@ import Foundation
 
 enum Content {
     case Recommendations
+    case MostRecent
+    case MostViewed
     case Ratings
     case Categories
+    case Series
 }
 
 enum MediaType {
@@ -20,5 +23,6 @@ enum MediaType {
 }
 
 protocol UpdateContent {
-    func selectedCategory(_ categoryRow: Int, category: Category)
+    func selectedCategory(_ categoryRow: Int, category: Genre)
+    func changeContent(to content: Content)
 }

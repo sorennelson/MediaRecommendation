@@ -16,13 +16,19 @@ class ObjectController {
     
     var allMovies: [Movie] = []
     var recommendedMovies: [Movie] = []
-    var movieCategories: [Category] = []
-    var categoryMovies: [String: [Movie]] = [:]
+    var movieGenres: [Genre] = []
+    var genreMovies: [String: [Movie]] = [:]
+    var mostRecentMovies: [Movie] = []
+    var mostViewedMovies: [Movie] = []
+    var seriesMovies: [MovieSeries] = []
     
     var allBooks: [Book] = []
     var recommendedBooks: [Book] = []
-    var bookCategories: [Category] = []
-    var categoryBooks: [String: [Book]] = [:]
+    var bookGenre: [Genre] = []
+    var genreBooks: [String: [Book]] = [:]
+    var mostRecentBooks: [Book] = []
+    var mostViewedBooks: [Book] = []
+    var seriesBooks: [BookSeries] = []
     
     var selectedMedia: Media?
     var selectedMediaPrediction: Double?
@@ -64,7 +70,11 @@ class ObjectController {
     }
     
     func getAllMedia() -> [Media] {
-        return ObjectController.currentMediaType == .Books ? recommendedBooks : recommendedMovies
+        if noRecommendations() {
+            return ObjectController.currentMediaType == .Books ? allBooks : allMovies
+        } else {
+            return ObjectController.currentMediaType == .Books ? recommendedBooks : recommendedMovies
+        }
     }
     
 //    MARK: RATINGS
@@ -120,49 +130,121 @@ class ObjectController {
         return true
     }
     
-//     MARK: Categories
-    
-    func getCategoryCount() -> Int {
-        if ObjectController.currentMediaType == .Books  {  return bookCategories.count  }
-        else  {  return movieCategories.count  }
+//     MARK: Genres
+    func getGenreCount() -> Int {
+        if ObjectController.currentMediaType == .Books  {  return bookGenre.count  }
+        else  {  return movieGenres.count  }
     }
     
-    func getCategory(at index: Int) -> Category? {
-        if ObjectController.currentMediaType == .Books && bookCategories.count > 0    {  return bookCategories[index]  }
-        if ObjectController.currentMediaType == .Movies && movieCategories.count > 0  {  return movieCategories[index]  }
+    func getGenre(at index: Int) -> Genre? {
+        if ObjectController.currentMediaType == .Books && bookGenre.count > 0    {  return bookGenre[index]  }
+        if ObjectController.currentMediaType == .Movies && movieGenres.count > 0  {  return movieGenres[index]  }
         return nil
     }
     
-    func getMediaForCategory(withName categoryName: String, for indices: Range<Int>) -> [Media]? {
-        if categoryName == "All"  {  return getMedia(for: indices)  }
+    func getMediaForGenre(withName genreName: String, for indices: Range<Int>) -> [Media]? {
+        if genreName == "All"  {  return getMedia(for: indices)  }
         
-        if ObjectController.currentMediaType == .Books && categoryBooks.keys.contains(categoryName) {
-            return self.getMedia(for: indices, in: categoryBooks[categoryName]!)
+        if ObjectController.currentMediaType == .Books && genreBooks.keys.contains(genreName) {
+            return self.getMedia(for: indices, in: genreBooks[genreName]!)
         }
-        if ObjectController.currentMediaType == .Movies && categoryMovies.keys.contains(categoryName) {
-            return self.getMedia(for: indices, in: categoryMovies[categoryName]!)
+        if ObjectController.currentMediaType == .Movies && genreMovies.keys.contains(genreName) {
+            return self.getMedia(for: indices, in: genreMovies[genreName]!)
         }
         
         return nil
     }
     
-    /// Imports the given Category's Media
+    /// Imports the given Genre's Media
     ///
     /// - Parameters:
     ///   - categoryName: String
     ///   - mediaType: MediaType
     ///   - completion: [Media]? -- nil if their was an issue importing
-    func getMediaForCategory(withName categoryName: String, completion:@escaping ([Media]?) -> ()) {
-        ImportController.sharedInstance.loadCategoryMedia(for: categoryName, of: ObjectController.currentMediaType) { (success, err, media) in
+    func getMediaForGenre(withName genreName: String, completion:@escaping ([Media]?) -> ()) {
+        ImportController.sharedInstance.loadGenreMedia(for: genreName, of: ObjectController.currentMediaType) { (success, err, media) in
             if !success {
                 print(err)
                 completion(nil)
             }
             else {
-                if ObjectController.currentMediaType == .Books { self.categoryBooks[categoryName] = media as? [Book] }
-                else { self.categoryMovies[categoryName] = media as? [Movie] }
+                if ObjectController.currentMediaType == .Books { self.genreBooks[genreName] = media as? [Book] }
+                else { self.genreMovies[genreName] = media as? [Movie] }
                 completion(media)
             }
         }
+    }
+    
+//     MARK: Most Recent
+    func setMostRecent() {
+        if ObjectController.currentMediaType == .Books {
+            mostRecentBooks = getAllMedia().sorted(by: { (left, right) -> Bool in
+                return left.year > right.year
+            }) as! [Book]
+            mostRecentBooks = Array(mostRecentBooks.prefix(99))
+            
+        } else {
+            mostRecentMovies = getAllMedia().sorted(by: { (left, right) -> Bool in
+                return left.year > right.year
+            }) as! [Movie]
+            mostRecentMovies = Array(mostRecentMovies.prefix(99))
+        }
+    }
+    
+    func getMostRecent(for indices: Range<Int>) -> [Media] {
+        return getMedia(for: indices, in: ObjectController.currentMediaType == .Books ? mostRecentBooks : mostRecentMovies)
+    }
+    
+    func getMostRecentCount() -> Int {
+        return ObjectController.currentMediaType == .Books ? mostRecentBooks.count : mostRecentMovies.count
+    }
+    
+//     MARK: Most Viewed
+    func setMostViewed() {
+        if ObjectController.currentMediaType == .Books {
+            mostViewedBooks = getAllMedia().sorted(by: { (left, right) -> Bool in
+                return left.numViewed > right.numViewed
+            }) as! [Book]
+            mostViewedBooks = Array(mostViewedBooks.prefix(30))
+            
+        } else {
+            mostViewedMovies = getAllMedia().sorted(by: { (left, right) -> Bool in
+                return left.numViewed > right.numViewed
+            }) as! [Movie]
+            mostViewedMovies = Array(mostViewedMovies.prefix(30))
+        }
+    }
+    
+    func getMostViewed(for indices: Range<Int>) -> [Media] {
+        return getMedia(for: indices, in: ObjectController.currentMediaType == .Books ? mostViewedBooks : mostViewedMovies)
+    }
+    
+    func getMostViewedCount() -> Int {
+        return ObjectController.currentMediaType == .Books ? mostViewedBooks.count : mostViewedMovies.count
+    }
+    
+//    MARK: Series
+    func getBookSeries(for indices: Range<Int>) -> [BookSeries] {
+        var series = [BookSeries]()
+        for i in indices {
+            if seriesBooks.indices.contains(i) {
+                series.append(seriesBooks[i])
+            }
+        }
+        return series
+    }
+    
+    func getMovieSeries(for indices: Range<Int>) -> [MovieSeries] {
+        var series = [MovieSeries]()
+        for i in indices {
+            if seriesMovies.indices.contains(i) {
+                series.append(seriesMovies[i])
+            }
+        }
+        return series
+    }
+    
+    func getSeriesCount() -> Int {
+        return ObjectController.currentMediaType == .Books ? seriesBooks.count : seriesMovies.count
     }
 }

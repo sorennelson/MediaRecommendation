@@ -55,7 +55,6 @@ extension ViewController {
             leftDataSource.toggleArrowButtonDirection()
             
         } else {
-            leftDataSource.changeContent(to: Content.Recommendations)
             rightDataSource.changeContent(to: Content.Ratings)
             leftDataSource.toggleArrowButtonDirection()
         }
@@ -64,7 +63,6 @@ extension ViewController {
     
     @IBAction func ratingsExpandButtonPressed(_ sender: Any) {
         toggleExpansion()
-        leftDataSource.changeContent(to: Content.Ratings)
         rightDataSource.changeContent(to: Content.Categories)
         leftDataSource.toggleArrowButtonDirection()
     }

@@ -16,7 +16,7 @@ class RightTVCategoryCell: NSTableCellView {
     @IBOutlet var countLabel: NSTextField!
     @IBOutlet var categoryTitle: NSTextField!
     
-    var category: Category? {
+    var category: Genre? {
         didSet {
             self.categoryTitle.stringValue = category!.name
             self.countLabel.stringValue = String(category!.count)

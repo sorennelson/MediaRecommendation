@@ -43,6 +43,7 @@ INSTALLED_APPS = [
       'ratings',
       'predictions',
       'genres',
+      'series',
       'rest_framework',
       'django_extensions',
 ]

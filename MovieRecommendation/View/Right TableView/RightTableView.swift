@@ -20,7 +20,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     var titleCell: TitleCell?
     
     var selectedCategoryRow = 1
-    var selectedCategory = Category(name: "All", count: 0)
+    var selectedCategory = Genre(name: "All", count: 0)
     
     //    MARK: Tableview
     func setTableView(_ tableView: NSTableView) {
@@ -38,7 +38,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
             
         } else {
             // Title + "all categories" + categories
-            return 1 + ObjectController.sharedInstance.getCategoryCount() 
+            return 1 + ObjectController.sharedInstance.getGenreCount() 
         }
     }
     
@@ -100,7 +100,7 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     //    MARK: Category Cell
     private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
-        cell.category = ObjectController.sharedInstance.getCategory(at: row - 1)
+        cell.category = ObjectController.sharedInstance.getGenre(at: row - 1)
         if row == 1  {  cell.selected = true  }
         return cell
     }

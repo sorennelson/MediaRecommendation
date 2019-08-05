@@ -21,17 +21,20 @@ from media.views import BookViewSet, MovieViewSet
 from ratings.views import BookRatingViewSet, MovieRatingViewSet
 from predictions.views import BookPredictionViewSet, MoviePredictionViewSet
 from genres.views import BookGenreViewSet, MovieGenreViewSet
+from series.views import BookSeriesViewSet, MovieSeriesViewSet
 
 router = routers.DefaultRouter()
 router.register(r'books/all', BookViewSet)
 router.register(r'books/ratings', BookRatingViewSet)
 router.register(r'books/predictions', BookPredictionViewSet)
 router.register(r'books/genres', BookGenreViewSet)
+router.register(r'books/series', BookSeriesViewSet)
 
 router.register(r'movies/all', MovieViewSet)
 router.register(r'movies/ratings', MovieRatingViewSet)
 router.register(r'movies/predictions', MoviePredictionViewSet)
 router.register(r'movies/genres', MovieGenreViewSet)
+router.register(r'movies/series', MovieSeriesViewSet)
 
 
 urlpatterns = [

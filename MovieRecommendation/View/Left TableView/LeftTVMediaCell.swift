@@ -25,13 +25,9 @@ class LeftTVMediaCell: NSTableCellView {
             leftLabel.stringValue = leftMedia!.title
             leftMedia!.getImageData(completion: { (data) in
                 if let data = data {
-                    DispatchQueue.main.async {
-                        self.leftImageButton.image = NSImage(data: data)
-                    }
+                    DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(data: data)  }
                 } else {
-                    DispatchQueue.main.async {
-                        self.leftImageButton.image = NSImage(named: "no-image")
-                    }
+                    DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(named: "no-image")  }
                 }
             })
         }
@@ -42,13 +38,9 @@ class LeftTVMediaCell: NSTableCellView {
             middleLabel.stringValue = middleMedia!.title
             middleMedia!.getImageData(completion: { (data) in
                 if let data = data {
-                    DispatchQueue.main.async {
-                        self.middleImageButton.image = NSImage(data: data)
-                    }
+                    DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(data: data)  }
                 } else {
-                    DispatchQueue.main.async {
-                        self.middleImageButton.image = NSImage(named: "no-image")
-                    }
+                    DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(named: "no-image")  }
                 }
             })
         }
@@ -59,13 +51,9 @@ class LeftTVMediaCell: NSTableCellView {
             rightLabel.stringValue = rightMedia!.title
             rightMedia!.getImageData(completion: { (data) in
                 if let data = data {
-                    DispatchQueue.main.async {
-                        self.rightImageButton.image = NSImage(data: data)
-                    }
+                    DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(data: data)  }
                 } else {
-                    DispatchQueue.main.async {
-                        self.rightImageButton.image = NSImage(named: "no-image")
-                    }
+                    DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(named: "no-image")  }
                 }
             })
         }
@@ -77,6 +65,99 @@ class LeftTVMediaCell: NSTableCellView {
         if media.count > 2 { rightMedia = media[2] }
     }
     
+    //    MARK: Book Series
+    var leftBookSeries: BookSeries? {
+        didSet {
+            leftLabel.stringValue = leftBookSeries!.name
+            leftBookSeries!.showMedia.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(data: data)  }
+                } else {
+                    DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(named: "no-image")  }
+                }
+            })
+        }
+    }
+    
+    var middleBookSeries: BookSeries? {
+        didSet {
+            middleLabel.stringValue = middleBookSeries!.name
+            middleBookSeries!.showMedia.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(data: data)  }
+                } else {
+                    DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(named: "no-image")  }
+                }
+            })
+        }
+    }
+    
+    var rightBookSeries: BookSeries? {
+        didSet {
+            rightLabel.stringValue = rightBookSeries!.name
+            rightBookSeries!.showMedia.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(data: data)  }
+                } else {
+                    DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(named: "no-image")  }
+                }
+            })
+        }
+    }
+    
+    func setBookSeries(series: [BookSeries]) {
+        if series.count > 0 { leftBookSeries = series[0] }
+        if series.count > 1 { middleBookSeries = series[1] }
+        if series.count > 2 { rightBookSeries = series[2] }
+    }
+    
+    //    MARK: Movie Series
+    var leftMovieSeries: MovieSeries? {
+        didSet {
+            leftLabel.stringValue = leftMovieSeries!.name
+            leftMovieSeries!.showMedia.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(data: data)  }
+                } else {
+                    DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(named: "no-image")  }
+                }
+            })
+        }
+    }
+    
+    var middleMovieSeries: MovieSeries? {
+        didSet {
+            middleLabel.stringValue = middleMovieSeries!.name
+            middleMovieSeries!.showMedia.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(data: data)  }
+                } else {
+                    DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(named: "no-image")  }
+                }
+            })
+        }
+    }
+    
+    var rightMovieSeries: MovieSeries? {
+        didSet {
+            rightLabel.stringValue = rightMovieSeries!.name
+            rightMovieSeries!.showMedia.getImageData(completion: { (data) in
+                if let data = data {
+                    DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(data: data)  }
+                } else {
+                    DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(named: "no-image")  }
+                }
+            })
+        }
+    }
+    
+    func setMovieSeries(series: [MovieSeries]) {
+        if series.count > 0 { leftMovieSeries = series[0] }
+        if series.count > 1 { middleMovieSeries = series[1] }
+        if series.count > 2 { rightMovieSeries = series[2] }
+    }
+    
+    //    MARK: Selection
     @IBAction func leftButtonClicked(_ sender: Any) {}
     
     @IBAction func middleButtonClicked(_ sender: Any) {}
