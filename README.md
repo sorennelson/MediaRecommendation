@@ -14,8 +14,8 @@ A macOS application that uses rankings from MovieLens and Goodbooks datasets to 
 
 ## Results
 Data was trained using a random 90% of the data and validated using the other 10% of the ratings. Ratings were then combined to test the model for the following results.
-- Normalized RMSE of 1.5% on MovieLens Data
-- Normalized RMSE of 1.9% on GoodBooks
+- RMSE of 0.074 on MovieLens Data
+- RMSE of 0.096 on GoodBooks Data
 
 Detailed results may be viewed [HERE](https://github.com/sorennelson/MediaRecommendation/blob/master/Collaborative_Filtering_Results.ipynb).
 
