@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: moviess
+  name: movies
 spec:
   containers:
   - image: us-east1-docker.pkg.dev/mystic-bank-375221/movies/movies:v1
