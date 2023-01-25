@@ -9,6 +9,6 @@ spec:
   capacity:
     storage: 3Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadOnly
   hostPath:
     path: "$(pwd)/model_store"
