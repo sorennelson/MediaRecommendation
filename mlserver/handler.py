@@ -18,7 +18,8 @@ class Handler(BaseHandler):
         Preprocess function to convert the request input to a tensor(Torchserve supported format).
         The user needs to override to customize the pre-processing
         Args:
-            data (list): List of the data from the request input. Must be of the form [user_id, [movie_ids]].
+            data (list): List of the data from the request input. Must be of the form:
+              {"userId": int, "movieId":[int], "genres": [[str]] "numRatings": [int], "avgRating": [float]}.
         Returns:
             tensor: Returns the tensor data of the input
         """
@@ -28,22 +29,34 @@ class Handler(BaseHandler):
         uids = [body['userId']]*batch_size
         # Add throw away ratings
         ratings = [0.]*batch_size
-        df = pd.DataFrame({'userId': uids, 'movieId': body['movieId'], 'rating': ratings})
-        
+        df = pd.DataFrame({'userId': uids, 
+                           'movieId': body['movieId'], 
+                           'rating': ratings})
+        # 2 Dataframes to work with Join from Training Workflow
+        df_movie = pd.DataFrame({'movieId': body['movieId'],
+                                'split_genres': body['genres'],
+                                'num_ratings': body['numRatings'],
+                                'avg_rating': body['avgRating']})
+
         # TODO: Probably a faster way of transforming the ds without having to wrap in DL
         ds = TorchAsyncItr(
             self.workflow.transform(nvt.Dataset(df)),
             batch_size=batch_size,
-            cats=['userId', 'movieId'],
-            conts=["rating"], 
+            cats=['userId', 'movieId', 'split_genres'],
+            conts=["rating", 'avg_rating', 'num_ratings'], 
         )
         dl = DLDataLoader(ds, batch_size=None, pin_memory=False, num_workers=0)
         data = next(iter(dl))
 
         user = data[0]['userId'].to(self.device)
         media = data[0]['movieId'].to(self.device)
-        return (user, media)
-        # return (torch.as_tensor(uids, device=self.device).view(4,1), torch.as_tensor(body['movieId'], device=self.device).view(4,1))
+        genres = [data[0]['split_genres'][0].to(self.device),
+                  data[0]['split_genres'][1].to(self.device)]
+        extra_feats = [data[0]['avg_rating'].to(self.device), 
+                       data[0]['num_ratings'].to(self.device)]
+
+        # print((user, media, genres, extra_feats))
+        return (user, media, genres, extra_feats)
 
     def inference(self, data, *args, **kwargs):
         """
@@ -55,6 +68,7 @@ class Handler(BaseHandler):
         Returns:
             Torch Tensor : The Predicted Torch Tensor is returned in this function.
         """
+        # print(self.model.code)
         with torch.no_grad():
             results = self.model(*data, *args, **kwargs)
         # Batch size needs to stay the same for input/output so reshape to (1,movieIds)
