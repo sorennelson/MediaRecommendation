@@ -10,4 +10,4 @@
 
 docker run --rm -it \
 -p 3000:8080 -p 3001:8081 \
-torchserve:1.1
+torchserve:1.2
