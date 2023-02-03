@@ -26,3 +26,7 @@ protocol UpdateContent {
     func selectedCategory(_ categoryRow: Int, category: Genre)
     func changeContent(to content: Content)
 }
+
+protocol ReloadContent {
+    func reload()
+}

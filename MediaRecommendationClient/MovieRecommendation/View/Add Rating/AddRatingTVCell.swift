@@ -47,7 +47,7 @@ class AddRatingTVCell: NSTableCellView {
         if let rating = ObjectController.sharedInstance.getRating(for: media!) {
             average.stringValue = "Rating: " +  String(rating)
         } else {
-            average.stringValue = "Avg: " + String(Double(Int(media!.avgRating * 100.0)) / 200.0)
+            average.stringValue = "Avg: " + String(format: "%.2f", media!.avgRating)
         }
     }
     

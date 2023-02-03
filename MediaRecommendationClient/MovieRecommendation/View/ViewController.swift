@@ -34,6 +34,8 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupTableViews()
+        self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
         UserController.sharedInstance.attemptLogin { (success) in
             // TODO: If not logged in, prompt them
             ImportController.sharedInstance.loadMediaRatingsAndGenres(.Movies) { (media, ratings, genres) in
@@ -41,7 +43,6 @@ class ViewController: NSViewController {
                 self.setupTableViews()
             }
         }
-        self.view.layer?.backgroundColor = NSColor(red: 0.0898, green: 0.0938, blue: 0.0938, alpha: 1).cgColor
     }
     
     private func setupTableViews() {
@@ -49,6 +50,7 @@ class ViewController: NSViewController {
         rightDataSource.contentDelegate = leftDataSource
         
         leftDataSource.setTableView(leftTableView)
+        leftDataSource.reloadDelegate = rightDataSource
 
         categoriesTableView.dataSource = categoriesDataSource
         categoriesTableView.delegate = categoriesDataSource

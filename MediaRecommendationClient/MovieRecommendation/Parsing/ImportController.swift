@@ -13,8 +13,9 @@ class ImportController {
     
     static let sharedInstance = ImportController()
     
-    /// Loads either the recommended movies or all media (sorted by highest avg, title) depending on whether their is a current user or not.
-    /// If their is an error loading the recommended media, or the model is not done recommending, attempts to load all media.
+    /// Loads the recommended media or all media (sorted by highest avg, title) depending on whether their is a current user or not.
+    /// Then loads the user ratings and media Genre's
+    /// If their is an error loading the recommended media, attempts to load all media.
     /// Call before using media.
     ///
     /// - Parameter completion: (was media successful to load bool, were ratings successful to load bool, were genres successful to load bool)
@@ -23,7 +24,7 @@ class ImportController {
         var mediaLoaded = false
         var ratingsLoaded = false
         var genresLoaded = false
-        
+
         if let _ = User.current {
             ImportController.sharedInstance.loadRecommended(0, to: 500, mediaType) { (success, error) in
                 if !success || ObjectController.sharedInstance.noRecommendations() {
@@ -31,17 +32,23 @@ class ImportController {
                         //            TODO: Handle error
                         if success {
                             mediaLoaded = true
-                            print("All")
                         }
-                        if self.isComplete(&completeCount) {
+                        if self.isComplete(mediaType, &completeCount) {
                             completion(mediaLoaded, ratingsLoaded, genresLoaded)
                         }
                     }
                 } else {
-                    //            TODO: Handle error
-                    print("Recommended")
                     mediaLoaded = true
-                    if self.isComplete(&completeCount) {
+                    
+                    // Still need to load all media but no need to wait on it
+                    // TODO: Handle error
+                    ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
+                        if success && completeCount == 3 {
+                            self.removeRatingsFromAllMedia(of: mediaType)
+                        }
+                    }
+                    
+                    if self.isComplete(mediaType, &completeCount) {
                         completion(mediaLoaded, ratingsLoaded, genresLoaded)
                     }
                 }
@@ -52,7 +59,7 @@ class ImportController {
                 if success {
                     mediaLoaded = true
                 }
-                if self.isComplete(&completeCount) {
+                if self.isComplete(mediaType, &completeCount) {
                     completion(mediaLoaded, ratingsLoaded, genresLoaded)
                 }
             }
@@ -63,7 +70,7 @@ class ImportController {
             if success {
                 ratingsLoaded = true
             }
-            if self.isComplete(&completeCount) {
+            if self.isComplete(mediaType, &completeCount) {
                 completion(mediaLoaded, ratingsLoaded, genresLoaded)
             }
         }
@@ -73,15 +80,19 @@ class ImportController {
             if success {
                 genresLoaded = true
             }
-            if self.isComplete(&completeCount) {
+            if self.isComplete(mediaType, &completeCount) {
                 completion(mediaLoaded, ratingsLoaded, genresLoaded)
             }
         }
     }
     
-    private func isComplete(_ completeCount: inout Int) -> Bool {
+    private func isComplete(_ mediaType: MediaType, _ completeCount: inout Int) -> Bool {
         completeCount += 1
-        return completeCount == 3
+        let done = completeCount == 3
+        if done {
+            removeRatingsFromAllMedia(of: mediaType)
+        }
+        return done
     }
     
     /// Forms an Alamofire request and gives back the data if their is any, and any error description
@@ -114,12 +125,13 @@ class ImportController {
     /// - Parameters:
     ///   - mediaType: MediaType.
     ///   - completion: (success bool, error description)
-    private func loadAllMedia(_ mediaType: MediaType, completion:@escaping (Bool, String) -> ()) {
+    func loadAllMedia(_ mediaType: MediaType, completion:@escaping (Bool, String) -> ()) {
         
         let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/all/"
         loadData(requestString: requestString, params:nil) { (success, str, data) in
             
-            if !success { completion(false, str) }
+            if !success {
+                completion(false, str) }
             guard let data = data else { completion(false, "No Data Error"); return }
             
             do {
@@ -179,6 +191,41 @@ class ImportController {
         }
     }
     
+    /// Load a single recommendation for the given media.
+    ///
+    /// - Parameters:
+    ///   - media: Media
+    ///   - completion: (success bool, error description, prediction float)
+    func loadRecommendation(media:Media, completion:@escaping (Bool, String, Float?) -> ()) {
+        let mediaType = ObjectController.currentMediaType
+        guard let user = User.current else { completion(false, "No User", nil); return }
+        let mediaIdStr = mediaType == .Movies ? "movieId" : "bookId"
+        let params = ["id":user.id, mediaIdStr:media.id] as [String:Any]
+
+        let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/predictions/get_prediction/"
+        loadData(requestString: requestString, params:params) { (success, str, data) in
+            
+            if !success { completion(false, str, nil) }
+            guard let data = data else { completion(false, "No Data Error", nil);  return }
+            
+            do {
+                
+                if mediaType == .Movies {
+                    let prediction = try JSONDecoder().decode([String:Float].self, from: data)["prediction"]
+                    completion(true, str, prediction)
+                    
+                } else {
+                    let prediction = try JSONDecoder().decode([String:Float].self, from: data)["prediction"]
+                    completion(true, str, prediction)
+                }
+                
+            } catch let error {
+                print(error)
+                completion(false, error.localizedDescription, nil)
+            }
+        }
+    }
+    
     /// Load the User Ratings
     ///
     /// - Parameters:
@@ -196,7 +243,6 @@ class ImportController {
             guard let data = data else { completion(false, "No Data Error");  return }
             
             do {
-                
                 if mediaType == .Movies {
                     let ratings = try JSONDecoder().decode([MovieRating].self, from: data)
                     User.current?.movieRatings = ratings
@@ -215,7 +261,40 @@ class ImportController {
         }
     }
     
+    /// Remove any media that has been rated from recommended and all media.
+    ///
+    /// - Parameters:
+    ///   - mediaType: MediaType
+    func removeRatingsFromAllMedia(of mediaType: MediaType) {
+        if mediaType == .Books {
+            guard let ratings = User.current?.bookRatings else { return }
+            let ratingMedia = ratings.map { $0.book }
+            
+            if ObjectController.sharedInstance.recommendedBooks.count > 0 {
+                ObjectController.sharedInstance.recommendedBooks.removeAll(where: { ratingMedia.contains($0) })
+            }
+            if ObjectController.sharedInstance.allBooks.count > 0 {
+                ObjectController.sharedInstance.allBooks.removeAll(where: { ratingMedia.contains($0) })
+            }
+        } else {
+            guard let ratings = User.current?.movieRatings else { return }
+            let ratingMedia = ratings.map { $0.movie }
+            
+            if ObjectController.sharedInstance.recommendedMovies.count > 0 {
+                ObjectController.sharedInstance.recommendedMovies.removeAll(where: { ratingMedia.contains($0) })
+            }
+            if ObjectController.sharedInstance.allMovies.count > 0 {
+                ObjectController.sharedInstance.allMovies.removeAll(where: { ratingMedia.contains($0) })
+            }
+        }
+    }
     
+    /// Load the media genres.
+    /// Does not load the media for each genre (see loadGenreMedia()).
+    ///
+    /// - Parameters:
+    ///   - mediaType: MediaType
+    ///   - completion: (success bool, error description)
     func loadAllGenres(of mediaType: MediaType, completion:@escaping (Bool, String) -> ()) {
         let requestString = API_HOST + (mediaType == .Movies ? "movies" : "books") + "/genres/"
         loadData(requestString: requestString, params:nil) { (success, str, data) in
@@ -237,7 +316,12 @@ class ImportController {
         }
     }
     
-    
+    /// Load the media for the given genre title. Removes any ratings from the genre media.
+    ///
+    /// - Parameters:
+    ///   - genre: String. The genre title.
+    ///   - mediaType: MediaType
+    ///   - completion: (success bool, error description)
     func loadGenreMedia(for genre: String, of mediaType: MediaType, completion:@escaping (Bool, String, [Media]) -> ()) {
         let params: [String: Any]
         if let current = User.current {
@@ -255,11 +339,25 @@ class ImportController {
             do {
                 
                 if mediaType == .Movies {
-                    let movies = try JSONDecoder().decode([Movie].self, from: data)
+                    var movies = try JSONDecoder().decode([Movie].self, from: data)
+                    
+                    // Remove any rated from genre
+                    if let ratings = User.current?.movieRatings {
+                        let ratingMedia = ratings.map { $0.movie }
+                        movies.removeAll(where: { ratingMedia.contains($0) })
+                        completion(true, str, movies)
+                    }
                     completion(true, str, movies)
                     
                 } else {
-                    let books = try JSONDecoder().decode([Book].self, from: data)
+                    var books = try JSONDecoder().decode([Book].self, from: data)
+                    
+                    // Remove any rated from genre
+                    if let ratings = User.current?.bookRatings {
+                        let ratingMedia = ratings.map { $0.book }
+                        books.removeAll(where: { ratingMedia.contains($0) })
+                        completion(true, str, books)
+                    }
                     completion(true, str, books)
                 }
                 
@@ -268,8 +366,13 @@ class ImportController {
                 completion(false, error.localizedDescription, [])
             }
         }
+        
     }
     
+    /// Loads all series of the current media type.
+    ///
+    /// - Parameters:
+    ///   - completion: (success bool, error description)
     func loadSeries(completion:@escaping (Bool, String) -> ()) {
         let requestString = API_HOST + (ObjectController.currentMediaType == .Movies ? "movies" : "books") + "/series/"
         loadData(requestString: requestString, params: nil) { (success, str, data) in
@@ -296,6 +399,12 @@ class ImportController {
         }
     }
     
+    /// Sends a post request to the server to add a new rating on the given media for the logged in user.
+    ///
+    /// - Parameters:
+    ///   - rating: Float
+    ///   - media: Media
+    ///   - completion: (success bool, error description)
     func post(rating: Float, for media: Media, completion:@escaping (Bool, String) -> ()) {
         let params: [String: Any]
         if ObjectController.currentMediaType == .Books {
@@ -317,9 +426,6 @@ class ImportController {
                 }
                 
             case .failure(let error):
-                if error.localizedDescription.contains("timed out") {
-                    print("HERE")
-                }
                 completion(false, error.localizedDescription)
             }
         }

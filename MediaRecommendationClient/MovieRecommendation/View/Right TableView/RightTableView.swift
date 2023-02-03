@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
+class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource, ReloadContent {
     
 // MARK: TableView
     var tableView: NSTableView?
@@ -43,16 +43,23 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if row == 0 { return 90 }
+        if row == 0 { return 110 }
         else if currentContent == .Categories { return 82 }
         return 153
     }
     
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
-        if row == 0 || currentContent == .Ratings  { return false }
+        if row == 0 || currentContent == .Ratings  {
+            guard let (media, rating) = UserController.sharedInstance.getMediaAndRating(for: row - 1) else { return false }
+            setSelectedMedia(media, with: rating)
+            return false
+        }
         else {
-            let oldCell = tableView.view(atColumn: 0, row: selectedCategoryRow, makeIfNecessary: false) as! RightTVCategoryCell
-            oldCell.deselect()
+            for row in 0..<tableView.numberOfRows {
+                if let oldCell = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as? RightTVCategoryCell {
+                    oldCell.deselect()
+                }
+            }
             
             let newCell = tableView.view(atColumn: 0, row: row, makeIfNecessary: false) as! RightTVCategoryCell
             newCell.select()
@@ -101,8 +108,32 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
     private func getCategoryCellView(tableView: NSTableView, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CategoryCellID), owner: nil) as! RightTVCategoryCell
         cell.category = ObjectController.sharedInstance.getGenre(at: row - 1)
-        if row == 1  {  cell.selected = true  }
+        if row == selectedCategoryRow  {
+            cell.selected = true
+        } else {
+            cell.selected = false
+        }
         return cell
+    }
+    
+    
+    func setSelectedMedia(_ media: Media, with rating: Double) {
+        ObjectController.sharedInstance.selectedMedia = media
+        // TODO: Remove label
+//        ObjectController.sharedInstance.selectedMediaPrediction = rating
+        self.displayPopover(rating: rating)
+    }
+    
+    func displayPopover(rating: Double) {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let popover = NSPopover()
+        let mediaDetail = storyboard.instantiateController(withIdentifier: "MediaDetailPopover") as! MediaDetailPopover
+        popover.behavior = .transient
+        popover.contentViewController = mediaDetail
+        popover.show(relativeTo: self.tableView!.bounds, of: self.tableView!, preferredEdge: .maxX)
+        // TODO: Handle removing of rating
+        mediaDetail.reloadDelegate = self
+        mediaDetail.setRating(rating: Int(rating))
     }
     
 // MARK: Content
@@ -115,4 +146,8 @@ class RightTableView: NSObject, NSTableViewDelegate, NSTableViewDataSource {
         tableView?.reloadData()
     }
     
+// MARK: ReloadContent
+    func reload() {
+        self.tableView?.reloadData()
+    }
 }
