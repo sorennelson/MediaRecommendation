@@ -8,7 +8,7 @@ from . import models
 
 from userauth.models import User
 from media.models import Book, Movie
-from mlmodels import helper as ml
+from predictions.views import MoviePredictionViewSet
 
 
 class BookRatingViewSet(viewsets.ModelViewSet):
@@ -25,7 +25,7 @@ class BookRatingViewSet(viewsets.ModelViewSet):
         if models.BookRating.objects.filter(rating_user=user.book_user,
                                             book=Book.objects.get(pk=int(request.data['book']))).exists():
             book_rating = models.BookRating.objects.get(rating_user=user.book_user,
-                                                        book=Book.objects.get(pk=int(request.data['movie'])))
+                                                        book=Book.objects.get(pk=int(request.data['book'])))
             book_rating.rating = float(request.data['rating'])
 
         else:
@@ -33,7 +33,7 @@ class BookRatingViewSet(viewsets.ModelViewSet):
                                              book=Book.objects.get(pk=int(request.data['book'])),
                                              rating=float(request.data['rating']))
         book_rating.save()
-        ml.add_rating('books', book_rating.book.id, user.book_user.id, book_rating.rating)
+        
         return Response(status=status.HTTP_201_CREATED)
 
     @action(detail=False)
@@ -62,6 +62,12 @@ class MovieRatingViewSet(viewsets.ModelViewSet):
     @csrf_exempt
     @action(detail=False, methods=['post'])
     def new(self, request):
+        """Adds a new rating for the user on the given media. Updates the user model embedding
+           which updates the user's predictions.
+
+        :param request: /movies/ratings/new/ -- 'id': int (user id), 'movie': int (movieId), 'rating': float
+        :return Response with status
+        """
         user = User.objects.get(pk=int(request.data['id']))
 
         if models.MovieRating.objects.filter(rating_user=user.movie_user,
@@ -75,7 +81,8 @@ class MovieRatingViewSet(viewsets.ModelViewSet):
                                               movie=Movie.objects.get(pk=int(request.data['movie'])),
                                               rating=float(request.data['rating']))
         movie_rating.save()
-        ml.add_rating('movies', movie_rating.movie.id, user.movie_user.id, movie_rating.rating)
+        MoviePredictionViewSet.update_user_embedding(user)
+
         return Response(status=status.HTTP_201_CREATED)
 
     @action(detail=False)

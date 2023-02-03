@@ -58,27 +58,21 @@ class MovieGenreViewSet(viewsets.ModelViewSet):
 
     @action(detail=False)
     def get_genre_media(self, request):
-        """Gets all the Movies for a given Genre.
+        """Gets the Movies for a given Genre. Defaults to the predictions for the genre, otherwise returns all.
 
         :param request: /movies/genres/get_genre_media/ -- 'name': string (genre name), 'id': int (user id)
         :return: Response with the serialized [Movies]
         """
+        print('GET GENRE MEDIA')
         try:
             genre = models.MovieGenre.objects.get(name=request.GET['name'])
             user = User.objects.get(pk=request.GET['id'])
         except genre.DoesNotExist or user.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 
-        predictions = []
-        for movie in genre.movies.all():
-            prediction = MoviePrediction.objects.filter(prediction_user=user.movie_user, movie=movie)
-            if prediction.exists():
-                pred = list(prediction.all())[0]
-                predictions.append((pred, pred.prediction))
-
+        predictions = MoviePrediction.objects.filter(prediction_user=user.movie_user).filter(movie__in=genre.movies.all())
         if len(predictions) > 0:
-            predictions.sort(key=lambda x: x[1])
-            movies = [pred[0].movie for pred in predictions]
+            movies = [pred.movie for pred in predictions]
         else:
             movies = genre.movies
 

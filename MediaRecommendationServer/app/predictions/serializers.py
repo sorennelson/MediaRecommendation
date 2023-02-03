@@ -20,3 +20,10 @@ class MoviePredictionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.MoviePrediction
         fields = ('prediction_user', 'movie', 'prediction',)
+
+
+class PredictionSerializer(serializers.BaseSerializer):
+    def to_representation(self, instance):
+        return {
+            'prediction': instance.prediction,
+        }

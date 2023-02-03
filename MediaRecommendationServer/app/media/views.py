@@ -53,6 +53,7 @@ class MovieViewSet(viewsets.ModelViewSet):
         :param request: /movies/all/get_top_recommendations/ -- 'start': int, 'end': int, 'id': int (user id)
         :return: Response with the serialized [Movie]
         """
+
         try:
             start = int(request.GET['start'])
             end = int(request.GET['end'])
@@ -60,16 +61,11 @@ class MovieViewSet(viewsets.ModelViewSet):
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 
-        print(user.id)
-        print(user.book_user.id)
-        print(user.movie_user.id)
         movie_user = user.movie_user
         predictions = MoviePrediction.objects.filter(prediction_user=movie_user)
         predictions = predictions[start:end]
 
-        movies = []
-        for prediction in predictions:
-            movies.append(prediction.movie)
+        movies = [p.movie for p in predictions]
         serializer = MovieSerializer(movies, many=True)
 
         return Response(serializer.data)

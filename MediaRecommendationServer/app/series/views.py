@@ -10,6 +10,6 @@ class BookSeriesViewSet(viewsets.ModelViewSet):
 
 
 class MovieSeriesViewSet(viewsets.ModelViewSet):
-    queryset = models.MovieSeries.objects.all()[:60]
+    queryset = models.MovieSeries.objects.all()[:200]
     serializer_class = serializers.MovieSeriesSerializer
 

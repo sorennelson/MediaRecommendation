@@ -13,7 +13,6 @@ class BookPrediction(models.Model):
 
 class MoviePrediction(models.Model):
     prediction_user = models.ForeignKey('userauth.MovieUser', on_delete=models.PROTECT, related_name='predictions')
-    # prediction_user = models.ForeignKey('userauth.movieuser', on_delete=models.PROTECT, related_name='predictions')
     movie = models.ForeignKey('media.Movie', on_delete=models.PROTECT)
     prediction = models.FloatField(default=0.0)
 

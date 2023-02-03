@@ -15,6 +15,7 @@ class BookUser(models.Model):
 
 
 class MovieUser(models.Model):
+    embedding_id = models.IntegerField(unique=False, default=0)
     class Meta:
         ordering = ['id']
 

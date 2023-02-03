@@ -36,6 +36,5 @@ class Movie(models.Model):
     image_url = models.URLField(null=True)
 
     class Meta:
-        ordering = ['-average_rating', '-num_watched', 'title']
+        ordering = ['-num_watched', '-average_rating', 'title']
 
-#     \copy media_book FROM '/users/solosoren/desktop/new_books.csv' DELIMITER ',' CSV;

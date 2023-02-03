@@ -1,3 +1,6 @@
+''' Helper functions for extracting data and throw away testing.
+'''
+
 import sys
 import os
 import django
@@ -10,10 +13,15 @@ import xmltodict
 import json
 import pandas as pd
 import numpy as np
+import requests
 
-DATA_PATH = './Data/ml-25m/'
+DATA_PATH = '../Data/ml-25m/'
 
 def save_movie_row(row, batch_links, all_genres):
+    '''Extracts the movie features from row with corresponding batch_links and 
+       adds the movie to each of it's genres within all_genres. 
+       Returns the movie object.
+    '''
     df_to_numpy = {'movieId': 0, 'title': 1, 'genres': 2}
 
     movielens_id = row[df_to_numpy['movieId']]
@@ -53,6 +61,8 @@ def save_movie_row(row, batch_links, all_genres):
 
 
 def import_movies():
+    '''Imports movieLens Movies.
+    '''
     BATCH_SIZE = 5000
 
     df_movies = pd.read_csv(DATA_PATH + 'movies.csv', chunksize=BATCH_SIZE)
@@ -74,8 +84,6 @@ def import_movies():
 
             print(i*5000)
             i+=1
-            # df_moviebatch.apply(lambda x: save_movie_row(x, df_linkbatch), axis=1)
-            # break
             
         except Exception as e: 
             print(e)
@@ -89,72 +97,116 @@ def import_movies():
         movie_genre.save()
     
 
+def import_movie_rating_stats():
+    """ Computes and updates movie rating stats.
+    """
+    print('Computing stats ...')
+    BATCH_SIZE = 250000
+    df_ratings = pd.read_csv(DATA_PATH + 'ratings.csv', chunksize=BATCH_SIZE)
+    movie_stats = {}
+    n_batch = 0
+    while True:
+        try:
+            df_batch = df_ratings.get_chunk()
 
-def import_movie_ratings():
-    """Imports the data at the given path to a csv file."""
-    path = './movie_ratings.csv'
-    with open(path, 'r') as f:
-        uid = 1
-        user = MovieUser(id=uid)
-        user.save()
+            # Update stats for each movie in batch
+            unique_ids = np.unique(df_batch['movieId'])
+            for id in unique_ids:
+                avg, count = movie_stats[id] if id in movie_stats else (0,0)
+                avg *= count
 
-        for line in f:
-            terms = line.strip().split(',')
+                movie_ratings = df_batch[df_batch['movieId'] == id]['rating']
+                avg += np.sum(movie_ratings)
+                count += len(movie_ratings)
+                avg /= count
 
-            if terms[0] != uid and terms[1] != str(62437):
-                uid = terms[0]
-                user = MovieUser(id=uid)
-                user.save()
+                assert avg >= 0 and avg <= 5 and count > 0, 'Movie {} has avg {} with count {}'.format(id, avg, count)
+                movie_stats[id] = (avg, count)
+            n_batch += 1
+            print(n_batch)
+            
+        except Exception as e: 
+            print('ERROR while computing stats: {}'.format(e))
+            break
+    
+    print('{} batches of size {}'.format(n_batch, BATCH_SIZE))
+    print('Computed stats for {} movies'.format(len(movie_stats)))
 
-                rating = MovieRating(rating_user=user,
-                                     movie=Movie.objects.get(id=int(terms[1])),
-                                     rating=float(terms[2]))
-                rating.save()
+    # Add stats to movies
+    movies = Movie.objects.all()
+    print('Adding stats to movies ...')
+    n_updated_movies = 0
+    for movie in movies:
+        if movie.movielens_id in movie_stats:
+            avg, count = movie_stats[movie.movielens_id]
+            movie.average_rating = avg
+            movie.num_watched = count
+            n_updated_movies += 1
+    print('Added stats to {} movies'.format(n_updated_movies))
 
-            elif terms[1] != str(62437):
-                rating = MovieRating(rating_user=user,
-                                     movie=Movie.objects.get(id=int(terms[1])),
-                                     rating=float(terms[2]))
-                rating.save()
+    print('Updating ...')
+    # Update in PostgreSQL
+    Movie.objects.bulk_update(movies, ['average_rating', 'num_watched'])
+    print('Done')
 
 
-def set_movie_images():
-    conn = http.client.HTTPSConnection("api.themoviedb.org")
-    path = './links.csv'
-    with open(path, 'r') as f:
-        i = 1
-        for line in f:
-            terms = line.strip().split(',')
+def import_movie_images():
+    """ Imports the movie image links and movie Series from TMDB.
+    """
+    movies = Movie.objects.all()
+    all_series = {}
+    print('Pulling image URLs and series from TMDB ...')
+    for i, movie in enumerate(movies):
+        url = "https://api.themoviedb.org/3/movie/{}?language=en-US&api_key=60d78c7cfee3c407c714903efd4c3359".format(movie.tmdb_id)
+        r = requests.get(url)
+        r_json = r.json()
 
-            if int(terms[0]) > 84847:
-                print(terms[0])
+        if r.status_code != 200:
+            print('Movie {} {} Error: Status {}.'.format(movie.id, movie.title, r.status_code))
+            continue
+        
+        if 'poster_path' not in r_json:
+            print('Movie {} {}: No "poster_path"'.format(movie.id, movie.title))
+        else:
+            movie.image_url = 'https://image.tmdb.org/t/p/w342{}'.format(r.json()['poster_path'])
 
-                if i % 40 == 0:
-                    time.sleep(11)
-                payload = "{}"
-                url = "/3/movie/" + terms[2] + "?language=en-US&api_key=60d78c7cfee3c407c714903efd4c3359"
-                conn.request("GET", url, payload)
+        if 'belongs_to_collection' in r_json and r_json['belongs_to_collection']:
+            series_id = int(r_json['belongs_to_collection']['id'])
+            series_title = r_json['belongs_to_collection']['name']
+            if series_id in all_series:
+                all_series[series_id]['movies'].append(movie)
+            else:
+                all_series[series_id] = {'title': series_title, 'movies': [movie]}
 
-                res = conn.getresponse()
-                data = res.read()
-                json = data.decode("utf-8")
+    print('Updating Movie images ...')
+    # Update in PostgreSQL
+    Movie.objects.bulk_update(movies, ['image_url'], batch_size=10000)
 
-                poster_str = re.search(r'"poster_path":\s?"\/.{25}.?.?.?\.jpg"', json)
-                try:
-                    poster_str = poster_str[0]
-                    poster_url = re.search(r'\/.*', poster_str)[0]
-                    poster_url = poster_url[:-1]
+    print('Creating Movie series ...')
+    # Create in PostgreSQL
+    series_objs = []
+    for id, series in all_series.items():
+        series_objs.append(MovieSeries(tmdb_id=id, name=series['title'], avg_rating=0.0))
+    MovieSeries.objects.bulk_create(series_objs)
+    
+    print('Updating Movie series movies, most viewed, and avg rating ...')
+    for series in series_objs:
+        series_movies = all_series[series.tmdb_id]['movies']
+        series.movies.add(*series_movies)
+        
+        avg_sum = 0.0
+        most_viewed = series_movies[0]
+        for movie in series_movies:
+            avg_sum += movie.average_rating
+            if most_viewed.average_rating < movie.average_rating:
+                most_viewed = movie
+        series.avg_rating = avg_sum / len(series_movies)
+        series.most_viewed = most_viewed
+    
+    MovieSeries.objects.bulk_update(series_objs, ['avg_rating', 'most_viewed'])
+    print('Done')
 
-                    avg_str = re.search(r'"vote_average":\d\d?\.\d\d?', json)[0]
-                    avg = float(re.search(r'\d\d?\.\d', avg_str)[0])
 
-                    movie = Movie.objects.get(pk=terms[0])
-                    movie.image_url = 'https://image.tmdb.org/t/p/w342' + poster_url
-                    movie.average_rating = avg
-                    movie.save()
-                except TypeError:
-                    print(i, json)
-                i += 1
 
 
 def import_book_ratings():
@@ -210,7 +262,7 @@ def add_all_genre():
     book_genre.save()
 
     movies_count = Movie.objects.count()
-    movie_genre = MovieGenre(name='All', movies_count=movies_count)
+    movie_genre = MovieGenre(name='All', count=movies_count)
     movie_genre.save()
 
 
@@ -321,80 +373,22 @@ def set_book_series_most_viewed():
         s.save()
 
 
-def set_movie_series():
-    conn = http.client.HTTPSConnection("api.themoviedb.org")
-    path = './links.csv'
-    with open(path, 'r') as f:
-        i = 1
-        for line in f:
-            terms = line.strip().split(',')
-
-            if int(terms[0]) > 85774:
-                print(terms[0])
-
-                if i % 40 == 0:
-                    time.sleep(11)
-                payload = "{}"
-                url = "/3/movie/" + terms[2] + "?language=en-US&api_key=60d78c7cfee3c407c714903efd4c3359"
-                conn.request("GET", url, payload)
-
-                res = conn.getresponse()
-                data = res.read()
-                json_dict = json.loads(data.decode("utf-8"))
-
-                if 'belongs_to_collection' in json_dict.keys() and json_dict['belongs_to_collection']:
-                    movie = Movie.objects.get(pk=int(terms[0]))
-                    movie.tmdb_id = int(terms[2])
-                    movie.save()
-
-                    add_movie_to_series(json_dict['belongs_to_collection'], movie)
-
-                i += 1
-
-
-def add_movie_to_series(series_dict, movie):
-    series_id = int(series_dict['id'])
-    series_title = series_dict['name']
-
-    if MovieSeries.objects.filter(tmdb_id=series_id).exists():
-        series = MovieSeries.objects.get(tmdb_id=series_id)
-    else:
-        series = MovieSeries(tmdb_id=series_id, name=series_title, avg_rating=0.0)
-        series.save()
-
-    series.movies.add(movie)
-
-
-def order_movie_series():
-    series = MovieSeries.objects.all()
-    for s in series:
-        avg_sum = 0.0
-        highest = s.movies.all()[0]
-        for movie in s.movies.all():
-            avg_sum += movie.average_rating
-            if highest.average_rating < movie.average_rating:
-                highest = movie
-        s.avg_rating = avg_sum / s.movies.count()
-        s.most_viewed = highest
-        s.save()
-
-
 def quick_check():
-    book = Book.objects.get(pk=8768)
-    print(book.work_id)
-
+    pass
+    
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "MediaRecommendationServer.settings")
 
     django.setup()
     from MediaRecommendationServer import *
-    import mlmodels.helper as ml
     from media.models import Movie, Book
-    from userauth.models import MovieUser, BookUser
+    from userauth.models import User, MovieUser, BookUser
+    from predictions.models import MoviePrediction
     from ratings.models import MovieRating, BookRating
     from genres.models import MovieGenre, BookGenre
     from series.models import MovieSeries, BookSeries
+
 
     if sys.argv[1] == 'import_movies':
         import_movies()
@@ -402,14 +396,8 @@ if __name__ == "__main__":
     elif sys.argv[1] == "import_book_ratings":
         import_book_ratings()
 
-    elif sys.argv[1] == "import_movie_ratings":
-        import_movie_ratings()
-
-    elif sys.argv[1] == "run_book_ml":
-        ml.run_collaborative_filtering('books', int(sys.argv[2]))
-
-    elif sys.argv[1] == "run_movie_ml":
-        ml.run_collaborative_filtering('movies', int(sys.argv[2]))
+    elif sys.argv[1] == "import_movie_rating_stats":
+        import_movie_rating_stats()
 
     elif sys.argv[1] == "add_book_genres":
         add_book_genres()
@@ -420,11 +408,8 @@ if __name__ == "__main__":
     elif sys.argv[1] == "remove_small_book_genres":
         remove_small_book_genres()
 
-    elif sys.argv[1] == "set_movie_images":
-        set_movie_images()
-
-    elif sys.argv[1] == 'add_movie_rating':
-        ml.add_rating('movie', 1, 467, 3.0)
+    elif sys.argv[1] == "import_movie_images":
+        import_movie_images()
 
     elif sys.argv[1] == 'set_num_watched':
         set_num_watched()
@@ -435,14 +420,8 @@ if __name__ == "__main__":
     elif sys.argv[1] == 'set_book_series':
         set_book_series()
 
-    elif sys.argv[1] == 'set_movie_series':
-        set_movie_series()
-
     elif sys.argv[1] == 'order_book_series':
         order_book_series()
-
-    elif sys.argv[1] == 'order_movie_series':
-        order_movie_series()
 
     elif sys.argv[1] == 'set_book_series_most_viewed':
         set_book_series_most_viewed()

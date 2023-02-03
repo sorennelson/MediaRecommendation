@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 from . import serializers
 from . import models
+from predictions.views import MoviePredictionViewSet
 
 
 @csrf_exempt
@@ -45,6 +46,13 @@ def signup(request):
         u.save()
         login(request, u)
         serializer = serializers.UserSerializer(u)
+
+        # Predict on movies
+        # TODO: Turn async 
+        # https://docs.djangoproject.com/en/4.1/topics/async/#asgiref.sync.sync_to_async
+        # https://docs.python.org/3/library/asyncio.html
+        MoviePredictionViewSet.predict_movies_for_user(user=u)
+
         return JsonResponse(serializer.data)
 
 

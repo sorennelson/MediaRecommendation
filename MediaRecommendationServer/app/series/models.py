@@ -9,7 +9,7 @@ class BookSeries(models.Model):
     books = models.ManyToManyField('media.Book')
 
     class Meta:
-        ordering = ['-avg_rating']
+        ordering = ['most_viewed']
 
 
 class MovieSeries(models.Model):
@@ -20,4 +20,4 @@ class MovieSeries(models.Model):
     movies = models.ManyToManyField('media.Movie')
 
     class Meta:
-        ordering = ['-avg_rating']
+        ordering = ['most_viewed']
