@@ -56,7 +56,6 @@ class Handler(BaseHandler):
         extra_feats = [data[0]['avg_rating'].to(self.device), 
                        data[0]['num_ratings'].to(self.device)]
 
-        # print((user, media, genres, extra_feats))
         return (user, media, genres, extra_feats)
 
     def inference(self, data, *args, **kwargs):
