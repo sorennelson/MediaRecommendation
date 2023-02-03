@@ -26,7 +26,8 @@ class Handler(BaseHandler):
         body = data[0]['body']
         batch_size = len(body['movieId'])
         # Making predictions for the same user across each movie_id so expand
-        uids = [body['userId']]*batch_size
+        # Throw away user. Will add in the actual user later as the workflow alters the userId
+        uids = [0]*batch_size
         # Add throw away ratings
         ratings = [0.]*batch_size
         df = pd.DataFrame({'userId': uids, 
@@ -48,7 +49,7 @@ class Handler(BaseHandler):
         dl = DLDataLoader(ds, batch_size=None, pin_memory=False, num_workers=0)
         data = next(iter(dl))
 
-        user = data[0]['userId'].to(self.device)
+        user = (data[0]['userId'] + body['userId']).to(self.device)
         media = data[0]['movieId'].to(self.device)
         genres = [data[0]['split_genres'][0].to(self.device),
                   data[0]['split_genres'][1].to(self.device)]
