@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-miniconda3:python3.7
+FROM continuumio/miniconda3:latest
 EXPOSE 8000
 WORKDIR /app 
 COPY requirements.txt /app
