@@ -39,7 +39,6 @@ INSTALLED_APPS = [
       'django.contrib.staticfiles',
       'userauth',
       'media',
-      'mlmodels',
       'ratings',
       'predictions',
       'genres',
