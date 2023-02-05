@@ -35,8 +35,8 @@ Data:
 The MacOS app is written in Swift. We use Django for the backend API, TorchServe to serve all ML models, and a PostgreSQL database. The Django and Torchserve services are deployed on Kubernetes clusters on GKE. The database lives in Amazon RDS.
 
 ## Future Work
-- [] Related media suggestions
-- [] Podcasts
-- [] Spotify playlists
-- [] Explore/Exploit manual adjustment
-- [] Wish Lists
+- [ ] Related media suggestions
+- [ ] Podcasts
+- [ ] Spotify playlists
+- [ ] Explore/Exploit manual adjustment
+- [ ] Wish Lists
