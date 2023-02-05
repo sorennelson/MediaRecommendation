@@ -52,3 +52,8 @@ class CategoriesTableView : NSObject, NSTableViewDataSource, NSTableViewDelegate
         return false
     }
 }
+
+
+class CategoriesScroll: NSScrollView {
+    override func scrollWheel(with event: NSEvent) {}
+}

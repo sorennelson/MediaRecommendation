@@ -39,13 +39,15 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
             }
         })
     }
-    
+        
     func updateResults(stringValue: String, completion:@escaping() -> ()) {
-        DispatchQueue.global(qos: .background).async {
-            self.searchResults = ObjectController.sharedInstance.getAllMedia().filter {
-                return $0.title.lowercased().contains(stringValue)
+        ObjectController.sharedInstance.getAllMediaNotRecommended { success, media in
+            DispatchQueue.global(qos: .background).async {
+                self.searchResults = media.filter {
+                    return $0.title.lowercased().contains(stringValue)
+                }
+                completion()
             }
-            completion()
         }
     }
     
@@ -129,10 +131,8 @@ class AddRatingModal: NSViewController, NSTableViewDelegate, NSTableViewDataSour
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         guard let selectedMedia = selectedMedia else { return }
-        ObjectController.sharedInstance.addRating(Float(rating), for: selectedMedia, completion: { (success, err) in
-
-        })
-        presentingViewController?.dismiss(self)
+        ObjectController.sharedInstance.addRating(Float(rating), for: selectedMedia, completion: { (success, err) in })
+        self.presentingViewController?.dismiss(self)
     }
     
 }

@@ -9,10 +9,11 @@
 import Foundation
 import Cocoa
 
-class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, UpdateContent  {
+class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, UpdateContent, ReloadContent  {
     
 // MARK: TableView
     var tableView: NSTableView?
+    var reloadDelegate: ReloadContent?
     let CollectionCellID = "CVCell"
     let MediaCellID = "MediaCellID"
     let TitleCellID = "TitleCell"
@@ -67,6 +68,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     
     private func getMediaCellView(tableView: NSTableView, row: Int) -> LeftTVMediaCell? {
         let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: MediaCellID), owner: nil) as! LeftTVMediaCell
+        cell.reloadDelegate = self
         
         if currentContent == .Recommendations {
             if let media = ObjectController.sharedInstance.getMediaForGenre(withName: selectedCategory.name, for: row*3..<row*3+3) {
@@ -95,7 +97,7 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        if row == 0 { return 90 }
+        if row == 0 { return 110 }
         return 335
     }
     
@@ -119,11 +121,17 @@ class LeftTableView : NSObject, NSTableViewDelegate, NSTableViewDataSource, Upda
     }
     
     func selectedCategory(_ categoryRow: Int, category: Genre) {
-        selectedCategoryRow = categoryRow
+        selectedCategoryRow = categoryRow - 1
         selectedCategory = category
         tableView?.scrollRowToVisible(0)
         ObjectController.sharedInstance.getMediaForGenre(withName: selectedCategory.name) { (_) in
             self.tableView?.reloadData()
         }
+    }
+    
+    // MARK: ReloadContent
+    func reload() {
+        self.tableView?.reloadData()
+        self.reloadDelegate?.reload()
     }
 }

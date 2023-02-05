@@ -20,10 +20,13 @@ class LeftTVMediaCell: NSTableCellView {
     @IBOutlet var rightImageButton: NSButton!
     @IBOutlet var rightLabel: NSTextField!
     
+    var reloadDelegate: ReloadContent?
+    
     var leftMedia: Media? {
         didSet {
-            leftLabel.stringValue = leftMedia!.title
-            leftMedia!.getImageData(completion: { (data) in
+            guard let media = leftMedia else { return }
+            leftLabel.stringValue = media.title
+                media.getImageData(completion: { (data) in
                 if let data = data {
                     DispatchQueue.main.async  {  self.leftImageButton.image = NSImage(data: data)  }
                 } else {
@@ -35,8 +38,9 @@ class LeftTVMediaCell: NSTableCellView {
     
     var middleMedia: Media? {
         didSet {
-            middleLabel.stringValue = middleMedia!.title
-            middleMedia!.getImageData(completion: { (data) in
+            guard let media = middleMedia else { return }
+            middleLabel.stringValue = media.title
+            media.getImageData(completion: { (data) in
                 if let data = data {
                     DispatchQueue.main.async  {  self.middleImageButton.image = NSImage(data: data)  }
                 } else {
@@ -48,8 +52,9 @@ class LeftTVMediaCell: NSTableCellView {
     
     var rightMedia: Media? {
         didSet {
-            rightLabel.stringValue = rightMedia!.title
-            rightMedia!.getImageData(completion: { (data) in
+            guard let media = rightMedia else { return }
+            rightLabel.stringValue = media.title
+            media.getImageData(completion: { (data) in
                 if let data = data {
                     DispatchQueue.main.async  {  self.rightImageButton.image = NSImage(data: data)  }
                 } else {
@@ -155,18 +160,66 @@ class LeftTVMediaCell: NSTableCellView {
         if series.count > 0 { leftMovieSeries = series[0] }
         if series.count > 1 { middleMovieSeries = series[1] }
         if series.count > 2 { rightMovieSeries = series[2] }
+        leftMedia = nil
+        middleMedia = nil
+        rightMedia = nil
     }
     
     //    MARK: Selection
-    @IBAction func leftButtonClicked(_ sender: Any) {}
+    @IBAction func leftButtonClicked(_ sender: Any) {
+        if let media = leftMedia {
+            self.setSelectedMedia(media)
+            
+        } else if ObjectController.currentMediaType == .Movies {
+            guard let series = leftMovieSeries else { return }
+            // TODO: New view to show the entire series
+            self.setSelectedMedia(series.showMedia)
+            
+        } else if ObjectController.currentMediaType == .Books {
+            guard let series = leftBookSeries else { return }
+            self.setSelectedMedia(series.showMedia)
+        }
+    }
     
-    @IBAction func middleButtonClicked(_ sender: Any) {}
+    @IBAction func middleButtonClicked(_ sender: Any) {
+        if let media = middleMedia {
+            self.setSelectedMedia(media)
+            
+        } else if ObjectController.currentMediaType == .Movies {
+            guard let series = middleMovieSeries else { return }
+            // TODO: New view to show the entire series
+            self.setSelectedMedia(series.showMedia)
+            
+        } else if ObjectController.currentMediaType == .Books {
+            guard let series = middleBookSeries else { return }
+            self.setSelectedMedia(series.showMedia)
+        }
+    }
     
-    @IBAction func rightButtonClicked(_ sender: Any) {}
+    @IBAction func rightButtonClicked(_ sender: Any) {
+        if let media = rightMedia {
+            self.setSelectedMedia(media)
+            
+        } else if ObjectController.currentMediaType == .Movies {
+            guard let series = rightMovieSeries else { return }
+            // TODO: New view to show the entire series
+            self.setSelectedMedia(series.showMedia)
+            
+        } else if ObjectController.currentMediaType == .Books {
+            guard let series = rightBookSeries else { return }
+            self.setSelectedMedia(series.showMedia)
+        }
+    }
     
-    func setSelectedMedia(_ media: Media, prediction: Double) {
+    func setSelectedMedia(_ media: Media) {
         ObjectController.sharedInstance.selectedMedia = media
-        ObjectController.sharedInstance.selectedMediaPrediction = prediction
+//        self.displayPopover()
+        ImportController.sharedInstance.loadRecommendation(media: media) { success, error, pred in
+            if success, let pred = pred {
+                ObjectController.sharedInstance.selectedMediaPrediction = Double(pred)
+            }
+            self.displayPopover()
+        }
     }
     
     func displayPopover() {
@@ -176,6 +229,7 @@ class LeftTVMediaCell: NSTableCellView {
         popover.behavior = .transient
         popover.contentViewController = mediaDetail
         popover.show(relativeTo: superview!.bounds, of: superview!, preferredEdge: .maxX)
+        mediaDetail.reloadDelegate = reloadDelegate
     }
     
 }

@@ -33,6 +33,7 @@ class ObjectController {
     var selectedMedia: Media?
     var selectedMediaPrediction: Double?
     
+    /// Returns whether there are any recommended media of the current media type loaded.
     func noRecommendations() -> Bool {
         return ObjectController.currentMediaType == .Books ? recommendedBooks.count == 0 : recommendedMovies.count == 0
     }
@@ -69,6 +70,7 @@ class ObjectController {
         return media
     }
     
+    /// Returns the current media type recommendations if there are any otherwise allMedia.
     func getAllMedia() -> [Media] {
         if noRecommendations() {
             return ObjectController.currentMediaType == .Books ? allBooks : allMovies
@@ -77,7 +79,25 @@ class ObjectController {
         }
     }
     
+    /// Returns allMedia of the current media type. If they haven't been loaded then loads them.
+    ///
+    /// - Parameters:
+    ///   - completion: (success, allMedia)
+    func getAllMediaNotRecommended(completion:@escaping (Bool, [Media]) -> ()) {
+        let media: [Media] = ObjectController.currentMediaType == .Books ? self.allBooks : self.allMovies
+        if media.isEmpty {
+            ImportController.sharedInstance.loadAllMedia(ObjectController.currentMediaType) { (success, error) in
+                //            TODO: Handle error
+                completion(success, ObjectController.currentMediaType == .Books ? self.allBooks : self.allMovies)
+            }
+        } else {
+            completion(true, media)
+        }
+    }
+    
 //    MARK: RATINGS
+    
+    /// Returns the rating of the given media.
     func getRating(for media: Media) -> Float? {
         if ObjectController.currentMediaType == .Books {
             guard let user = User.current, let ratings = user.bookRatings else { return nil }
@@ -94,6 +114,7 @@ class ObjectController {
         return nil
     }
     
+    /// Adds the rating locally then posts the rating to the backend.
     func addRating(_ rating: Float, for media: Media, completion:@escaping (Bool, String) -> ()) -> Bool {
         let success = addLocalRating(rating, for: media)
         if !success  {  return false  }

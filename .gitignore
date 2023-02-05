@@ -10133,3 +10133,7 @@ Movie_Data/ratings.csv
 Movie_Data/new_ratings.csv
 Movie_Data/new_movies.csv
 MediaRecommendationServer/movie_ratings.csv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

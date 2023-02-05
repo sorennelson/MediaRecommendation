@@ -50,6 +50,9 @@ class Media: Equatable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
+        if title.count > 6 && title[title.index(title.endIndex, offsetBy: -5)..<title.endIndex] == ", The" {
+            title = "The " + title[title.startIndex..<title.index(title.endIndex, offsetBy: -5)]
+        }
         genres = try container.decode([String].self, forKey: .genres)
         year = try container.decode(Int.self, forKey: .year)
         let avgFloat = try container.decode(Float.self, forKey: .avgRating)

@@ -23,18 +23,20 @@ extension ViewController {
         rightTableView.reloadData()
     }
 
-    private func minimize() {
-        leftTVToViewConstraint.isActive = false
-        leftTVToCategoriesConstraint.isActive = true
+    func minimize() {
+//        leftTVToViewConstraint.isActive = false
+//        leftTVToCategoriesConstraint.isActive = true
+        leftTVToViewConstraint.constant = 352
         
-        rightTVToViewConstraint.isActive = false
-        rightTVToCategoriesConstraint.isActive = true
+//        rightTVToViewConstraint.isActive = false
+//        rightTVToCategoriesConstraint.isActive = true
+        rightTVToViewConstraint.constant = 352
         
         categoriesTableView.isHidden = false
     }
     
     private func expand() {
-        leftTVToCategoriesConstraint.isActive = false
+//        leftTVToCategoriesConstraint.isActive = false
         
         leftTVToViewConstraint.constant = 66
         leftTVToViewConstraint.isActive = true
