@@ -8,8 +8,8 @@
 
 import Foundation
 
-//let API_HOST = "http://35.196.75.191:80/"
-let API_HOST = "http://localhost:8000/"
+let API_HOST = "http://35.196.75.191:80/"
+//let API_HOST = "http://localhost:8000/"
 
 var GRKEY = "UAHiKRW5GiTcCQXsFq9Ckg"
 var GRSECRETKEY = "YjDRf7AoGwlKpK1rK6AL2CzfuJcEe0vzA2tmYuL3qto"

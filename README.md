@@ -3,7 +3,7 @@ A media recommendation MacOS app that suggests new movies and books to users bas
 
 This is a sandbox for recommender system ideas I have that are completely decoupled from any business metrics.
 
-If you have any ideas or feedback, please [reach out](sorennelson33@gmail.com).
+If you have any ideas or feedback, please reach out.
 
 ![MediaRec](./Wide_Media_Rec.png)
 
@@ -32,7 +32,7 @@ Data:
 - [Goodbooks-10k Dataset](http://fastml.com/goodbooks-10k-a-new-dataset-for-book-recommendations/): 465 Users, 10,000 Books from GoodReads, 1,048,517 Ratings on a 1-5 scale in one star increments.
 
 ## System Architecture
-The MacOS app is written in Swift. We use Django for the backend API, TorchServe to serve all ML models, and a PostgreSQL database. The Django and Torchserve services are deployed on Kubernetes clusters on GKE. The database lives in Amazon RDS.
+The MacOS app is written in Swift. We use Django for the backend API, TorchServe as the model server, and a PostgreSQL database. The Django and Torchserve services are deployed on Kubernetes clusters on GKE. The database lives in Amazon RDS.
 
 ## Future Work
 - [ ] Related media suggestions

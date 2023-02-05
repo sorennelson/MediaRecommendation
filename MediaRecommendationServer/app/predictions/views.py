@@ -115,8 +115,14 @@ class MoviePredictionViewSet(viewsets.ModelViewSet):
         ratings = [{'movieId': rating.movie.movielens_id, 'rating': rating.rating} \
                    for rating in user.movie_user.ratings.all()]
         print('ratings: {}'.format(ratings))
-        ratings_vector = MoviePredictionViewSet.__get_workflow_ratings_vector(ratings)
-        embedding_id = MoviePredictionViewSet.__find_closest_cluster(ratings_vector)
+        if len(ratings) == 0:
+            embedding_id = 0
+        else:
+            ratings_vector = MoviePredictionViewSet.__get_workflow_ratings_vector(ratings)
+            embedding_id = MoviePredictionViewSet.__find_closest_cluster(ratings_vector)
+            # To handle default embedding
+            embedding_id += 1 
+        
         print('Embedding ID: {}, was {}'.format(embedding_id, curr_embedding_id))
         # No updating needed if the embedding wasn't updated
         if curr_embedding_id == embedding_id:
