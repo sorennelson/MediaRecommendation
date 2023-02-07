@@ -1,7 +1,7 @@
 # Media Recommendation
 A media recommendation MacOS app that suggests new movies and books to users based on media they rate via Collaborative Filtering DNN's.
 
-This is a sandbox for recommender system ideas I have that are completely decoupled from any business metrics.
+This is a sandbox for recommender system ideas I have that are decoupled from any business metrics.
 
 If you have any ideas or feedback, please reach out.
 
