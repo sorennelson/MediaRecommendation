@@ -21,7 +21,7 @@ Future Work:
 Data: 
 - [MovieLens 25M Dataset](https://grouplens.org/datasets/movielens/25m/): 162,000 Users, 62,000 Movies from IMDB, 25M Ratings on a 0.5-5 star scale in half star increments.
 
-### Books
+### [Books](./BookRec.ipynb)
 The current model is a simple 4 layer MLP with learned User/Book Embeddings. 
 Improving this model is the current focus starting with incorporating additional features.
 
