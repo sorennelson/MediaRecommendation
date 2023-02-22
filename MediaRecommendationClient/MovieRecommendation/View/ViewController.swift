@@ -42,6 +42,7 @@ class ViewController: NSViewController {
                 // TODO: Notification if something didn't load
                 self.setupTableViews()
             }
+            ImportController.sharedInstance.loadMediaRatingsAndGenres(.Books) { (media, ratings, genres) in }
         }
     }
     
@@ -70,9 +71,13 @@ class ViewController: NSViewController {
     @IBAction func addButtonPressed(_ sender: Any) {}
     
     @IBAction func bookButtonPressed(_ sender: Any) {
+        ObjectController.currentMediaType = .Books
+        self.reloadTableViews()
+        
+        // TODO: Only load if we need to?
         ImportController.sharedInstance.loadMediaRatingsAndGenres(.Books) { (media, ratings, genres) in
             // TODO: Notification if something didn't load
-            ObjectController.currentMediaType = .Books
+//            ObjectController.currentMediaType = .Books
             self.reloadTableViews()
         }
     }

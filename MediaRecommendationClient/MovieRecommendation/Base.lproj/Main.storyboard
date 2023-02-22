@@ -785,7 +785,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cLC-rZ-Opg">
-                                <rect key="frame" x="171" y="197" width="123" height="16"/>
+                                <rect key="frame" x="171" y="197" width="261" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Crime, Drama, Thriller" id="Zyj-82-KxD">
                                     <font key="font" size="12" name="Avenir-Roman"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
@@ -905,6 +905,7 @@
                             <constraint firstItem="cLC-rZ-Opg" firstAttribute="top" secondItem="2YR-w9-YrI" secondAttribute="bottom" constant="5" id="Ga7-kq-1Vc"/>
                             <constraint firstItem="sug-SJ-Fyu" firstAttribute="leading" secondItem="2WJ-Wb-MHv" secondAttribute="leading" id="Ja4-pP-78h"/>
                             <constraint firstItem="xf5-ng-XxO" firstAttribute="leading" secondItem="EAw-yo-am8" secondAttribute="trailing" constant="20" id="JcY-Pt-cCc"/>
+                            <constraint firstItem="cLC-rZ-Opg" firstAttribute="trailing" secondItem="2WJ-Wb-MHv" secondAttribute="trailing" id="KXx-Je-Zr1"/>
                             <constraint firstItem="sug-SJ-Fyu" firstAttribute="bottom" secondItem="fpf-Ev-qkD" secondAttribute="bottom" id="NlT-sO-rbJ"/>
                             <constraint firstItem="sug-SJ-Fyu" firstAttribute="top" secondItem="Vc8-Fd-VXj" secondAttribute="bottom" constant="3" id="TIU-Yi-kD3"/>
                             <constraint firstItem="xf5-ng-XxO" firstAttribute="centerY" secondItem="vBA-fQ-PvG" secondAttribute="centerY" id="TKh-am-fld"/>
@@ -1302,7 +1303,10 @@
                                                                     </connections>
                                                                 </button>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sev-VS-cYI">
-                                                                    <rect key="frame" x="63" y="3" width="184" height="30"/>
+                                                                    <rect key="frame" x="63" y="3" width="184" height="38"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="38" id="Ydx-6H-TCf"/>
+                                                                    </constraints>
                                                                     <textFieldCell key="cell" alignment="center" id="anq-UP-qRs">
                                                                         <font key="font" size="14" name="Avenir-Medium"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1310,9 +1314,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nVp-ya-22J">
-                                                                    <rect key="frame" x="301" y="18" width="184" height="25"/>
+                                                                    <rect key="frame" x="301" y="5" width="184" height="38"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="25" id="G0I-17-0HA"/>
+                                                                        <constraint firstAttribute="height" constant="38" id="G0I-17-0HA"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="gQz-JD-ZGR">
                                                                         <font key="font" size="14" name="Avenir-Medium"/>
@@ -1321,9 +1325,9 @@
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fm4-FP-AP6">
-                                                                    <rect key="frame" x="539" y="18" width="184" height="25"/>
+                                                                    <rect key="frame" x="539" y="5" width="184" height="38"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="25" id="4cA-34-lRV"/>
+                                                                        <constraint firstAttribute="height" constant="38" id="4cA-34-lRV"/>
                                                                     </constraints>
                                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="IEl-mN-Kkq">
                                                                         <font key="font" size="14" name="Avenir-Medium"/>

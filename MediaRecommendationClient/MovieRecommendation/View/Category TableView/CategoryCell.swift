@@ -28,6 +28,7 @@ class CategoryCell : NSTableCellView {
     }
     
     @IBAction func seriesButtonPressed(_ sender: Any) {
+        self.contentDelegate?.changeContent(to: .Series)
         //        TODO: Update button image
         ImportController.sharedInstance.loadSeries { (success, str) in
             if !success {

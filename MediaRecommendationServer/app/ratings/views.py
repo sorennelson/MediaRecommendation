@@ -8,7 +8,7 @@ from . import models
 
 from userauth.models import User
 from media.models import Book, Movie
-from predictions.views import MoviePredictionViewSet
+from predictions.views import MoviePredictionViewSet, BookPredictionViewSet
 
 
 class BookRatingViewSet(viewsets.ModelViewSet):
@@ -29,10 +29,11 @@ class BookRatingViewSet(viewsets.ModelViewSet):
             book_rating.rating = float(request.data['rating'])
 
         else:
-            book_rating = models.MovieRating(rating_user=user.book_user,
+            book_rating = models.BookRating(rating_user=user.book_user,
                                              book=Book.objects.get(pk=int(request.data['book'])),
                                              rating=float(request.data['rating']))
         book_rating.save()
+        BookPredictionViewSet.update_user_embedding(user) 
         
         return Response(status=status.HTTP_201_CREATED)
 
