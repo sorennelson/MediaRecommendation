@@ -10,6 +10,7 @@ class User(AbstractUser):
 
 
 class BookUser(models.Model):
+    embedding_id = models.IntegerField(unique=False, default=0)
     class Meta:
         ordering = ['id']
 

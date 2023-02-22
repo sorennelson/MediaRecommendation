@@ -5,7 +5,7 @@ from . import models
 
 
 class BookSeriesViewSet(viewsets.ModelViewSet):
-    queryset = models.BookSeries.objects.all()[:60]
+    queryset = models.BookSeries.objects.all()[:200]
     serializer_class = serializers.BookSeriesSerializer
 
 

@@ -14,8 +14,10 @@ import json
 import pandas as pd
 import numpy as np
 import requests
+import time
 
 DATA_PATH = '../Data/ml-25m/'
+BOOK_PATH = '../Data/books/'
 
 def save_movie_row(row, batch_links, all_genres):
     '''Extracts the movie features from row with corresponding batch_links and 
@@ -208,169 +210,305 @@ def import_movie_images():
 
 
 
+def import_books():
+    BATCH_SIZE = 50000
+    authors_df = pd.read_json(BOOK_PATH + 'goodreads_book_authors.json', lines=True)
+    series_df = pd.read_json(BOOK_PATH + 'goodreads_book_series.json', lines=True)
+    idmap_df = pd.read_csv(BOOK_PATH + 'book_id_map.csv')
 
-def import_book_ratings():
-    path = './book_ratings.csv'
-    with open(path, 'r') as f:
-        uid = 1
-        csv_uid = 1
-        user = BookUser(id=uid)
-        user.save()
+    print('Importing Books ...')
+    all_books, all_genres, all_series = {}, {}, {}
+    i = 0
+    extra_versions = 0
+    with pd.read_json(BOOK_PATH + 'goodreads_books.json', 
+                      lines=True, 
+                      chunksize=BATCH_SIZE
+                      ) as reader:
+        for chunk in reader:
+            i += 1
+            # Remove non-english books
+            chunk = chunk[chunk['language_code'].str.fullmatch('') \
+                          | chunk['language_code'].str.contains('en', case=False)]
 
-        for line in f:
-            terms = line.strip().split(',')
+            for _, x in chunk.iterrows():
+                # Convert small image url from medium url
+                if 'nophoto' in x['image_url']:
+                    small_img_url = x['image_url']
+                else:
+                    split_url = x['image_url'].split('/')
+                    try:
+                        if split_url[-2][-1] == 'm':
+                            split_url[-2] = split_url[-2][:-1] + 's'
+                            small_img_url = '/'.join(split_url)
+                        else:
+                            small_img_url = x['image_url']
+                    except:
+                        small_img_url = x['image_url']
+                
+                # Clean up genres a little
+                genres = []
+                for genre in x['popular_shelves']:
+                    if int(genre['count']) <= 50: continue
+                    next_genre = False
+                    for name in ['read', 'own', 'finish', 'library', 'have', 
+                                 'wish', 'default', 'buy', 'borrow']:
+                        if name in genre['name']:
+                            next_genre = True
+                            break
+                    if next_genre: continue
+                    genres.append(genre['name'])
 
-            if terms[0] != csv_uid and terms[1] != str(3618):
-                csv_uid = terms[0]
-                uid += 1
+                # Map author ids to name from author_df
+                author_names = ''
+                n_authors = len(x['authors']) if len(x['authors']) < 4 else 4
+                for author_id in x['authors'][:n_authors]:
+                    author = authors_df[authors_df['author_id'] == int(author_id['author_id'])]
+                    if len(author) == 1:
+                        author_names += author['name'].iloc[0] + ', '
+                if len(author_names) == 0 or len(author_names) >= 200:
+                    continue
+                # Remove ending comma
+                author_names = author_names[:-2]
 
-                user = BookUser(id=uid)
-                user.save()
+                if not x['description'] or not x['publication_year']:
+                    continue
 
-                rating = BookRating(rating_user=user,
-                                    book=Book.objects.get(id=int(terms[1])),
-                                    rating=float(terms[2]))
-                rating.save()
+                # Ignore if not as popular as the version already saved
+                old_goodreadsid, old_n_ratings = None, 0
+                if x['work_id'] in all_books:
+                    extra_versions += 1
+                    if int(x['ratings_count']) < all_books[x['work_id']].num_watched:
+                        # Add version ratings
+                        all_books[x['work_id']].num_watched += int(x['ratings_count'])
+                        continue
+                    else:
+                        old_goodreadsid = all_books[x['work_id']].goodreads_id
+                        old_n_ratings = all_books[x['work_id']].num_watched
 
-            elif terms[1] != str(3618):
-                rating = BookRating(rating_user=user,
-                                    book=Book.objects.get(id=int(terms[1])),
-                                    rating=float(terms[2]))
-                rating.save()
+                # Add any other version ratings
+                ratings_count = int(x['ratings_count']) + old_n_ratings
+
+                book = Book(title=x['title_without_series'],
+                            author=author_names,
+                            description=x['description'],
+                            num_pages=int(x['num_pages']) if x['num_pages'] else 0,
+                            publisher=x['publisher'],
+                            year=int(x['publication_year']),
+                            genres=genres,
+                            goodreads_id=x['book_id'],
+                            num_watched=ratings_count,
+                            average_rating=float(x['average_rating']),
+                            image_url=x['image_url'],
+                            work_id=x['work_id'],
+                            small_image_url=small_img_url)
+                
+                all_books[x['work_id']] = book
+
+                # Add book to genre
+                for genre in genres:
+                    if genre in all_genres:
+                        all_genres[genre][x['work_id']] = book
+                    else:
+                        all_genres[genre] = {x['work_id']: book}
+
+                # Add book to series
+                if x['series']:
+                    for series_id in x['series']:
+                        series = series_df[series_df['series_id'] == int(series_id)]
+                        if len(series) > 0:
+                            series_title = series['title'].iloc[0]
+
+                            if series_title in all_series:
+                                all_series[series_title]['books'][x['work_id']] = book
+                            else:
+                                all_series[series_title] = {'id': int(series_id),
+                                                            'books': { x['work_id']: book }}
+                        
+                # Replace all occurrences of old_goodreadsid in ratings_map with new
+                if old_goodreadsid:
+                    idmap_df.loc[idmap_df['book_id'] == old_goodreadsid, 'book_id'] = x['book_id']
+
+            if i % 5 == 0:
+                print('... {} batches completed'.format(i))
+
+    print('... Extra versions count {}'.format(extra_versions))
+    print('... Saving Books to DB ...')
+    Book.objects.bulk_create(list(all_books.values()), batch_size=BATCH_SIZE)
+    
+    # Save new map
+    print('Removing rating map ids that arent in DB ...')
+    all_goodreads_ids = list(Book.objects.all().values_list('goodreads_id', flat=True))
+    print('... Dropping {} ids'.format(
+        len(idmap_df[~idmap_df['book_id'].isin(all_goodreads_ids)]))
+        )
+    idmap_df = idmap_df[idmap_df['book_id'].isin(all_goodreads_ids)]
+    # idmap_df.to_csv(BOOK_PATH + 'book_id_map-dedup-test2.csv')
+    idmap_df.to_csv(BOOK_PATH + 'book_id_map-dedup-v1.csv')
+
+    # Genres
+    print('Creating Book genres ...')
+    print('... Removing bad versions from Genres ...')
+    n_bad_versions = __clean_bad_versions_from_bookgenres(all_genres, all_books)
+    print('...... {} bad works'.format(n_bad_versions))
+    print('... Creating {} Genres ...'.format(len(all_genres)))
+    __create_book_genres(all_genres)
+
+    # Series
+    print('Creating Book series ...')
+    print('... Removing bad versions from Series ...')
+    n_bad_versions, n_del_series = __clean_bad_versions_from_bookseries(all_series, all_books)
+    print('...... {} bad works and {} empty series after'.format(
+        n_bad_versions, n_del_series
+    ))
+    print('... Creating {} Series ...'.format(len(all_series)))
+    series_objs = __create_bookseries(all_series, BATCH_SIZE)
+    print('... Updating Book series books, most viewed, and avg rating ...')
+    __update_bookseries(series_objs, all_series, BATCH_SIZE)
 
 
-def add_book_genres():
-    books = Book.objects.all()
+def __clean_bad_versions_from_bookgenres(all_genres, all_books):
+    '''
+    '''
+    n_bad_versions = 0
+    for genre, genre_workid_books in all_genres.items():
+        del_works = []
+        for work_id, book in genre_workid_books.items():
+            if work_id not in all_books or book.id != all_books[work_id].id:
+                del_works.append(work_id)
 
-    for book in books:
-        for genre_name in book.genres:
-            if BookGenre.objects.filter(name=genre_name).exists():
-                psql_genre = BookGenre.objects.get(name=genre_name)
-                psql_genre.books.add(book)
-                psql_genre.books_count += 1
-                psql_genre.save()
-            else:
-                psql_genre = BookGenre(name=genre_name,
-                                       books_count=1)
-                psql_genre.save()
-                psql_genre.books.add(book)
+        n_bad_versions += len(del_works)
+        for work_id in del_works:
+            del genre_workid_books[work_id]
+    return n_bad_versions
 
+def __create_book_genres(all_genres):
+    '''
+    '''
+    for genre, genre_workid_books in all_genres.items():
+        # Ignore any low count genres
+        if len(genre_workid_books) < 50:
+            continue
+        book_objs = list(genre_workid_books.values())
+        
+        book_genre = BookGenre(name=genre)
+        book_genre.save()
+        book_genre.books.add(*book_objs)
+        book_genre.count = len(book_objs)
+        book_genre.save()
+
+def __clean_bad_versions_from_bookseries(all_series, all_books):
+    '''
+    '''
+    n_bad_versions = 0
+    del_series = []
+    for title, series in all_series.items():
+        del_works = []
+        for work_id, book in series['books'].items():
+            if work_id not in all_books or book.id != all_books[work_id].id:
+                del_works.append(work_id)
+
+        n_bad_versions += len(del_works)
+        for work_id in del_works:
+            del series['books'][work_id]
+        if len(series['books']) <= 1:
+            del_series.append(title)
+
+    # Remove any empty Series
+    for title in del_series:
+        del all_series[title]
+    
+    return n_bad_versions, len(del_series)
+
+def __create_bookseries(all_series, batch_size):
+    '''
+    '''
+    series_objs = []
+    for title, series in all_series.items():
+        series_objs.append(BookSeries(goodreads_id=series['id'], name=title, avg_rating=0.0))
+    BookSeries.objects.bulk_create(series_objs, batch_size=batch_size)
+    return series_objs
+
+def __update_bookseries(series_objs, all_series, batch_size):
+    '''
+    '''
+    for series in series_objs:
+        series_books = list(all_series[series.name]['books'].values())
+        series.books.add(*series_books)
+        
+        avg_sum = 0.0
+        most_viewed = series_books[0]
+        for book in series_books:
+            avg_sum += float(book.average_rating)
+            if most_viewed.num_watched < float(book.num_watched):
+                most_viewed = book
+        series.avg_rating = avg_sum / len(series_books)
+        series.most_viewed = most_viewed
+        # assert series.avg_rating >= 0 and series.avg_rating <= 5
+    
+    BookSeries.objects.bulk_update(series_objs, ['avg_rating', 'most_viewed'], batch_size=batch_size)
+
+
+def remove_book_ratings_notin_django():
+    ''' Removes interactions not in the deduplicated book_id_map 
+        (any books not in Django).
+    '''
+    BATCH_SIZE = 1000000
+    idmap_df = pd.read_csv(BOOK_PATH + 'book_id_map-dedup-v1.csv')
+    book_ids = list(idmap_df['book_id_csv'])
+    output_path = BOOK_PATH + 'goodreads_interactions-clean.csv'
+    n_interactions = 0
+
+    with pd.read_csv(BOOK_PATH + 'goodreads_interactions.csv', chunksize=BATCH_SIZE) as reader:
+        for chunk in reader:
+            new_chunk = chunk[chunk['book_id'].isin(book_ids)]
+            n_interactions += len(new_chunk)
+            new_chunk.to_csv(output_path, mode='a', header=not os.path.exists(output_path))
+    
+    print('Total interactions after cleaning {}'.format(n_interactions))
+
+def add_book_features_to_ratings():
+    ''' Pulls average_rating, num_watched, and genres from Django, 
+        adds them to book_id_map, and saves the updated pd.Dataframe.
+    '''
+    idmap_df = pd.read_csv(BOOK_PATH + 'book_id_map-dedup-v1.csv')
+    idmap_df['avg_rating'] = None
+    idmap_df['num_watched'] = None
+    idmap_df['genres'] = None
+    genre_books = set(BookGenre.objects.values_list('name'))
+
+    start = time.time()
+    all_feats, all_genres, indexes = [], [], []
+
+    for i, book in enumerate(Book.objects.values(
+        'goodreads_id','average_rating','num_watched','genres'
+        )):
+        # Remove genres that were cleaned from BookGenre.objects but left on the Book
+        book_genres = [name for name in book['genres'] if (name,) in genre_books]
+
+        new_indexes = idmap_df.index[idmap_df['book_id'] == book['goodreads_id']]
+        all_feats.extend([[book['average_rating'], book['num_watched']]]*len(new_indexes))
+        all_genres.extend([book_genres]*len(new_indexes))
+        indexes.extend(new_indexes)
+        
+        if (i+1)%25000==0:
+            print('{} examples - Total {} M'.format(i, (time.time() - start) // 60))
+            # To be safe upload in chunks of 25,000
+            idmap_df.loc[indexes, ['avg_rating', 'num_watched']] = all_feats
+            idmap_df.loc[indexes, ['genres']] = pd.Series(all_genres, index=indexes)
+            
+            print(idmap_df.loc[indexes[:3]])
+            all_feats, all_genres, indexes = [], [], []
+
+    idmap_df.to_csv(BOOK_PATH + 'book_id_map-dedup-features-v1.csv')
 
 def add_all_genre():
     books_count = Book.objects.count()
-    book_genre = BookGenre(name='All', books_count=books_count)
+    book_genre = BookGenre(name='All', count=books_count)
     book_genre.save()
 
     movies_count = Movie.objects.count()
     movie_genre = MovieGenre(name='All', count=movies_count)
     movie_genre.save()
-
-
-def remove_small_book_genres():
-    for count in range(5, 10):
-        genres = BookGenre.objects.filter(count=count)
-        for genre in genres:
-            genre.delete()
-
-
-def set_num_watched():
-    movies = Movie.objects.all()
-    for movie in movies:
-        num_watched = MovieRating.objects.filter(movie=movie).count()
-        movie.num_watched = num_watched
-        movie.save()
-
-    books = Book.objects.all()
-    for book in books:
-        num_watched = BookRating.objects.filter(book=book).count()
-        book.num_watched = num_watched
-        book.save()
-
-
-def add_book_work_id():
-    path = './books.csv'
-    with open(path, 'r') as f:
-        for line in f:
-            terms = line.strip().split(',')
-            work_id = int(terms[3])
-            goodreads_id = int(terms[1])
-            books = Book.objects.filter(goodreads_id=goodreads_id).all()
-            if books.count() < 1:
-                print("DNE", goodreads_id)
-            else:
-                book = books[0]
-                book.work_id = work_id
-                book.save()
-
-
-def set_book_series():
-    conn = http.client.HTTPSConnection("www.goodreads.com")
-    books = Book.objects.all()
-
-    i = 1
-    for book in books:
-        if i > 1154:
-            print(i, book.id)
-
-            payload = "{}"
-            url = "/series/work/" + str(book.work_id) + "?format=xml&key=UAHiKRW5GiTcCQXsFq9Ckg"
-            conn.request("GET", url, payload)
-            res = conn.getresponse()
-            data = res.read()
-            xml = data.decode("utf-8")
-            response_dict = xmltodict.parse(xml)
-            series_dict = response_dict['GoodreadsResponse']
-
-            if 'series_works' in series_dict.keys():
-                series_dict = series_dict['series_works']
-                if series_dict:
-                    # Multiple series
-                    if type(series_dict['series_work']) == list:
-                        series_dict = series_dict['series_work']
-                        for s in series_dict:
-                            add_book_to_series(s['series'], book)
-
-                    else:
-                        series_dict = series_dict['series_work']['series']
-                        add_book_to_series(series_dict, book)
-
-            else:
-                print("ERROR IN RESPONSE", book.id, book.work_id)
-        i += 1
-
-
-def add_book_to_series(series_dict, book):
-    series_id = int(series_dict['id'])
-    series_title = series_dict['title']
-
-    if BookSeries.objects.filter(goodreads_id=series_id).exists():
-        series = BookSeries.objects.get(goodreads_id=series_id)
-    else:
-        series = BookSeries(goodreads_id=series_id, name=series_title)
-        series.save()
-
-    series.books.add(book)
-
-
-def order_book_series():
-    series = BookSeries.objects.all()
-    for s in series:
-        avg_sum = 0.0
-        for book in s.books.all():
-            avg_sum += book.average_rating
-        s.avg_rating = avg_sum / s.books.count()
-        s.save()
-
-
-def set_book_series_most_viewed():
-    series = BookSeries.objects.all()
-    for s in series:
-        highest = s.books.all()[0]
-        for book in s.books.all():
-            if highest.average_rating < book.average_rating:
-                highest = book
-        s.most_viewed = highest
-        s.save()
 
 
 def quick_check():
@@ -393,38 +531,23 @@ if __name__ == "__main__":
     if sys.argv[1] == 'import_movies':
         import_movies()
 
-    elif sys.argv[1] == "import_book_ratings":
-        import_book_ratings()
-
     elif sys.argv[1] == "import_movie_rating_stats":
         import_movie_rating_stats()
-
-    elif sys.argv[1] == "add_book_genres":
-        add_book_genres()
-
-    elif sys.argv[1] == "add_all_genre":
-        add_all_genre()
-
-    elif sys.argv[1] == "remove_small_book_genres":
-        remove_small_book_genres()
 
     elif sys.argv[1] == "import_movie_images":
         import_movie_images()
 
-    elif sys.argv[1] == 'set_num_watched':
-        set_num_watched()
+    elif sys.argv[1] == "import_books":
+        import_books()
 
-    elif sys.argv[1] == 'add_book_work_id':
-        add_book_work_id()
+    elif sys.argv[1] == "remove_book_ratings_notin_django":
+        remove_book_ratings_notin_django()
 
-    elif sys.argv[1] == 'set_book_series':
-        set_book_series()
+    elif sys.argv[1] == 'add_book_features_to_ratings':
+        add_book_features_to_ratings()
 
-    elif sys.argv[1] == 'order_book_series':
-        order_book_series()
-
-    elif sys.argv[1] == 'set_book_series_most_viewed':
-        set_book_series_most_viewed()
+    elif sys.argv[1] == "add_all_genre":
+        add_all_genre()
 
     elif sys.argv[1] == 'quick_check':
         quick_check()

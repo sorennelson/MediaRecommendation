@@ -58,7 +58,8 @@ class MediaDetailPopover: NSViewController {
         
         // Set Genres
         var genresStr = ""
-        for i in 0..<media.genres.count-1 {
+        let nGenres = min(media.genres.count-1, 4)
+        for i in 0..<nGenres {
             genresStr += media.genres[i] + ", "
         }
         genresStr += media.genres[media.genres.count-1]

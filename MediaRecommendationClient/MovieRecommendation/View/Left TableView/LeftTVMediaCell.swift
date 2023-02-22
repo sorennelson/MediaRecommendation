@@ -114,6 +114,9 @@ class LeftTVMediaCell: NSTableCellView {
         if series.count > 0 { leftBookSeries = series[0] }
         if series.count > 1 { middleBookSeries = series[1] }
         if series.count > 2 { rightBookSeries = series[2] }
+        leftMedia = nil
+        middleMedia = nil
+        rightMedia = nil
     }
     
     //    MARK: Movie Series

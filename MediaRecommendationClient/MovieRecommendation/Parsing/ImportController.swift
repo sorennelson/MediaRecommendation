@@ -29,10 +29,10 @@ class ImportController {
             ImportController.sharedInstance.loadRecommended(0, to: 500, mediaType) { (success, error) in
                 if !success || ObjectController.sharedInstance.noRecommendations() {
                     ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
-                        //            TODO: Handle error
-                        if success {
-                            mediaLoaded = true
-                        }
+                        mediaLoaded = true
+//                        if success {
+//                            mediaLoaded = true
+//                        }
                         if self.isComplete(mediaType, &completeCount) {
                             completion(mediaLoaded, ratingsLoaded, genresLoaded)
                         }
@@ -41,7 +41,6 @@ class ImportController {
                     mediaLoaded = true
                     
                     // Still need to load all media but no need to wait on it
-                    // TODO: Handle error
                     ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
                         if success && completeCount == 3 {
                             self.removeRatingsFromAllMedia(of: mediaType)
@@ -55,7 +54,6 @@ class ImportController {
             }
         } else {
             ImportController.sharedInstance.loadAllMedia(mediaType) { (success, error) in
-                //            TODO: Handle error
                 if success {
                     mediaLoaded = true
                 }
@@ -66,7 +64,6 @@ class ImportController {
         }
         
         ImportController.sharedInstance.loadRatings(mediaType) { (success, error) in
-//            TODO: Handle error
             if success {
                 ratingsLoaded = true
             }
@@ -76,7 +73,6 @@ class ImportController {
         }
         
         ImportController.sharedInstance.loadAllGenres(of: mediaType) { (success, error) in
-//            TODO: Handle error
             if success {
                 genresLoaded = true
             }
@@ -374,6 +370,13 @@ class ImportController {
     /// - Parameters:
     ///   - completion: (success bool, error description)
     func loadSeries(completion:@escaping (Bool, String) -> ()) {
+        // If already loaded then no need to reload
+        if ObjectController.currentMediaType == .Movies && ObjectController.sharedInstance.seriesMovies.count > 0 {
+            completion(true, "")
+        } else if ObjectController.currentMediaType == .Books && ObjectController.sharedInstance.seriesBooks.count > 0 {
+            completion(true, "")
+        }
+            
         let requestString = API_HOST + (ObjectController.currentMediaType == .Movies ? "movies" : "books") + "/series/"
         loadData(requestString: requestString, params: nil) { (success, str, data) in
             

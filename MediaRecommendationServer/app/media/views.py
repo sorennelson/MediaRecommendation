@@ -13,7 +13,7 @@ from userauth.models import User
 
 
 class BookViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all()
+    queryset = Book.objects.all()[:10000]
     serializer_class = BookSerializer
 
     @action(detail=False)
@@ -30,8 +30,7 @@ class BookViewSet(viewsets.ModelViewSet):
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 
-        book_user = user.book_user
-        predictions = BookPrediction.objects.filter(prediction_user=book_user)
+        predictions = BookPrediction.objects.filter(prediction_user=user.book_user)
         predictions = predictions[start:end]
 
         books = []
