@@ -2,6 +2,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import login, logout
 from django.contrib.auth import authenticate
+from threading import Thread
 
 from . import serializers
 from . import models
@@ -47,10 +48,19 @@ def signup(request):
         login(request, u)
         serializer = serializers.UserSerializer(u)
 
-        # Predict on movies
-        MoviePredictionViewSet.predict_movies_for_user(user=u)
-        # Predict on Books
-        BookPredictionViewSet.predict_books_for_user(user=u)
+        # Predict on movies - run on daemon background thread 
+        # MoviePredictionViewSet.predict_movies_for_user(user=u)
+        thread = Thread(target=MoviePredictionViewSet.predict_movies_for_user, 
+                        args=[u], 
+                        daemon=True)
+        thread.start()
+
+        # Predict on Books - run on daemon background thread 
+        # BookPredictionViewSet.predict_books_for_user(user=u)
+        thread = Thread(target=BookPredictionViewSet.predict_books_for_user, 
+                        args=[u], 
+                        daemon=True)
+        thread.start()
 
         return JsonResponse(serializer.data)
 
