@@ -2,6 +2,7 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
+from threading import Thread
 import requests
 import json
 import numpy as np
@@ -41,9 +42,8 @@ class BookPredictionViewSet(viewsets.ModelViewSet):
         batch_size = 4096
         MODEL_UID = user.book_user.embedding_id if embedding_id is None else embedding_id
 
-        books = Book.objects.all()[:50000]
+        books = Book.objects.all()[:20000]
         book_ids = [book.goodreads_id for book in books]
-        print('Making predictions for {} books.'.format(len(book_ids)))
         
         preds = []
         # Split up books
@@ -103,8 +103,16 @@ class BookPredictionViewSet(viewsets.ModelViewSet):
         # Update user
         user.book_user.embedding_id = embedding_id
         user.book_user.save()
-        # Get new predictions
-        return BookPredictionViewSet.predict_books_for_user(user)
+
+        # Make new predictions - run on daemon background thread 
+        # BookPredictionViewSet.predict_books_for_user(user)
+        thread = Thread(target=BookPredictionViewSet.predict_books_for_user, 
+                        args=[user], 
+                        daemon=True)
+        thread.start()
+
+        return Response(status=status.HTTP_200_OK)
+    
     
     def __get_workflow_ratings_vector(user_ratings):
         ''' Computes the ratings vector from original ratings for use in clustering.
@@ -181,7 +189,6 @@ class BookPredictionViewSet(viewsets.ModelViewSet):
             user = User.objects.get(pk=request.GET['id'])
             prediction = models.BookPrediction.objects.get(prediction_user=user.book_user,
                                                             book=book)
-        # except models.BookPrediction.DoesNotExist:
 
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
@@ -217,7 +224,7 @@ class MoviePredictionViewSet(viewsets.ModelViewSet):
         batch_size = 4096
         MODEL_UID = user.movie_user.embedding_id if embedding_id is None else embedding_id
 
-        movies = Movie.objects.filter(num_watched__gte=15).filter(average_rating__gte=4.0)
+        movies = Movie.objects.filter(num_watched__gte=15).filter(average_rating__gte=3.5)
         movie_ids = [movie.movielens_id for movie in movies]
         genres = [movie.genres for movie in movies]
         n_ratings = [movie.num_watched for movie in movies]
@@ -289,8 +296,15 @@ class MoviePredictionViewSet(viewsets.ModelViewSet):
         # Update user
         user.movie_user.embedding_id = embedding_id
         user.movie_user.save()
-        # Get new predictions
-        return MoviePredictionViewSet.predict_movies_for_user(user)
+
+        # Make new predictions - run on daemon background thread 
+        # MoviePredictionViewSet.predict_movies_for_user(user)
+        thread = Thread(target=MoviePredictionViewSet.predict_movies_for_user, 
+                        args=[user], 
+                        daemon=True)
+        thread.start()
+
+        return Response(status=status.HTTP_200_OK)
 
 
     def __get_workflow_ratings_vector(user_ratings):

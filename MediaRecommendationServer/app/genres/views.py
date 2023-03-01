@@ -32,10 +32,13 @@ class BookGenreViewSet(viewsets.ModelViewSet):
             Response(status=status.HTTP_400_BAD_REQUEST)
 
         predictions = BookPrediction.objects.filter(prediction_user=user.book_user).filter(book__in=genre.books.all())
-        if len(predictions) > 0:
-            books = [pred.book for pred in predictions]
+        n_return_books = 500
+        if len(predictions) > 50:
+            n_return_books = min(len(predictions), n_return_books)
+            books = [pred.book for pred in predictions[:n_return_books]]
         else:
-            books = genre.books
+            n_return_books = min(genre.books.count, n_return_books)
+            books = genre.books[:n_return_books]
 
         serializer = BookSerializer(books, many=True)
         response = Response(serializer.data)
@@ -63,10 +66,22 @@ class MovieGenreViewSet(viewsets.ModelViewSet):
             Response(status=status.HTTP_400_BAD_REQUEST)
 
         predictions = MoviePrediction.objects.filter(prediction_user=user.movie_user).filter(movie__in=genre.movies.all())
-        if len(predictions) > 0:
-            movies = [pred.movie for pred in predictions]
+
+        n_return_books = 500
+        if len(predictions) > 50:
+            n_return_books = min(len(predictions), n_return_books)
+            books = [pred.book for pred in predictions[:n_return_books]]
         else:
-            movies = genre.movies
+            n_return_books = min(len(genre.books), n_return_books)
+            books = genre.books[:n_return_books]
+
+        n_return_movies = 500
+        if len(predictions) > 50:
+            n_return_movies = min(len(predictions), n_return_movies)
+            movies = [pred.movie for pred in predictions[:n_return_movies]]
+        else:
+            n_return_movies = min(genre.movies.count(), n_return_movies)
+            movies = genre.movies[:n_return_movies]
 
         serializer = MovieSerializer(movies, many=True)
         response = Response(serializer.data)
