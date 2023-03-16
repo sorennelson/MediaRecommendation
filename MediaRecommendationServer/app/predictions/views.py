@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.views.decorators.csrf import csrf_exempt
 from threading import Thread
+from celery import shared_task
 import requests
 import json
 import numpy as np
@@ -28,19 +29,21 @@ class BookPredictionViewSet(viewsets.ModelViewSet):
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 
-        return self.predict_books_for_user(user)
+        return BookPredictionViewSet.predict_books_for_user(user.id, user.book_user.embedding_id)
 
-    def predict_books_for_user(user, embedding_id=None):
+    @shared_task()
+    def predict_books_for_user(uid, embedding_id):
         ''' Removes old predictions then gathers predictions for the user from the TorchServe model 
             and saves them. For emphasis on more popular books right now, predictions are only for 
             books with atleast 15 reads and average rating >= 4.
 
-        :param user: User
-        :param embedding_id: Int embedding index for the user. Defautls to the user.book_user.embedding_id.
+        :param user: User.id
+        :param embedding_id: Int embedding index for the user.
         :return: Response with status
         '''
         batch_size = 4096
-        MODEL_UID = user.book_user.embedding_id if embedding_id is None else embedding_id
+        MODEL_UID = embedding_id
+        user = User.objects.get(pk=uid)
 
         books = Book.objects.all()[:20000]
         book_ids = [book.goodreads_id for book in books]
@@ -70,8 +73,6 @@ class BookPredictionViewSet(viewsets.ModelViewSet):
                                                     book=book, prediction=pred))
 
         models.BookPrediction.objects.bulk_create(book_preds, batch_size=batch_size)
-
-        return Response(status=status.HTTP_201_CREATED)
     
     def update_user_embedding(user):
         ''' Finds the best model embedding for the user based on the user's ratings.
@@ -104,12 +105,8 @@ class BookPredictionViewSet(viewsets.ModelViewSet):
         user.book_user.embedding_id = embedding_id
         user.book_user.save()
 
-        # Make new predictions - run on daemon background thread 
-        # BookPredictionViewSet.predict_books_for_user(user)
-        thread = Thread(target=BookPredictionViewSet.predict_books_for_user, 
-                        args=[user], 
-                        daemon=True)
-        thread.start()
+        # Make new predictions - offload to celery 
+        BookPredictionViewSet.predict_books_for_user.delay(user.id, embedding_id)
 
         return Response(status=status.HTTP_200_OK)
     
@@ -210,19 +207,21 @@ class MoviePredictionViewSet(viewsets.ModelViewSet):
         except User.DoesNotExist or ValueError:
             Response(status=status.HTTP_400_BAD_REQUEST)
 
-        return self.predict_movies_for_user(user)
+        return MoviePredictionViewSet.predict_movies_for_user(user.id, user.movie_user.embedding_id)
 
-    def predict_movies_for_user(user, embedding_id=None):
+    @shared_task()
+    def predict_movies_for_user(uid, embedding_id):
         ''' Removes old predictions then gathers predictions for the user from the TorchServe model 
             and saves them. For emphasis on more popular movies right now, predictions are only for 
             movies with atleast 15 watches and average rating >= 4.
 
-        :param user: User
-        :param embedding_id: Int embedding index for the user. Defautls to the user.movie_user.embedding_id.
+        :param uid: User.id
+        :param embedding_id: Int embedding index for the user.
         :return: Response with status
         '''
         batch_size = 4096
-        MODEL_UID = user.movie_user.embedding_id if embedding_id is None else embedding_id
+        MODEL_UID = embedding_id
+        user = User.objects.get(pk=uid)
 
         movies = Movie.objects.filter(num_watched__gte=15).filter(average_rating__gte=3.5)
         movie_ids = [movie.movielens_id for movie in movies]
@@ -262,8 +261,6 @@ class MoviePredictionViewSet(viewsets.ModelViewSet):
             movie_preds.append(models.MoviePrediction(prediction_user=user.movie_user, movie=movie, prediction=pred))
 
         models.MoviePrediction.objects.bulk_create(movie_preds, batch_size=batch_size)
-
-        return Response(status=status.HTTP_201_CREATED)
     
 
     def update_user_embedding(user):
@@ -297,12 +294,8 @@ class MoviePredictionViewSet(viewsets.ModelViewSet):
         user.movie_user.embedding_id = embedding_id
         user.movie_user.save()
 
-        # Make new predictions - run on daemon background thread 
-        # MoviePredictionViewSet.predict_movies_for_user(user)
-        thread = Thread(target=MoviePredictionViewSet.predict_movies_for_user, 
-                        args=[user], 
-                        daemon=True)
-        thread.start()
+        # Make new predictions - offload to celery 
+        MoviePredictionViewSet.predict_movies_for_user.delay(user.id, embedding_id)
 
         return Response(status=status.HTTP_200_OK)
 

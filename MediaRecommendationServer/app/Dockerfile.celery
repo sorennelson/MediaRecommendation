@@ -11,4 +11,4 @@ RUN apt -y install redis
 RUN pip install redis
 RUN pip3 install torch --extra-index-url https://download.pytorch.org/whl/cpu
 COPY . /app 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "-m", "celery", "-A", "MediaRecommendationServer", "worker"]
